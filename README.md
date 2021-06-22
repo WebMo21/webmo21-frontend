@@ -1,4 +1,21 @@
-# webmo21-frontend
+# Fitness Time - Workout Planer
+
+ A modern web application enabling users scheduling and organization of fitness activities.
+
+![Alt Text](preview-fitness-time-landing-page.gif)
+
+
+
+### Prerequisites
+
+The following applications should be installed before running this software.
+
+```
+Git
+Yarn
+```
+
+
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
@@ -11,6 +28,7 @@ npm run dev
 # or
 yarn dev
 ```
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
