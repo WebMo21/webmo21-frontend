@@ -1,7 +1,9 @@
 import React from "react";
 import Link from "next/link";
+import { useSession } from "next-auth/client"
 
 const HeroSection = () => {
+  const [session] = useSession();
   return (
     <div
       className="relative flex items-center content-center justify-center pt-16 pb-32"
@@ -42,11 +44,24 @@ const HeroSection = () => {
                   alt=""
                 />
               </div>
-              <Link href="./login">
+              {!session && (
+                <>
+                  <Link href="/login">
                 <a className="inline-block p-4 mt-5 font-semibold text-green-500 bg-transparent border border-green-500 rounded cursor-pointer select-none hover:bg-green-500 hover:text-white hover:border-transparent">
                   Jetzt im Browser loslegen!
                 </a>
               </Link>
+                </>
+              )}
+               {session && (
+                <>
+                  <Link href="/dashboard">
+                <a className="inline-block p-4 mt-5 font-semibold text-green-500 bg-transparent border border-green-500 rounded cursor-pointer select-none hover:bg-green-500 hover:text-white hover:border-transparent">
+                  Hallo {session.user.name}, zum Dashboard!
+                </a>
+              </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -10,6 +10,7 @@ import ContactForm from "./components/landing/ContactForm";
 import Footer from "./components/footer/Footer";
 
 const landing = () => {
+
   return (
     <>
       <Head>

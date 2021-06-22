@@ -1,9 +1,20 @@
-import React from "react"
+import React, { useEffect } from "react"
+import { signIn, useSession } from "next-auth/client"
+import { useRouter } from 'next/router'
 
 import NavBar from "./components/navbar/NavBar";
 import Footer from "./components/footer/Footer";
 
 const login = () => {
+  const [session, loading] = useSession();
+  const router = useRouter()
+
+  useEffect(() => {
+    if (session) {
+      router.push('/dashboard')
+    }
+  }, [])
+
   return (
     <>
     <NavBar />
@@ -18,7 +29,7 @@ const login = () => {
       <div className="container h-full px-4 mx-auto">
         <div className="flex items-center content-center justify-center h-full mt-60">
           <div className="w-full px-4 m-auto lg:w-4/12">
-            <div className="relative flex flex-col w-full mb-6 bg-white rounded-lg shadow-lg">
+            <div className="relative flex flex-col w-full mb-6 bg-white rounded-lg shadow-lg" data-aos="fade-in">
               <div className="px-6 py-6 mb-0">
                 <div className="mb-3 text-center">
                   <h6 className="text-sm font-bold text-blueGray-500">
@@ -106,7 +117,7 @@ const login = () => {
                     </label>
                   </div>
                   <div className="mt-5 text-center">
-                    <button className="inline-block w-full px-6 py-2 mr-2 text-sm font-bold text-center text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none focus:outline-none last:mr-0 bg-blueGray-800 border-blueGray-800 active:bg-blueGray-900 active:border-blueGray-900 hover:shadow-lg">
+                    <button onClick={signIn} className="inline-block w-full px-6 py-2 mr-2 text-sm font-bold text-center text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none focus:outline-none last:mr-0 bg-blueGray-800 border-blueGray-800 active:bg-blueGray-900 active:border-blueGray-900 hover:shadow-lg">
                       Einloggen
                     </button>
                   </div>
