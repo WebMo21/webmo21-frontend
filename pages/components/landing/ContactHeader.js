@@ -22,10 +22,10 @@ const ContactHeader = () => {
       <div className="container mx-auto px-4 lg:pt-24 lg:pb-64 pb-20 pt-20">
         <div className="flex flex-wrap text-center justify-center">
           <div className="w-full lg:w-6/12 px-4">
-            <h2 className="text-4xl font-semibold text-white uppercase">
+            <h2 className="text-4xl font-semibold text-white uppercase select-none">
               Schreib Uns
             </h2>
-            <p className="text-lg leading-relaxed mt-4 mb-4">
+            <p className="text-lg leading-relaxed mt-4 mb-4 select-none">
               Wir beantworten gern deine Fragen oder Hinweise zu Fitness Time.
             </p>
           </div>

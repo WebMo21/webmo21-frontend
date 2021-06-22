@@ -6,10 +6,10 @@ const PreviewSection = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-center text-center mb-24">
           <div className="w-full lg:w-6/12 px-4">
-            <h2 className="text-4xl font-semibold uppercase">
+            <h2 className="text-4xl font-semibold uppercase select-none">
               Pläne wie von Selbst
             </h2>
-            <p className="text-lg leading-relaxed m-4">
+            <p className="text-lg leading-relaxed m-4 select-none">
               Unsere Trainingspläne erinnern dich stetig daran deinem Körper
               etwas Gutes zu tun. Nutze die Features von Fitness Time um im
               Handumdrehen deinen Traumkörper zu erreichen.
@@ -31,8 +31,8 @@ const PreviewSection = () => {
                 style={{ maxWidth: 250 }}
               />
               <div className="pt-6 text-center">
-                <h5 className="text-xl font-bold">Eigene Übungen</h5>
-                <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
+                <h5 className="text-xl font-bold select-none">Eigene Übungen</h5>
+                <p className="mt-1 text-sm text-gray-500 uppercase font-semibold select-none">
                   Weil Training Indivduell ist
                 </p>
               </div>
@@ -51,8 +51,8 @@ const PreviewSection = () => {
                 style={{ maxWidth: 250 }}
               />
               <div className="pt-6 text-center">
-                <h5 className="text-xl font-bold">Eigene Pläne</h5>
-                <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
+                <h5 className="text-xl font-bold select-none">Eigene Pläne</h5>
+                <p className="mt-1 text-sm text-gray-500 uppercase font-semibold select-none">
                   Modern mit Drag & Drop
                 </p>
               </div>
@@ -71,8 +71,8 @@ const PreviewSection = () => {
                 style={{ maxWidth: 250 }}
               />
               <div className="pt-6 text-center">
-                <h5 className="text-xl font-bold">Eigene Übersicht</h5>
-                <p className="mt-1 text-sm text-gray-500 uppercase font-semibold">
+                <h5 className="text-xl font-bold select-none">Eigene Übersicht</h5>
+                <p className="mt-1 text-sm text-gray-500 uppercase font-semibold select-none">
                   Verliere dein Ziel Nie aus den Augen
                 </p>
               </div>

@@ -6,7 +6,7 @@ const AboutSection = () => {
       <div className="container mx-auto px-4">
         <div className="items-center flex flex-wrap">
           <div
-            className="w-full md:w-4/12 ml-auto mr-auto px-4"
+            className="w-full md:w-4/12 ml-auto mr-auto px-4 select-none"
             data-aos="fade-right"
           >
             <img
@@ -20,11 +20,11 @@ const AboutSection = () => {
             data-aos="fade-left"
           >
             <div className="md:pr-12">
-              <small className="text-white">Über Fitness Time</small>
-              <h3 className="text-4xl uppercase font-bold">
+              <small className="text-white select-none">Über Fitness Time</small>
+              <h3 className="text-4xl uppercase font-bold select-none">
                 Bleibe deinen Zielen treu
               </h3>
-              <p className="mt-4 text-lg leading-relaxed">
+              <p className="mt-4 text-lg leading-relaxed select-none">
                 Erstelle deinen individuellen Trainingsplan und ordne
                 vordefinierte oder eigene Übungen ganz nach deinen Vorstellungen
                 in diesen ein.
@@ -95,7 +95,7 @@ const AboutSection = () => {
                       </span>
                     </div>
                     <div>
-                      <h4 className="text-xl">
+                      <h4 className="text-xl select-none">
                         Deine Trainingsübersicht - Überall & Kostenlos
                       </h4>
                     </div>
@@ -170,7 +170,7 @@ const AboutSection = () => {
                       </span>
                     </div>
                     <div>
-                      <h4 className="text-xl">Eigene Übungen - Eigene Pläne</h4>
+                      <h4 className="text-xl select-none">Eigene Übungen - Eigene Pläne</h4>
                     </div>
                   </div>
                 </li>
@@ -265,7 +265,7 @@ const AboutSection = () => {
                       </span>
                     </div>
                     <div>
-                      <h4 className="text-xl">Im Browser & Smartphone</h4>
+                      <h4 className="text-xl select-none">Im Browser & Smartphone</h4>
                     </div>
                   </div>
                 </li>

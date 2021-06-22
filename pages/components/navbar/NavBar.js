@@ -11,13 +11,13 @@ const NavBar = () => {
               <a>
                 <img
                   alt="..."
-                  className="h-10 max-w-10 rounded-lg shadow-lg mt-1 mr-2 cursor-pointer"
+                  className="h-10 max-w-10 rounded-lg shadow-lg mt-1 mr-2 cursor-pointer select-none"
                   src="./logos/logo_small_icon_only_inverted-fitness-time.png"
                 />
               </a>
             </Link>
             <Link href="https://webmo21-frontend.vercel.app">
-              <a className="text-lg font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap uppercase text-white cursor-pointer">
+              <a className="text-lg font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap uppercase text-white cursor-pointer select-none">
                 Fitness Time
               </a>
             </Link>
@@ -38,7 +38,7 @@ const NavBar = () => {
             {/* Icon 1 */}
             <li className="flex items-center">
               <a
-                className="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                className="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold select-none"
                 href="https://github.com/WebMo21/webmo21-frontend"
                 rel="noreferrer"
                 target="_blank"
@@ -63,7 +63,7 @@ const NavBar = () => {
             {/* Icon 2 */}
             <li className="flex items-center">
               <a
-                className="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                className="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold select-none"
                 href="https://twitter.com/fitnesstime"
                 rel="noreferrer"
                 target="_blank"
@@ -89,7 +89,7 @@ const NavBar = () => {
             {/* Icon 3 */}
             <li className="flex items-center">
               <a
-                className="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                className="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold select-none"
                 href="https://instagram.com/fitnesstime"
                 rel="noreferrer"
                 target="_blank"

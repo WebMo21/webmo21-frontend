@@ -26,10 +26,10 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap">
           <div className="w-full lg:w-6/12 px-4">
-            <h4 className="text-3xl font-semibold">
+            <h4 className="text-3xl font-semibold select-none">
               Folge uns auf Social Media
             </h4>
-            <h5 className="text-lg mt-0 mb-2 text-gray-700">
+            <h5 className="text-lg mt-0 mb-2 text-gray-700 select-none">
               Wir sind auf folgenden Plattformen und antworten dir innerhalb
               weniger Stunden.
             </h5>
@@ -123,7 +123,7 @@ const Footer = () => {
         <hr className="my-6 border-gray-400" />
         <div className="flex flex-wrap items-center md:justify-between justify-center">
           <div className="w-full md:w-4/12 px-4 mx-auto text-center">
-            <div className="text-sm text-gray-600 font-semibold py-1">
+            <div className="text-sm text-gray-600 font-semibold py-1 select-none">
               {new Date().getFullYear()} Copyright © Fitness Time
             </div>
           </div>

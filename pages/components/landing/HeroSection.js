@@ -22,15 +22,15 @@ const HeroSection = () => {
         <div className="items-center flex flex-wrap">
           <div className="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
             <div>
-              <h1 className="text-white font-semibold text-5xl">
+              <h1 className="text-white font-semibold text-5xl selection:bg-yellow-300">
                 Fitness <span className="text-green-500">Time</span>
               </h1>
-              <p className="mt-4 text-lg text-gray-300">
+              <p className="mt-4 text-lg text-gray-300 selection:bg-yellow-300">
                 Willkommen zu Fitness Time, deinem digitalen Planer für dein
                 Training und deine Fitness. Lass uns die Übersicht deiner
                 Workouts organisieren und fokussiere dich auf dein Training.
               </p>
-              <div className="flex justify-center mt-4">
+              <div className="flex justify-center mt-4 select-none">
                 <img
                   className="h-12 w-30 object-cover mr-4 cursor-pointer"
                   src="./ios-app-store-badge.png"
@@ -43,7 +43,7 @@ const HeroSection = () => {
                 />
               </div>
               <Link href="https://webmo21-frontend.vercel.app/login">
-                <a className="bg-transparent hover:bg-green-500 text-green-500 font-semibold hover:text-white p-4 border border-green-500 hover:border-transparent rounded inline-block mt-5 cursor-pointer">
+                <a className="bg-transparent hover:bg-green-500 text-green-500 font-semibold hover:text-white p-4 border border-green-500 hover:border-transparent rounded inline-block mt-5 cursor-pointer select-none">
                   Jetzt im Browser loslegen!
                 </a>
               </Link>

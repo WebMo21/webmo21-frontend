@@ -11,13 +11,13 @@ const ContactForm = () => {
               data-aos="fade-up-right"
             >
               <div className="flex-auto p-5 lg:p-10 bg-green-500 text-white rounded-md">
-                <h4 className="text-2xl font-semibold">Kontakt aufnehmen</h4>
-                <p className="leading-relaxed mt-1 mb-4">
+                <h4 className="text-2xl font-semibold select-none">Kontakt aufnehmen</h4>
+                <p className="leading-relaxed mt-1 mb-4 select-none">
                   Wir versuchen dir innerhalb von 24 Stunden zu antworten.
                 </p>
                 <div className="relative w-full mb-3 mt-8">
                   <label
-                    className="block uppercase text-xs font-bold mb-2"
+                    className="block uppercase text-xs font-bold mb-2 select-none"
                     htmlFor="full-name"
                   >
                     Vollständiger Name
@@ -31,7 +31,7 @@ const ContactForm = () => {
                 </div>
                 <div className="relative w-full mb-3">
                   <label
-                    className="block uppercase text-xs font-bold mb-2"
+                    className="block uppercase text-xs font-bold mb-2 select-none"
                     htmlFor="email"
                   >
                     E-Mail-Adresse
@@ -45,7 +45,7 @@ const ContactForm = () => {
                 </div>
                 <div className="relative w-full mb-3">
                   <label
-                    className="block uppercase text-xs font-bold mb-2"
+                    className="block uppercase text-xs font-bold mb-2 select-none"
                     htmlFor="message"
                   >
                     Nachricht
@@ -61,7 +61,7 @@ const ContactForm = () => {
                 </div>
                 <div className="text-center mt-6">
                   <button
-                    className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                    className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 select-none"
                     type="button"
                     style={{ transition: "all 0.15s ease 0s" }}
                   >
