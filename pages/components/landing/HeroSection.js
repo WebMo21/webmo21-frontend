@@ -42,7 +42,7 @@ const HeroSection = () => {
                   alt=""
                 />
               </div>
-              <Link href="https://webmo21-frontend.vercel.app/login">
+              <Link href="./login">
                 <a className="bg-transparent hover:bg-green-500 text-green-500 font-semibold hover:text-white p-4 border border-green-500 hover:border-transparent rounded inline-block mt-5 cursor-pointer select-none">
                   Jetzt im Browser loslegen!
                 </a>
