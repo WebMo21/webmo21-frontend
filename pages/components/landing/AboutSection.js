@@ -2,11 +2,11 @@ import React from "react";
 
 const AboutSection = () => {
   return (
-    <section id="about" className="relative py-20 bg-black text-white">
-      <div className="container mx-auto px-4">
-        <div className="items-center flex flex-wrap">
+    <section id="about" className="relative py-20 text-white bg-black">
+      <div className="container px-4 mx-auto">
+        <div className="flex flex-wrap items-center">
           <div
-            className="w-full md:w-4/12 ml-auto mr-auto px-4 select-none"
+            className="w-full px-4 ml-auto mr-auto select-none md:w-4/12"
             data-aos="fade-right"
           >
             <img
@@ -16,12 +16,12 @@ const AboutSection = () => {
             />
           </div>
           <div
-            className="w-full md:w-5/12 ml-auto mr-auto px-4"
+            className="w-full px-4 ml-auto mr-auto md:w-5/12"
             data-aos="fade-left"
           >
             <div className="md:pr-12">
               <small className="text-white select-none">Über Fitness Time</small>
-              <h3 className="text-4xl uppercase font-bold select-none">
+              <h3 className="text-4xl font-bold uppercase select-none">
                 Bleibe deinen Zielen treu
               </h3>
               <p className="mt-4 text-lg leading-relaxed select-none">
@@ -29,13 +29,13 @@ const AboutSection = () => {
                 vordefinierte oder eigene Übungen ganz nach deinen Vorstellungen
                 in diesen ein.
               </p>
-              <ul className="list-none mt-6">
+              <ul className="mt-6 list-none">
                 <li className="py-2">
                   <div className="flex items-center">
                     <div>
-                      <span className="font-semibold inline-block py-3 mr-3 text-green-500">
+                      <span className="inline-block py-3 mr-3 font-semibold text-green-500">
                         <svg
-                          className="h-10 w-10"
+                          className="w-10 h-10"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="#10b981"
                           viewBox="0 0 512 512"
@@ -104,9 +104,9 @@ const AboutSection = () => {
                 <li className="py-2">
                   <div className="flex items-center">
                     <div>
-                      <span className="font-semibold inline-block py-3 mr-3 text-green-500">
+                      <span className="inline-block py-3 mr-3 font-semibold text-green-500">
                         <svg
-                          className="h-10 w-10"
+                          className="w-10 h-10"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="#10b981"
                           viewBox="0 0 512 512"
@@ -177,9 +177,9 @@ const AboutSection = () => {
                 <li className="py-2">
                   <div className="flex items-center">
                     <div>
-                      <span className="font-semibold inline-block py-3 mr-3 text-green-500">
+                      <span className="inline-block py-3 mr-3 font-semibold text-green-500">
                         <svg
-                          className="h-10 w-10"
+                          className="w-10 h-10"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="#10b981"
                           viewBox="0 0 512 512"

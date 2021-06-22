@@ -3,27 +3,27 @@ import Link from "next/link";
 
 const NavBar = () => {
   return (
-    <nav className="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg">
-      <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-        <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+    <nav className="absolute top-0 z-50 flex flex-wrap items-center justify-between w-full px-2 py-3 navbar-expand-lg">
+      <div className="container flex flex-wrap items-center justify-between px-4 mx-auto">
+        <div className="relative flex justify-between w-full lg:w-auto lg:static lg:block lg:justify-start">
           <div className="flex">
             <Link href="https://webmo21-frontend.vercel.app">
               <a>
                 <img
                   alt="..."
-                  className="h-10 max-w-10 rounded-lg shadow-lg mt-1 mr-2 cursor-pointer select-none"
+                  className="h-10 mt-1 mr-2 rounded-lg shadow-lg cursor-pointer select-none max-w-10"
                   src="./logos/logo_small_icon_only_inverted-fitness-time.png"
                 />
               </a>
             </Link>
             <Link href="https://webmo21-frontend.vercel.app">
-              <a className="text-lg font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap uppercase text-white cursor-pointer select-none">
+              <a className="inline-block py-2 mr-4 text-lg font-bold leading-relaxed text-white uppercase whitespace-no-wrap cursor-pointer select-none">
                 Fitness Time
               </a>
             </Link>
           </div>
           <button
-            className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+            className="block px-3 py-1 text-xl leading-none bg-transparent border border-transparent border-solid rounded outline-none cursor-pointer lg:hidden focus:outline-none"
             type="button"
             onClick="toggleNavbar('example-collapse-navbar')"
           >
@@ -31,20 +31,20 @@ const NavBar = () => {
           </button>
         </div>
         <div
-          className="lg:flex flex-grow items-center bg-white lg:bg-transparent lg:shadow-none hidden"
+          className="items-center flex-grow hidden bg-white lg:flex lg:bg-transparent lg:shadow-none"
           id="example-collapse-navbar"
         >
-          <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+          <ul className="flex flex-col list-none lg:flex-row lg:ml-auto">
             {/* Icon 1 */}
             <li className="flex items-center">
               <a
-                className="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold select-none"
+                className="flex items-center px-3 py-4 text-xs font-bold text-gray-800 uppercase select-none lg:text-white lg:hover:text-gray-300 lg:py-2"
                 href="https://github.com/WebMo21/webmo21-frontend"
                 rel="noreferrer"
                 target="_blank"
               >
                 <svg
-                  className="h-6 w-6"
+                  className="w-6 h-6"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#10b981"
                   viewBox="0 0 24 24"
@@ -57,19 +57,19 @@ const NavBar = () => {
                     fill="#10b981"
                   />
                 </svg>
-                <span className="lg:hidden inline-block ml-2">Share</span>
+                <span className="inline-block ml-2 lg:hidden">Share</span>
               </a>
             </li>
             {/* Icon 2 */}
             <li className="flex items-center">
               <a
-                className="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold select-none"
+                className="flex items-center px-3 py-4 text-xs font-bold text-gray-800 uppercase select-none lg:text-white lg:hover:text-gray-300 lg:py-2"
                 href="https://twitter.com/fitnesstime"
                 rel="noreferrer"
                 target="_blank"
               >
                 <svg
-                  className="h-6 w-6"
+                  className="w-6 h-6"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#10b981"
                   viewBox="0 0 512 512"
@@ -83,19 +83,19 @@ const NavBar = () => {
                     fill="#10b981"
                   />
                 </svg>
-                <span className="lg:hidden inline-block ml-2">Tweet</span>
+                <span className="inline-block ml-2 lg:hidden">Tweet</span>
               </a>
             </li>
             {/* Icon 3 */}
             <li className="flex items-center">
               <a
-                className="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold select-none"
+                className="flex items-center px-3 py-4 text-xs font-bold text-gray-800 uppercase select-none lg:text-white lg:hover:text-gray-300 lg:py-2"
                 href="https://instagram.com/fitnesstime"
                 rel="noreferrer"
                 target="_blank"
               >
                 <svg
-                  className="h-8 w-8"
+                  className="w-8 h-8"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#10b981"
                   viewBox="0 0 24 24"
@@ -112,7 +112,7 @@ const NavBar = () => {
                     fill="#10b981"
                   />
                 </svg>
-                <span className="lg:hidden inline-block ml-2">Profile</span>
+                <span className="inline-block ml-2 lg:hidden">Profile</span>
               </a>
             </li>
           </ul>

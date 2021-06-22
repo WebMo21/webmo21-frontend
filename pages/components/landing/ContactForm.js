@@ -2,50 +2,50 @@ import React from "react";
 
 const ContactForm = () => {
   return (
-    <section className="relative block py-24 lg:pt-0 bg-black">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-center lg:-mt-64 -mt-48">
-          <div className="w-full lg:w-6/12 px-4">
+    <section className="relative block py-24 bg-black lg:pt-0">
+      <div className="container px-4 mx-auto">
+        <div className="flex flex-wrap justify-center -mt-48 lg:-mt-64">
+          <div className="w-full px-4 lg:w-6/12">
             <div
-              className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300"
+              className="relative flex flex-col w-full min-w-0 mb-6 break-words bg-gray-300 rounded-lg shadow-lg"
               data-aos="fade-up-right"
             >
-              <div className="flex-auto p-5 lg:p-10 bg-green-500 text-white rounded-md">
+              <div className="flex-auto p-5 text-white bg-green-500 rounded-md lg:p-10">
                 <h4 className="text-2xl font-semibold select-none">Kontakt aufnehmen</h4>
-                <p className="leading-relaxed mt-1 mb-4 select-none">
+                <p className="mt-1 mb-4 leading-relaxed select-none">
                   Wir versuchen dir innerhalb von 24 Stunden zu antworten.
                 </p>
-                <div className="relative w-full mb-3 mt-8">
+                <div className="relative w-full mt-8 mb-3">
                   <label
-                    className="block uppercase text-xs font-bold mb-2 select-none"
+                    className="block mb-2 text-xs font-bold uppercase select-none"
                     htmlFor="full-name"
                   >
                     Vollständiger Name
                   </label>
                   <input
                     type="text"
-                    className="px-3 py-3 placeholder-gray-400 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full text-black"
+                    className="w-full px-3 py-3 text-sm text-black placeholder-gray-400 bg-white rounded shadow focus:outline-none focus:shadow-outline"
                     placeholder="Max Mustermann"
                     style={{ transition: "all 0.15s ease 0s" }}
                   />
                 </div>
                 <div className="relative w-full mb-3">
                   <label
-                    className="block uppercase text-xs font-bold mb-2 select-none"
+                    className="block mb-2 text-xs font-bold uppercase select-none"
                     htmlFor="email"
                   >
                     E-Mail-Adresse
                   </label>
                   <input
                     type="email"
-                    className="px-3 py-3 placeholder-gray-400 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full text-black"
+                    className="w-full px-3 py-3 text-sm text-black placeholder-gray-400 bg-white rounded shadow focus:outline-none focus:shadow-outline"
                     placeholder="max.mustermann@pm.me"
                     style={{ transition: "all 0.15s ease 0s" }}
                   />
                 </div>
                 <div className="relative w-full mb-3">
                   <label
-                    className="block uppercase text-xs font-bold mb-2 select-none"
+                    className="block mb-2 text-xs font-bold uppercase select-none"
                     htmlFor="message"
                   >
                     Nachricht
@@ -54,14 +54,14 @@ const ContactForm = () => {
                     rows={4}
                     cols={80}
                     style={{ resize: "none" }}
-                    className="px-3 py-3 placeholder-gray-400 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full text-black"
+                    className="w-full px-3 py-3 text-sm text-black placeholder-gray-400 bg-white rounded shadow focus:outline-none focus:shadow-outline"
                     placeholder="Hier steht deine Nachricht..."
                     defaultValue={""}
                   />
                 </div>
-                <div className="text-center mt-6">
+                <div className="mt-6 text-center">
                   <button
-                    className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 select-none"
+                    className="px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase bg-gray-900 rounded shadow outline-none select-none active:bg-gray-700 hover:shadow-lg focus:outline-none"
                     type="button"
                     style={{ transition: "all 0.15s ease 0s" }}
                   >

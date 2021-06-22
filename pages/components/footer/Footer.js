@@ -3,9 +3,9 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="relative bg-gray-300 pt-8 pb-6">
+    <footer className="relative pt-8 pb-6 bg-gray-300">
       <div
-        className="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
+        className="absolute top-0 left-0 right-0 bottom-auto w-full -mt-20 overflow-hidden pointer-events-none"
         style={{ height: 80, transform: "translateZ(0px)" }}
       >
         <svg
@@ -23,13 +23,13 @@ const Footer = () => {
           />
         </svg>
       </div>
-      <div className="container mx-auto px-4">
+      <div className="container px-4 mx-auto">
         <div className="flex flex-wrap">
-          <div className="w-full lg:w-6/12 px-4">
+          <div className="w-full px-4 lg:w-6/12">
             <h4 className="text-3xl font-semibold select-none">
               Folge uns auf Social Media
             </h4>
-            <h5 className="text-lg mt-0 mb-2 text-gray-700 select-none">
+            <h5 className="mt-0 mb-2 text-lg text-gray-700 select-none">
               Wir sind auf folgenden Plattformen und antworten dir innerhalb
               weniger Stunden.
             </h5>
@@ -40,12 +40,12 @@ const Footer = () => {
                 target="_blank"
               >
                 <button
-                  className="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
+                  className="items-center justify-center w-10 h-10 p-3 mr-2 font-normal text-blue-400 bg-white rounded-full shadow-lg outline-none align-center focus:outline-none"
                   type="button"
                 >
                   <div className="flex justify-center">
                     <svg
-                      className="h-6 w-6"
+                      className="w-6 h-6"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="#10b981"
                       viewBox="0 0 24 24"
@@ -67,12 +67,12 @@ const Footer = () => {
                 target="_blank"
               >
                 <button
-                  className="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
+                  className="items-center justify-center w-10 h-10 p-3 mr-2 font-normal text-blue-600 bg-white rounded-full shadow-lg outline-none align-center focus:outline-none"
                   type="button"
                 >
                   <div className="flex justify-center">
                     <svg
-                      className="h-6 w-6"
+                      className="w-6 h-6"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="#10b981"
                       viewBox="0 0 512 512"
@@ -94,12 +94,12 @@ const Footer = () => {
                 target="_blank"
               >
                 <button
-                  className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-2"
+                  className="items-center justify-center w-10 h-10 p-2 mr-2 font-normal text-pink-400 bg-white rounded-full shadow-lg outline-none align-center focus:outline-none"
                   type="button"
                 >
-                  <div className="flex justify-center items-center">
+                  <div className="flex items-center justify-center">
                     <svg
-                      className="h-6 w-6 mt-1"
+                      className="w-6 h-6 mt-1"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="#10b981"
                       width="512"
@@ -121,9 +121,9 @@ const Footer = () => {
           </div>
         </div>
         <hr className="my-6 border-gray-400" />
-        <div className="flex flex-wrap items-center md:justify-between justify-center">
-          <div className="w-full md:w-4/12 px-4 mx-auto text-center">
-            <div className="text-sm text-gray-600 font-semibold py-1 select-none">
+        <div className="flex flex-wrap items-center justify-center md:justify-between">
+          <div className="w-full px-4 mx-auto text-center md:w-4/12">
+            <div className="py-1 text-sm font-semibold text-gray-600 select-none">
               {new Date().getFullYear()} Copyright © Fitness Time
             </div>
           </div>

@@ -4,7 +4,7 @@ import Link from "next/link";
 const HeroSection = () => {
   return (
     <div
-      className="relative pt-16 pb-32 flex content-center items-center justify-center"
+      className="relative flex items-center content-center justify-center pt-16 pb-32"
       style={{ minHeight: "95vh" }}
     >
       <div
@@ -15,35 +15,35 @@ const HeroSection = () => {
       >
         <span
           id="blackOverlay"
-          className="w-full h-full absolute opacity-75 bg-black"
+          className="absolute w-full h-full bg-black opacity-75"
         />
       </div>
       <div className="container relative mx-auto" data-aos="fade-in">
-        <div className="items-center flex flex-wrap">
-          <div className="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
+        <div className="flex flex-wrap items-center">
+          <div className="w-full px-4 ml-auto mr-auto text-center lg:w-6/12">
             <div>
-              <h1 className="text-white font-semibold text-5xl selection:bg-yellow-300">
-                Fitness <span className="text-green-500">Time</span>
+              <h1 className="text-5xl font-semibold text-white selection:bg-yellow-300 selection:text-yellow-900">
+                Fitness <span className="text-green-500 selection:bg-yellow-300 selection:text-yellow-900">Time</span>
               </h1>
-              <p className="mt-4 text-lg text-gray-300 selection:bg-yellow-300">
+              <p className="mt-4 text-lg text-gray-300 selection:bg-yellow-300 selection:text-yellow-900">
                 Willkommen zu Fitness Time, deinem digitalen Planer für dein
                 Training und deine Fitness. Lass uns die Übersicht deiner
                 Workouts organisieren und fokussiere dich auf dein Training.
               </p>
               <div className="flex justify-center mt-4 select-none">
                 <img
-                  className="h-12 w-30 object-cover mr-4 cursor-pointer"
+                  className="object-cover h-12 mr-4 cursor-pointer w-30"
                   src="./ios-app-store-badge.png"
                   alt=""
                 />
                 <img
-                  className="h-12 w-30 object-cover cursor-pointer"
+                  className="object-cover h-12 cursor-pointer w-30"
                   src="./google-play-badge.png"
                   alt=""
                 />
               </div>
               <Link href="./login">
-                <a className="bg-transparent hover:bg-green-500 text-green-500 font-semibold hover:text-white p-4 border border-green-500 hover:border-transparent rounded inline-block mt-5 cursor-pointer select-none">
+                <a className="inline-block p-4 mt-5 font-semibold text-green-500 bg-transparent border border-green-500 rounded cursor-pointer select-none hover:bg-green-500 hover:text-white hover:border-transparent">
                   Jetzt im Browser loslegen!
                 </a>
               </Link>
@@ -52,7 +52,7 @@ const HeroSection = () => {
         </div>
       </div>
       <div
-        className="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden"
+        className="absolute bottom-0 left-0 right-0 top-auto w-full overflow-hidden pointer-events-none"
         style={{ height: 70, transform: "translateZ(0px)" }}
       >
         <svg
