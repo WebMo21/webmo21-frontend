@@ -40,12 +40,11 @@ const Footer = () => {
                 target="_blank"
               >
                 <button
-                  className="items-center justify-center w-10 h-10 p-3 mr-2 font-normal text-blue-400 bg-white rounded-full shadow-lg outline-none align-center focus:outline-none"
+                  className="items-center justify-center p-3 mr-2 font-normal text-blue-400 bg-white rounded-full shadow-lg outline-none align-center focus:outline-none"
                   type="button"
                 >
-                  <div className="flex justify-center">
                     <svg
-                      className="w-6 h-6"
+                      className="block w-6 h-6 m-auto"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="#10b981"
                       viewBox="0 0 24 24"
@@ -58,7 +57,6 @@ const Footer = () => {
                         fill="#10b981"
                       />
                     </svg>
-                  </div>
                 </button>
               </a>
               <a
@@ -67,12 +65,11 @@ const Footer = () => {
                 target="_blank"
               >
                 <button
-                  className="items-center justify-center w-10 h-10 p-3 mr-2 font-normal text-blue-600 bg-white rounded-full shadow-lg outline-none align-center focus:outline-none"
+                  className="items-center justify-center p-3 mr-2 font-normal text-blue-600 bg-white rounded-full shadow-lg outline-none align-center focus:outline-none"
                   type="button"
                 >
-                  <div className="flex justify-center">
                     <svg
-                      className="w-6 h-6"
+                      className="block w-6 h-6 m-auto"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="#10b981"
                       viewBox="0 0 512 512"
@@ -85,7 +82,6 @@ const Footer = () => {
                         fill="#10b981"
                       />
                     </svg>
-                  </div>
                 </button>
               </a>
               <a
@@ -94,16 +90,18 @@ const Footer = () => {
                 target="_blank"
               >
                 <button
-                  className="items-center justify-center w-10 h-10 p-2 mr-2 font-normal text-pink-400 bg-white rounded-full shadow-lg outline-none align-center focus:outline-none"
+                  className="items-center justify-center p-2 mr-1 font-normal text-pink-400 bg-white rounded-full shadow-lg outline-none align-center focus:outline-none"
                   type="button"
                 >
-                  <div className="flex items-center justify-center">
                     <svg
-                      className="w-6 h-6 mt-1"
+                      className="block m-auto"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="#10b981"
+                      viewBox="0 0 24 24"
+                      enableBackground="new 0 0 24 24"
                       width="512"
                       height="512"
+                      style={{ width: "1.9em", height: "1.9em" }}
                     >
                       <path
                         d="m1.5 1.633c-1.886 1.959-1.5 4.04-1.5 10.362 0 5.25-.916 10.513 3.878 11.752 1.497.385 14.761.385 16.256-.002 1.996-.515 3.62-2.134 3.842-4.957.031-.394.031-13.185-.001-13.587-.236-3.007-2.087-4.74-4.526-5.091-.559-.081-.671-.105-3.539-.11-10.173.005-12.403-.448-14.41 1.633z"
@@ -114,7 +112,6 @@ const Footer = () => {
                         fill="#10b981"
                       />
                     </svg>
-                  </div>
                 </button>
               </a>
             </div>

@@ -3,6 +3,7 @@ import AOS from "aos";
 
 import "../styles/globals.css";
 import "aos/dist/aos.css";
+import "@notus-pro/react/tailwind.min.css";
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {

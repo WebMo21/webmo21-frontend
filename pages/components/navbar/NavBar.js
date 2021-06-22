@@ -7,7 +7,7 @@ const NavBar = () => {
       <div className="container flex flex-wrap items-center justify-between px-4 mx-auto">
         <div className="relative flex justify-between w-full lg:w-auto lg:static lg:block lg:justify-start">
           <div className="flex">
-            <Link href="https://webmo21-frontend.vercel.app">
+            <Link href="/">
               <a>
                 <img
                   alt="..."
@@ -16,7 +16,7 @@ const NavBar = () => {
                 />
               </a>
             </Link>
-            <Link href="https://webmo21-frontend.vercel.app">
+            <Link href="/">
               <a className="inline-block py-2 mr-4 text-lg font-bold leading-relaxed text-white uppercase whitespace-no-wrap cursor-pointer select-none">
                 Fitness Time
               </a>
