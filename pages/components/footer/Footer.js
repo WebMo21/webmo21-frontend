@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -127,7 +126,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  );
+  )
 };
 
 export default Footer;

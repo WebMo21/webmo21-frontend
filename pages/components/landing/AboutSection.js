@@ -13,7 +13,7 @@ const AboutSection = () => {
               alt="..."
               className="max-w-full rounded-lg shadow-lg"
               src="./backgrounds/bg-fitness-woman-time.jpeg"
-            />
+            /> 
           </div>
           <div
             className="w-full px-4 ml-auto mr-auto md:w-5/12"

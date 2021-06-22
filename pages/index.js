@@ -27,7 +27,7 @@ const landing = () => {
       </main>
       <Footer />
     </>
-  );
+  )
 };
 
 export default landing;

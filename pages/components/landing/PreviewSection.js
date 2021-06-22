@@ -31,7 +31,9 @@ const PreviewSection = () => {
                 style={{ maxWidth: 250 }}
               />
               <div className="pt-6 text-center">
-                <h5 className="text-xl font-bold select-none">Eigene Übungen</h5>
+                <h5 className="text-xl font-bold select-none">
+                  Eigene Übungen
+                </h5>
                 <p className="mt-1 text-sm font-semibold text-gray-500 uppercase select-none">
                   Weil Training Indivduell ist
                 </p>
@@ -71,7 +73,9 @@ const PreviewSection = () => {
                 style={{ maxWidth: 250 }}
               />
               <div className="pt-6 text-center">
-                <h5 className="text-xl font-bold select-none">Eigene Übersicht</h5>
+                <h5 className="text-xl font-bold select-none">
+                  Eigene Übersicht
+                </h5>
                 <p className="mt-1 text-sm font-semibold text-gray-500 uppercase select-none">
                   Verliere dein Ziel Nie aus den Augen
                 </p>

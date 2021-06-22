@@ -1,30 +1,32 @@
 import NextAuth from "next-auth";
-import Providers from "next-auth/providers"
+import Providers from "next-auth/providers";
 
 const options = {
   providers: [
     Providers.GitHub({
-      clientId: "",
-      clientSecret: ""
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
     }),
     Providers.Facebook({
-      clientId: "",
-      clientSecret: ""
+      clientId: process.env.FACEBOOK_ID,
+      clientSecret: process.env.FACEBOOK_SECRET,
     }),
     Providers.Twitter({
-      clientId: "",
-      clientSecret: ""
+      clientId: process.env.TWITTER_ID,
+      clientSecret: process.env.TWITTER_SECRET,
     }),
-    Providers.Email({
+    /* Providers.Email({
       server: {
         host: "",
         port: "",
         auth: {
           user: "",
-          pass: ""
-        }
+          pass: "",
+        },
       },
-      from: ""
-    })
-  ]
-}
+      from: "",
+    }), */
+  ],
+};
+
+export default (req, res) => NextAuth(req, res, options);
