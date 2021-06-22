@@ -10,8 +10,7 @@ const HeroSection = () => {
       <div
         className="absolute top-0 w-full h-full bg-top bg-cover"
         style={{
-          backgroundImage:
-            'url("http://localhost:3000/backgrounds/bg-fitness-woman.jpeg")',
+          backgroundImage: 'url("./backgrounds/bg-fitness-woman.jpeg")',
         }}
       >
         <span
@@ -43,7 +42,7 @@ const HeroSection = () => {
                   alt=""
                 />
               </div>
-              <Link href={process.env.NEXT_PUBLIC_DEVELOP_URL + "/login"}>
+              <Link href="https://webmo21-frontend.vercel.app/login">
                 <a className="bg-transparent hover:bg-green-500 text-green-500 font-semibold hover:text-white p-4 border border-green-500 hover:border-transparent rounded inline-block mt-5 cursor-pointer">
                   Jetzt im Browser loslegen!
                 </a>
