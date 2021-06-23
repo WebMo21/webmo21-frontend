@@ -60,7 +60,11 @@ const HeroSection = () => {
                 <>
                   <Link href="/dashboard">
                     <a className="inline-block p-4 mt-5 font-semibold text-green-500 bg-transparent border border-green-500 rounded cursor-pointer select-none hover:bg-green-500 hover:text-white hover:border-transparent">
-                      Hallo {session.user.name}, zum Dashboard!
+                      Hallo{" "}
+                      {session.user.name
+                        ? session.user.name
+                        : session.user.email}
+                      , zum Dashboard!
                     </a>
                   </Link>
                 </>
