@@ -73,6 +73,11 @@ const HeroSection = () => {
                       zum Dashboard!
                     </a>
                   </Link>
+                  <Link href="/dashboard">
+                    <a className="hidden p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none iphone:block hover:bg-red-300">
+                      Ausloggen
+                    </a>
+                  </Link>
                 </>
               )}
             </div>
