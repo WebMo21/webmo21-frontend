@@ -115,7 +115,7 @@ const login = () => {
                       </div> */}
                     <div className="mt-5 text-center">
                       <button
-                        onClick={() => signIn()}
+                        onClick={() => signIn("email", { email })}
                         className="inline-block w-full px-6 py-2 mr-2 text-sm font-bold text-center text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none focus:outline-none last:mr-0 bg-blueGray-800 border-blueGray-800 active:bg-blueGray-900 active:border-blueGray-900 hover:shadow-lg"
                       >
                         Mit E-Mail Einloggen
