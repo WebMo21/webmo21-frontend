@@ -25,18 +25,17 @@ export default NextAuth({
     database: ":memory:",
     synchronize: true,
   }, */
-  database: process.env.DATABASE_URL,
+  /* database: process.env.DATABASE_URL,
   secret: process.env.SECRET,
 
   session: {
     jwt: true,
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-  /* test */
   jwt: {
     secret: process.env.JWT_SECRET, //use a random secret token here
     encryption: true,
   },
 
-  debug: true,
+  debug: true, */
 });
