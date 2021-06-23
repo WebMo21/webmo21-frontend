@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/client";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -10,6 +10,7 @@ const login = () => {
   const [session, loading] = useSession();
   const router = useRouter();
   const [email, setEmail] = useState("");
+  const [showEmailInvalid, setShowEmailInvalid] = useState(false);
 
   useEffect(() => {
     if (session) {
@@ -105,6 +106,13 @@ const login = () => {
                             cursor: "auto",
                           }}
                         />
+                        {showEmailInvalid ? (
+                          <span className="rounded bg-red-50 px-2.5 py-1 text-xs font-semibold text-red-500 tracking-wide uppercase">
+                            Das ist keine gültige E-Mail-Adresse
+                          </span>
+                        ) : (
+                          ""
+                        )}
                       </div>
                     </div>
                     {/* <div className="inline-block mt-2">
@@ -122,10 +130,11 @@ const login = () => {
                       <button
                         onClick={() => {
                           if (validateEmail(email)) {
+                            setShowEmailInvalid(false);
                             signIn("email", { email });
                           } else {
                             // notification for user
-                            console.log("TEST");
+                            setShowEmailInvalid(true);
                           }
                         }}
                         className="inline-block w-full px-6 py-2 mr-2 text-sm font-bold text-center text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none focus:outline-none last:mr-0 bg-blueGray-800 border-blueGray-800 active:bg-blueGray-900 active:border-blueGray-900 hover:shadow-lg"

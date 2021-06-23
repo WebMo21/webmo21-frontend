@@ -16,9 +16,9 @@ const PreviewSection = () => {
             </p>
           </div>
         </div>
-        {/* Trainer Card Wrapper */}
+        {/* Preview Images */}
         <div className="flex flex-wrap">
-          {/* Card 1 */}
+          {/* Image 1 */}
           <div
             className="w-full px-4 mb-12 md:w-4/12 lg:mb-0"
             data-aos="flip-right"
@@ -40,7 +40,7 @@ const PreviewSection = () => {
               </div>
             </div>
           </div>
-          {/* Card 2 */}
+          {/* Image 2 */}
           <div
             className="w-full px-4 mb-12 md:w-4/12 lg:mb-0"
             data-aos="flip-right"
@@ -60,7 +60,7 @@ const PreviewSection = () => {
               </div>
             </div>
           </div>
-          {/* Card 3 */}
+          {/* Image 3 */}
           <div
             className="w-full px-4 mb-12 md:w-4/12 lg:mb-0"
             data-aos="flip-right"
