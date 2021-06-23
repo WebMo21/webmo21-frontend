@@ -25,7 +25,8 @@ export default NextAuth({
     database: ":memory:",
     synchronize: true,
   }, */
-  /* database: process.env.DATABASE_URL,
+  database: process.env.DATABASE_URL,
+  /*
   secret: process.env.SECRET,
 
   session: {
