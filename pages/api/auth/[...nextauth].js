@@ -32,7 +32,7 @@ export default NextAuth({
     jwt: true,
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-
+  /* test */
   jwt: {
     secret: process.env.JWT_SECRET, //use a random secret token here
     encryption: true,
