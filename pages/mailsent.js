@@ -24,17 +24,11 @@ const emailsent = () => {
                     <p className="text-xl font-normal leading-normal text-blueGray-500">
                       Wir haben dir einen Link zum Einloggen gesendet.
                     </p>
-                    <a
-                      onClick={() => {
-                        window.opener = null;
-                        window.open("", "_self", "");
-                        window.close();
-                      }}
-                    >
-                      <a className="inline-block p-4 mt-5 font-semibold text-white bg-red-500 border border-green-500 rounded cursor-pointer select-none hover:bg-red-400">
-                        Seite schließen
+                    <Link href="/dashboard">
+                      <a className="inline-block p-4 mt-5 font-semibold text-white bg-green-500 border border-green-500 rounded cursor-pointer select-none hover:bg-green-400">
+                        Zurück zum Dashboard
                       </a>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
