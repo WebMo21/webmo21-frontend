@@ -25,6 +25,7 @@ export default NextAuth({
         },
       },
       from: process.env.EMAIL_FROM,
+      sendVerificationRequest: customVerificationRequest,
     }),
   ],
   /* database: {
