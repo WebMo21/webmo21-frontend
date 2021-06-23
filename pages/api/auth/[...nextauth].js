@@ -33,6 +33,10 @@ export default NextAuth({
     synchronize: true,
   }, */
   database: process.env.DATABASE_URL,
+  pages: {
+    verifyRequest: "/email/sent",
+    // newUser: null, // If set, new users will be directed here on first sign in
+  },
   /*
   secret: process.env.SECRET,
 
