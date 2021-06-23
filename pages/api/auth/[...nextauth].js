@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
+import customVerificationRequest from "./customVerificationRequest";
 
 export default NextAuth({
   providers: [
