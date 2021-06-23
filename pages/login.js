@@ -23,6 +23,11 @@ const login = () => {
     }
   }, []);
 
+  const validateEmail = (email) =>
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      String(email).toLowerCase()
+    );
+
   return (
     <>
       <Head>
@@ -40,7 +45,7 @@ const login = () => {
             }}
           ></div>
           <div className="container h-full px-4 mx-auto">
-            <div className="flex items-center content-center justify-center h-full mt-60">
+            <div className="flex items-center content-center justify-center h-full mt-60 iphone:mt-20">
               <div className="w-full px-4 m-auto lg:w-4/12">
                 <div
                   className="relative flex flex-col w-full mb-6 bg-white rounded-lg shadow-lg"
@@ -52,24 +57,24 @@ const login = () => {
                         Schnell einloggen mit
                       </h6>
                     </div>
-                    <div className="text-center cursor-pointer">
+                    <div className="flex-col text-center cursor-pointer iphone:flex iphone:">
                       <a
                         onClick={() => signIn("github")}
-                        className="inline-block px-3 py-2 mr-2 text-xs font-bold text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none focus:outline-none last:mr-0 bg-github-regular border-github-regular active:bg-github-active active:border-github-active hover:shadow-md"
+                        className="inline-block px-3 py-2 mr-2 text-xs font-bold text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none focus:outline-none last:mr-0 bg-github-regular border-github-regular active:bg-github-active active:border-github-active hover:shadow-md iphone:mt-2"
                       >
-                        <i className="mr-1 fab fa-github" /> {/* */}github
+                        {/* */}github
                       </a>
                       <a
                         onClick={() => signIn("facebook")}
-                        className="inline-block px-3 py-2 mr-2 text-xs font-bold text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none focus:outline-none last:mr-0 bg-facebook-regular border-facebook-regular active:bg-facebook-active active:border-facebook-active hover:shadow-md"
+                        className="inline-block px-3 py-2 mr-2 text-xs font-bold text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none focus:outline-none last:mr-0 bg-facebook-regular border-facebook-regular active:bg-facebook-active active:border-facebook-active hover:shadow-md iphone:mt-2"
                       >
-                        <i className="mr-1 fab fa-facebook" /> {/* */}facebook
+                        {/* */}facebook
                       </a>
                       <a
                         onClick={() => signIn("twitter")}
-                        className="inline-block px-3 py-2 mr-2 text-xs font-bold text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none focus:outline-none last:mr-0 bg-twitter-regular border-twitter-regular active:bg-twitter-active active:border-twitter-active hover:shadow-md"
+                        className="inline-block px-3 py-2 text-xs font-bold text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none focus:outline-none last:mr-0 bg-twitter-regular border-twitter-regular active:bg-twitter-active active:border-twitter-active hover:shadow-md iphone:!mr-2 iphone:mt-2"
                       >
-                        <i className="mr-1 fab fa-twitter" /> {/* */}twitter
+                        {/* */}twitter
                       </a>
                     </div>
                     <hr className="mt-6 border-b-1 border-blueGray-200" />
@@ -115,7 +120,14 @@ const login = () => {
                       </div> */}
                     <div className="mt-5 text-center">
                       <button
-                        onClick={() => signIn("email", { email })}
+                        onClick={() => {
+                          if (validateEmail(email)) {
+                            signIn("email", { email });
+                          } else {
+                            // notification for user
+                            console.log("TEST");
+                          }
+                        }}
                         className="inline-block w-full px-6 py-2 mr-2 text-sm font-bold text-center text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none focus:outline-none last:mr-0 bg-blueGray-800 border-blueGray-800 active:bg-blueGray-900 active:border-blueGray-900 hover:shadow-lg"
                       >
                         Mit E-Mail Einloggen

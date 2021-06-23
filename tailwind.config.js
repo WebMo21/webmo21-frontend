@@ -20,6 +20,9 @@ module.exports = {
         lime: colors.lime,
         orange: colors.orange,
       },
+      screens: {
+        iphone: { max: "400px" },
+      },
     },
   },
   variants: {

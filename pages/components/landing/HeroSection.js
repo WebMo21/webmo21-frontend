@@ -59,12 +59,18 @@ const HeroSection = () => {
               {session && (
                 <>
                   <Link href="/dashboard">
-                    <a className="inline-block p-4 mt-5 font-semibold text-green-500 bg-transparent border border-green-500 rounded cursor-pointer select-none hover:bg-green-500 hover:text-white hover:border-transparent">
+                    <a className="inline-block p-4 mt-5 font-semibold text-green-500 bg-transparent border border-green-500 rounded cursor-pointer select-none hover:bg-green-500 hover:text-white hover:border-transparent iphone:text-center">
                       Hallo{" "}
                       {session.user.name
                         ? session.user.name
                         : session.user.email}
-                      , zum Dashboard!
+                      ,
+                      <br
+                        className={`hidden ${
+                          session.user.email ? "iphone:block" : ""
+                        }`}
+                      ></br>{" "}
+                      zum Dashboard!
                     </a>
                   </Link>
                 </>
