@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { useSession } from "next-auth/client";
+import { signOut, useSession } from "next-auth/client";
 
 const HeroSection = () => {
   const [session] = useSession();
@@ -73,11 +73,12 @@ const HeroSection = () => {
                       zum Dashboard!
                     </a>
                   </Link>
-                  <Link href="/dashboard">
-                    <a className="p-2 mt-4 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none sm:hidden md:hidden lg:hidden xl:hidden iphone:block hover:bg-red-300">
-                      Ausloggen
-                    </a>
-                  </Link>
+                  <a
+                    onClick={signOut}
+                    className="p-2 mx-2 mt-4 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none sm:hidden md:hidden lg:hidden xl:hidden iphone:block hover:bg-red-300"
+                  >
+                    Ausloggen
+                  </a>
                 </>
               )}
             </div>
