@@ -1,9 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/client"
+import { useRouter } from "next/router";
+import { signOut, useSession } from "next-auth/client";
 
 const NavBar = () => {
   const [session] = useSession();
+  const router = useRouter();
+
   return (
     <nav className="absolute top-0 z-50 flex flex-wrap items-center justify-between w-full px-2 py-3 navbar-expand-lg">
       <div className="container flex flex-wrap items-center justify-between px-4 mx-auto">
@@ -119,18 +122,20 @@ const NavBar = () => {
             </li>
             {/* singIn / signOut */}
             <li className="flex items-center">
-            {!session && (
+              {!session && router.pathname !== "/login" ? (
                 <>
                   <Link href="/login">
-                <a className="inline-block p-2 ml-5 font-semibold text-white bg-green-500 border border-transparent border-green-500 rounded cursor-pointer select-none">
-                  Einloggen
-                </a>
-              </Link>
+                    <a className="inline-block p-2 ml-5 font-semibold text-white bg-green-500 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-green-400">
+                      Einloggen
+                    </a>
+                  </Link>
                 </>
+              ) : (
+                ""
               )}
-               {session && (
+              {session && (
                 <div onClick={signOut}>
-                  <a className="inline-block p-2 ml-5 font-semibold text-white bg-green-500 border border-transparent border-green-500 rounded cursor-pointer select-none">
+                  <a className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300">
                     Ausloggen
                   </a>
                 </div>

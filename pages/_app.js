@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Provider }  from "next-auth/client";
+import { Provider } from "next-auth/client";
 import AOS from "aos";
 
 import "../styles/globals.css";
@@ -18,9 +18,10 @@ function MyApp({ Component, pageProps }) {
     });
   }, []);
   return (
-  <Provider session={pageProps.session}>
-    <Component {...pageProps} />
-  </Provider>)
+    <Provider session={pageProps.session}>
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
 
 export default MyApp;

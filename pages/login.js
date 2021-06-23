@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/client";
+import Head from "next/head";
 import { useRouter } from "next/router";
 
 import NavBar from "./components/navbar/NavBar";
@@ -8,6 +9,7 @@ import Footer from "./components/footer/Footer";
 const login = () => {
   const [session, loading] = useSession();
   const router = useRouter();
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     if (session) {
@@ -23,6 +25,10 @@ const login = () => {
 
   return (
     <>
+      <Head>
+        <title>Fitness Time - Login</title>
+        <link rel="icon" href="./favicons/favicon.ico" />
+      </Head>
       <NavBar />
       <main>
         <section className="relative w-full h-full min-h-screen py-40">
@@ -70,52 +76,33 @@ const login = () => {
                   </div>
                   <div className="flex-auto px-4 py-10 pt-0 lg:px-10">
                     <div className="mb-3 font-bold text-center text-blueGray-500">
-                      <small>Oder mit E-Mail fortfahren</small>
+                      <small>Mit E-Mail fortfahren</small>
                     </div>
-                    <form>
-                      <div className="relative w-full">
-                        <label className="block mb-2 ml-1 text-xs font-bold uppercase text-blueGray-500">
-                          E-Email-Adresse
-                        </label>
-                        <div className="pt-0 mb-3">
-                          <input
-                            type="email"
-                            placeholder="max.mustermann@pm.me"
-                            className="relative w-full px-3 py-2 text-sm transition duration-200 bg-white border border-solid rounded-md outline-none border-blueGray-300 placeholder-blueGray-200 text-blueGray-700 focus:ring focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 "
-                            autoComplete="off"
-                            style={{
-                              backgroundImage: 'url("data:image/png',
-                              backgroundRepeat: "no-repeat",
-                              backgroundAttachment: "scroll",
-                              backgroundSize: "16px 18px",
-                              backgroundPosition: "98% 50%",
-                              cursor: "auto",
-                            }}
-                          />
-                        </div>
+                    <div className="relative w-full">
+                      <label className="block mb-2 ml-1 text-xs font-bold uppercase text-blueGray-500">
+                        E-Email-Adresse
+                      </label>
+                      <div className="pt-0 mb-3">
+                        <input
+                          type="email"
+                          required
+                          placeholder="max.mustermann@pm.me"
+                          value={email}
+                          onChange={(event) => setEmail(event.target.value)}
+                          className="relative w-full px-3 py-2 text-sm transition duration-200 bg-white border border-solid rounded-md outline-none border-blueGray-300 placeholder-blueGray-200 text-blueGray-700 focus:ring focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 "
+                          autoComplete="off"
+                          style={{
+                            backgroundImage: 'url("data:image/png',
+                            backgroundRepeat: "no-repeat",
+                            backgroundAttachment: "scroll",
+                            backgroundSize: "16px 18px",
+                            backgroundPosition: "98% 50%",
+                            cursor: "auto",
+                          }}
+                        />
                       </div>
-                      <div className="relative w-full">
-                        <label className="block mb-2 ml-1 text-xs font-bold uppercase text-blueGray-500">
-                          Passwort
-                        </label>
-                        <div className="pt-0 mb-3">
-                          <input
-                            type="password"
-                            placeholder="SuPeRSIcHeReSpAsSwOrT"
-                            className="relative w-full px-3 py-2 text-sm transition duration-200 bg-white border border-solid rounded-md outline-none border-blueGray-300 placeholder-blueGray-200 text-blueGray-700 focus:ring focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 "
-                            autoComplete="off"
-                            style={{
-                              backgroundImage: 'url("data:image/png',
-                              backgroundRepeat: "no-repeat",
-                              backgroundAttachment: "scroll",
-                              backgroundSize: "16px 18px",
-                              backgroundPosition: "98% 50%",
-                              cursor: "pointer",
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className="inline-block mt-2">
+                    </div>
+                    {/* <div className="inline-block mt-2">
                         <label className="inline-flex items-center cursor-pointer">
                           <input
                             type="checkbox"
@@ -125,16 +112,15 @@ const login = () => {
                             Angemeldet bleiben
                           </span>
                         </label>
-                      </div>
-                      <div className="mt-5 text-center">
-                        <button
-                          onClick={signIn}
-                          className="inline-block w-full px-6 py-2 mr-2 text-sm font-bold text-center text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none focus:outline-none last:mr-0 bg-blueGray-800 border-blueGray-800 active:bg-blueGray-900 active:border-blueGray-900 hover:shadow-lg"
-                        >
-                          Einloggen
-                        </button>
-                      </div>
-                    </form>
+                      </div> */}
+                    <div className="mt-5 text-center">
+                      <button
+                        onClick={() => signIn()}
+                        className="inline-block w-full px-6 py-2 mr-2 text-sm font-bold text-center text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none focus:outline-none last:mr-0 bg-blueGray-800 border-blueGray-800 active:bg-blueGray-900 active:border-blueGray-900 hover:shadow-lg"
+                      >
+                        Mit E-Mail Einloggen
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

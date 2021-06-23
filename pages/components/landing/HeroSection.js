@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { useSession } from "next-auth/client"
+import { useSession } from "next-auth/client";
 
 const HeroSection = () => {
   const [session] = useSession();
@@ -25,12 +25,15 @@ const HeroSection = () => {
           <div className="w-full px-4 ml-auto mr-auto text-center lg:w-6/12">
             <div>
               <h1 className="text-5xl font-semibold text-white selection:bg-yellow-300 selection:text-yellow-900">
-                Fitness <span className="text-green-500 selection:bg-yellow-300 selection:text-yellow-900">Time</span>
+                Fitness{" "}
+                <span className="text-green-500 selection:bg-yellow-300 selection:text-yellow-900">
+                  Time
+                </span>
               </h1>
               <p className="mt-4 text-lg text-gray-300 selection:bg-yellow-300 selection:text-yellow-900">
                 Willkommen zu Fitness Time, deinem digitalen Planer für dein
                 Training und deine Fitness. Lass uns die Übersicht deiner
-                Workouts organisieren und fokussiere dich auf dein Training.
+                Workouts organisieren und fokussiere dich auf dein Workout.
               </p>
               <div className="flex justify-center mt-4 select-none">
                 <img
@@ -47,19 +50,19 @@ const HeroSection = () => {
               {!session && (
                 <>
                   <Link href="/login">
-                <a className="inline-block p-4 mt-5 font-semibold text-green-500 bg-transparent border border-green-500 rounded cursor-pointer select-none hover:bg-green-500 hover:text-white hover:border-transparent">
-                  Jetzt im Browser loslegen!
-                </a>
-              </Link>
+                    <a className="inline-block p-4 mt-5 font-semibold text-green-500 bg-transparent border border-green-500 rounded cursor-pointer select-none hover:bg-green-500 hover:text-white hover:border-transparent">
+                      Jetzt im Browser loslegen!
+                    </a>
+                  </Link>
                 </>
               )}
-               {session && (
+              {session && (
                 <>
                   <Link href="/dashboard">
-                <a className="inline-block p-4 mt-5 font-semibold text-green-500 bg-transparent border border-green-500 rounded cursor-pointer select-none hover:bg-green-500 hover:text-white hover:border-transparent">
-                  Hallo {session.user.name}, zum Dashboard!
-                </a>
-              </Link>
+                    <a className="inline-block p-4 mt-5 font-semibold text-green-500 bg-transparent border border-green-500 rounded cursor-pointer select-none hover:bg-green-500 hover:text-white hover:border-transparent">
+                      Hallo {session.user.name}, zum Dashboard!
+                    </a>
+                  </Link>
                 </>
               )}
             </div>
