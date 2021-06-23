@@ -34,7 +34,7 @@ export default NextAuth({
   }, */
   database: process.env.DATABASE_URL,
   pages: {
-    /* verifyRequest: "/emailsent", */
+    verifyRequest: "/emailsent",
     error: "/error",
     // newUser: null, // If set, new users will be directed here on first sign in
   },
