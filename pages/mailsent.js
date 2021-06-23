@@ -12,7 +12,7 @@ const emailsent = () => {
                 className="absolute w-full h-full bg-cover bg-50"
                 style={{ backgroundImage: "url(./backgrounds/mailsent.svg)" }}
               ></div>
-              <div className="container h-full px-4 mx-auto">
+              <div className="container h-full px-4 mx-auto" data-aos="fade-in">
                 <div className="flex flex-wrap items-center h-full -mx-4">
                   <div className="relative w-full px-4 text-center">
                     <h1 className="mb-16 text-6xl font-bold text-green-500">

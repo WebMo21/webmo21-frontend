@@ -12,7 +12,7 @@ const error = () => {
                 className="absolute w-full h-full bg-cover bg-50"
                 style={{ backgroundImage: "url(./backgrounds/error.svg)" }}
               ></div>
-              <div className="container h-full px-4 mx-auto">
+              <div className="container h-full px-4 mx-auto" data-aos="fade-in">
                 <div className="flex flex-wrap items-center h-full -mx-4">
                   <div className="relative w-full px-4 text-center">
                     <h1 className="font-bold text-green-500 text-10 sm:text-12 tracking-875">
