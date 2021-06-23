@@ -66,8 +66,10 @@ const HeroSection = () => {
                         : session.user.email}
                       ,
                       <br
-                        className={`hidden ${
-                          session.user.email ? "iphone:block" : ""
+                        className={`${
+                          session.user.email
+                            ? "xm:hidden md:hidden lg:hidden xl:hidden iphone:block"
+                            : ""
                         }`}
                       ></br>{" "}
                       zum Dashboard!
