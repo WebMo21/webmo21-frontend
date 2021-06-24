@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 
 import NavBar from "./components/navbar/NavBar";
@@ -10,24 +10,30 @@ import ContactForm from "./components/landing/ContactForm";
 import Footer from "./components/footer/Footer";
 
 const landing = () => {
+  const [language, setLanguage] = useState(
+    typeof window !== "undefined" && localStorage.getItem("language")
+  );
 
   return (
     <>
       <Head>
-        <title>Fitness Time - Dein Workout Planer</title>
+        <title>
+          Fitness Time -{" "}
+          {language === "DE" ? "Dein Workout Planer" : "Your Workout Planer"}
+        </title>
         <link rel="icon" href="./favicons/favicon.ico" />
       </Head>
-      <NavBar />
+      <NavBar language={language} setLanguageCallback={setLanguage} />
       <main>
-        <HeroSection />
-        <AboutSection />
-        <PreviewSection />
-        <ContactHeader />
-        <ContactForm />
+        <HeroSection language={language} />
+        <AboutSection language={language} />
+        <PreviewSection language={language} />
+        <ContactHeader language={language} />
+        <ContactForm language={language} />
       </main>
-      <Footer />
+      <Footer language={language} />
     </>
-  )
+  );
 };
 
 export default landing;

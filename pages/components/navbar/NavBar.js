@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/client";
 
-const NavBar = () => {
+const NavBar = ({ language, setLanguageCallback }) => {
   const [session] = useSession();
   const router = useRouter();
 
@@ -36,10 +36,10 @@ const NavBar = () => {
           </button>
         </div>
         <div
-          className="items-center flex-grow hidden bg-white lg:flex lg:bg-transparent lg:shadow-none"
+          className="items-center flex-grow bg-green-100 rounded-lg lg:flex lg:bg-transparent lg:shadow-none tablet:mt-4"
           id="example-collapse-navbar"
         >
-          <ul className="flex flex-col list-none lg:flex-row lg:ml-auto">
+          <ul className="flex list-none tablet:justify-between lg:flex-row lg:ml-auto">
             {/* Icon 1 */}
             <li className="flex items-center">
               <a
@@ -62,7 +62,7 @@ const NavBar = () => {
                     fill="#10b981"
                   />
                 </svg>
-                <span className="inline-block ml-2 lg:hidden">Share</span>
+                <span className="inline-block ml-2 lg:hidden"></span>
               </a>
             </li>
             {/* Icon 2 */}
@@ -88,7 +88,7 @@ const NavBar = () => {
                     fill="#10b981"
                   />
                 </svg>
-                <span className="inline-block ml-2 lg:hidden">Tweet</span>
+                <span className="inline-block ml-2 lg:hidden"></span>
               </a>
             </li>
             {/* Icon 3 */}
@@ -117,16 +117,59 @@ const NavBar = () => {
                     fill="#10b981"
                   />
                 </svg>
-                <span className="inline-block ml-2 lg:hidden">Profile</span>
+                <span className="inline-block ml-2 lg:hidden"></span>
               </a>
             </li>
-            {/* singIn / signOut */}
-            <li className="flex items-center">
+            {/* Language Selection */}
+            <div className="relative inline-block pt-1 ml-1 mr-2 group tablet:mt-2">
+              <button className="inline-flex items-center px-3 py-2 font-semibold text-green-600 bg-transparent border border-green-500 rounded iphone:text-xs iphone:mt-1">
+                <span className="mr-1">{language}</span>
+                <svg
+                  className="w-4 h-4 fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
+              </button>
+
+              <ul className="absolute hidden pt-1 text-gray-700 group-hover:block iphone:w-20">
+                {language === "DE" ? (
+                  <li className="">
+                    <a
+                      onClick={() => {
+                        setLanguageCallback("EN");
+                        localStorage.setItem("language", "EN");
+                      }}
+                      className="block w-16 px-4 py-2 whitespace-no-wrap bg-green-500 rounded hover:bg-green-400 iphone:text-xs iphone:w-10"
+                      href="#"
+                    >
+                      EN
+                    </a>
+                  </li>
+                ) : (
+                  <li className="">
+                    <a
+                      onClick={() => {
+                        setLanguageCallback("DE");
+                        localStorage.setItem("language", "DE");
+                      }}
+                      className="block w-16 px-4 py-2 whitespace-no-wrap bg-green-500 rounded hover:bg-green-400 iphone:text-xs iphone:w-10"
+                      href="#"
+                    >
+                      DE
+                    </a>
+                  </li>
+                )}
+              </ul>
+            </div>
+            {/* signIn / signOut */}
+            <li className="flex items-center tablet:mr-3 iphone:w-20 iphone:text-xs">
               {!session && router.pathname !== "/login" ? (
                 <>
                   <Link href="/login">
                     <a className="inline-block p-2 ml-5 font-semibold text-white bg-green-500 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-green-400">
-                      Einloggen
+                      {language === "DE" ? "Login" : "Sign In"}
                     </a>
                   </Link>
                 </>
@@ -136,7 +179,7 @@ const NavBar = () => {
               {session && (
                 <div onClick={signOut}>
                   <a className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300">
-                    Ausloggen
+                    {language === "DE" ? "Ausloggen" : "Sign Out"}
                   </a>
                 </div>
               )}

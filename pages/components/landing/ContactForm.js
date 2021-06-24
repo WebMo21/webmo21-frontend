@@ -1,6 +1,6 @@
 import React from "react";
 
-const ContactForm = () => {
+const ContactForm = ({ language }) => {
   return (
     <section className="relative block py-24 bg-black lg:pt-0">
       <div className="container px-4 mx-auto">
@@ -11,16 +11,20 @@ const ContactForm = () => {
               data-aos="fade-up-right"
             >
               <div className="flex-auto p-5 text-white bg-green-500 rounded-md lg:p-10">
-                <h4 className="text-2xl font-semibold select-none">Kontakt aufnehmen</h4>
+                <h4 className="text-2xl font-semibold select-none">
+                  {language === "DE" ? "Kontakt aufnehmen" : "Contact Us"}
+                </h4>
                 <p className="mt-1 mb-4 leading-relaxed select-none">
-                  Wir versuchen dir innerhalb von 24 Stunden zu antworten.
+                  {language === "DE"
+                    ? "Wir versuchen dir innerhalb von 24 Stunden zu antworten."
+                    : "We will try to answer you within 24 hours."}
                 </p>
                 <div className="relative w-full mt-8 mb-3">
                   <label
                     className="block mb-2 text-xs font-bold uppercase select-none"
                     htmlFor="full-name"
                   >
-                    Vollständiger Name
+                    {language === "DE" ? "Vollständiger Name" : "Full Name"}
                   </label>
                   <input
                     type="text"
@@ -34,7 +38,7 @@ const ContactForm = () => {
                     className="block mb-2 text-xs font-bold uppercase select-none"
                     htmlFor="email"
                   >
-                    E-Mail-Adresse
+                    {language === "DE" ? "E-Mail-Adresse" : "Email"}
                   </label>
                   <input
                     type="email"
@@ -48,14 +52,18 @@ const ContactForm = () => {
                     className="block mb-2 text-xs font-bold uppercase select-none"
                     htmlFor="message"
                   >
-                    Nachricht
+                    {language === "DE" ? "Nachricht" : "Message"}
                   </label>
                   <textarea
                     rows={4}
                     cols={80}
                     style={{ resize: "none" }}
                     className="w-full px-3 py-3 text-sm text-black placeholder-gray-400 bg-white rounded shadow focus:outline-none focus:shadow-outline"
-                    placeholder="Hier steht deine Nachricht..."
+                    placeholder={
+                      language === "DE"
+                        ? "Hier steht deine Nachricht..."
+                        : "Your message here..."
+                    }
                     defaultValue={""}
                   />
                 </div>
@@ -65,7 +73,7 @@ const ContactForm = () => {
                     type="button"
                     style={{ transition: "all 0.15s ease 0s" }}
                   >
-                    Nachricht Senden
+                    {language === "DE" ? "Nachricht Senden" : "Send Message"}
                   </button>
                 </div>
               </div>

@@ -7,10 +7,13 @@ import NavBar from "./components/navbar/NavBar";
 import Footer from "./components/footer/Footer";
 
 const login = () => {
-  const [session, loading] = useSession();
+  const [session] = useSession();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [showEmailInvalid, setShowEmailInvalid] = useState(false);
+  const [language, setLanguage] = useState(
+    typeof window !== "undefined" && localStorage.getItem("language")
+  );
 
   useEffect(() => {
     if (session) {
@@ -35,7 +38,7 @@ const login = () => {
         <title>Fitness Time - Login</title>
         <link rel="icon" href="./favicons/favicon.ico" />
       </Head>
-      <NavBar />
+      <NavBar language={language} setLanguageCallback={setLanguage} />
       <main>
         <section className="relative w-full h-full min-h-screen py-40">
           <div
@@ -55,7 +58,9 @@ const login = () => {
                   <div className="px-6 py-6 mb-0">
                     <div className="mb-3 text-center">
                       <h6 className="text-sm font-bold text-blueGray-500">
-                        Schnell einloggen mit
+                        {language === "DE"
+                          ? "Schnell einloggen mit"
+                          : "Quick Sign In"}
                       </h6>
                     </div>
                     <div className="flex-col text-center cursor-pointer iphone:flex iphone:">
@@ -82,11 +87,15 @@ const login = () => {
                   </div>
                   <div className="flex-auto px-4 py-10 pt-0 lg:px-10">
                     <div className="mb-3 font-bold text-center text-blueGray-500">
-                      <small>Mit E-Mail fortfahren</small>
+                      <small>
+                        {language === "DE"
+                          ? "Mit E-Mail fortfahren"
+                          : "Continue with E-Mail"}
+                      </small>
                     </div>
                     <div className="relative w-full">
                       <label className="block mb-2 ml-1 text-xs font-bold uppercase text-blueGray-500">
-                        E-Email-Adresse
+                        {language === "DE" ? "E-Mail-Adresse" : "Email"}
                       </label>
                       <div className="pt-0 mb-3">
                         <input
@@ -108,7 +117,9 @@ const login = () => {
                         />
                         {showEmailInvalid ? (
                           <span className="rounded bg-red-50 px-2.5 py-1 text-xs font-semibold text-red-500 tracking-wide uppercase">
-                            Das ist keine gültige E-Mail-Adresse
+                            {language === "DE"
+                              ? "Das ist keine gültige E-Mail-Adresse"
+                              : "This is no valid email"}
                           </span>
                         ) : (
                           ""
@@ -139,7 +150,9 @@ const login = () => {
                         }}
                         className="inline-block w-full px-6 py-2 mr-2 text-sm font-bold text-center text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none focus:outline-none last:mr-0 bg-blueGray-800 border-blueGray-800 active:bg-blueGray-900 active:border-blueGray-900 hover:shadow-lg"
                       >
-                        Mit E-Mail Einloggen
+                        {language === "DE"
+                          ? "Mit E-Mail Einloggen"
+                          : "Login with Email"}
                       </button>
                     </div>
                   </div>
@@ -149,7 +162,7 @@ const login = () => {
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer language={language} />
     </>
   );
 };

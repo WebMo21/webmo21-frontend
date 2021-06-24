@@ -1,6 +1,6 @@
 import React from "react";
 
-const ContactHeader = () => {
+const ContactHeader = ({ language }) => {
   return (
     <section className="relative block pb-20 text-white bg-black">
       <div
@@ -23,10 +23,12 @@ const ContactHeader = () => {
         <div className="flex flex-wrap justify-center text-center">
           <div className="w-full px-4 lg:w-6/12">
             <h2 className="text-4xl font-semibold text-white uppercase select-none">
-              Schreib Uns
+              {language === "DE" ? "Schreib Uns" : "Contact Us"}
             </h2>
             <p className="mt-4 mb-4 text-lg leading-relaxed select-none">
-              Wir beantworten gern deine Fragen oder Hinweise zu Fitness Time.
+              {language === "DE"
+                ? "Wir beantworten gern deine Fragen oder Hinweise zu Fitness Time."
+                : "We will be happy to answer any questions or comments you may have about Fitness Time."}
             </p>
           </div>
         </div>

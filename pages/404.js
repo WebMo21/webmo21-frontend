@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
 const Custom404 = () => {
+  const [language] = useState(
+    typeof window !== "undefined" && localStorage.getItem("language")
+  );
+
   return (
     <div className="!h-screen">
       <div className="flex-auto ct-docs-frame">
@@ -22,14 +26,18 @@ const Custom404 = () => {
                       404
                     </h1>
                     <h4 className="mt-0 mb-2 text-3xl font-bold text-white">
-                      Fehler :(
+                      {language === "DE" ? "Fehler :(" : "Error :("}
                     </h4>
                     <p className="text-2xl font-normal leading-normal text-white">
-                      Dieses Training ist uns neu...
+                      {language === "DE"
+                        ? "Dieses Training ist uns neu..."
+                        : "This workout seems new to us..."}
                     </p>
                     <Link href="/dashboard">
                       <a className="inline-block p-4 mt-5 font-semibold text-white bg-green-500 border border-green-500 rounded cursor-pointer select-none hover:bg-green-400">
-                        Zurück zum Dashboard!
+                        {language === "DE"
+                          ? "Zurück zum Dashboard!"
+                          : "Back to the Dashboard"}
                       </a>
                     </Link>
                   </div>

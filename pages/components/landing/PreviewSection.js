@@ -1,18 +1,18 @@
 import React from "react";
 
-const PreviewSection = () => {
+const PreviewSection = ({ language }) => {
   return (
     <section className="pt-20 pb-48">
       <div className="container px-4 mx-auto">
         <div className="flex flex-wrap justify-center mb-24 text-center">
           <div className="w-full px-4 lg:w-6/12">
             <h2 className="text-4xl font-semibold uppercase select-none">
-              Pläne wie von Selbst
+              {language === "DE" ? "Pläne wie von Selbst" : "Plans like magic"}
             </h2>
             <p className="m-4 text-lg leading-relaxed select-none">
-              Unsere Trainingspläne erinnern dich stetig daran deinem Körper
-              etwas Gutes zu tun. Nutze die Features von Fitness Time um im
-              Handumdrehen deinen Traumkörper zu erreichen.
+              {language === "DE"
+                ? "Unsere Trainingspläne erinnern dich stetig daran deinem Körper etwas Gutes zu tun. Nutze die Features von Fitness Time um im Handumdrehen deinen Traumkörper zu erreichen."
+                : "Our training plans constantly remind you to do your body something good for yourself. Use the features of Fitness Time to achieve your dream body in no time."}
             </p>
           </div>
         </div>
@@ -32,10 +32,12 @@ const PreviewSection = () => {
               />
               <div className="pt-6 text-center">
                 <h5 className="text-xl font-bold select-none">
-                  Eigene Übungen
+                  {language === "DE" ? "Eigene Übungen" : "Cusom Workouts"}
                 </h5>
                 <p className="mt-1 text-sm font-semibold text-gray-500 uppercase select-none">
-                  Weil Training Indivduell ist
+                  {language === "DE"
+                    ? "Weil Training Individuell ist"
+                    : "Because training is individual"}
                 </p>
               </div>
             </div>
@@ -53,9 +55,13 @@ const PreviewSection = () => {
                 style={{ maxWidth: 250 }}
               />
               <div className="pt-6 text-center">
-                <h5 className="text-xl font-bold select-none">Eigene Pläne</h5>
+                <h5 className="text-xl font-bold select-none">
+                  {language === "DE" ? "Eigene Pläne" : "Custom Plans"}
+                </h5>
                 <p className="mt-1 text-sm font-semibold text-gray-500 uppercase select-none">
-                  Modern mit Drag & Drop
+                  {language === "DE"
+                    ? "Modern mit Drag & Drop"
+                    : "Modern with Drag and Drop"}
                 </p>
               </div>
             </div>
@@ -74,10 +80,12 @@ const PreviewSection = () => {
               />
               <div className="pt-6 text-center">
                 <h5 className="text-xl font-bold select-none">
-                  Eigene Übersicht
+                  {language === "DE" ? "Eigene Übersicht" : "Custom Overview"}
                 </h5>
                 <p className="mt-1 text-sm font-semibold text-gray-500 uppercase select-none">
-                  Verliere dein Ziel Nie aus den Augen
+                  {language === "DE"
+                    ? "Verliere dein Ziel Nie aus den Augen"
+                    : "Never lose sight of your goal"}
                 </p>
               </div>
             </div>

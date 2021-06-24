@@ -1,6 +1,6 @@
 import React from "react";
 
-const AboutSection = () => {
+const AboutSection = ({ language }) => {
   return (
     <section id="about" className="relative py-20 text-white bg-black">
       <div className="container px-4 mx-auto">
@@ -13,21 +13,25 @@ const AboutSection = () => {
               alt="..."
               className="max-w-full rounded-lg shadow-lg"
               src="./backgrounds/bg-fitness-woman-time.jpeg"
-            /> 
+            />
           </div>
           <div
             className="w-full px-4 ml-auto mr-auto md:w-5/12"
             data-aos="fade-left"
           >
             <div className="md:pr-12">
-              <small className="text-white select-none">Über Fitness Time</small>
+              <small className="text-white select-none">
+                {language === "DE" ? "Über Fitness Time" : "About Fitness Time"}
+              </small>
               <h3 className="text-4xl font-bold uppercase select-none">
-                Bleibe deinen Zielen treu
+                {language === "DE"
+                  ? "Bleibe deinen Zielen treu"
+                  : "Stay true to your goals"}
               </h3>
               <p className="mt-4 text-lg leading-relaxed select-none">
-                Erstelle deinen individuellen Trainingsplan und ordne
-                vordefinierte oder eigene Übungen ganz nach deinen Vorstellungen
-                in diesen ein.
+                {language === "DE"
+                  ? "Erstelle deinen individuellen Trainingsplan und ordne vordefinierte oder eigene Übungen ganz nach deinen Vorstellungen in diesen ein."
+                  : "Create your individual training plan and arrange predefined or your own exercises into it according to your ideas."}
               </p>
               <ul className="mt-6 list-none">
                 <li className="py-2">
@@ -96,7 +100,9 @@ const AboutSection = () => {
                     </div>
                     <div>
                       <h4 className="text-xl select-none">
-                        Deine Trainingsübersicht - Überall & Kostenlos
+                        {language === "DE"
+                          ? "Deine Trainingsübersicht - Überall & Kostenlos"
+                          : "Your training overview - Everywhere & Free of charge"}
                       </h4>
                     </div>
                   </div>
@@ -170,7 +176,11 @@ const AboutSection = () => {
                       </span>
                     </div>
                     <div>
-                      <h4 className="text-xl select-none">Eigene Übungen - Eigene Pläne</h4>
+                      <h4 className="text-xl select-none">
+                        {language === "DE"
+                          ? "Eigene Übungen - Eigene Pläne"
+                          : "Your Own exercises - Your own plans"}
+                      </h4>
                     </div>
                   </div>
                 </li>
@@ -265,7 +275,11 @@ const AboutSection = () => {
                       </span>
                     </div>
                     <div>
-                      <h4 className="text-xl select-none">Im Browser & Smartphone</h4>
+                      <h4 className="text-xl select-none">
+                        {language === "DE"
+                          ? "Im Browser & Smartphone"
+                          : "For Browser & Smartphone"}
+                      </h4>
                     </div>
                   </div>
                 </li>

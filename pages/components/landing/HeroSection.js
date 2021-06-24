@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/client";
 
-const HeroSection = () => {
+const HeroSection = ({ language }) => {
   const [session] = useSession();
   return (
     <div
@@ -31,19 +31,27 @@ const HeroSection = () => {
                 </span>
               </h1>
               <p className="mt-4 text-lg text-gray-300 selection:bg-yellow-300 selection:text-yellow-900">
-                Willkommen zu Fitness Time, deinem digitalen Planer für dein
-                Training und deine Fitness. Lass uns die Übersicht deiner
-                Workouts organisieren und fokussiere dich auf dein Workout.
+                {language === "DE"
+                  ? "Willkommen zu Fitness Time, deinem digitalen Planer für dein Training und deine Fitness. Lass uns die Übersicht deiner Workouts organisieren und fokussiere dich auf dein Workout."
+                  : "Welcome to Fitness Time, your digital planner for your workouts and fitness. Let us organize the overview of your training and focus on your body instead of time."}
               </p>
               <div className="flex justify-center mt-4 select-none">
                 <img
                   className="object-cover h-12 mr-4 cursor-pointer w-30"
-                  src="./ios-app-store-badge.png"
+                  src={
+                    language === "DE"
+                      ? "./ios-app-store-badge.png"
+                      : "./ios-app-store-badge-english.png"
+                  }
                   alt=""
                 />
                 <img
                   className="object-cover h-12 cursor-pointer w-30"
-                  src="./google-play-badge.png"
+                  src={
+                    language === "DE"
+                      ? "./google-play-badge.png"
+                      : "./google-play-badge-english.png"
+                  }
                   alt=""
                 />
               </div>
@@ -51,7 +59,9 @@ const HeroSection = () => {
                 <>
                   <Link href="/login">
                     <a className="inline-block p-4 mt-5 font-semibold text-green-500 bg-transparent border border-green-500 rounded cursor-pointer select-none hover:bg-green-500 hover:text-white hover:border-transparent">
-                      Jetzt im Browser loslegen!
+                      {language === "DE"
+                        ? "Jetzt im Browser loslegen!"
+                        : "Start now on the web!"}
                     </a>
                   </Link>
                 </>
@@ -60,7 +70,7 @@ const HeroSection = () => {
                 <>
                   <Link href="/dashboard">
                     <a className="inline-block p-4 mt-5 font-semibold text-green-500 bg-transparent border border-green-500 rounded cursor-pointer select-none hover:bg-green-500 hover:text-white hover:border-transparent iphone:text-center">
-                      Hallo{" "}
+                      {language === "DE" ? "Hallo" : "Welcome"}{" "}
                       {session.user.name
                         ? session.user.name
                         : session.user.email}
@@ -72,14 +82,16 @@ const HeroSection = () => {
                             : ""
                         }`}
                       ></br>{" "}
-                      zum Dashboard!
+                      {language === "DE"
+                        ? "zum Dashboard!"
+                        : "go to dashboard!"}
                     </a>
                   </Link>
                   <a
                     onClick={signOut}
                     className="p-2 mx-2 mt-4 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none sm:hidden md:hidden lg:hidden xl:hidden iphone:block hover:bg-red-300"
                   >
-                    Ausloggen
+                    {language === "DE" ? "Ausloggen" : "Sign Out"}
                   </a>
                 </>
               )}
