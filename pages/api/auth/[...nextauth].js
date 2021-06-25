@@ -1,6 +1,12 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import customVerificationRequest from "./customVerificationRequest";
+const parse = require("pg-connection-string").parse;
+const pgconfig = parse(process.env.DATABASE_URL);
+pgconfig.ssl = { rejectUnauthorized: false };
+
+console.log("URL: ", process.env.DATABASE_URL);
+console.log("URL PARSED: ", pgconfig);
 
 export default NextAuth({
   providers: [
