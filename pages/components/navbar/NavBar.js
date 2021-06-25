@@ -164,7 +164,7 @@ const NavBar = ({ language, setLanguageCallback }) => {
                 )}
               </ul>
             </div>
-            {/* signIn / signOut */}
+            {/* signIn */}
             <li className="flex items-center tablet:mr-3 iphone:w-20 iphone:text-xs">
               {!session && router.pathname !== "/login" ? (
                 <>
