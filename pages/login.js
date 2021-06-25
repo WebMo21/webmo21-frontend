@@ -7,13 +7,15 @@ import NavBar from "./components/navbar/NavBar";
 import Footer from "./components/footer/Footer";
 
 const login = () => {
-  const [session] = useSession();
+  const [session, loading] = useSession();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [showEmailInvalid, setShowEmailInvalid] = useState(false);
-  const [language, setLanguage] = useState((typeof window !== "undefined" && localStorage.getItem("language") === null) ? "DE" : 
-  typeof window !== "undefined" && localStorage.getItem("language")
-);
+  const [language, setLanguage] = useState(
+    typeof window !== "undefined" && localStorage.getItem("language") === null
+      ? "DE"
+      : typeof window !== "undefined" && localStorage.getItem("language")
+  );
 
   useEffect(() => {
     if (session) {
@@ -39,7 +41,11 @@ const login = () => {
         <link rel="icon" href="./favicons/favicon.ico" />
       </Head>
       <NavBar language={language} setLanguageCallback={setLanguage} />
-      {language && (typeof window !== "undefined" && localStorage.getItem("language") === null) ? localStorage.setItem("language", language) : ""}
+      {language &&
+      typeof window !== "undefined" &&
+      localStorage.getItem("language") === null
+        ? localStorage.setItem("language", language)
+        : ""}
       <main>
         <section className="relative w-full h-full min-h-screen py-40">
           <div
@@ -127,17 +133,6 @@ const login = () => {
                         )}
                       </div>
                     </div>
-                    {/* <div className="inline-block mt-2">
-                        <label className="inline-flex items-center cursor-pointer">
-                          <input
-                            type="checkbox"
-                            className="w-5 h-5 ml-1 transition-all duration-150 ease-linear border rounded appearance-none form-checkbox border-blueGray-300 checked:bg-blueGray-700 checked:border-blueGray-700 focus:border-blueGray-300"
-                          />
-                          <span className="ml-2 text-sm font-semibold text-blueGray-500">
-                            Angemeldet bleiben
-                          </span>
-                        </label>
-                      </div> */}
                     <div className="mt-5 text-center">
                       <button
                         onClick={() => {
@@ -145,7 +140,6 @@ const login = () => {
                             setShowEmailInvalid(false);
                             signIn("email", { email });
                           } else {
-                            // notification for user
                             setShowEmailInvalid(true);
                           }
                         }}

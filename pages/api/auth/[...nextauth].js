@@ -1,12 +1,6 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import customVerificationRequest from "./customVerificationRequest";
-const parse = require("pg-connection-string").parse;
-const pgconfig = parse(process.env.DATABASE_URL);
-pgconfig.ssl = { rejectUnauthorized: false };
-
-console.log("URL: ", process.env.DATABASE_URL);
-console.log("URL PARSED: ", pgconfig);
 
 export default NextAuth({
   providers: [
@@ -35,28 +29,21 @@ export default NextAuth({
       sendVerificationRequest: customVerificationRequest,
     }),
   ],
-  /* database: {
-    type: "sqlite",
-    database: ":memory:",
-    synchronize: true,
-  }, */
   database: process.env.DATABASE_URL,
+  secret: process.env.SECRET,
+  session: {
+    jwt: true,
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
+
+  jwt: {
+    secret: process.env.JWT_SECRET, //use a random secret token here
+    encryption: true,
+  },
+  debug: true,
   pages: {
     verifyRequest: "/mailsent",
     error: "/error",
     // newUser: null, // If set, new users will be directed here on first sign in
   },
-  /*
-  secret: process.env.SECRET,
-
-  session: {
-    jwt: true,
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-  },
-  jwt: {
-    secret: process.env.JWT_SECRET, //use a random secret token here
-    encryption: true,
-  },
-
-  debug: true, */
 });
