@@ -8,6 +8,11 @@ export default function Dashboard() {
   const [session, loading] = useSession();
   const [content, setContent] = useState();
   const router = useRouter();
+  const [language] = useState(
+    typeof window !== "undefined" && localStorage.getItem("language") === null
+      ? "DE"
+      : typeof window !== "undefined" && localStorage.getItem("language")
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +44,11 @@ export default function Dashboard() {
   return (
     <main>
       <div>
+        {language &&
+        typeof window !== "undefined" &&
+        localStorage.getItem("language") === null
+          ? localStorage.setItem("language", language)
+          : ""}
         <h1>DASHBOARD HIER</h1>
         <p>{content}</p>
       </div>

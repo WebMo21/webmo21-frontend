@@ -3,11 +3,18 @@ import Link from "next/link";
 
 const Custom404 = () => {
   const [language] = useState(
-    typeof window !== "undefined" && localStorage.getItem("language")
+    typeof window !== "undefined" && localStorage.getItem("language") === null
+      ? "DE"
+      : typeof window !== "undefined" && localStorage.getItem("language")
   );
 
   return (
     <div className="!h-screen">
+      {language &&
+      typeof window !== "undefined" &&
+      localStorage.getItem("language") === null
+        ? localStorage.setItem("language", language)
+        : ""}
       <div className="flex-auto ct-docs-frame">
         <div className="relative flex flex-wrap justify-center ">
           <div className="w-full">
