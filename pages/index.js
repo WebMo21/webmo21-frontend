@@ -10,12 +10,13 @@ import ContactForm from "./components/landing/ContactForm";
 import Footer from "./components/footer/Footer";
 
 const landing = () => {
-  const [language, setLanguage] = useState(
+  const [language, setLanguage] = useState((typeof window !== "undefined" && localStorage.getItem("language") === null) ? "DE" : 
     typeof window !== "undefined" && localStorage.getItem("language")
   );
 
   return (
     <>
+    {language && (typeof window !== "undefined" && localStorage.getItem("language") === null) ? localStorage.setItem("language", language) : ""} 
       <Head>
         <title>
           Fitness Time -{" "}

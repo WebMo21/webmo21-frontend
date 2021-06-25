@@ -11,9 +11,9 @@ const login = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [showEmailInvalid, setShowEmailInvalid] = useState(false);
-  const [language, setLanguage] = useState(
-    typeof window !== "undefined" && localStorage.getItem("language")
-  );
+  const [language, setLanguage] = useState((typeof window !== "undefined" && localStorage.getItem("language") === null) ? "DE" : 
+  typeof window !== "undefined" && localStorage.getItem("language")
+);
 
   useEffect(() => {
     if (session) {
@@ -39,6 +39,7 @@ const login = () => {
         <link rel="icon" href="./favicons/favicon.ico" />
       </Head>
       <NavBar language={language} setLanguageCallback={setLanguage} />
+      {language && (typeof window !== "undefined" && localStorage.getItem("language") === null) ? localStorage.setItem("language", language) : ""}
       <main>
         <section className="relative w-full h-full min-h-screen py-40">
           <div
