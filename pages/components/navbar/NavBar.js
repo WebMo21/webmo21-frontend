@@ -37,6 +37,7 @@ const NavBar = ({ language, setLanguageCallback }) => {
         </div>
         <div
           className="items-center flex-grow bg-green-100 rounded-lg lg:flex lg:bg-transparent lg:shadow-none tablet:mt-4"
+          data-aos="fade-in"
           id="example-collapse-navbar"
         >
           <ul className="flex list-none tablet:justify-between lg:flex-row lg:ml-auto">
