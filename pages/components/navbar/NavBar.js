@@ -1,29 +1,34 @@
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { signOut, useSession } from "next-auth/client";
 
-const NavBar = () => {
+const NavBar = ({ language, setLanguageCallback }) => {
+  const [session] = useSession();
+  const router = useRouter();
+
   return (
-    <nav className="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg">
-      <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-        <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+    <nav className="absolute top-0 z-50 flex flex-wrap items-center justify-between w-full px-2 py-3 navbar-expand-lg">
+      <div className="container flex flex-wrap items-center justify-between px-4 mx-auto">
+        <div className="relative flex justify-between w-full lg:w-auto lg:static lg:block lg:justify-start">
           <div className="flex">
-            <Link href={process.env.NEXT_PUBLIC_DEVELOP_URL}>
+            <Link href="/">
               <a>
                 <img
                   alt="..."
-                  className="h-10 max-w-10 rounded-lg shadow-lg mt-1 mr-2 cursor-pointer"
+                  className="h-10 mt-1 mr-2 rounded-lg shadow-lg cursor-pointer select-none max-w-10"
                   src="./logos/logo_small_icon_only_inverted-fitness-time.png"
                 />
               </a>
             </Link>
-            <Link href={process.env.NEXT_PUBLIC_DEVELOP_URL}>
-              <a className="text-lg font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap uppercase text-white cursor-pointer">
+            <Link href="/">
+              <a className="inline-block py-2 mr-4 text-lg font-bold leading-relaxed text-white uppercase whitespace-no-wrap cursor-pointer select-none">
                 Fitness Time
               </a>
             </Link>
           </div>
           <button
-            className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+            className="block px-3 py-1 text-xl leading-none bg-transparent border border-transparent border-solid rounded outline-none cursor-pointer lg:hidden focus:outline-none"
             type="button"
             onClick="toggleNavbar('example-collapse-navbar')"
           >
@@ -31,24 +36,25 @@ const NavBar = () => {
           </button>
         </div>
         <div
-          className="lg:flex flex-grow items-center bg-white lg:bg-transparent lg:shadow-none hidden"
+          className="items-center flex-grow bg-green-100 rounded-lg lg:flex lg:bg-transparent lg:shadow-none tablet:mt-4"
+          data-aos="fade-in"
           id="example-collapse-navbar"
         >
-          <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+          <ul className="flex list-none tablet:justify-between lg:flex-row lg:ml-auto">
             {/* Icon 1 */}
             <li className="flex items-center">
               <a
-                className="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                className="flex items-center px-3 py-4 text-xs font-bold text-gray-800 uppercase select-none lg:text-white lg:hover:text-gray-300 lg:py-2"
                 href="https://github.com/WebMo21/webmo21-frontend"
                 rel="noreferrer"
                 target="_blank"
               >
                 <svg
-                  className="h-6 w-6"
+                  className="w-6 h-6"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#10b981"
                   viewBox="0 0 24 24"
-                  enable-background="new 0 0 24 24"
+                  enableBackground="new 0 0 24 24"
                   width="512"
                   height="512"
                 >
@@ -57,19 +63,19 @@ const NavBar = () => {
                     fill="#10b981"
                   />
                 </svg>
-                <span className="lg:hidden inline-block ml-2">Share</span>
+                <span className="inline-block ml-2 lg:hidden"></span>
               </a>
             </li>
             {/* Icon 2 */}
             <li className="flex items-center">
               <a
-                className="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                className="flex items-center px-3 py-4 text-xs font-bold text-gray-800 uppercase select-none lg:text-white lg:hover:text-gray-300 lg:py-2"
                 href="https://twitter.com/fitnesstime"
                 rel="noreferrer"
                 target="_blank"
               >
                 <svg
-                  className="h-6 w-6"
+                  className="w-6 h-6"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#10b981"
                   viewBox="0 0 512 512"
@@ -83,23 +89,23 @@ const NavBar = () => {
                     fill="#10b981"
                   />
                 </svg>
-                <span className="lg:hidden inline-block ml-2">Tweet</span>
+                <span className="inline-block ml-2 lg:hidden"></span>
               </a>
             </li>
             {/* Icon 3 */}
             <li className="flex items-center">
               <a
-                className="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                className="flex items-center px-3 py-4 text-xs font-bold text-gray-800 uppercase select-none lg:text-white lg:hover:text-gray-300 lg:py-2"
                 href="https://instagram.com/fitnesstime"
                 rel="noreferrer"
                 target="_blank"
               >
                 <svg
-                  className="h-8 w-8"
+                  className="w-8 h-8"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#10b981"
                   viewBox="0 0 24 24"
-                  enable-background="new 0 0 24 24"
+                  enableBackground="new 0 0 24 24"
                   width="512"
                   height="512"
                 >
@@ -112,8 +118,74 @@ const NavBar = () => {
                     fill="#10b981"
                   />
                 </svg>
-                <span className="lg:hidden inline-block ml-2">Profile</span>
+                <span className="inline-block ml-2 lg:hidden"></span>
               </a>
+            </li>
+            {/* Language Selection */}
+            <div className="relative inline-block pt-1 ml-1 mr-2 group tablet:mt-2">
+              <button className="inline-flex items-center px-3 py-2 font-semibold text-green-600 bg-transparent border border-green-500 rounded iphone:text-xs iphone:mt-1">
+                <span className="mr-1">{language}</span>
+                <svg
+                  className="w-4 h-4 fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
+              </button>
+
+              <ul className="absolute hidden pt-1 text-gray-700 group-hover:block iphone:w-20">
+                {language === "DE" ? (
+                  <li className="">
+                    <a
+                      onClick={() => {
+                        setLanguageCallback("EN");
+                        localStorage.setItem("language", "EN");
+                      }}
+                      className="block w-16 px-4 py-2 whitespace-no-wrap bg-green-500 rounded hover:bg-green-400 iphone:text-xs iphone:w-10"
+                      href="#"
+                    >
+                      EN
+                    </a>
+                  </li>
+                ) : (
+                  <li className="">
+                    <a
+                      onClick={() => {
+                        setLanguageCallback("DE");
+                        localStorage.setItem("language", "DE");
+                      }}
+                      className="block w-16 px-4 py-2 whitespace-no-wrap bg-green-500 rounded hover:bg-green-400 iphone:text-xs iphone:w-10"
+                      href="#"
+                    >
+                      DE
+                    </a>
+                  </li>
+                )}
+              </ul>
+            </div>
+            {/* signIn */}
+            <li className="flex items-center tablet:mr-3 iphone:w-20 iphone:text-xs">
+              {!session && router.pathname !== "/login" ? (
+                <>
+                  <Link href="/login">
+                    <a className="inline-block p-2 ml-5 font-semibold text-white bg-green-500 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-green-400">
+                      {language === "DE" ? "Login" : "Sign In"}
+                    </a>
+                  </Link>
+                </>
+              ) : (
+                ""
+              )}
+              {session && (
+                <Link href="/logout">
+                  <div>
+                    <a className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300">
+                      {language === "DE" ? "Ausloggen" : "Sign Out"}
+                    </a>
+                  </div>
+                </Link>
+              )}
             </li>
           </ul>
         </div>

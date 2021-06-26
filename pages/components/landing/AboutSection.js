@@ -1,12 +1,12 @@
 import React from "react";
 
-const AboutSection = () => {
+const AboutSection = ({ language }) => {
   return (
-    <section id="about" className="relative py-20 bg-black text-white">
-      <div className="container mx-auto px-4">
-        <div className="items-center flex flex-wrap">
+    <section id="about" className="relative py-20 text-white bg-black">
+      <div className="container px-4 mx-auto">
+        <div className="flex flex-wrap items-center">
           <div
-            className="w-full md:w-4/12 ml-auto mr-auto px-4"
+            className="w-full px-4 ml-auto mr-auto select-none md:w-4/12"
             data-aos="fade-right"
           >
             <img
@@ -16,26 +16,30 @@ const AboutSection = () => {
             />
           </div>
           <div
-            className="w-full md:w-5/12 ml-auto mr-auto px-4"
+            className="w-full px-4 ml-auto mr-auto md:w-5/12"
             data-aos="fade-left"
           >
             <div className="md:pr-12">
-              <small className="text-white">Über Fitness Time</small>
-              <h3 className="text-4xl uppercase font-bold">
-                Bleibe deinen Zielen treu
+              <small className="text-white select-none">
+                {language === "DE" ? "Über Fitness Time" : "About Fitness Time"}
+              </small>
+              <h3 className="text-4xl font-bold uppercase select-none">
+                {language === "DE"
+                  ? "Bleibe deinen Zielen treu"
+                  : "Stay true to your goals"}
               </h3>
-              <p className="mt-4 text-lg leading-relaxed">
-                Erstelle deinen individuellen Trainingsplan und ordne
-                vordefinierte oder eigene Übungen ganz nach deinen Vorstellungen
-                in diesen ein.
+              <p className="mt-4 text-lg leading-relaxed select-none">
+                {language === "DE"
+                  ? "Erstelle deinen individuellen Trainingsplan und ordne vordefinierte oder eigene Übungen ganz nach deinen Vorstellungen in diesen ein."
+                  : "Create your individual training plan and arrange predefined or your own exercises into it according to your ideas."}
               </p>
-              <ul className="list-none mt-6">
+              <ul className="mt-6 list-none">
                 <li className="py-2">
                   <div className="flex items-center">
                     <div>
-                      <span className="font-semibold inline-block py-3 mr-3 text-green-500">
+                      <span className="inline-block py-3 mr-3 font-semibold text-green-500">
                         <svg
-                          className="h-10 w-10"
+                          className="w-10 h-10"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="#10b981"
                           viewBox="0 0 512 512"
@@ -95,8 +99,10 @@ const AboutSection = () => {
                       </span>
                     </div>
                     <div>
-                      <h4 className="text-xl">
-                        Deine Trainingsübersicht - Überall & Kostenlos
+                      <h4 className="text-xl select-none">
+                        {language === "DE"
+                          ? "Deine Trainingsübersicht - Überall & Kostenlos"
+                          : "Your training overview - Everywhere & Free of charge"}
                       </h4>
                     </div>
                   </div>
@@ -104,9 +110,9 @@ const AboutSection = () => {
                 <li className="py-2">
                   <div className="flex items-center">
                     <div>
-                      <span className="font-semibold inline-block py-3 mr-3 text-green-500">
+                      <span className="inline-block py-3 mr-3 font-semibold text-green-500">
                         <svg
-                          className="h-10 w-10"
+                          className="w-10 h-10"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="#10b981"
                           viewBox="0 0 512 512"
@@ -170,16 +176,20 @@ const AboutSection = () => {
                       </span>
                     </div>
                     <div>
-                      <h4 className="text-xl">Eigene Übungen - Eigene Pläne</h4>
+                      <h4 className="text-xl select-none">
+                        {language === "DE"
+                          ? "Eigene Übungen - Eigene Pläne"
+                          : "Your Own exercises - Your own plans"}
+                      </h4>
                     </div>
                   </div>
                 </li>
                 <li className="py-2">
                   <div className="flex items-center">
                     <div>
-                      <span className="font-semibold inline-block py-3 mr-3 text-green-500">
+                      <span className="inline-block py-3 mr-3 font-semibold text-green-500">
                         <svg
-                          className="h-10 w-10"
+                          className="w-10 h-10"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="#10b981"
                           viewBox="0 0 512 512"
@@ -265,7 +275,11 @@ const AboutSection = () => {
                       </span>
                     </div>
                     <div>
-                      <h4 className="text-xl">Im Browser & Smartphone</h4>
+                      <h4 className="text-xl select-none">
+                        {language === "DE"
+                          ? "Im Browser & Smartphone"
+                          : "For Browser & Smartphone"}
+                      </h4>
                     </div>
                   </div>
                 </li>
