@@ -41,11 +41,11 @@ const emailsent = () => {
                         ? "Wir haben dir einen Link zum Einloggen gesendet."
                         : "We have sent you a link to log in."}
                     </p>
-                    <Link href="/dashboard">
+                    <Link href="/">
                       <a className="inline-block p-4 mt-5 font-semibold text-white bg-green-500 border border-green-500 rounded cursor-pointer select-none hover:bg-green-400">
                         {language === "DE"
-                          ? "Zurück zum Dashboard!"
-                          : "Back to the Dashboard"}
+                          ? "Zurück zur Startseite"
+                          : "Back to Landingpage"}
                       </a>
                     </Link>
                   </div>
