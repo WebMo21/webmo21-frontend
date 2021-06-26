@@ -28,7 +28,7 @@ const emailsent = () => {
                   <div className="relative w-full px-4 text-center">
                     <h1 className="mb-16 text-6xl font-bold text-green-500">
                       {language === "DE"
-                        ? "Gleich gehts los!"
+                        ? "Gleich geht's los!"
                         : "Almost ready to go!"}
                     </h1>
                     <h4 className="mt-0 mb-2 text-2xl font-bold">
