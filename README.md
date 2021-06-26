@@ -8,7 +8,7 @@ A modern web application enabling users scheduling and organization of fitness a
 
 ## ✨ Features
 
-- Modern Landing page with [Animate on Scroll](https://www.npmjs.com/package/aos) Animation
+- Modern Landing page with [Animate on Scroll](https://www.npmjs.com/package/aos) animations
 - Contact us via email
 - Language Support for german and english
 - Responsiveness optimized for desktop, tablet and mobile devices
@@ -66,7 +66,7 @@ Several login mechanisms have been implemented through oAuth providers like GitH
 
 #### Magic Link Email Login
 
-Furthermore there is the option to login via email without a password. On first use an email will be sent to the user that contains a Verification Token that is valid for 24 hours and is stored in the database table `verification_request`. When used the user will be redirect and logged in automatically as well as his data will be stored within the `users` table containing information like his email. Email can also be used when a user has used an oAuth provider like GitHub, Twitter or Facebook with the same email before and maybe lost access. So it acts as a backup mechanism and the corresponding user account should be succesfully linked when used email instead of oAuth.
+Furthermore there is the option to login via email without a password. On first use an email will be sent to the user that contains a Verification Token that is valid for 24 hours and is stored in the database table `verification_request`. When used the user will be redirect and logged in automatically as well as his data will be stored within the `users` table containing information like his email. Email can also be used when a user has used an oAuth provider like GitHub, Twitter or Facebook with the same email before and maybe lost access. So it acts as a backup mechanism and the corresponding user account should be succesfully linked when used email instead of oAuth. Trough the selected technical login mechanism the CSRF token will be set automatically.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
