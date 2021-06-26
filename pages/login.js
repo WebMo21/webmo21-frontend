@@ -67,7 +67,7 @@ const login = () => {
                       <h6 className="text-sm font-bold text-blueGray-500">
                         {language === "DE"
                           ? "Schnell einloggen mit"
-                          : "Quick Sign In"}
+                          : "Quick Login"}
                       </h6>
                     </div>
                     <div className="flex-col text-center cursor-pointer iphone:flex iphone:">
@@ -97,7 +97,7 @@ const login = () => {
                       <small>
                         {language === "DE"
                           ? "Mit E-Mail fortfahren"
-                          : "Continue with E-Mail"}
+                          : "Continue with Email"}
                       </small>
                     </div>
                     <div className="relative w-full">

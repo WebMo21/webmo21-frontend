@@ -178,11 +178,13 @@ const NavBar = ({ language, setLanguageCallback }) => {
                 ""
               )}
               {session && (
-                <div onClick={signOut}>
-                  <a className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300">
-                    {language === "DE" ? "Ausloggen" : "Sign Out"}
-                  </a>
-                </div>
+                <Link href="/logout">
+                  <div>
+                    <a className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300">
+                      {language === "DE" ? "Ausloggen" : "Sign Out"}
+                    </a>
+                  </div>
+                </Link>
               )}
             </li>
           </ul>

@@ -11,7 +11,7 @@ const PreviewSection = ({ language }) => {
             </h2>
             <p className="m-4 text-lg leading-relaxed select-none">
               {language === "DE"
-                ? "Unsere Trainingspläne erinnern dich stetig daran deinem Körper etwas Gutes zu tun. Nutze die Features von Fitness Time um im Handumdrehen deinen Traumkörper zu erreichen."
+                ? "Unsere Trainingspläne erinnern dich stetig daran deinem Körper etwas Gutes zu tun. Nutze die Features von Fitness Time um deinen Traumkörper zu erreichen."
                 : "Our training plans constantly remind you to do your body something good for yourself. Use the features of Fitness Time to achieve your dream body in no time."}
             </p>
           </div>

@@ -87,12 +87,11 @@ const HeroSection = ({ language }) => {
                         : "go to dashboard!"}
                     </a>
                   </Link>
-                  <a
-                    onClick={signOut}
-                    className="p-2 mx-2 mt-4 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none sm:hidden md:hidden lg:hidden xl:hidden iphone:block hover:bg-red-300"
-                  >
-                    {language === "DE" ? "Ausloggen" : "Sign Out"}
-                  </a>
+                  <Link href="/logout">
+                    <a className="p-2 mx-2 mt-4 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none sm:hidden md:hidden lg:hidden xl:hidden iphone:block hover:bg-red-300">
+                      {language === "DE" ? "Ausloggen" : "Sign Out"}
+                    </a>
+                  </Link>
                 </>
               )}
             </div>
