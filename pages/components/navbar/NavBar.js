@@ -166,7 +166,7 @@ const NavBar = ({ language, setLanguageCallback }) => {
             </div>
             {/* signIn */}
             <li className="flex items-center tablet:mr-3 iphone:w-20 iphone:text-xs">
-              {!session && router.pathname !== "/login" ? (
+              {!session && router.pathname !== "/login" && (
                 <>
                   <Link href="/login">
                     <a className="inline-block p-2 ml-5 font-semibold text-white bg-green-500 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-green-400">
@@ -174,17 +174,17 @@ const NavBar = ({ language, setLanguageCallback }) => {
                     </a>
                   </Link>
                 </>
-              ) : (
-                ""
               )}
               {session && (
-                <Link href="/logout">
-                  <div>
-                    <a className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300">
-                      {language === "DE" ? "Ausloggen" : "Sign Out"}
-                    </a>
-                  </div>
-                </Link>
+                <>
+                  <Link href="/logout">
+                    <div>
+                      <a className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300">
+                        {language === "DE" ? "Ausloggen" : "Sign Out"}
+                      </a>
+                    </div>
+                  </Link>
+                </>
               )}
             </li>
           </ul>
