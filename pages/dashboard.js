@@ -19,7 +19,6 @@ import {
   MenuIcon,
 } from "@heroicons/react/outline";
 
-import DashboardNoSession from "./components/dashboard/DashboardNoSession";
 import DashboardLogo from "./components/dashboard/DashboardLogo";
 import DashboardDesktopNavigation from "./components/dashboard/DashboardDesktopNavigation";
 import DashboardMobileMenu from "./components/dashboard/DashboardMobileMenu";
@@ -115,7 +114,7 @@ export default function Dashboard() {
   if (!session) {
     return (
       <main>
-        <DashboardNoSession />
+        <h1>Bitte logge dich zunächst ein!</h1>
       </main>
     );
   }
