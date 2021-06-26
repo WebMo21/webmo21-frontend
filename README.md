@@ -1,4 +1,4 @@
-# 🏋️ Fitness Time - Workout Planer
+# 🏋️ Fitness Time - Workout Planner Frontend
 
 ![GitHub deployments](https://img.shields.io/github/deployments/WebMo21/webmo21-frontend/production?label=vercel&logo=vercel&logoColor=white)
 
@@ -16,6 +16,8 @@ A modern web application enabling users scheduling and organization of fitness a
 - Alternative fallback magic URL email login
 - Custom [Error](https://fitness-time.vercel.app/error), [404](https://fitness-time.vercel.app/404) and [Email sent](https://fitness-time.vercel.app/mailsent) page
 - Continuous Integration/Continuous Deployment Pipeline through [Vercel](https://vercel.com/)
+
+## 🤖 Technologies
 
 ## ⏹️ Prerequisites
 
