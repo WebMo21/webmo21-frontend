@@ -2,7 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-html,body
-{
-    overflow-x: hidden; 
+html,
+body {
+  overflow-x: hidden;
+}
+
+.rbc-toolbar button {
+  color: white !important;
+  outline: 0 !important;
+}
+
+.rbc-toolbar button:hover {
+  background: #10b9819b !important;
+  outline: 0 !important;
+}
+
+.rbc-toolbar button:focus {
+  background: #10b981 !important;
+  outline: 0 !important;
+}
+
+.rbc-active {
+  background: #10b981 !important;
+}
+
+.rbc-off-range-bg {
+  background: #0000004f !important;
+}
+
+.rbc-today {
+  background: #374151 !important;
+}
+.rbc-toolbar-label {
+  font-size: 1.8rem !important;
+  color: #10b981 !important;
+  font-weight: 700;
+}
+
+.rbc-event {
+  background: #10b981 !important;
+}
+
+.rbc-day-slot .rbc-time-slot {
+  border-top: 1px solid rgba(128, 128, 128, 0.267) !important;
 }

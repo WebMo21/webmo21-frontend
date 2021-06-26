@@ -34,7 +34,7 @@ const logout = () => {
                 <div className="flex flex-wrap items-center h-full -mx-4">
                   <div className="relative w-full px-4 text-center">
                     <h1 className="mb-16 font-bold text-green-500 text-8xl">
-                      {language === "DE" ? "Ausloggen" : "Logout"}
+                      {language === "DE" ? "Auf Wiedersehen!" : "Goodbye!"}
                     </h1>
                     <p className="text-2xl font-normal leading-normal text-white">
                       {language === "DE"
