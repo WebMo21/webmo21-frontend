@@ -97,12 +97,11 @@ const DashboardHome = ({ username, email, signUpDate }) => {
             </div>
             <div className="flex mt-6 space-x-3 md:mt-0 md:ml-4">
               <Link href="/logout">
-                <a
-                  type="button"
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-500 border border-transparent rounded-md shadow-sm hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
-                >
-                  Ausloggen
-                </a>
+                <div>
+                  <a className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300">
+                    Ausloggen
+                  </a>
+                </div>
               </Link>
             </div>
           </div>
