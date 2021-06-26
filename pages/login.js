@@ -113,6 +113,12 @@ const login = () => {
                           onChange={(event) => setEmail(event.target.value)}
                           className="relative w-full px-3 py-2 text-sm transition duration-200 bg-white border border-solid rounded-md outline-none border-blueGray-300 placeholder-blueGray-200 text-blueGray-700 focus:ring focus:ring-lightBlue-500 focus:ring-1 focus:border-lightBlue-500 "
                           autoComplete="off"
+                          onKeyPress={(event) => {
+                            if (event.key === "Enter" && validateEmail(email)) {
+                              setShowEmailInvalid(false);
+                              signIn("email", { email });
+                            }
+                          }}
                           style={{
                             backgroundImage: 'url("data:image/png',
                             backgroundRepeat: "no-repeat",
@@ -141,12 +147,6 @@ const login = () => {
                             signIn("email", { email });
                           } else {
                             setShowEmailInvalid(true);
-                          }
-                        }}
-                        onKeyPress={(event) => {
-                          if (event.key === "Enter" && validateEmail(email)) {
-                            setShowEmailInvalid(false);
-                            signIn("email", { email });
                           }
                         }}
                         className="inline-block w-full px-6 py-2 mr-2 text-sm font-bold text-center text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none focus:outline-none last:mr-0 bg-blueGray-800 border-blueGray-800 active:bg-blueGray-900 active:border-blueGray-900 hover:shadow-lg"
