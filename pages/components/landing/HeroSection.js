@@ -24,7 +24,11 @@ const HeroSection = ({ language }) => {
         <div className="flex flex-wrap items-center">
           <div className="w-full px-4 ml-auto mr-auto text-center lg:w-6/12">
             <div>
-              <h1 className="text-5xl font-semibold text-white selection:bg-yellow-300 selection:text-yellow-900">
+              <h1
+                className={`${
+                  session ? "mt-16" : ""
+                } text-5xl font-semibold text-white selection:bg-yellow-300 selection:text-yellow-900`}
+              >
                 Fitness{" "}
                 <span className="text-green-500 selection:bg-yellow-300 selection:text-yellow-900">
                   Time
