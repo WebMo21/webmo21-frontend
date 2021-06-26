@@ -48,17 +48,23 @@ const DashboardMobileMenu = ({
           leaveTo="transform opacity-0 scale-110 sm:translate-x-full sm:scale-100 sm:opacity-100"
         >
           <nav
-            className="fixed inset-0 z-40 w-full h-full bg-white sm:inset-y-0 sm:left-auto sm:right-0 sm:max-w-sm sm:w-full sm:shadow-lg"
+            className="fixed inset-0 z-40 w-full h-full bg-gray-800 sm:inset-y-0 sm:left-auto sm:right-0 sm:max-w-sm sm:w-full sm:shadow-lg"
             aria-label="Global"
           >
             <div className="flex items-center justify-between h-16 px-4 sm:px-6">
-              <a href="#">
-                <img
-                  className="block w-auto h-12"
-                  src="./logos/logo_small_icon_only_inverted-fitness-time.png"
-                  alt="Workflow"
-                />
-              </a>
+              <div className="flex items-center justify-center">
+                <a href="#">
+                  <img
+                    className="block w-auto h-12"
+                    src="./logos/logo_small_icon_only_inverted-fitness-time.png"
+                    alt="Workflow"
+                  />
+                </a>
+                <div className="inline-block py-2 ml-3 text-lg font-bold leading-relaxed text-white uppercase whitespace-no-wrap cursor-pointer select-none">
+                  Fitness Time
+                </div>
+              </div>
+
               <button
                 type="button"
                 className="inline-flex items-center justify-center p-2 -mr-2 text-gray-400 rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-600"

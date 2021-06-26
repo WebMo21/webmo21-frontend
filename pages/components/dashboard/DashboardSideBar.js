@@ -4,18 +4,32 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const DashboardSideBar = ({ sidebarNavigation }) => {
+const DashboardSideBar = ({
+  sidebarNavigation,
+  setActiveSideBarSection,
+  activeSideBarSection,
+  setSideBarNavigationActive,
+}) => {
   return (
     <nav
       aria-label="Sidebar"
       className="hidden lg:block lg:flex-shrink-0 lg:bg-gray-800 lg:overflow-y-auto"
     >
-      <div className="relative flex flex-col w-20 p-3 space-y-3 cursor-pointer">
+      <div
+        className="relative flex flex-col w-20 p-3 mt-4 space-y-3 cursor-pointer"
+        data-aos="fade-up"
+      >
         {sidebarNavigation.map((item) => (
           <a
             key={item.name}
             href={item.href}
-            title={item.name}
+            title={item.title}
+            onClick={() => {
+              if (activeSideBarSection !== item.name) {
+                setActiveSideBarSection(item.name);
+                setSideBarNavigationActive(item.name);
+              }
+            }}
             className={classNames(
               item.current
                 ? "bg-gray-700 text-green-400"

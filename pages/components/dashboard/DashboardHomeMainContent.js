@@ -1,39 +1,43 @@
 import React from "react";
 import Link from "next/link";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import "moment/locale/de";
+import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
+
+const localizer = momentLocalizer(moment);
+
+const myEventsList = [
+  {
+    start: moment().toDate(),
+    end: moment().add(1, "hours").toDate(),
+    title: "Testing",
+  },
+];
+
+const DnDCalendar = withDragAndDrop(Calendar);
+
+const onEventResize = (data) => {
+  const { start, end } = data;
+  myEventsList[0].start = start;
+  myEventsList[0].end = end;
+  return [...myEventsList];
+};
+
+const onEventDrop = (data) => console.log(data);
 
 import {
-  CashIcon,
-  ScaleIcon,
-  ChevronRightIcon,
   ClockIcon,
   CheckCircleIcon,
   CalendarIcon,
   ChartBarIcon,
 } from "@heroicons/react/solid";
 
-const transactions = [
-  {
-    id: 1,
-    name: "Payment to Molly Sanders",
-    href: "#",
-    amount: "$20,000",
-    currency: "USD",
-    status: "success",
-    date: "July 11, 2020",
-    datetime: "2020-07-11",
-  },
-  // More transactions...
-];
-
-const statusStyles = {
-  success: "bg-green-100 text-green-800",
-  processing: "bg-yellow-100 text-yellow-800",
-  failed: "bg-gray-100 text-gray-800",
-};
-
 const cards = [
   {
-    name: "Absolvierte Trainingswochen",
+    name: "Absolvierte Trainingswochen", // Fetch users weekly workout plans and count each where there is a workout and is minimum last week+
     icon: CalendarIcon,
     amount: "2" + " Wochen",
   },
@@ -47,11 +51,14 @@ function classNames(...classes) {
 
 const DashboardHomeMainContent = ({ username, email, signUpDate }) => {
   return (
-    <main className="relative z-0 flex-1 pb-8 overflow-y-auto">
+    <main
+      className="relative z-0 flex-1 pb-8 overflow-y-auto"
+      data-aos="fade-up"
+    >
       {/* Page header */}
       <div className="bg-gray-900">
         <div className="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
-          <div className="p-8 py-6 mt-8 bg-gray-700 rounded-md md:flex md:items-center md:justify-between">
+          <div className="p-8 py-6 mt-8 bg-gray-700 rounded-lg md:flex md:items-center md:justify-between">
             <div className="flex-1 min-w-0">
               {/* Profile */}
               <div className="flex items-center ">
@@ -147,165 +154,38 @@ const DashboardHomeMainContent = ({ username, email, signUpDate }) => {
 
         {/* Calendar Section */}
         <div>
-          <h2 className="max-w-6xl px-4 pb-2 mx-auto mt-8 text-2xl font-medium leading-6 text-white sm:px-6 lg:px-8">
-            Deine Trainingskalender
+          <h2
+            className="max-w-6xl px-4 pb-4 mx-auto mt-8 text-2xl font-medium leading-6 text-white sm:px-6 lg:px-8"
+            data-aos="fade-up"
+          >
+            Dein Trainingskalender
           </h2>
 
           {/* Activity list (smallest breakpoint only) */}
-          <div className="shadow sm:hidden">
-            <ul className="mt-2 overflow-hidden divide-y divide-gray-200 shadow sm:hidden">
-              {transactions.map((transaction) => (
-                <li key={transaction.id}>
-                  <a
-                    href={transaction.href}
-                    className="block px-4 py-4 bg-white hover:bg-gray-50"
-                  >
-                    <span className="flex items-center space-x-4">
-                      <span className="flex flex-1 space-x-2 truncate">
-                        <CashIcon
-                          className="flex-shrink-0 w-5 h-5 text-gray-400"
-                          aria-hidden="true"
-                        />
-                        <span className="flex flex-col text-sm text-gray-500 truncate">
-                          <span className="truncate">{transaction.name}</span>
-                          <span>
-                            <span className="font-medium text-gray-900">
-                              {transaction.amount}
-                            </span>{" "}
-                            {transaction.currency}
-                          </span>
-                          <time dateTime={transaction.datetime}>
-                            {transaction.date}
-                          </time>
-                        </span>
-                      </span>
-                      <ChevronRightIcon
-                        className="flex-shrink-0 w-5 h-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
 
-            <nav
-              className="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200"
-              aria-label="Pagination"
-            >
-              <div className="flex justify-between flex-1">
-                <a
-                  href="#"
-                  className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:text-gray-500"
-                >
-                  Previous
-                </a>
-                <a
-                  href="#"
-                  className="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:text-gray-500"
-                >
-                  Next
-                </a>
-              </div>
-            </nav>
-          </div>
-
-          {/* Activity table (small breakpoint and up) */}
-          <div className="sm:block">
-            <div className="max-w-6xl px-4 mx-auto sm:px-6 lg:px-8">
-              <div className="flex flex-col mt-2">
-                <div className="min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-lg">
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead>
-                      <tr>
-                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase bg-gray-50">
-                          Transaction
-                        </th>
-                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase bg-gray-50">
-                          Amount
-                        </th>
-                        <th className="hidden px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase bg-gray-50 md:block">
-                          Status
-                        </th>
-                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase bg-gray-50">
-                          Date
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      {transactions.map((transaction) => (
-                        <tr key={transaction.id} className="bg-white">
-                          <td className="w-full px-6 py-4 text-sm text-gray-900 max-w-0 whitespace-nowrap">
-                            <div className="flex">
-                              <a
-                                href={transaction.href}
-                                className="inline-flex space-x-2 text-sm truncate group"
-                              >
-                                <CashIcon
-                                  className="flex-shrink-0 w-5 h-5 text-gray-400 group-hover:text-gray-500"
-                                  aria-hidden="true"
-                                />
-                                <p className="text-gray-500 truncate group-hover:text-gray-900">
-                                  {transaction.name}
-                                </p>
-                              </a>
-                            </div>
-                          </td>
-                          <td className="px-6 py-4 text-sm text-right text-gray-500 whitespace-nowrap">
-                            <span className="font-medium text-gray-900">
-                              {transaction.amount}{" "}
-                            </span>
-                            {transaction.currency}
-                          </td>
-                          <td className="hidden px-6 py-4 text-sm text-gray-500 whitespace-nowrap md:block">
-                            <span
-                              className={classNames(
-                                statusStyles[transaction.status],
-                                "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize"
-                              )}
-                            >
-                              {transaction.status}
-                            </span>
-                          </td>
-                          <td className="px-6 py-4 text-sm text-right text-gray-500 whitespace-nowrap">
-                            <time dateTime={transaction.datetime}>
-                              {transaction.date}
-                            </time>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  {/* Pagination */}
-                  <nav
-                    className="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200 sm:px-6"
-                    aria-label="Pagination"
-                  >
-                    <div className="sm:block">
-                      <p className="text-sm text-gray-700">
-                        Showing <span className="font-medium">1</span> to{" "}
-                        <span className="font-medium">10</span> of{" "}
-                        <span className="font-medium">20</span> results
-                      </p>
-                    </div>
-                    <div className="flex justify-between flex-1 sm:justify-end">
-                      <a
-                        href="#"
-                        className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
-                      >
-                        Previous
-                      </a>
-                      <a
-                        href="#"
-                        className="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
-                      >
-                        Next
-                      </a>
-                    </div>
-                  </nav>
-                </div>
-              </div>
-            </div>
+          <div
+            className="max-w-6xl p-4 mx-auto text-gray-300 rounded-lg bg-gray-700/25 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8"
+            data-aos="fade-up"
+          >
+            <DnDCalendar
+              defaultDate={moment().toDate()}
+              defaultView="month"
+              events={myEventsList}
+              localizer={localizer}
+              onEventDrop={onEventDrop}
+              onEventResize={onEventResize}
+              resizable
+              style={{ height: "100vh" }}
+              messages={{
+                next: "Weiter",
+                previous: "Zurück",
+                today: "Heute",
+                month: "Monat",
+                week: "Woche",
+                day: "Tag",
+                agenda: "Übersicht",
+              }}
+            />
           </div>
         </div>
 
@@ -316,160 +196,15 @@ const DashboardHomeMainContent = ({ username, email, signUpDate }) => {
           </h2>
 
           {/* Activity list (smallest breakpoint only) */}
-          <div className="shadow sm:hidden">
-            <ul className="mt-2 overflow-hidden divide-y divide-gray-200 shadow sm:hidden">
-              {transactions.map((transaction) => (
-                <li key={transaction.id}>
-                  <a
-                    href={transaction.href}
-                    className="block px-4 py-4 bg-white hover:bg-gray-50"
-                  >
-                    <span className="flex items-center space-x-4">
-                      <span className="flex flex-1 space-x-2 truncate">
-                        <CashIcon
-                          className="flex-shrink-0 w-5 h-5 text-gray-400"
-                          aria-hidden="true"
-                        />
-                        <span className="flex flex-col text-sm text-gray-500 truncate">
-                          <span className="truncate">{transaction.name}</span>
-                          <span>
-                            <span className="font-medium text-gray-900">
-                              {transaction.amount}
-                            </span>{" "}
-                            {transaction.currency}
-                          </span>
-                          <time dateTime={transaction.datetime}>
-                            {transaction.date}
-                          </time>
-                        </span>
-                      </span>
-                      <ChevronRightIcon
-                        className="flex-shrink-0 w-5 h-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            <nav
-              className="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200"
-              aria-label="Pagination"
-            >
-              <div className="flex justify-between flex-1">
-                <a
-                  href="#"
-                  className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:text-gray-500"
-                >
-                  Previous
-                </a>
-                <a
-                  href="#"
-                  className="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:text-gray-500"
-                >
-                  Next
-                </a>
-              </div>
-            </nav>
-          </div>
-
-          {/* Activity table (small breakpoint and up) */}
-          <div className="sm:block">
-            <div className="max-w-6xl px-4 mx-auto sm:px-6 lg:px-8">
-              <div className="flex flex-col mt-2">
-                <div className="min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-lg">
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead>
-                      <tr>
-                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase bg-gray-50">
-                          Transaction
-                        </th>
-                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase bg-gray-50">
-                          Amount
-                        </th>
-                        <th className="hidden px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase bg-gray-50 md:block">
-                          Status
-                        </th>
-                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase bg-gray-50">
-                          Date
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      {transactions.map((transaction) => (
-                        <tr key={transaction.id} className="bg-white">
-                          <td className="w-full px-6 py-4 text-sm text-gray-900 max-w-0 whitespace-nowrap">
-                            <div className="flex">
-                              <a
-                                href={transaction.href}
-                                className="inline-flex space-x-2 text-sm truncate group"
-                              >
-                                <CashIcon
-                                  className="flex-shrink-0 w-5 h-5 text-gray-400 group-hover:text-gray-500"
-                                  aria-hidden="true"
-                                />
-                                <p className="text-gray-500 truncate group-hover:text-gray-900">
-                                  {transaction.name}
-                                </p>
-                              </a>
-                            </div>
-                          </td>
-                          <td className="px-6 py-4 text-sm text-right text-gray-500 whitespace-nowrap">
-                            <span className="font-medium text-gray-900">
-                              {transaction.amount}{" "}
-                            </span>
-                            {transaction.currency}
-                          </td>
-                          <td className="hidden px-6 py-4 text-sm text-gray-500 whitespace-nowrap md:block">
-                            <span
-                              className={classNames(
-                                statusStyles[transaction.status],
-                                "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize"
-                              )}
-                            >
-                              {transaction.status}
-                            </span>
-                          </td>
-                          <td className="px-6 py-4 text-sm text-right text-gray-500 whitespace-nowrap">
-                            <time dateTime={transaction.datetime}>
-                              {transaction.date}
-                            </time>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  {/* Pagination */}
-                  <nav
-                    className="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200 sm:px-6"
-                    aria-label="Pagination"
-                  >
-                    <div className="sm:block">
-                      <p className="text-sm text-gray-700">
-                        Showing <span className="font-medium">1</span> to{" "}
-                        <span className="font-medium">10</span> of{" "}
-                        <span className="font-medium">20</span> results
-                      </p>
-                    </div>
-                    <div className="flex justify-between flex-1 sm:justify-end">
-                      <a
-                        href="#"
-                        className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
-                      >
-                        Previous
-                      </a>
-                      <a
-                        href="#"
-                        className="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
-                      >
-                        Next
-                      </a>
-                    </div>
-                  </nav>
-                </div>
-              </div>
+          <div className="flex-col p-8 py-6 mt-3 mb-12 text-gray-300 bg-gray-700 rounded-md sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-10 md:flex md:items-center md:justify-between">
+            {/* <div className="flex-row justify-between mx-auto md:flex items-between">
+              <div className="p-8">Test1.1</div>
+              <div className="p-8">Test1.2</div>
+              <div className="p-8">Test1.3</div>
             </div>
+            <div>Test2</div>
+            <div>Test3</div> */}
+            Test
           </div>
         </div>
       </div>
