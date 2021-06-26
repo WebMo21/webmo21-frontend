@@ -1,10 +1,23 @@
-# Fitness Time - Workout Planer
+# 🏋️ Fitness Time - Workout Planer
+
+![Vercel](http://therealsujitk-vercel-badge.vercel.app/?app=webmo21-frontend)
 
 A modern web application enabling users scheduling and organization of fitness activities.
 
 ![Alt Text](preview-fitness-time-landing-page.gif)
 
-### Prerequisites
+## ✨ Features
+
+- Modern Landing page with [Animate on Scroll](https://www.npmjs.com/package/aos) Animation
+- Contact us via email
+- Language Support for german and english
+- Responsiveness optimized for desktop, tablet and mobile devices
+- JWT token based authentication via oAuth providers like GitHub, Facebook and Twitter for quick SignIn
+- Alternative fallback magic URL email login
+- Custom [Error](https://fitness-time.vercel.app/error), [404](https://fitness-time.vercel.app/404) and [Email sent](https://fitness-time.vercel.app/mailsent) page
+- Continuous Integration/Continuous Deployment Pipeline through [Vercel](https://vercel.com/)
+
+## ⏹️ Prerequisites
 
 The following applications should be installed before running this software.
 
@@ -13,7 +26,33 @@ Git
 Yarn
 ```
 
-### Authentication
+### Environment Variables
+
+There are some environment variables needed weither the application should be run locally or in deployment.
+
+```bash
+GITHUB_ID=<3-legged oAUTH ID here>
+GITHUB_SECRET=<3-legged oAUTH SECRET here>
+FACEBOOK_ID=<3-legged oAUTH ID here>
+FACEBOOK_SECRET=<3-legged oAUTH SECRET here>
+TWITTER_ID=<3-legged oAUTH ID here>
+TWITTER_SECRET=<3-legged oAUTH SECRET here>
+
+EMAIL_SERVER_USER=<Email SMTP username here>
+EMAIL_SERVER_PASSWORD=<Email SMTP password here>
+EMAIL_SERVER_HOST=<Email SMTP host here>
+EMAIL_SERVER_PORT=<Email SMTP port here>
+EMAIL_FROM=<Mail adress that should appear as sender here>
+
+DATABASE_URL=<Database URL connection string here>
+
+NEXTAUTH_URL=<Domain/base url of the project here>
+SECRET=<https://generate-secret.vercel.app/32 Secret here>
+JWT_SECRET=<Long Secret to sign JWT with here>
+
+```
+
+## 📝 Authentication
 
 For user authentication in the frontend the open source, customizable and gdpr-compliant authentication solution [NextAuth.js](https://next-auth.js.org/) is used.
 
@@ -25,9 +64,13 @@ Several login mechanisms have been implemented through oAuth providers like GitH
 
 #### Magic Link Email Login
 
-Furthermore there is the option to login via email without a password. On first use an email will be sent to the user that contains a Verification Token that is valid for 24 hours and is stored in the database table `verification_request`. When used the user will be redirect and logged in automatically as well as his data will be stored within the `users` table containing information like his email.
+Furthermore there is the option to login via email without a password. On first use an email will be sent to the user that contains a Verification Token that is valid for 24 hours and is stored in the database table `verification_request`. When used the user will be redirect and logged in automatically as well as his data will be stored within the `users` table containing information like his email. Email can also be used when a user has used an oAuth provider like GitHub, Twitter or Facebook with the same email before and maybe lost access. So it acts as a backup mechanism and the corresponding user account should be succesfully linked when used email instead of oAuth.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+#### Email Provider
+
+For sending emails for authentication reasons the service [Mailjet](https://app.mailjet.com) is used. It offers easy and free access to sending out 100 emails per hour which should be enough for this university demo project. If it should ever go into real work production another SMTP service provider or an account upgrade can be used.
 
 ## Getting Started
 
