@@ -7,7 +7,6 @@ import { useSession } from "next-auth/client";
 
 import {
   ArchiveIcon as ArchiveIconSolid,
-  ChevronDownIcon,
   HomeIcon,
   ClipboardIcon,
   LightningBoltIcon,
@@ -19,10 +18,10 @@ import {
   MenuIcon,
 } from "@heroicons/react/outline";
 
-import DashboardLogo from "./components/dashboard/DashboardLogo";
-import DashboardDesktopNavigation from "./components/dashboard/DashboardDesktopNavigation";
-import DashboardMobileMenu from "./components/dashboard/DashboardMobileMenu";
-import DashboardHomeMainContent from "./components/dashboard/DashboardHomeMainContent";
+import DashboardLogo from "./components/dashboard/navbar/DashboardLogo";
+import DashboardDesktopNavigation from "./components/dashboard/navbar/DashboardDesktopNavigation";
+import DashboardMobileMenu from "./components/dashboard/navbar/DashboardMobileMenu";
+import DashboardHome from "./components/dashboard/home/DashboardHome";
 import DashboardSideBar from "./components/dashboard/DashboardSideBar";
 
 const user = {
@@ -81,14 +80,14 @@ const setSideBarNavigationActive = (name) =>
 
 export default function Dashboard() {
   const [session, loading] = useSession();
-  const [content, setContent] = useState();
-  const router = useRouter();
+  /* const [content, setContent] = useState(); */
+  /* const router = useRouter(); */
   const [language] = useState(
     typeof window !== "undefined" && localStorage.getItem("language") === null
       ? "DE"
       : typeof window !== "undefined" && localStorage.getItem("language")
   );
-  const [open, setOpen] = useState(false);
+
   const [activeSideBarSection, setActiveSideBarSection] = useState("home");
 
   useEffect(() => {
@@ -96,9 +95,9 @@ export default function Dashboard() {
       const res = await fetch("/api/dashboard");
       const json = await res.json();
 
-      if (json.content) {
+      /* if (json.content) {
         setContent(json.content);
-      }
+      } */
     };
     fetchData();
   }, [session]);
@@ -137,20 +136,6 @@ export default function Dashboard() {
           <div className="flex flex-col h-screen overflow-hidden bg-gray-900">
             <header className="relative flex items-center flex-shrink-0 h-16 bg-gray-800">
               <DashboardLogo />
-              <div className="absolute inset-y-0 right-0 flex items-center pr-4 outline-none sm:pr-6 lg:hidden focus:outline-none">
-                {/* Mobile menu button */}
-                <button
-                  type="button"
-                  className="inline-flex items-center justify-center p-2 -mr-2 text-white rounded-md outline-none hover:text-white hover:bg-gray-600 focus:outline-none"
-                  onClick={() => setOpen(true)}
-                >
-                  <span className="sr-only">Open main menu</span>
-                  <MenuIcon
-                    className="block w-6 h-6 text-white focus:outline-none"
-                    aria-hidden="true"
-                  />
-                </button>
-              </div>
 
               {/* Desktop nav area */}
               <DashboardDesktopNavigation
@@ -171,8 +156,6 @@ export default function Dashboard() {
 
               {/* Mobile menu, show/hide this `div` based on menu open/closed state */}
               <DashboardMobileMenu
-                open={open}
-                setOpen={setOpen}
                 navigation={navigation}
                 user={user}
                 userNavigation={userNavigation}
@@ -196,7 +179,7 @@ export default function Dashboard() {
                   className="flex flex-col flex-1 h-full min-w-0 overflow-hidden xl:order-last"
                 >
                   {activeSideBarSection === "home" && (
-                    <DashboardHomeMainContent
+                    <DashboardHome
                       username="Sascha Majewsky"
                       signUpDate={"26.06.2021"}
                     />

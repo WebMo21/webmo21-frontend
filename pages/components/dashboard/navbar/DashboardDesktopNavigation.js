@@ -1,17 +1,11 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 import {
   ArchiveIcon as ArchiveIconSolid,
-  ChevronDownIcon,
   SearchIcon,
 } from "@heroicons/react/solid";
-import {
-  ArchiveIcon as ArchiveIconOutline,
-  BellIcon,
-} from "@heroicons/react/outline";
-import { Menu, Transition } from "@headlessui/react";
 
-const DashboardDesktopNavigation = ({ navigation, user, title }) => {
+const DashboardDesktopNavigation = ({ title }) => {
   return (
     <div className="hidden lg:min-w-0 lg:flex-1 lg:flex lg:items-center lg:justify-between">
       <div className="flex-1 min-w-0">

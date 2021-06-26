@@ -45,11 +45,7 @@ const cards = [
   { name: "Bewegtes Gewicht", icon: ChartBarIcon, amount: "2,5" + " Tonnen" },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
-const DashboardHomeMainContent = ({ username, email, signUpDate }) => {
+const DashboardHome = ({ username, email, signUpDate }) => {
   return (
     <main
       className="relative z-0 flex-1 pb-8 overflow-y-auto"
@@ -212,4 +208,4 @@ const DashboardHomeMainContent = ({ username, email, signUpDate }) => {
   );
 };
 
-export default DashboardHomeMainContent;
+export default DashboardHome;
