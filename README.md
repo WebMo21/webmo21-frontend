@@ -1,6 +1,6 @@
 # 🏋️ Fitness Time - Workout Planer
 
-![Vercel](http://therealsujitk-vercel-badge.vercel.app/?app=webmo21-frontend)
+![GitHub deployments](https://img.shields.io/github/deployments/WebMo21/webmo21-frontend/production?label=vercel&logo=vercel&logoColor=white)
 
 A modern web application enabling users scheduling and organization of fitness activities.
 
