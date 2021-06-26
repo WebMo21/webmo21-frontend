@@ -150,19 +150,13 @@ const DashboardHome = ({ username, email, signUpDate }) => {
 
         {/* Calendar Section */}
         <div>
-          <h2
-            className="max-w-6xl px-4 pb-4 mx-auto mt-8 text-2xl font-medium leading-6 text-white sm:px-6 lg:px-8"
-            data-aos="fade-up"
-          >
+          <h2 className="max-w-6xl px-4 pb-4 mx-auto mt-8 text-2xl font-medium leading-6 text-white sm:px-6 lg:px-8">
             Dein Trainingskalender
           </h2>
 
           {/* Activity list (smallest breakpoint only) */}
 
-          <div
-            className="max-w-6xl p-4 mx-auto text-gray-300 rounded-lg bg-gray-700/25 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8"
-            data-aos="fade-up"
-          >
+          <div className="max-w-6xl p-4 mx-auto text-gray-300 rounded-lg bg-gray-700/25 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
             <DnDCalendar
               defaultDate={moment().toDate()}
               defaultView="month"
