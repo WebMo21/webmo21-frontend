@@ -16,13 +16,13 @@ const DashboardPlans = ({ language }) => {
           <h2 className="max-w-6xl pl-1 mx-auto mt-8 text-2xl font-medium leading-6 text-white select-none">
             {language === "DE" ? "Deine Trainingspläne" : "Your Workoutplans"}
           </h2>
-          <div className="p-8 py-6 mt-5 bg-gray-700 rounded-lg md:flex md:items-center md:justify-between">
+          <div className="p-8 py-6 mt-5 transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer md:flex md:items-center md:justify-between hover:scale-105">
             <div className="flex-1 min-w-0">
               <div
                 onClick={() => createNewWorkoutPlan()}
-                className="flex items-center justify-center h-12 cursor-pointer group"
+                className="flex items-center justify-center h-12"
               >
-                <PlusIcon className="w-10 h-10 text-gray-400 group-hover:w-12 group-hover:h-12" />
+                <PlusIcon className="w-10 h-10 text-gray-400" />
               </div>
             </div>
           </div>

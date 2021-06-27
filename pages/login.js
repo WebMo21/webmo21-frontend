@@ -97,7 +97,7 @@ const login = () => {
           ></div>
           <div className="container h-full px-4 mx-auto">
             <div className="flex items-center content-center justify-center h-full mt-60 iphone:mt-20">
-              <div className="w-full px-4 m-auto lg:w-4/12">
+              <div className="w-full px-4 m-auto lg:w-4/12 tabletpro:!w-96">
                 <div
                   className="relative flex flex-col w-full mb-6 bg-white rounded-lg shadow-lg"
                   data-aos="fade-in"
@@ -107,7 +107,8 @@ const login = () => {
                       <h1
                         className={`mx-auto text-lg text-green-500 mb-6 font-bold w-full bg-green-100 rounded-md p-4 select-none`}
                       >
-                        Jetzt einloggen und mit Fitness Time Workouts planen
+                        Jetzt einloggen und mit der Fitness Time App deine
+                        Workouts planen
                       </h1>
                       <h6 className="font-bold select-none text-md text-blueGray-500">
                         {language === "DE"

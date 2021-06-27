@@ -33,7 +33,7 @@ const logout = () => {
               <div className="container h-full px-4 mx-auto" data-aos="fade-in">
                 <div className="flex flex-wrap items-center h-full -mx-4">
                   <div className="relative w-full px-4 text-center">
-                    <h1 className="mb-16 font-bold text-green-500 text-8xl">
+                    <h1 className="mb-16 font-bold text-green-500 iphone:text-2xl text-8xl">
                       {language === "DE" ? "Auf Wiedersehen!" : "Goodbye!"}
                     </h1>
                     <p className="text-2xl font-normal leading-normal text-white">

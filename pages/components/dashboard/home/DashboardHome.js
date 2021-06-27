@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { useSession } from "next-auth/client";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "moment/locale/de";
@@ -14,7 +15,9 @@ import {
   ChartBarIcon,
 } from "@heroicons/react/solid";
 
-const DashboardHome = ({ username, email, signUpDate, language }) => {
+const DashboardHome = ({ signUpDate, language }) => {
+  const [session, loading] = useSession();
+
   if (language === "DE") {
     moment.locale("de");
   } else {
@@ -76,25 +79,35 @@ const DashboardHome = ({ username, email, signUpDate, language }) => {
               {/* Profile */}
               <div className="flex items-center ">
                 <img
-                  className="w-20 h-20 rounded-full iphone:hidden"
-                  src="https://i.pravatar.cc/300"
+                  className="w-20 h-20 rounded-full select-none iphone:hidden"
+                  src={
+                    session.user.image
+                      ? session.user.image
+                      : "https://i.pravatar.cc/300"
+                  }
                   alt="Fitness Time User Avatar"
                 />
                 <div>
                   <div className="flex items-center">
                     <img
-                      className="w-20 h-20 rounded-full sm:hidden"
-                      src="https://i.pravatar.cc/300"
+                      className="w-20 h-20 rounded-full select-none sm:hidden"
+                      src={
+                        session.user.image
+                          ? session.user.image
+                          : "https://i.pravatar.cc/300"
+                      }
                       alt="Fitness Time User Avatar"
                     />
-                    <h1 className="ml-3 text-3xl font-bold leading-7 text-white sm:leading-9 sm:truncate">
+                    <h1 className="ml-3 text-3xl font-bold leading-7 text-white select-none sm:leading-9 sm:truncate">
                       {language === "DE" ? "Willkommen" : "Welcome"},{" "}
-                      {username ? username : email}
+                      {session.user.name
+                        ? session.user.name
+                        : session.user.email}
                     </h1>
                   </div>
                   <dl className="flex flex-col mt-6 sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
                     <dt className="sr-only">Membership</dt>
-                    <dd className="flex items-center font-medium text-gray-400 text-md sm:mr-6">
+                    <dd className="flex items-center font-medium text-gray-400 select-none text-md sm:mr-6">
                       <ClockIcon
                         className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                         aria-hidden="true"
@@ -103,7 +116,7 @@ const DashboardHome = ({ username, email, signUpDate, language }) => {
                       {signUpDate}
                     </dd>
                     <dt className="sr-only">Account status</dt>
-                    <dd className="flex items-center mt-3 font-medium text-gray-400 capitalize ttext-md sm:mr-6 sm:mt-0">
+                    <dd className="flex items-center mt-3 font-medium text-gray-400 capitalize select-none ttext-md sm:mr-6 sm:mt-0">
                       <CheckCircleIcon
                         className="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400"
                         aria-hidden="true"
@@ -131,7 +144,7 @@ const DashboardHome = ({ username, email, signUpDate, language }) => {
 
       <div className="mt-8">
         <div className="max-w-6xl px-4 mx-auto sm:px-6 lg:px-8">
-          <h2 className="pb-2 text-2xl font-medium leading-6 text-white">
+          <h2 className="pb-2 text-2xl font-medium leading-6 text-white select-none">
             {language === "DE" ? "Deine Trainingsfakten" : "Your Fitness Facts"}
           </h2>
           <div className="grid grid-cols-1 gap-5 mt-2 sm:grid-cols-2 lg:grid-cols-3">
@@ -139,7 +152,7 @@ const DashboardHome = ({ username, email, signUpDate, language }) => {
             {cards.map((card) => (
               <div
                 key={card.name}
-                className="overflow-hidden bg-gray-700 border-green-500 rounded-lg shadow"
+                className="overflow-hidden transition duration-300 ease-in transform bg-gray-700 border-green-500 rounded-lg shadow hover:scale-105"
               >
                 <div className="p-5">
                   <div className="flex items-center">
@@ -151,11 +164,11 @@ const DashboardHome = ({ username, email, signUpDate, language }) => {
                     </div>
                     <div className="flex-1 w-0 ml-5">
                       <dl>
-                        <dt className="text-lg font-medium text-gray-400 truncate">
+                        <dt className="text-lg font-medium text-gray-400 truncate select-none">
                           {card.name}
                         </dt>
                         <dd>
-                          <div className="text-xl font-medium text-green-500">
+                          <div className="text-xl font-medium text-green-500 select-none">
                             {card.amount}
                           </div>
                         </dd>
@@ -170,7 +183,7 @@ const DashboardHome = ({ username, email, signUpDate, language }) => {
 
         {/* Calendar Section */}
         <div>
-          <h2 className="max-w-6xl px-4 pb-4 mx-auto mt-8 text-2xl font-medium leading-6 text-white sm:px-6 lg:px-8">
+          <h2 className="max-w-6xl px-4 pb-4 mx-auto mt-8 text-2xl font-medium leading-6 text-white select-none sm:px-6 lg:px-8">
             {language === "DE"
               ? "Dein Trainingskalender"
               : "Your Training Calendar"}
@@ -207,14 +220,14 @@ const DashboardHome = ({ username, email, signUpDate, language }) => {
 
         {/* History Section */}
         <div>
-          <h2 className="max-w-6xl px-4 pb-2 mx-auto mt-8 text-2xl font-medium leading-6 text-white sm:px-6 lg:px-8">
+          <h2 className="max-w-6xl px-4 pb-2 mx-auto mt-8 text-2xl font-medium leading-6 text-white select-none sm:px-6 lg:px-8">
             {language === "DE"
               ? "Deine Trainingshistorie"
               : "Your Training History"}
           </h2>
 
           {/* Activity list (smallest breakpoint only) */}
-          <div className="flex-col p-8 py-6 mt-3 mb-12 text-gray-300 bg-gray-700 rounded-md sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-10 md:flex md:items-center md:justify-between">
+          <div className="flex-col p-8 py-6 mt-3 mb-12 text-gray-300 bg-gray-700 rounded-md select-none sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-10 md:flex md:items-center md:justify-between">
             {/* <div className="flex-row justify-between mx-auto md:flex items-between">
               <div className="p-8">Test1.1</div>
               <div className="p-8">Test1.2</div>

@@ -221,7 +221,6 @@ export default function Dashboard() {
               >
                 {activeSideBarSection === "home" && (
                   <DashboardHome
-                    username="Sascha Majewsky"
                     signUpDate={"26.06.2021"}
                     language={language}
                   />
