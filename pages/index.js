@@ -18,12 +18,13 @@ const landing = () => {
 
   return (
     <>
-      {language &&
-      typeof window !== "undefined" &&
-      localStorage.getItem("language") === null
-        ? localStorage.setItem("language", language)
-        : ""}
       <NextSeo
+        title={`Fitness Time - ${
+          language === "DE"
+            ? "Dein Workout Planer um deine Fitness zu verbessern und zu überwachen"
+            : "Your Workout Planner to improve and monitor your fitness"
+        }`}
+        description="Nutze die Fitness Time Plattform um den Überblick über dein Training und deine Workouts zu erhalten. Erstelle individuelle Übungen und eigene Pläne, damit du stets einen Zeitplan für deinen Sport hast."
         openGraph={{
           type: "website",
           url: "https://fitness-time.vercel.app",
@@ -61,6 +62,12 @@ const landing = () => {
           },
         ]}
       />
+      {language &&
+      typeof window !== "undefined" &&
+      localStorage.getItem("language") === null
+        ? localStorage.setItem("language", language)
+        : ""}
+
       <NavBar language={language} setLanguageCallback={setLanguage} />
       <div>
         <HeroSection language={language} />
