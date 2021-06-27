@@ -46,7 +46,7 @@ const login = () => {
       localStorage.getItem("language") === null
         ? localStorage.setItem("language", language)
         : ""}
-      <main>
+      <div>
         <section className="relative w-full h-full min-h-screen py-40">
           <div
             className="absolute top-0 w-full h-full bg-top bg-cover"
@@ -162,7 +162,7 @@ const login = () => {
             </div>
           </div>
         </section>
-      </main>
+      </div>
       <Footer language={language} />
     </>
   );

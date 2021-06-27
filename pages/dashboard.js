@@ -13,16 +13,16 @@ import {
   CogIcon,
   KeyIcon,
 } from "@heroicons/react/solid";
-import {
-  ArchiveIcon as ArchiveIconOutline,
-  MenuIcon,
-} from "@heroicons/react/outline";
 
 import DashboardLogo from "./components/dashboard/navbar/DashboardLogo";
 import DashboardDesktopNavigation from "./components/dashboard/navbar/DashboardDesktopNavigation";
 import DashboardMobileMenu from "./components/dashboard/navbar/DashboardMobileMenu";
-import DashboardHome from "./components/dashboard/home/DashboardHome";
 import DashboardSideBar from "./components/dashboard/DashboardSideBar";
+import DashboardHome from "./components/dashboard/home/DashboardHome";
+import DashboardPlans from "./components/dashboard/plans/DashboardPlans";
+import DashboardWorkouts from "./components/dashboard/workouts/DashboardWorkouts";
+import DashboardSettings from "./components/dashboard/settings/DashboardSettings";
+import DashboardAdmin from "./components/dashboard/admin/DashboardAdmin";
 
 const user = {
   name: "Whitney Francis",
@@ -82,7 +82,7 @@ export default function Dashboard() {
   const [session, loading] = useSession();
   /* const [content, setContent] = useState(); */
   /* const router = useRouter(); */
-  const [language] = useState(
+  const [language, setLanguage] = useState(
     typeof window !== "undefined" && localStorage.getItem("language") === null
       ? "DE"
       : typeof window !== "undefined" && localStorage.getItem("language")
@@ -112,9 +112,9 @@ export default function Dashboard() {
 
   if (!session) {
     return (
-      <main>
+      <div>
         <h1>Bitte logge dich zunächst ein!</h1>
-      </main>
+      </div>
     );
   }
   return (
@@ -126,70 +126,123 @@ export default function Dashboard() {
         </title>
         <link rel="icon" href="./favicons/favicon.ico" />
       </Head>
-      <main>
-        <div>
-          {language &&
-          typeof window !== "undefined" &&
-          localStorage.getItem("language") === null
-            ? localStorage.setItem("language", language)
-            : ""}
-          <div className="flex flex-col h-screen overflow-hidden bg-gray-900">
-            <header className="relative flex items-center flex-shrink-0 h-16 bg-gray-800">
-              <DashboardLogo />
+      <div>
+        {language &&
+        typeof window !== "undefined" &&
+        localStorage.getItem("language") === null
+          ? localStorage.setItem("language", language)
+          : ""}
+        <div className="flex flex-col h-screen overflow-hidden bg-gray-900">
+          <header className="relative flex items-center flex-shrink-0 h-16 bg-gray-800">
+            <DashboardLogo />
 
-              {/* Desktop nav area */}
-              <DashboardDesktopNavigation
-                navigation={navigation}
-                user={user}
-                title={`Fitness Time - ${
-                  activeSideBarSection === "home"
-                    ? "Übersicht"
-                    : activeSideBarSection === "plans"
-                    ? "Trainingspläne"
-                    : activeSideBarSection === "workouts"
-                    ? "Übungen"
-                    : activeSideBarSection === "settings"
-                    ? "Einstellungen"
-                    : "Admin Einstellungen"
-                }`}
-              />
-
-              {/* Mobile menu, show/hide this `div` based on menu open/closed state */}
-              <DashboardMobileMenu
-                navigation={navigation}
-                user={user}
-                userNavigation={userNavigation}
-              />
-            </header>
-
-            {/* Page Content */}
-            <div className="flex flex-1 min-h-0 overflow-hidden">
-              {/* Narrow sidebar*/}
-              <DashboardSideBar
-                sidebarNavigation={sidebarNavigation}
-                setActiveSideBarSection={setActiveSideBarSection}
-                activeSideBarSection={activeSideBarSection}
-                setSideBarNavigationActive={setSideBarNavigationActive}
-              />
-
-              {/* Main Page Content */}
-              <main className="flex-1 min-w-0 xl:flex" data-aos="fade-in">
-                <section
-                  aria-labelledby="message-heading"
-                  className="flex flex-col flex-1 h-full min-w-0 overflow-hidden xl:order-last"
+            {/* Desktop nav area */}
+            <DashboardDesktopNavigation
+              navigation={navigation}
+              user={user}
+              title={`Fitness Time - ${
+                activeSideBarSection === "home"
+                  ? "Übersicht"
+                  : activeSideBarSection === "plans"
+                  ? "Trainingspläne"
+                  : activeSideBarSection === "workouts"
+                  ? "Übungen"
+                  : activeSideBarSection === "settings"
+                  ? "Einstellungen"
+                  : "Admin Einstellungen"
+              }`}
+            />
+            <div className="relative z-50 inline-block pt-1 mb-3 ml-1 mr-20 select-none lg:mr-8 group tablet:mt-2">
+              <button className="inline-flex items-center px-3 py-2 font-semibold text-green-600 bg-transparent border border-green-500 rounded iphone:text-xs iphone:mt-1 iphone:hidden">
+                <span className="mr-1">{language}</span>
+                <svg
+                  className="w-4 h-4 fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
                 >
-                  {activeSideBarSection === "home" && (
-                    <DashboardHome
-                      username="Sascha Majewsky"
-                      signUpDate={"26.06.2021"}
-                    />
-                  )}
-                </section>
-              </main>
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
+              </button>
+
+              <ul className="absolute hidden pt-1 text-gray-700 group-hover:block iphone:w-20">
+                {language === "DE" ? (
+                  <li className="">
+                    <a
+                      onClick={() => {
+                        setLanguage("EN");
+                        localStorage.setItem("language", "EN");
+                      }}
+                      className="block w-16 px-4 py-2 whitespace-no-wrap bg-green-500 rounded hover:bg-green-400 iphone:text-xs iphone:w-10"
+                      href="#"
+                    >
+                      EN
+                    </a>
+                  </li>
+                ) : (
+                  <li className="">
+                    <a
+                      onClick={() => {
+                        setLanguage("DE");
+                        localStorage.setItem("language", "DE");
+                      }}
+                      className="block w-16 px-4 py-2 whitespace-no-wrap bg-green-500 rounded hover:bg-green-400 iphone:text-xs iphone:w-10"
+                      href="#"
+                    >
+                      DE
+                    </a>
+                  </li>
+                )}
+              </ul>
+            </div>
+
+            {/* Mobile menu, show/hide this `div` based on menu open/closed state */}
+            <DashboardMobileMenu
+              navigation={navigation}
+              user={user}
+              userNavigation={userNavigation}
+            />
+          </header>
+
+          {/* Page Content */}
+          <div className="flex flex-1 min-h-0 overflow-hidden">
+            {/* Narrow sidebar*/}
+            <DashboardSideBar
+              sidebarNavigation={sidebarNavigation}
+              setActiveSideBarSection={setActiveSideBarSection}
+              activeSideBarSection={activeSideBarSection}
+              setSideBarNavigationActive={setSideBarNavigationActive}
+            />
+
+            {/* Main Page Content */}
+            <div className="flex-1 min-w-0 xl:flex" data-aos="fade-in">
+              <section
+                aria-labelledby="message-heading"
+                className="flex flex-col flex-1 h-full min-w-0 overflow-hidden xl:order-last"
+              >
+                {activeSideBarSection === "home" && (
+                  <DashboardHome
+                    username="Sascha Majewsky"
+                    signUpDate={"26.06.2021"}
+                    language={language}
+                  />
+                )}
+                {activeSideBarSection === "plans" && (
+                  <DashboardPlans language={language} />
+                )}
+                {activeSideBarSection === "workouts" && (
+                  <DashboardWorkouts language={language} />
+                )}
+                {activeSideBarSection === "settings" && (
+                  <DashboardSettings language={language} />
+                )}
+                {activeSideBarSection === "admin" && (
+                  <DashboardAdmin language={language} />
+                )}
+              </section>
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

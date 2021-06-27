@@ -7,12 +7,12 @@ import {
 
 const DashboardDesktopNavigation = ({ title }) => {
   return (
-    <div className="hidden lg:min-w-0 lg:flex-1 lg:flex lg:items-center lg:justify-between">
-      <div className="flex-1 min-w-0">
+    <div className="flex items-center justify-between flex-1 min-w-0">
+      <div className="hidden lg:min-w-0 lg:flex-1 lg:flex lg:items-center lg:justify-between">
         {title ? (
           <div
             className="inline-block py-2 ml-6 text-lg font-bold leading-relaxed text-white uppercase whitespace-no-wrap cursor-pointer select-none"
-            data-aos="fade-in"
+            data-aos="fade-down"
           >
             {title}
           </div>

@@ -10,13 +10,19 @@ import ContactForm from "./components/landing/ContactForm";
 import Footer from "./components/footer/Footer";
 
 const landing = () => {
-  const [language, setLanguage] = useState((typeof window !== "undefined" && localStorage.getItem("language") === null) ? "DE" : 
-    typeof window !== "undefined" && localStorage.getItem("language")
+  const [language, setLanguage] = useState(
+    typeof window !== "undefined" && localStorage.getItem("language") === null
+      ? "DE"
+      : typeof window !== "undefined" && localStorage.getItem("language")
   );
 
   return (
     <>
-    {language && (typeof window !== "undefined" && localStorage.getItem("language") === null) ? localStorage.setItem("language", language) : ""} 
+      {language &&
+      typeof window !== "undefined" &&
+      localStorage.getItem("language") === null
+        ? localStorage.setItem("language", language)
+        : ""}
       <Head>
         <title>
           Fitness Time -{" "}
@@ -25,13 +31,13 @@ const landing = () => {
         <link rel="icon" href="./favicons/favicon.ico" />
       </Head>
       <NavBar language={language} setLanguageCallback={setLanguage} />
-      <main>
+      <div>
         <HeroSection language={language} />
         <AboutSection language={language} />
         <PreviewSection language={language} />
         <ContactHeader language={language} />
         <ContactForm language={language} />
-      </main>
+      </div>
       <Footer language={language} />
     </>
   );

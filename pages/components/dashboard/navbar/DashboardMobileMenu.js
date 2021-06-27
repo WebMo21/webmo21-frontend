@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from "react";
+import Link from "next/link";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   ArchiveIcon as ArchiveIconOutline,
@@ -64,14 +65,16 @@ const DashboardMobileMenu = ({ navigation, user, userNavigation }) => {
               aria-label="Global"
             >
               <div className="flex items-center justify-between h-16 px-4 sm:px-6">
-                <div className="flex items-center justify-center">
-                  <a href="#">
-                    <img
-                      className="block w-auto h-12"
-                      src="./logos/logo_small_icon_only_inverted-fitness-time.png"
-                      alt="Workflow"
-                    />
-                  </a>
+                <div className="flex items-center justify-center focus:outline-none">
+                  <Link href="/">
+                    <a>
+                      <img
+                        className="block w-auto h-12 focus:outline-none"
+                        src="./logos/logo_small_icon_only_inverted-fitness-time.png"
+                        alt="Workflow"
+                      />
+                    </a>
+                  </Link>
                   <div className="inline-block py-2 ml-3 text-lg font-bold leading-relaxed text-white uppercase whitespace-no-wrap cursor-pointer select-none">
                     Fitness Time
                   </div>
@@ -79,7 +82,7 @@ const DashboardMobileMenu = ({ navigation, user, userNavigation }) => {
 
                 <button
                   type="button"
-                  className="inline-flex items-center justify-center p-2 -mr-2 text-gray-400 rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-600"
+                  className="inline-flex items-center justify-center p-2 -mr-2 text-gray-400 rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none"
                   onClick={() => setOpen(false)}
                 >
                   <span className="sr-only">Close main menu</span>

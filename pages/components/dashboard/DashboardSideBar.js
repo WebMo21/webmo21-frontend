@@ -17,7 +17,7 @@ const DashboardSideBar = ({
     >
       <div
         className="relative flex flex-col w-20 p-3 mt-4 space-y-3 cursor-pointer"
-        data-aos="fade-up"
+        data-aos="fade-right"
       >
         {sidebarNavigation &&
           sidebarNavigation.map((item) => (
