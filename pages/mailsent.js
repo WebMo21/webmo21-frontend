@@ -21,7 +21,7 @@ const emailsent = () => {
             <div className="h-screen overflow-hidden">
               <div
                 className="absolute w-full h-full bg-cover bg-50"
-                style={{ backgroundImage: "url(./backgrounds/mailsent.svg)" }}
+                style={{ backgroundImage: "url(./backgrounds/mailsent.png)" }}
               ></div>
               <div className="container h-full px-4 mx-auto" data-aos="fade-in">
                 <div className="flex flex-wrap items-center h-full -mx-4">
