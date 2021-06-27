@@ -11,7 +11,6 @@ const HeroSection = ({ language }) => {
     >
       <div
         className="absolute top-0 w-full h-full bg-top bg-cover"
-        title="Fitness Time Hero Background Image"
         style={{
           backgroundImage: 'url("./backgrounds/bg-fitness-woman.jpeg")',
         }}

@@ -90,7 +90,6 @@ const login = () => {
         <section className="relative w-full h-full min-h-screen py-40">
           <div
             className="absolute top-0 w-full h-full bg-top bg-cover"
-            title="Cardio Is Great For your Stamina And Often Done After Training"
             style={{
               backgroundImage:
                 'url("./backgrounds/bg-fitness-cardio-dark.jpeg")',

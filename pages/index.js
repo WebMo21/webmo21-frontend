@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NextSeo } from "next-seo";
+import CookieConsent from "react-cookie-consent";
 
 import NavBar from "./components/navbar/NavBar";
 import HeroSection from "./components/landing/HeroSection";
@@ -70,6 +71,27 @@ const landing = () => {
 
       <NavBar language={language} setLanguageCallback={setLanguage} />
       <div>
+        <CookieConsent
+          debug={true}
+          style={{ color: "#10b981", background: "#1f2937" }}
+          cookieName="next-auth.session-token"
+          enableDeclineButton
+          buttonStyle={{
+            background: "#10b981",
+            color: "white",
+            fontWeight: "600",
+          }}
+          buttonText="Ich stimme der Verwendung von Cookies zu!"
+          declineButtonText="Ich lehne ab."
+          onAccept={() => {
+            // TODO: BACKEND CALL
+            console.log("GDPR COMPLIANT");
+          }}
+          onDecline={() => (location.href = "http://leuphana.de")}
+        >
+          Diese Seite nutzt Cookies zur Nutzer-Authentifizierung und
+          Verarbeitung persönlicher Daten.
+        </CookieConsent>
         <HeroSection language={language} />
         <AboutSection language={language} />
         <PreviewSection language={language} />
