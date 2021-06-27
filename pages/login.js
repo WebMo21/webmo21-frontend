@@ -39,7 +39,7 @@ const login = () => {
       <NextSeo
         title={`Fitness Time - ${
           language === "DE"
-            ? "Logge dich ein um deine Fitness und Ausdauer zu verbessern und überwachen"
+            ? "Logge dich ein um deine Fitness zu überwachen"
             : "Log in to improve and monitor your fitness and stamina"
         }`}
         description="Nutze die Fitness Time Plattform um den Überblick über dein Training und deine Workouts zu erhalten. Erstelle individuelle Übungen und eigene Pläne, damit du stets einen Zeitplan für deinen Sport hast."

@@ -21,8 +21,8 @@ const landing = () => {
       <NextSeo
         title={`Fitness Time - ${
           language === "DE"
-            ? "Dein Workout Planer um deine Fitness zu verbessern und zu überwachen"
-            : "Your Workout Planner to improve and monitor your fitness"
+            ? "Dein Workout Planer um deine Fitness zu verbessern"
+            : "Your Workout Planner to monitor your fitness"
         }`}
         description="Nutze die Fitness Time Plattform um den Überblick über dein Training und deine Workouts zu erhalten. Erstelle individuelle Übungen und eigene Pläne, damit du stets einen Zeitplan für deinen Sport hast."
         openGraph={{
