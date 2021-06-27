@@ -25,6 +25,7 @@ const logout = () => {
             <div className="h-screen overflow-hidden">
               <div
                 className="absolute w-full h-full bg-cover bg-50"
+                title="The Locker Room Can Be An Inspirational Part of The Training Experience"
                 style={{
                   backgroundImage:
                     "url(./backgrounds/bg-fitness-locker-room.jpeg)",

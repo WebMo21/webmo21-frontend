@@ -72,14 +72,14 @@ const DashboardHome = ({ username, email, signUpDate, language }) => {
                 <img
                   className="w-20 h-20 rounded-full iphone:hidden"
                   src="https://i.pravatar.cc/300"
-                  alt=""
+                  alt="Fitness Time User Avatar"
                 />
                 <div>
                   <div className="flex items-center">
                     <img
                       className="w-20 h-20 rounded-full sm:hidden"
                       src="https://i.pravatar.cc/300"
-                      alt=""
+                      alt="Fitness Time User Avatar"
                     />
                     <h1 className="ml-3 text-3xl font-bold leading-7 text-white sm:leading-9 sm:truncate">
                       {language === "DE" ? "Willkommen" : "Welcome"},{" "}

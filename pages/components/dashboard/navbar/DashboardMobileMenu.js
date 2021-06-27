@@ -71,7 +71,7 @@ const DashboardMobileMenu = ({ navigation, user, userNavigation }) => {
                       <img
                         className="block w-auto h-12 focus:outline-none"
                         src="./logos/logo_small_icon_only_inverted-fitness-time.png"
-                        alt="Workflow"
+                        alt="Fitness Time Logo"
                       />
                     </a>
                   </Link>
@@ -133,7 +133,7 @@ const DashboardMobileMenu = ({ navigation, user, userNavigation }) => {
                     <img
                       className="w-10 h-10 rounded-full"
                       src={user && user.imageUrl}
-                      alt=""
+                      alt="Fitness Time User Avatar"
                     />
                   </div>
                   <div className="flex-1 min-w-0 ml-3">

@@ -21,6 +21,7 @@ const error = () => {
             <div className="h-screen overflow-hidden">
               <div
                 className="absolute w-full h-full bg-cover bg-50"
+                title="Fitness Time Error Page"
                 style={{ backgroundImage: "url(./backgrounds/error.svg)" }}
               ></div>
               <div className="container h-full px-4 mx-auto" data-aos="fade-in">

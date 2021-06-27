@@ -21,6 +21,7 @@ const Custom404 = () => {
             <div className="h-screen overflow-hidden">
               <div
                 className="absolute w-full h-full bg-cover bg-50"
+                title="Strength Training Will Help You Stay in Shape And Healthy"
                 style={{
                   backgroundImage:
                     "url(./backgrounds/bg-fitness-man-dark.jpeg)",

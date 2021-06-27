@@ -15,7 +15,7 @@ const NavBar = ({ language, setLanguageCallback }) => {
             <Link href="/">
               <a>
                 <img
-                  alt="..."
+                  alt="Fitness Time Logo"
                   className="h-10 mt-1 mr-2 rounded-lg shadow-lg cursor-pointer select-none max-w-10"
                   src="./logos/logo_small_icon_only_inverted-fitness-time.png"
                 />

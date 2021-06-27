@@ -21,6 +21,7 @@ const emailsent = () => {
             <div className="h-screen overflow-hidden">
               <div
                 className="absolute w-full h-full bg-cover bg-50"
+                title="Fitness Time Mail Was Sent Background Image"
                 style={{ backgroundImage: "url(./backgrounds/mailsent.png)" }}
               ></div>
               <div className="container h-full px-4 mx-auto" data-aos="fade-in">

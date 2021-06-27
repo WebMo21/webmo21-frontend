@@ -9,7 +9,7 @@ const DashboardLogo = () => {
           <img
             className="w-auto h-12"
             src="./logos/logo_white_large-fitness-time.png"
-            alt="Workflow"
+            alt="Fitness Time Logo"
           />
         </a>
       </Link>
