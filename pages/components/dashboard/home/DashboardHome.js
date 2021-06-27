@@ -7,27 +7,6 @@ import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 
-const localizer = momentLocalizer(moment);
-
-const myEventsList = [
-  {
-    start: moment().toDate(),
-    end: moment().add(1, "hours").toDate(),
-    title: "Testing",
-  },
-];
-
-const DnDCalendar = withDragAndDrop(Calendar);
-
-const onEventResize = (data) => {
-  const { start, end } = data;
-  myEventsList[0].start = start;
-  myEventsList[0].end = end;
-  return [...myEventsList];
-};
-
-const onEventDrop = (data) => console.log(data);
-
 import {
   ClockIcon,
   CheckCircleIcon,
@@ -36,6 +15,33 @@ import {
 } from "@heroicons/react/solid";
 
 const DashboardHome = ({ username, email, signUpDate, language }) => {
+  if (language === "DE") {
+    moment.locale("de");
+  } else {
+    moment.locale("en");
+  }
+
+  const localizer = momentLocalizer(moment);
+
+  const myEventsList = [
+    {
+      start: moment().toDate(),
+      end: moment().add(1, "hours").toDate(),
+      title: "Testing",
+    },
+  ];
+
+  const DnDCalendar = withDragAndDrop(Calendar);
+
+  const onEventResize = (data) => {
+    const { start, end } = data;
+    myEventsList[0].start = start;
+    myEventsList[0].end = end;
+    return [...myEventsList];
+  };
+
+  const onEventDrop = (data) => console.log(data);
+
   const cards = [
     {
       name: `${

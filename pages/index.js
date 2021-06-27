@@ -73,7 +73,11 @@ const landing = () => {
       <div>
         <CookieConsent
           debug={true}
-          style={{ color: "#10b981", background: "#1f2937" }}
+          style={{
+            color: "#10b981",
+            background: "#1f2937",
+            textAlign: "justify",
+          }}
           cookieName="next-auth.session-token"
           enableDeclineButton
           buttonStyle={{
@@ -81,8 +85,8 @@ const landing = () => {
             color: "white",
             fontWeight: "600",
           }}
-          buttonText="Ich stimme der Verwendung von Cookies zu!"
-          declineButtonText="Ich lehne ab."
+          buttonText="Ich stimme der Verwendung von Cookies zu."
+          declineButtonText="Ich lehne die Verwendung von Cookies ab."
           onAccept={() => {
             // TODO: BACKEND CALL
             console.log("GDPR COMPLIANT");
