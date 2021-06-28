@@ -58,7 +58,7 @@ JWT_SECRET=<Long Secret to sign JWT with here>
 
 For user authentication in the frontend the open source, customizable and gdpr-compliant authentication solution [NextAuth.js](https://next-auth.js.org/) is used.
 
-![Alt Text](./static/login-screenshot.png)
+![Alt Text](./public/login-screenshot.png)
 
 #### Social Logins (oAuth Providers)
 

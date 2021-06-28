@@ -1,17 +1,18 @@
 import React from "react";
 import { useSession } from "next-auth/client";
+
 import { PlusIcon } from "@heroicons/react/solid";
 
 const DashboardWorkouts = ({ language }) => {
   const [session, loading] = useSession();
 
   const createNewWorkout = () => {
-    console.log("Create Workout Plan");
+    console.log("Create Workout");
   };
 
-  console.log("TEST: ", session);
+  /* const secret = process.env.JWT_SECRET; */
 
-  const fetchUserWorkouts = () => {
+  /*  const fetchUserWorkouts = async () => {
     if (
       contactFirstname &&
       contactLastname &&
@@ -52,7 +53,8 @@ const DashboardWorkouts = ({ language }) => {
     } else {
       setContactShowError(true);
     }
-  };
+  }; */
+
   return (
     <div
       className="relative z-0 flex-1 pb-8 overflow-y-auto"

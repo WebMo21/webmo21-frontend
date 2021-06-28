@@ -114,6 +114,13 @@ export default function Dashboard() {
     return (
       <div>
         <h1>Bitte logge dich zunächst ein!</h1>
+        <Link href="/">
+          <a className="inline-block p-4 mt-5 font-semibold text-white bg-green-500 border border-green-500 rounded cursor-pointer select-none hover:bg-green-400">
+            {language === "DE"
+              ? "Zurück zu Fitness Time!"
+              : "Back to Fitness Time"}
+          </a>
+        </Link>
       </div>
     );
   }

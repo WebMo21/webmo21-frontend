@@ -72,14 +72,15 @@ const landing = () => {
       <NavBar language={language} setLanguageCallback={setLanguage} />
       <div>
         <CookieConsent
-          debug={true}
           style={{
             color: "#10b981",
             background: "#1f2937",
             textAlign: "justify",
           }}
-          cookieName="next-auth.session-token"
+          cookieName="CookieConsent"
+          cookieValue="true"
           enableDeclineButton
+          flipButtons="true"
           buttonStyle={{
             background: "#10b981",
             color: "white",
@@ -100,6 +101,7 @@ const landing = () => {
             borderRadius: "0.375rem",
             width: "94%",
           }}
+          hideOnAccept
           onAccept={() => {
             // TODO: BACKEND CALL
             console.log("GDPR COMPLIANT");

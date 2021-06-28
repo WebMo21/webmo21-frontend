@@ -7,7 +7,7 @@ export default async (req, res) => {
   const session = await getSession({ req });
 
   if (session) {
-    const token = await jwt.getToken({ req, secret });
+     const token = await jwt.getToken({ req, secret });
     console.log("JSON Web Token", token);
     res.send({
       content: "Willkommen auf dem Dashboard!",
