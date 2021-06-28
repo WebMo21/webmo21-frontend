@@ -57,20 +57,34 @@ const setSideBarNavigationActive = (name) =>
   });
 
 const sidebarNavigation = [
-  { name: "home", title: "Übersicht", icon: HomeIcon, current: true },
+  {
+    name: "home",
+    title: "Übersicht",
+    englishTitle: "Overview",
+    icon: HomeIcon,
+    current: true,
+  },
   {
     name: "plans",
     title: "Trainingspläne",
+    englishTitle: "Workout Plans",
     icon: ClipboardIcon,
     current: false,
   },
   {
     name: "workouts",
     title: "Übungen",
+    englishTitle: "Workouts",
     icon: LightningBoltIcon,
     current: false,
   },
-  { name: "settings", title: "Einstellungen", icon: CogIcon, current: false },
+  {
+    name: "settings",
+    title: "Einstellungen",
+    englishTitle: "Settings",
+    icon: CogIcon,
+    current: false,
+  },
 ];
 
 export default function Dashboard() {
@@ -92,7 +106,8 @@ export default function Dashboard() {
   )
     sidebarNavigation.push({
       name: "admin",
-      title: "Admin Einstellungen",
+      title: "Admin Übersicht",
+      englishTitle: "Admin Overview",
       icon: KeyIcon,
       current: false,
     });
@@ -225,6 +240,7 @@ export default function Dashboard() {
               setActiveSideBarSection={setActiveSideBarSection}
               activeSideBarSection={activeSideBarSection}
               setSideBarNavigationActive={setSideBarNavigationActive}
+              language={language}
             />
 
             {/* Main Page Content */}

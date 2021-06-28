@@ -9,6 +9,7 @@ const DashboardSideBar = ({
   setActiveSideBarSection,
   activeSideBarSection,
   setSideBarNavigationActive,
+  language,
 }) => {
   return (
     <nav
@@ -24,7 +25,7 @@ const DashboardSideBar = ({
             <a
               key={item.name}
               href={item.href}
-              title={item.title}
+              title={language === "DE" ? item.title : item.englishTitle}
               onClick={() => {
                 if (activeSideBarSection !== item.name) {
                   setActiveSideBarSection(item.name);
