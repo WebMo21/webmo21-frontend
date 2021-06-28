@@ -44,28 +44,6 @@ const navigation = [
   { name: "Settings", href: "#", children: [] },
 ];
 
-let sidebarNavigation = [
-  { name: "home", title: "Übersicht", icon: HomeIcon, current: true },
-  {
-    name: "plans",
-    title: "Trainingspläne",
-    icon: ClipboardIcon,
-    current: false,
-  },
-  {
-    name: "workouts",
-    title: "Übungen",
-    icon: LightningBoltIcon,
-    current: false,
-  },
-  { name: "settings", title: "Einstellungen", icon: CogIcon, current: false },
-  {
-    name: "admin",
-    title: "Admin Einstellungen",
-    icon: KeyIcon,
-    current: false,
-  },
-];
 const userNavigation = [
   { name: "Your Profile", href: "#" },
   { name: "Sign out", href: "#" },
@@ -89,6 +67,30 @@ export default function Dashboard() {
   );
 
   const [activeSideBarSection, setActiveSideBarSection] = useState("home");
+  const sidebarNavigation = [
+    { name: "home", title: "Übersicht", icon: HomeIcon, current: true },
+    {
+      name: "plans",
+      title: "Trainingspläne",
+      icon: ClipboardIcon,
+      current: false,
+    },
+    {
+      name: "workouts",
+      title: "Übungen",
+      icon: LightningBoltIcon,
+      current: false,
+    },
+    { name: "settings", title: "Einstellungen", icon: CogIcon, current: false },
+  ];
+
+  if (session && session.user.role === "admin")
+    sidebarNavigation.push({
+      name: "admin",
+      title: "Admin Einstellungen",
+      icon: KeyIcon,
+      current: false,
+    });
 
   useEffect(() => {
     const fetchData = async () => {
