@@ -30,14 +30,14 @@ export default NextAuth({
     }),
   ],
   database: process.env.DATABASE_URL,
-  secret: process.env.SECRET,
+  secret: process.env.SECRET, // A random string used to hash tokens, sign cookies and generate cryptographic keys.
   session: {
-    jwt: true,
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    jwt: true, // Use JSON Web Tokens for session instead of database sessions.
+    maxAge: 30 * 24 * 60 * 60, // 30 days How long until an idle session expires and is no longer valid.
   },
 
   jwt: {
-    secret: process.env.JWT_SECRET, //use a random secret token here
+    secret: process.env.JWT_SECRET, // A secret to use for signing Key generation
     encryption: true,
   },
   debug: true,

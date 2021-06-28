@@ -18,9 +18,9 @@ import {
 const DashboardHome = ({ signUpDate, language }) => {
   const [session, loading] = useSession();
 
-  if (language === "DE") {
+  if (language && language === "DE") {
     moment.locale("de");
-  } else {
+  } else if (language && language === "EN") {
     moment.locale("en");
   }
 
@@ -66,6 +66,7 @@ const DashboardHome = ({ signUpDate, language }) => {
       amount: "2,5" + ` ${language === "DE" ? "Tonnen" : "Tons"}`,
     },
   ];
+
   return (
     <div
       className="relative z-0 flex-1 pb-8 overflow-y-auto"
@@ -81,7 +82,7 @@ const DashboardHome = ({ signUpDate, language }) => {
                 <img
                   className="w-20 h-20 rounded-full select-none iphone:hidden"
                   src={
-                    session.user.image
+                    session && session.user && session.user.image
                       ? session.user.image
                       : "https://i.pravatar.cc/300"
                   }
@@ -92,17 +93,22 @@ const DashboardHome = ({ signUpDate, language }) => {
                     <img
                       className="w-20 h-20 rounded-full select-none sm:hidden"
                       src={
-                        session.user.image
+                        session && session.user && session.user.image
                           ? session.user.image
                           : "https://i.pravatar.cc/300"
                       }
                       alt="Fitness Time User Avatar"
                     />
                     <h1 className="ml-3 text-3xl font-bold leading-7 text-white select-none sm:leading-9 sm:truncate">
-                      {language === "DE" ? "Willkommen" : "Welcome"},{" "}
-                      {session.user.name
-                        ? session.user.name
-                        : session.user.email}
+                      {language && language === "DE" ? "Willkommen" : "Welcome"}
+                      ,{" "}
+                      {session
+                        ? session.user
+                          ? session.user.name
+                            ? session.user.name
+                            : session.user.email
+                          : "NoUserOnSession"
+                        : "NoSessionTestName"}
                     </h1>
                   </div>
                   <dl className="flex flex-col mt-6 sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
@@ -112,7 +118,9 @@ const DashboardHome = ({ signUpDate, language }) => {
                         className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                         aria-hidden="true"
                       />
-                      {language === "DE" ? "Dabei seit " : "Joined at "}
+                      {language && language === "DE"
+                        ? "Dabei seit "
+                        : "Joined at "}
                       {signUpDate}
                     </dd>
                     <dt className="sr-only">Account status</dt>
@@ -121,7 +129,7 @@ const DashboardHome = ({ signUpDate, language }) => {
                         className="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400"
                         aria-hidden="true"
                       />
-                      {language === "DE"
+                      {language && language === "DE"
                         ? "Verifizierter Nutzer"
                         : "Verified User"}
                     </dd>
@@ -133,7 +141,7 @@ const DashboardHome = ({ signUpDate, language }) => {
               <div>
                 <Link href="/logout">
                   <a className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300">
-                    {language === "DE" ? "Ausloggen" : "SignOut"}
+                    {language && language === "DE" ? "Ausloggen" : "SignOut"}
                   </a>
                 </Link>
               </div>
@@ -145,7 +153,9 @@ const DashboardHome = ({ signUpDate, language }) => {
       <div className="mt-8">
         <div className="max-w-6xl px-4 mx-auto sm:px-6 lg:px-8">
           <h2 className="pb-2 text-2xl font-medium leading-6 text-white select-none">
-            {language === "DE" ? "Deine Trainingsfakten" : "Your Fitness Facts"}
+            {language && language === "DE"
+              ? "Deine Trainingsfakten"
+              : "Your Fitness Facts"}
           </h2>
           <div className="grid grid-cols-1 gap-5 mt-2 sm:grid-cols-2 lg:grid-cols-3">
             {/* Card */}
@@ -184,7 +194,7 @@ const DashboardHome = ({ signUpDate, language }) => {
         {/* Calendar Section */}
         <div>
           <h2 className="max-w-6xl px-4 pb-4 mx-auto mt-8 text-2xl font-medium leading-6 text-white select-none sm:px-6 lg:px-8">
-            {language === "DE"
+            {language && language === "DE"
               ? "Dein Trainingskalender"
               : "Your Training Calendar"}
           </h2>
@@ -202,17 +212,23 @@ const DashboardHome = ({ signUpDate, language }) => {
               resizable
               style={{ height: "100vh" }}
               messages={{
-                next: `${language === "DE" ? "Weiter" : "Next"}`,
-                allDay: `${language === "DE" ? "Ganzer Tag" : "All Day"}`,
-                previous: `${language === "DE" ? "Zurück" : "Previous"}`,
-                today: `${language === "DE" ? "Heute" : "Today"}`,
-                month: `${language === "DE" ? "Monat" : "Month"}`,
-                week: `${language === "DE" ? "Woche" : "Week"}`,
-                day: `${language === "DE" ? "Tag" : "Day"}`,
-                agenda: `${language === "DE" ? "Übersicht" : "Agenda"}`,
-                date: `${language === "DE" ? "Datum" : "Date"}`,
-                time: `${language === "DE" ? "Zeit" : "Time"}`,
-                event: `${language === "DE" ? "Event" : "Event"}`,
+                next: `${language && language === "DE" ? "Weiter" : "Next"}`,
+                allDay: `${
+                  language && language === "DE" ? "Ganzer Tag" : "All Day"
+                }`,
+                previous: `${
+                  language && language === "DE" ? "Zurück" : "Previous"
+                }`,
+                today: `${language && language === "DE" ? "Heute" : "Today"}`,
+                month: `${language && language === "DE" ? "Monat" : "Month"}`,
+                week: `${language && language === "DE" ? "Woche" : "Week"}`,
+                day: `${language && language === "DE" ? "Tag" : "Day"}`,
+                agenda: `${
+                  language && language === "DE" ? "Übersicht" : "Agenda"
+                }`,
+                date: `${language && language === "DE" ? "Datum" : "Date"}`,
+                time: `${language && language === "DE" ? "Zeit" : "Time"}`,
+                event: `${language && language === "DE" ? "Event" : "Event"}`,
               }}
             />
           </div>
@@ -221,7 +237,7 @@ const DashboardHome = ({ signUpDate, language }) => {
         {/* History Section */}
         <div>
           <h2 className="max-w-6xl px-4 pb-2 mx-auto mt-8 text-2xl font-medium leading-6 text-white select-none sm:px-6 lg:px-8">
-            {language === "DE"
+            {language && language === "DE"
               ? "Deine Trainingshistorie"
               : "Your Training History"}
           </h2>
