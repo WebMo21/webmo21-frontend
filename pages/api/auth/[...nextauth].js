@@ -56,11 +56,11 @@ export default NextAuth({
   },
   callbacks: {
     async jwt(token, user, account, profile, isNewUser) {
-      /* console.log("INSPECT account", account);
+      console.log("INSPECT account", account);
       console.log("INSPECT user", user);
       console.log("INSPECT token", token);
       console.log("INSPECT profile", profile);
-      console.log("INSPECT isNewUser", isNewUser); */
+      console.log("INSPECT isNewUser", isNewUser);
       if (account?.accessToken) {
         token.accessToken = account.accessToken;
       }
@@ -70,11 +70,17 @@ export default NextAuth({
       if (user?.role) {
         token.role = user.role;
       }
+      if (user?.id) {
+        token.id = user.id;
+      }
+      if (user?.createdAt) {
+        token.createdAt = user.createdAt;
+      }
       return token;
     },
     async session(session, token) {
-      /* console.log("INSPECT session", session);
-      console.log("INSPECT token", token); */
+      console.log("INSPECT session", session);
+      console.log("INSPECT token", token);
       if (token?.accessToken) {
         session.accessToken = token.accessToken;
       }
@@ -83,6 +89,12 @@ export default NextAuth({
       }
       if (token?.role) {
         session.user.role = token.role;
+      }
+      if (token?.id) {
+        session.user.id = token.id;
+      }
+      if (token?.createdAt) {
+        session.user.createdAt = token.createdAt;
       }
       return session;
     },

@@ -89,8 +89,6 @@ const sidebarNavigation = [
 
 export default function Dashboard() {
   const [session, loading] = useSession();
-  /* const [content, setContent] = useState(); */
-  /* const router = useRouter(); */
   const [language, setLanguage] = useState(
     typeof window !== "undefined" && localStorage.getItem("language") === null
       ? "DE"
@@ -111,24 +109,6 @@ export default function Dashboard() {
       icon: KeyIcon,
       current: false,
     });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("/api/dashboard");
-      const json = await res.json();
-
-      /* if (json.content) {
-        setContent(json.content);
-      } */
-    };
-    fetchData();
-  }, [session]);
-
-  useEffect(() => {
-    /* if (!session) {
-      router.push("/");
-    } */
-  }, []);
 
   if (typeof window !== "undefined" && loading) return null;
 
