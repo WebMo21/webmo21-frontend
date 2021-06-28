@@ -12,7 +12,7 @@ const emailsent = () => {
   return (
     <>
       <Head>
-        <title>Fitness Time Mail</title>
+        <title>Fitness Time - Mail</title>
         <link
           rel="shortcut icon"
           href="https://fitness-time.vercel.app/favicons/favicon.ico"

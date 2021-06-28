@@ -1,6 +1,9 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import customVerificationRequest from "./customVerificationRequest";
+import Adapters from "next-auth/adapters";
+
+import Models from "../models";
 
 export default NextAuth({
   providers: [
@@ -29,7 +32,12 @@ export default NextAuth({
       sendVerificationRequest: customVerificationRequest,
     }),
   ],
-  database: process.env.DATABASE_URL,
+  /* database: process.env.DATABASE_URL, */
+  adapter: Adapters.TypeORM.Adapter(process.env.DATABASE_URL, {
+    models: {
+      User: Models.User,
+    },
+  }),
   secret: process.env.SECRET, // A random string used to hash tokens, sign cookies and generate cryptographic keys.
   session: {
     jwt: true, // Use JSON Web Tokens for session instead of database sessions.
@@ -45,5 +53,38 @@ export default NextAuth({
     verifyRequest: "/mailsent",
     error: "/error",
     // newUser: null, // If set, new users will be directed here on first sign in
+  },
+  callbacks: {
+    async jwt(token, user, account, profile, isNewUser) {
+      /* console.log("INSPECT account", account);
+      console.log("INSPECT user", user);
+      console.log("INSPECT token", token);
+      console.log("INSPECT profile", profile);
+      console.log("INSPECT isNewUser", isNewUser); */
+      if (account?.accessToken) {
+        token.accessToken = account.accessToken;
+      }
+      if (account?.provider) {
+        token.provider = account.provider;
+      }
+      if (user?.role) {
+        token.role = user.role;
+      }
+      return token;
+    },
+    async session(session, token) {
+      /* console.log("INSPECT session", session);
+      console.log("INSPECT token", token); */
+      if (token?.accessToken) {
+        session.accessToken = token.accessToken;
+      }
+      if (token?.provider) {
+        session.provider = token.provider;
+      }
+      if (token?.role) {
+        session.user.role = token.role;
+      }
+      return session;
+    },
   },
 });
