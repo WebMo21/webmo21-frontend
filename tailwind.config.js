@@ -22,7 +22,7 @@ module.exports = {
       },
       screens: {
         iphone: { max: "400px" },
-        tablet: { max: "1025px" },
+        tablet: { max: "1023px" },
         tabletpro: { max: "1285px" },
       },
     },

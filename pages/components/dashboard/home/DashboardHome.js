@@ -72,12 +72,10 @@ const DashboardHome = ({ signUpDate, language }) => {
       className="relative z-0 flex-1 pb-8 overflow-y-auto"
       data-aos="fade-up"
     >
-      {/* Page header */}
       <div className="bg-gray-900">
         <div className="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
           <div className="p-8 py-6 mt-8 bg-gray-700 rounded-lg md:flex md:items-center md:justify-between">
             <div className="flex-1 min-w-0">
-              {/* Profile */}
               <div className="flex items-center ">
                 <img
                   className="w-20 h-20 rounded-full select-none iphone:hidden"
@@ -121,7 +119,7 @@ const DashboardHome = ({ signUpDate, language }) => {
                       {language && language === "DE"
                         ? "Dabei seit "
                         : "Joined at "}
-                      {signUpDate}
+                      {moment(session.user.createdAt).format("L")}
                     </dd>
                     <dt className="sr-only">Account status</dt>
                     <dd className="flex items-center mt-3 font-medium text-gray-400 capitalize select-none ttext-md sm:mr-6 sm:mt-0">
