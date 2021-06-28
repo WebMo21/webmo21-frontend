@@ -56,6 +56,23 @@ const setSideBarNavigationActive = (name) =>
       : (navigation.current = false);
   });
 
+const sidebarNavigation = [
+  { name: "home", title: "Übersicht", icon: HomeIcon, current: true },
+  {
+    name: "plans",
+    title: "Trainingspläne",
+    icon: ClipboardIcon,
+    current: false,
+  },
+  {
+    name: "workouts",
+    title: "Übungen",
+    icon: LightningBoltIcon,
+    current: false,
+  },
+  { name: "settings", title: "Einstellungen", icon: CogIcon, current: false },
+];
+
 export default function Dashboard() {
   const [session, loading] = useSession();
   /* const [content, setContent] = useState(); */
@@ -67,24 +84,12 @@ export default function Dashboard() {
   );
 
   const [activeSideBarSection, setActiveSideBarSection] = useState("home");
-  const sidebarNavigation = [
-    { name: "home", title: "Übersicht", icon: HomeIcon, current: true },
-    {
-      name: "plans",
-      title: "Trainingspläne",
-      icon: ClipboardIcon,
-      current: false,
-    },
-    {
-      name: "workouts",
-      title: "Übungen",
-      icon: LightningBoltIcon,
-      current: false,
-    },
-    { name: "settings", title: "Einstellungen", icon: CogIcon, current: false },
-  ];
 
-  if (session && session.user.role === "admin")
+  if (
+    session &&
+    session.user.role === "admin" &&
+    !sidebarNavigation.find((x) => x.name === "admin")
+  )
     sidebarNavigation.push({
       name: "admin",
       title: "Admin Einstellungen",

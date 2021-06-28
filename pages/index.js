@@ -103,7 +103,6 @@ const landing = () => {
           }}
           hideOnAccept
           onAccept={() => {
-            // TODO: BACKEND CALL
             console.log("GDPR COMPLIANT");
           }}
           onDecline={() => (location.href = "http://leuphana.de")}
