@@ -119,7 +119,7 @@ const DashboardHome = ({ signUpDate, language }) => {
                       {language && language === "DE"
                         ? "Dabei seit "
                         : "Joined at "}
-                      {moment(session.user.createdAt).format("L")}
+                      {session && moment(session.user.createdAt).format("L")}
                     </dd>
                     <dt className="sr-only">Account status</dt>
                     <dd className="flex items-center mt-3 font-medium text-gray-400 capitalize select-none ttext-md sm:mr-6 sm:mt-0">

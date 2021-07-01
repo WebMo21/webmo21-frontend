@@ -46,3 +46,18 @@ body {
 .rbc-day-slot .rbc-time-slot {
   border-top: 1px solid rgba(128, 128, 128, 0.267) !important;
 }
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+#muscle-group {
+  text-align-last: center;
+}
+
+@media screen and (max-width: 400px) {
+  .iphone-ml-left {
+    margin-left: 30%;
+  }
+}

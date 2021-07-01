@@ -161,7 +161,7 @@ export default function Dashboard() {
                   : "Admin Einstellungen"
               }`}
             />
-            <div className="relative z-50 inline-block pt-1 mb-3 ml-1 mr-20 select-none lg:mr-8 group tablet:mt-2">
+            <div className="relative z-30 inline-block pt-1 mb-3 ml-1 mr-20 select-none lg:mr-8 group tablet:mt-2">
               <button className="inline-flex items-center px-3 py-2 font-semibold text-green-600 bg-transparent border border-green-500 rounded iphone:text-xs iphone:mt-1 iphone:hidden">
                 <span className="mr-1">{language}</span>
                 <svg

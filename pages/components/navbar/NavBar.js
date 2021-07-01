@@ -8,7 +8,7 @@ const NavBar = ({ language, setLanguageCallback }) => {
   const router = useRouter();
 
   return (
-    <nav className="absolute top-0 z-50 flex flex-wrap items-center justify-between w-full px-2 py-3 navbar-expand-lg">
+    <nav className="absolute top-0 z-30 flex flex-wrap items-center justify-between w-full px-2 py-3 navbar-expand-lg">
       <div className="container flex flex-wrap items-center justify-between px-4 mx-auto">
         <div className="relative flex justify-between w-full lg:w-auto lg:static lg:block lg:justify-start">
           <div className="flex">
