@@ -1,27 +1,23 @@
 import { Fragment, useRef, useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-const findMuscleGroup = (muscleInput) => {
-  switch (muscleInput) {
-    case "Chest" || "Brustmuskel":
-      return "Chest";
-      break;
-    case y:
-      // code block
-      break;
-    default:
-    // code block
-  }
-};
-
 const DashboardEditWorkout = ({
   editWorkoutData,
   setShowEditWorkoutModal,
   showEditWorkoutModal,
   language,
+  updateWorkout,
+  findMuscleGroup,
 }) => {
   const cancelButtonRef = useRef(null);
-  const [inputName, setInputName] = useState(editWorkoutData?.name);
+  const [updatedWorkout, setUpdatedWorkout] = useState({
+    name: editWorkoutData?.name,
+    muscle_group: editWorkoutData?.muscle_group,
+    repetition_count: editWorkoutData?.repetition_count,
+    duration_in_seconds: editWorkoutData?.duration_in_seconds,
+    equipment_weight_in_kilo: editWorkoutData?.equipment_weight_in_kilo,
+  });
+  console.log("HERE", editWorkoutData);
 
   return (
     <Transition.Root
@@ -73,7 +69,7 @@ const DashboardEditWorkout = ({
               <div>
                 <img
                   src="./muscle-groups/back-woman.png"
-                  alt
+                  alt="muscle view"
                   className="object-contain w-full h-full rounded-l tablet:!h-60"
                   data-aos="fade-down"
                 />
@@ -84,14 +80,20 @@ const DashboardEditWorkout = ({
                       className="text-3xl font-bold leading-6 text-green-500 select-none"
                     ></Dialog.Title>
                     <input
-                      value={inputName}
+                      value={updatedWorkout.name}
                       type="text"
                       id="workout-name"
                       maxLength="10"
-                      onChange={(event) => setInputName(event.target.value)}
+                      onChange={(event) =>
+                        setUpdatedWorkout({
+                          ...updatedWorkout,
+                          name: event.target.value,
+                        })
+                      }
                       className="border !bg-gray-700 border-transparent text-3xl font-bold !text-green-500 select-none text-center w-80 rounded-md placeholder-green-700"
                     ></input>
                   </div>
+                  {/* {console.log("editworkout", editWorkoutData)} */}
                   <div className="mt-2">
                     <div className="mx-auto my-4 w-80">
                       <label
@@ -105,7 +107,16 @@ const DashboardEditWorkout = ({
                           id="muscle-group"
                           name="muscle-group"
                           className="block w-full py-2 pl-3 pr-10 mt-1 text-base border-none rounded-md focus:outline-none sm:text-sm !bg-gray-700 text-green-500 font-bold cursor-pointer"
-                          defaultValue="Brustmuskel"
+                          defaultValue={findMuscleGroup(
+                            editWorkoutData.muscle_group,
+                            language
+                          )}
+                          onChange={(event) =>
+                            setUpdatedWorkout({
+                              ...updatedWorkout,
+                              muscle_group: event.target.value,
+                            })
+                          }
                         >
                           <option className="text-white bg-gray-700">
                             {language === "DE" ? "Brustmuskel" : "Chest"}
@@ -214,20 +225,22 @@ const DashboardEditWorkout = ({
                         </div>
                       </div>
                     </div>
-
-                    {/* <p className="text-sm text-gray-500 select-none">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Eius aliquam laudantium explicabo pariatur iste dolorem
-                    animi vitae error totam. At sapiente aliquam accusamus
-                    facere veritatis.
-                  </p> */}
                   </div>
                 </div>
                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
                   <button
                     type="button"
                     className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-green-500 border border-transparent rounded-md shadow-sm select-none hover:bg-green-400 sm:col-start-2 sm:text-sm focus:outline-none"
-                    onClick={() => setShowEditWorkoutModal(false)}
+                    onClick={() => {
+                      updateWorkout({
+                        id: editWorkoutData.id,
+                        name: updatedWorkout.name,
+                        muscle_group: findMuscleGroup(
+                          updatedWorkout.muscle_group
+                        ),
+                      });
+                      setShowEditWorkoutModal(false);
+                    }}
                   >
                     Speichern
                   </button>

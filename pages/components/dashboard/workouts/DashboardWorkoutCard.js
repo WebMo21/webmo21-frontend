@@ -12,6 +12,7 @@ const DashboardWorkoutCard = ({
   setEditWorkoutData,
   workout,
   badge,
+  findMuscleGroup,
 }) => {
   return (
     <div
@@ -20,10 +21,14 @@ const DashboardWorkoutCard = ({
     >
       <div className="relative flex-none w-48 ml-2 iphone:mt-4">
         <img
-          src="./muscle-groups/back-woman.png"
-          alt
+          src={findMuscleGroup(muscle_group, language, "image", "woman")}
+          alt="muscle view"
           className="object-contain w-full h-full rounded-l"
         />
+        {console.log(
+          "IMAGES",
+          findMuscleGroup(muscle_group, language, "image", "woman")
+        )}
       </div>
       <div className="p-6 lg:flex-auto iphone:!pb-4 truncate">
         <div className="flex flex-wrap tablet:justify-flex-end iphone:justify-center">
@@ -33,7 +38,7 @@ const DashboardWorkoutCard = ({
                 badge === "Individuell" || badge === "Custom"
                   ? "bg-green-500"
                   : "bg-yellow-200 text-yellow-800"
-              } inline-flex items-center px-2 py-1 mt-2 text-xs font-medium bg-green-100 rounded`}
+              } inline-flex items-center px-2 py-1 mt-2 text-xs font-medium bg-green-100 rounded opacity-60`}
               style={{ height: "1.5rem" }}
             >
               {badge}
@@ -48,14 +53,14 @@ const DashboardWorkoutCard = ({
               {repetition_count && (
                 <img
                   src="./icons/repeat.png"
-                  alt
+                  alt="repeat icon"
                   className="object-contain w-5 h-full mt-1 mr-3 rounded-l"
                 />
               )}
               {duration_in_seconds && (
                 <img
                   src="./icons/clock.png"
-                  alt
+                  alt="clock icon"
                   className="object-contain w-5 h-full mt-1 mr-3 rounded-l"
                 />
               )}
@@ -148,7 +153,7 @@ const DashboardWorkoutCard = ({
               {language === "DE" ? "Muskelgruppe" : "Muscle Group"}
             </div>
             <div className="text-gray-400 iphone:text-center">
-              {muscle_group}
+              {findMuscleGroup(muscle_group, language)}
             </div>
           </div>
           <div className="ml-auto text-sm text-gray-500 underline"></div>
