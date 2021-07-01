@@ -24,12 +24,16 @@ const HeroSection = ({ language }) => {
         <div className="flex flex-wrap items-center">
           <div className="w-full px-4 ml-auto mr-auto text-center lg:w-6/12">
             <div>
-              <h1 className="text-5xl font-semibold text-white selection:bg-yellow-300 selection:text-yellow-900">
+              <h2
+                className={`${
+                  session ? "mt-16" : ""
+                } text-5xl font-semibold text-white selection:bg-yellow-300 selection:text-yellow-900`}
+              >
                 Fitness{" "}
                 <span className="text-green-500 selection:bg-yellow-300 selection:text-yellow-900">
                   Time
                 </span>
-              </h1>
+              </h2>
               <p className="mt-4 text-lg text-gray-300 selection:bg-yellow-300 selection:text-yellow-900">
                 {language === "DE"
                   ? "Willkommen zu Fitness Time, deinem digitalen Planer für dein Training und deine Fitness. Lass uns die Übersicht deiner Workouts organisieren und fokussiere dich auf dein Workout."
@@ -38,21 +42,21 @@ const HeroSection = ({ language }) => {
               <div className="flex justify-center mt-4 select-none">
                 <img
                   className="object-cover h-12 mr-4 cursor-pointer w-30"
+                  alt="Fitness Time On The iOS Store"
                   src={
                     language === "DE"
                       ? "./ios-app-store-badge.png"
                       : "./ios-app-store-badge-english.png"
                   }
-                  alt=""
                 />
                 <img
                   className="object-cover h-12 cursor-pointer w-30"
+                  alt="Fitness Time On The Android Play Store"
                   src={
                     language === "DE"
                       ? "./google-play-badge.png"
                       : "./google-play-badge-english.png"
                   }
-                  alt=""
                 />
               </div>
               {!session && (

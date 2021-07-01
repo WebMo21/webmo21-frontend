@@ -1,21 +1,21 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { signOut, useSession } from "next-auth/client";
+import { useSession } from "next-auth/client";
 
 const NavBar = ({ language, setLanguageCallback }) => {
   const [session] = useSession();
   const router = useRouter();
 
   return (
-    <nav className="absolute top-0 z-50 flex flex-wrap items-center justify-between w-full px-2 py-3 navbar-expand-lg">
+    <nav className="absolute top-0 z-30 flex flex-wrap items-center justify-between w-full px-2 py-3 navbar-expand-lg">
       <div className="container flex flex-wrap items-center justify-between px-4 mx-auto">
         <div className="relative flex justify-between w-full lg:w-auto lg:static lg:block lg:justify-start">
           <div className="flex">
             <Link href="/">
               <a>
                 <img
-                  alt="..."
+                  alt="Fitness Time Logo"
                   className="h-10 mt-1 mr-2 rounded-lg shadow-lg cursor-pointer select-none max-w-10"
                   src="./logos/logo_small_icon_only_inverted-fitness-time.png"
                 />
@@ -36,7 +36,7 @@ const NavBar = ({ language, setLanguageCallback }) => {
           </button>
         </div>
         <div
-          className="items-center flex-grow bg-green-100 rounded-lg lg:flex lg:bg-transparent lg:shadow-none tablet:mt-4"
+          className="items-center flex-grow bg-green-100 rounded-lg lg:flex lg:bg-transparent lg:shadow-none tablet:mt-4 tablet:mb-8"
           data-aos="fade-in"
           id="example-collapse-navbar"
         >
@@ -166,7 +166,7 @@ const NavBar = ({ language, setLanguageCallback }) => {
             </div>
             {/* signIn */}
             <li className="flex items-center tablet:mr-3 iphone:w-20 iphone:text-xs">
-              {!session && router.pathname !== "/login" ? (
+              {!session && router.pathname !== "/login" && (
                 <>
                   <Link href="/login">
                     <a className="inline-block p-2 ml-5 font-semibold text-white bg-green-500 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-green-400">
@@ -174,17 +174,17 @@ const NavBar = ({ language, setLanguageCallback }) => {
                     </a>
                   </Link>
                 </>
-              ) : (
-                ""
               )}
               {session && (
-                <Link href="/logout">
-                  <div>
-                    <a className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300">
-                      {language === "DE" ? "Ausloggen" : "Sign Out"}
-                    </a>
-                  </div>
-                </Link>
+                <>
+                  <Link href="/logout">
+                    <div>
+                      <a className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300">
+                        {language === "DE" ? "Logout" : "Logout"}
+                      </a>
+                    </div>
+                  </Link>
+                </>
               )}
             </li>
           </ul>

@@ -10,7 +10,7 @@ const AboutSection = ({ language }) => {
             data-aos="fade-right"
           >
             <img
-              alt="..."
+              alt="Tracking Time For Fitness Is Very Important"
               className="max-w-full rounded-lg shadow-lg"
               src="./backgrounds/bg-fitness-woman-time.jpeg"
             />
@@ -28,11 +28,11 @@ const AboutSection = ({ language }) => {
                   ? "Bleibe deinen Zielen treu"
                   : "Stay true to your goals"}
               </h3>
-              <p className="mt-4 text-lg leading-relaxed select-none">
+              <h1 className="mt-4 text-lg leading-relaxed select-none">
                 {language === "DE"
                   ? "Erstelle deinen individuellen Trainingsplan und ordne vordefinierte oder eigene Übungen ganz nach deinen Vorstellungen in diesen ein."
                   : "Create your individual training plan and arrange predefined or your own exercises into it according to your ideas."}
-              </p>
+              </h1>
               <ul className="mt-6 list-none">
                 <li className="py-2">
                   <div className="flex items-center">
