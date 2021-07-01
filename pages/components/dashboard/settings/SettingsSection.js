@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Switch } from "@headlessui/react";
 
-const DashboardSettings = ({ language }) => {
+const SettingsSection = ({ language }) => {
   const [active, setActive] = useState(false);
   let color = "green";
 
@@ -84,4 +84,4 @@ const DashboardSettings = ({ language }) => {
   );
 };
 
-export default DashboardSettings;
+export default SettingsSection;

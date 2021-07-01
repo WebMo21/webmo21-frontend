@@ -1,6 +1,6 @@
 import React from "react";
 
-const DashboardWorkoutCard = ({
+const WorkoutCard = ({
   id,
   name,
   repetition_count,
@@ -182,4 +182,4 @@ const DashboardWorkoutCard = ({
   );
 };
 
-export default DashboardWorkoutCard;
+export default WorkoutCard;

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/client";
 
-import DashboardEditWorkout from "./DashboardEditWorkout";
-import DashboardWorkoutCard from "./DashboardWorkoutCard";
+import EditWorkoutModal from "./EditWorkoutModal";
+import WorkoutCard from "./WorkoutCard";
 
 const ADMIN_ID = 12;
 
@@ -97,7 +97,7 @@ const findMuscleGroup = (muscleInput, language, ImageInstead, gender) => {
   return parsedMuscleGroup;
 };
 
-const DashboardWorkouts = ({ language }) => {
+const WorkoutsSection = ({ language }) => {
   const [session, loading] = useSession();
   const [fetchedUserWorkouts, setFetchedUserWorkouts] = useState([]);
   const [showEditWorkoutModal, setShowEditWorkoutModal] = useState(false);
@@ -189,7 +189,7 @@ const DashboardWorkouts = ({ language }) => {
                 />
               </div>
               {showEditWorkoutModal && (
-                <DashboardEditWorkout
+                <EditWorkoutModal
                   editWorkoutData={editWorkoutData}
                   setShowEditWorkoutModal={setShowEditWorkoutModal}
                   showEditWorkoutModal={showEditWorkoutModal}
@@ -200,7 +200,7 @@ const DashboardWorkouts = ({ language }) => {
               )}
 
               {fetchedUserWorkouts.map((workout) => (
-                <DashboardWorkoutCard
+                <WorkoutCard
                   id={workout.id}
                   name={workout.name}
                   repetition_count={workout.repetition_count}
@@ -218,7 +218,7 @@ const DashboardWorkouts = ({ language }) => {
               ))}
 
               {fetchedTemplateWorkouts.map((workout) => (
-                <DashboardWorkoutCard
+                <WorkoutCard
                   id={workout.id}
                   name={workout.name}
                   repetition_count={workout.repetition_count}
@@ -242,4 +242,4 @@ const DashboardWorkouts = ({ language }) => {
   );
 };
 
-export default DashboardWorkouts;
+export default WorkoutsSection;

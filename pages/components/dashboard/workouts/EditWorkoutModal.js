@@ -1,7 +1,7 @@
 import { Fragment, useRef, useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-const DashboardEditWorkout = ({
+const EditWorkoutModal = ({
   editWorkoutData,
   setShowEditWorkoutModal,
   showEditWorkoutModal,
@@ -262,4 +262,4 @@ const DashboardEditWorkout = ({
   );
 };
 
-export default DashboardEditWorkout;
+export default EditWorkoutModal;

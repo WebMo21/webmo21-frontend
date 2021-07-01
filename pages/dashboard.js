@@ -19,9 +19,9 @@ import Navigation from "./components/dashboard/navbar/Navigation";
 import MobileMenu from "./components/dashboard/navbar/MobileMenu";
 import DashboardSideBar from "./components/dashboard/DashboardSideBar";
 import HomeSection from "./components/dashboard/home/HomeSection";
-import DashboardPlans from "./components/dashboard/plans/DashboardPlans";
-import DashboardWorkouts from "./components/dashboard/workouts/DashboardWorkouts";
-import DashboardSettings from "./components/dashboard/settings/DashboardSettings";
+import PlansSection from "./components/dashboard/plans/PlansSection";
+import WorkoutsSection from "./components/dashboard/workouts/WorkoutsSection";
+import SettingsSection from "./components/dashboard/settings/SettingsSection";
 import AdminSection from "./components/dashboard/admin/AdminSection";
 
 const user = {
@@ -243,13 +243,13 @@ export default function Dashboard() {
                   <HomeSection signUpDate={"26.06.2021"} language={language} />
                 )}
                 {activeSideBarSection === "plans" && (
-                  <DashboardPlans language={language} />
+                  <PlansSection language={language} />
                 )}
                 {activeSideBarSection === "workouts" && (
-                  <DashboardWorkouts language={language} />
+                  <WorkoutsSection language={language} />
                 )}
                 {activeSideBarSection === "settings" && (
-                  <DashboardSettings language={language} />
+                  <SettingsSection language={language} />
                 )}
                 {activeSideBarSection === "admin" && (
                   <AdminSection language={language} />
