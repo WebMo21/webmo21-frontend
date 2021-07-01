@@ -14,9 +14,9 @@ import {
   KeyIcon,
 } from "@heroicons/react/solid";
 
-import DashboardLogo from "./components/dashboard/navbar/DashboardLogo";
-import DashboardDesktopNavigation from "./components/dashboard/navbar/DashboardDesktopNavigation";
-import DashboardMobileMenu from "./components/dashboard/navbar/DashboardMobileMenu";
+import NavbarLogo from "./components/dashboard/navbar/NavbarLogo";
+import Navigation from "./components/dashboard/navbar/Navigation";
+import MobileMenu from "./components/dashboard/navbar/MobileMenu";
 import DashboardSideBar from "./components/dashboard/DashboardSideBar";
 import HomeSection from "./components/dashboard/home/HomeSection";
 import DashboardPlans from "./components/dashboard/plans/DashboardPlans";
@@ -144,22 +144,32 @@ export default function Dashboard() {
         {console.log("SESSION", session)}
         <div className="flex flex-col h-screen overflow-hidden bg-gray-900">
           <header className="relative flex items-center flex-shrink-0 h-16 bg-gray-800">
-            <DashboardLogo />
+            <NavbarLogo />
 
             {/* Desktop nav area */}
-            <DashboardDesktopNavigation
+            <Navigation
               navigation={navigation}
               user={user}
               title={`Fitness Time - ${
                 activeSideBarSection === "home"
-                  ? "Übersicht"
+                  ? language === "DE"
+                    ? "Übersicht"
+                    : "Overview"
                   : activeSideBarSection === "plans"
-                  ? "Trainingspläne"
+                  ? language === "DE"
+                    ? "Trainingspläne"
+                    : "Workout Plans"
                   : activeSideBarSection === "workouts"
-                  ? "Übungen"
+                  ? language === "DE"
+                    ? "Übungen"
+                    : "Workouts"
                   : activeSideBarSection === "settings"
-                  ? "Einstellungen"
-                  : "Admin Einstellungen"
+                  ? language === "DE"
+                    ? "Einstellungen"
+                    : "Settings"
+                  : language === "DE"
+                  ? "Admin Einstellungen"
+                  : "Admin Settings"
               }`}
             />
             <div className="relative z-30 inline-block pt-1 mb-3 ml-1 mr-20 select-none lg:mr-8 group tablet:mt-2">
@@ -205,8 +215,7 @@ export default function Dashboard() {
               </ul>
             </div>
 
-            {/* Mobile menu, show/hide this `div` based on menu open/closed state */}
-            <DashboardMobileMenu
+            <MobileMenu
               navigation={navigation}
               user={user}
               userNavigation={userNavigation}
