@@ -18,11 +18,11 @@ import DashboardLogo from "./components/dashboard/navbar/DashboardLogo";
 import DashboardDesktopNavigation from "./components/dashboard/navbar/DashboardDesktopNavigation";
 import DashboardMobileMenu from "./components/dashboard/navbar/DashboardMobileMenu";
 import DashboardSideBar from "./components/dashboard/DashboardSideBar";
-import DashboardHome from "./components/dashboard/home/DashboardHome";
+import HomeSection from "./components/dashboard/home/HomeSection";
 import DashboardPlans from "./components/dashboard/plans/DashboardPlans";
 import DashboardWorkouts from "./components/dashboard/workouts/DashboardWorkouts";
 import DashboardSettings from "./components/dashboard/settings/DashboardSettings";
-import DashboardAdmin from "./components/dashboard/admin/DashboardAdmin";
+import AdminSection from "./components/dashboard/admin/AdminSection";
 
 const user = {
   name: "Whitney Francis",
@@ -141,6 +141,7 @@ export default function Dashboard() {
         localStorage.getItem("language") === null
           ? localStorage.setItem("language", language)
           : ""}
+        {console.log("SESSION", session)}
         <div className="flex flex-col h-screen overflow-hidden bg-gray-900">
           <header className="relative flex items-center flex-shrink-0 h-16 bg-gray-800">
             <DashboardLogo />
@@ -230,10 +231,7 @@ export default function Dashboard() {
                 className="flex flex-col flex-1 h-full min-w-0 overflow-hidden xl:order-last"
               >
                 {activeSideBarSection === "home" && (
-                  <DashboardHome
-                    signUpDate={"26.06.2021"}
-                    language={language}
-                  />
+                  <HomeSection signUpDate={"26.06.2021"} language={language} />
                 )}
                 {activeSideBarSection === "plans" && (
                   <DashboardPlans language={language} />
@@ -245,7 +243,7 @@ export default function Dashboard() {
                   <DashboardSettings language={language} />
                 )}
                 {activeSideBarSection === "admin" && (
-                  <DashboardAdmin language={language} />
+                  <AdminSection language={language} />
                 )}
               </section>
             </div>

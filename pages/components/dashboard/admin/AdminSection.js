@@ -1,6 +1,6 @@
 import React from "react";
 
-const DashboardAdmin = ({ language }) => {
+const AdminSection = ({ language }) => {
   return (
     <div
       className="relative z-0 flex-1 pb-8 overflow-y-auto"
@@ -22,4 +22,4 @@ const DashboardAdmin = ({ language }) => {
   );
 };
 
-export default DashboardAdmin;
+export default AdminSection;

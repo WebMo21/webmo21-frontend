@@ -54,5 +54,9 @@ export const UserSchema = {
       type: "varchar",
       nullable: false,
     },
+    gender: {
+      type: "varchar",
+      nullable: true,
+    },
   },
 };

@@ -15,7 +15,7 @@ import {
   ChartBarIcon,
 } from "@heroicons/react/solid";
 
-const DashboardHome = ({ signUpDate, language }) => {
+const HomeSection = ({ signUpDate, language }) => {
   const [session, loading] = useSession();
 
   if (language && language === "DE") {
@@ -257,4 +257,4 @@ const DashboardHome = ({ signUpDate, language }) => {
   );
 };
 
-export default DashboardHome;
+export default HomeSection;

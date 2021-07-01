@@ -70,6 +70,9 @@ export default NextAuth({
       if (user?.role) {
         token.role = user.role;
       }
+      if (user?.gender) {
+        token.gender = user.gender;
+      }
       if (user?.id) {
         token.id = user.id;
       }
@@ -89,6 +92,9 @@ export default NextAuth({
       }
       if (token?.role) {
         session.user.role = token.role;
+      }
+      if (token?.gender) {
+        session.user.gender = token.gender;
       }
       if (token?.id) {
         session.user.id = token.id;
