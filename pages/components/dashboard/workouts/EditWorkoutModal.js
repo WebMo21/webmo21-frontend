@@ -242,7 +242,7 @@ const EditWorkoutModal = ({
                       setShowEditWorkoutModal(false);
                     }}
                   >
-                    Speichern
+                    {language === "DE" ? "Speichern" : "Save"}
                   </button>
                   <button
                     type="button"

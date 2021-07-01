@@ -1,82 +1,115 @@
-import React, { useState } from "react";
-import { Switch } from "@headlessui/react";
+import React, { useState, useEffect } from "react";
+import { signOut, useSession } from "next-auth/client";
+import { useRouter } from "next/router";
 
 const SettingsSection = ({ language }) => {
-  const [active, setActive] = useState(false);
-  let color = "green";
+  const router = useRouter();
+  const [session, loading] = useSession();
+  const [nameOfUser, setNameOfUser] = useState("");
+  const [genderOfUser, setGenderOfUser] = useState("");
+
+  useEffect(() => {
+    if (session) {
+      setNameOfUser(session.user?.name);
+      setGenderOfUser(session.user?.gender);
+    }
+  }, []);
+
+  const saveUserUpdated = (id, name, gender) => {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/users/`, {
+      method: "put",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id,
+        name: name,
+        gender: gender,
+      }),
+    })
+      .then((response) =>
+        response
+          .json()
+          .then(() => {
+            router.push("/");
+            setTimeout(function () {
+              signOut();
+            }, 600);
+          })
+          .catch((e) => console.log(e))
+      )
+      .catch((e) => console.log(e));
+  };
 
   return (
-    <div
-      className="relative z-0 flex-1 pb-8 overflow-y-auto"
-      data-aos="fade-up"
-    >
-      <div className="bg-gray-900">
-        <div className="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
-          <h2 className="max-w-6xl pl-1 mx-auto mt-8 text-2xl font-medium leading-6 text-white select-none">
-            {language === "DE" ? "Deine Einstellungen" : "Your Settings"}
-          </h2>
-          <div className="p-8 py-6 mt-5 bg-gray-700 rounded-lg md:flex md:items-center md:justify-between">
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center justify-center h-12 cursor-pointer group">
-                <Switch
-                  checked={active}
-                  onChange={setActive}
-                  className={`${
-                    active ? "bg-green-500" : "bg-white"
-                  } relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 !outline-none`}
-                >
-                  <span className="sr-only">Use setting</span>
-                  <span
-                    className={`${
-                      active ? "translate-x-5 " : "translate-x-0 "
-                    } pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200`}
-                  >
-                    <span
-                      className={`${
-                        active
-                          ? "opacity-0 ease-out duration-100 "
-                          : "opacity-100 ease-in duration-200 "
-                      } absolute inset-0 h-full w-full flex items-center justify-center transition-opacity`}
-                      aria-hidden="true"
-                    >
-                      <svg
-                        className="w-3 h-3 text-gray-400"
-                        fill="none"
-                        viewBox="0 0 12 12"
-                      >
-                        <path
-                          d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </span>
-                    <span
-                      className={`${
-                        active
-                          ? "opacity-100 ease-in duration-200 "
-                          : "opacity-0 ease-out duration-100 "
-                      } absolute inset-0 h-full w-full flex items-center justify-center transition-opacity `}
-                      aria-hidden="true"
-                    >
-                      <svg
-                        className={`h-3 w-3 ${
-                          color ? `text-${color}-500` : "text-white"
-                        }`}
-                        fill="currentColor"
-                        viewBox="0 0 12 12"
-                      >
-                        <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
-                      </svg>
-                    </span>
-                  </span>
-                </Switch>
-                )
+    <div className="pb-8 bg-gray-900" data-aos="fade-up">
+      <div className="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
+        <h2 className="max-w-6xl pl-1 mx-auto mt-8 text-2xl font-medium leading-6 text-white select-none">
+          {language === "DE" ? "Deine Einstellungen" : "Your Settings"}
+        </h2>
+        <div className="justify-center p-8 py-6 mt-5 bg-gray-700 rounded-lg md:flex">
+          <div className="flex-col cursor-pointer">
+            <div className="mb-4">
+              <div className="flex-col">
+                <div className="mb-2 text-xl text-center text-white">
+                  {language === "DE" ? "Mein Name lautet:" : "My name is:"}
+                </div>
+                <input
+                  value={nameOfUser}
+                  type="text"
+                  id="name-of-user"
+                  maxLength="18"
+                  onChange={(event) => setNameOfUser(event.target.value)}
+                  className="border !bg-gray-600 border-transparent text-3xl font-bold !text-green-500 select-none w-96 rounded-md placeholder-green-700 text-center"
+                />
               </div>
             </div>
-            <div>DEIN NAME</div> <div>GESCHLECHT</div>
+            <div className="mb-2 text-xl text-center text-white">
+              {language === "DE" ? "Mein Geschlecht ist:" : "My gender is:"}
+            </div>
+            <div className="flex justify-center pt-2 ml-4">
+              <div>
+                <a
+                  onClick={() => setGenderOfUser("woman")}
+                  className={`p-2 font-semibold text-white ${
+                    genderOfUser === "woman"
+                      ? "bg-pink-500 hover:bg-pink-400"
+                      : "bg-pink-200 hover:bg-pink-100"
+                  } border border-transparent border-green-500 rounded cursor-pointer select-none`}
+                >
+                  {language && language === "DE" ? "♀️ Weiblich" : "♀️ Female"}
+                </a>
+              </div>
+              <div>
+                {" "}
+                <a
+                  onClick={() => setGenderOfUser("man")}
+                  className={`p-2 ml-5 font-semibold text-white ${
+                    genderOfUser === "man"
+                      ? "bg-blue-500 hover:bg-blue-400"
+                      : "bg-blue-200 hover:bg-blue-100"
+                  }  border border-transparent border-green-500 rounded cursor-pointer select-none`}
+                >
+                  {language && language === "DE" ? "♂️ Männlich" : "♂️ Male"}
+                </a>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              className="inline-flex justify-center w-full px-4 py-2 mt-12 text-base font-medium text-white bg-green-500 border border-transparent rounded-md shadow-sm select-none hover:bg-green-400 sm:col-start-2 sm:text-sm focus:outline-none"
+              onClick={() => {
+                saveUserUpdated(session.user.id, nameOfUser, genderOfUser);
+              }}
+            >
+              {language === "DE" ? "Speichern" : "Save"}
+            </button>
+            <div className="mb-2 text-center text-gray-400 text-md">
+              {language === "DE"
+                ? "Für den Prozess des Speicherns wirst du ausgeloggt!"
+                : "For the saving process you will be logged out!"}
+            </div>
           </div>
         </div>
       </div>
