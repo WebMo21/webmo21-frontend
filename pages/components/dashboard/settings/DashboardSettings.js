@@ -73,9 +73,10 @@ const DashboardSettings = ({ language }) => {
                     </span>
                   </span>
                 </Switch>
-                ) DEIN NAME GESCHLECHT
+                )
               </div>
             </div>
+            <div>DEIN NAME</div> <div>GESCHLECHT</div>
           </div>
         </div>
       </div>
