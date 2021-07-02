@@ -61,7 +61,7 @@ const SettingsSection = ({ language }) => {
                   id="name-of-user"
                   maxLength="18"
                   onChange={(event) => setNameOfUser(event.target.value)}
-                  className="border !bg-gray-600 border-transparent text-3xl font-bold !text-green-500 select-none w-96 rounded-md placeholder-green-700 text-center"
+                  className="border !bg-gray-600 border-transparent text-3xl font-bold !text-green-500 select-none w-96 rounded-md placeholder-green-700 text-center iphone:!text-base iphone:w-72"
                 />
               </div>
             </div>
