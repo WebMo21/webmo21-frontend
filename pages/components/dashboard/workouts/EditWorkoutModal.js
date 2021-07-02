@@ -6,9 +6,9 @@ const EditWorkoutModal = ({
   setShowEditWorkoutModal,
   showEditWorkoutModal,
   language,
-  updateWorkout,
   findMuscleGroup,
   gender,
+  reFetchWorkouts,
 }) => {
   const cancelButtonRef = useRef(null);
   const [updatedWorkout, setUpdatedWorkout] = useState({
@@ -17,8 +17,41 @@ const EditWorkoutModal = ({
     repetition_count: editWorkoutData?.repetition_count,
     duration_in_seconds: editWorkoutData?.duration_in_seconds,
     equipment_weight_in_kilo: editWorkoutData?.equipment_weight_in_kilo,
+    active: "none",
   });
-  console.log("HERE", editWorkoutData);
+
+  const updateWorkout = (workout) => {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/workouts/`, {
+      method: "put",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: workout.id,
+        name: workout.name,
+        muscle_group: workout.muscle_group,
+        repetition_count: workout.repetition_count
+          ? workout.repetition_count
+          : 0,
+        duration_in_seconds: workout.duration_in_seconds
+          ? parseInt(workout.duration_in_seconds)
+          : 0,
+        equipment_weight_in_kilo: workout.equipment_weight_in_kilo
+          ? workout.equipment_weight_in_kilo
+          : 0,
+      }),
+    })
+      .then((response) =>
+        response
+          .json()
+          .then((data) => {
+            reFetchWorkouts();
+          })
+          .catch((e) => console.log(e))
+      )
+      .catch((e) => console.log(e));
+  };
 
   return (
     <Transition.Root
@@ -33,7 +66,6 @@ const EditWorkoutModal = ({
         open={showEditWorkoutModal}
         onClose={setShowEditWorkoutModal}
       >
-        {/* {console.log("WORKOUT EDIT ", editWorkoutData)} */}
         <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
             as={Fragment}
@@ -189,9 +221,42 @@ const EditWorkoutModal = ({
                           maxLength="5"
                           className="block w-full pr-12 !bg-gray-700 !text-white border-gray-300 rounded-md focus:outline-none pl-7 sm:text-sm placeholder-white border-none active:outline-none"
                           placeholder="20"
+                          value={
+                            updatedWorkout.duration_in_seconds
+                              ? parseInt(updatedWorkout.duration_in_seconds) /
+                                60
+                              : updatedWorkout.repetition_count
+                          }
                           style={{ textIndent: "15px" }}
                           onChange={(event) => {
-                            console.log("EVENT: ", event.target.value);
+                            !updatedWorkout.duration_in_seconds &&
+                            !updatedWorkout.repetition_count
+                              ? updatedWorkout.active !== "none"
+                                ? updatedWorkout.active == "duration"
+                                  ? setUpdatedWorkout({
+                                      ...updatedWorkout,
+                                      duration_in_seconds:
+                                        parseInt(event.target.value) * 60,
+                                      repetition_count: "",
+                                    })
+                                  : setUpdatedWorkout({
+                                      ...updatedWorkout,
+                                      repetition_count: event.target.value,
+                                      duration_in_seconds: "",
+                                    })
+                                : console.log("weird state")
+                              : updatedWorkout.duration_in_seconds
+                              ? setUpdatedWorkout({
+                                  ...updatedWorkout,
+                                  duration_in_seconds:
+                                    parseInt(event.target.value) * 60,
+                                  repetition_count: "",
+                                })
+                              : setUpdatedWorkout({
+                                  ...updatedWorkout,
+                                  repetition_count: event.target.value,
+                                  duration_in_seconds: "",
+                                });
                           }}
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center">
@@ -202,8 +267,31 @@ const EditWorkoutModal = ({
                             id="amount"
                             name="amount"
                             className="block w-full py-2 pl-3 pr-10 border-none rounded-md focus:outline-none sm:text-sm !bg-gray-700 text-green-500 font-bold cursor-pointer text-sm"
+                            defaultValue={
+                              updatedWorkout.duration_in_seconds
+                                ? language === "DE"
+                                  ? "Dauer in Minuten"
+                                  : "Duration in minutes"
+                                : language === "DE"
+                                ? "Anzahl an Wiederholungen"
+                                : "Amount of workout repeats"
+                            }
                             onChange={(event) => {
-                              console.log("EVENT: ", event.target.value);
+                              event.target.value ===
+                                "Anzahl an Wiederholungen" ||
+                              event.target.value === "Amount of workout repeats"
+                                ? setUpdatedWorkout({
+                                    ...updatedWorkout,
+                                    duration_in_seconds: 0,
+                                    repetition_count: 0,
+                                    active: "repeat",
+                                  })
+                                : setUpdatedWorkout({
+                                    ...updatedWorkout,
+                                    repetition_count: 0,
+                                    duration_in_seconds: 0,
+                                    active: "duration",
+                                  });
                             }}
                           >
                             <option className="text-white bg-gray-700 ">
@@ -237,6 +325,17 @@ const EditWorkoutModal = ({
                           maxLength="4"
                           className="block w-full pr-12 !bg-gray-700 !text-white border-gray-300 rounded-md focus:outline-none pl-7 sm:text-sm placeholder-white border-none active:outline-none select-none"
                           placeholder="0"
+                          onChange={(event) => {
+                            setUpdatedWorkout({
+                              ...updatedWorkout,
+                              equipment_weight_in_kilo: event.target.value,
+                            });
+                          }}
+                          value={
+                            updatedWorkout.equipment_weight_in_kilo
+                              ? updatedWorkout.equipment_weight_in_kilo
+                              : ""
+                          }
                           style={{ textIndent: "15px" }}
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center">
@@ -247,6 +346,29 @@ const EditWorkoutModal = ({
                             id="weight"
                             name="weight"
                             className="block w-full py-2 pl-3 pr-10 border-none rounded-md focus:outline-none sm:text-sm !bg-gray-700 text-green-500 font-bold cursor-pointer text-sm select-none"
+                            onChange={(event) => {
+                              event.target.value === "Übung ohne Gewichte" ||
+                              "Workout without weights"
+                                ? setUpdatedWorkout({
+                                    ...updatedWorkout,
+                                    equipment_weight_in_kilo: 0,
+                                  })
+                                : setUpdatedWorkout({
+                                    ...updatedWorkout,
+                                    equipment_weight_in_kilo:
+                                      updatedWorkout.equipment_weight_in_kilo,
+                                  });
+                            }}
+                            value={
+                              updatedWorkout.equipment_weight_in_kilo &&
+                              updatedWorkout.equipment_weight_in_kilo > 0
+                                ? language === "DE"
+                                  ? "Gewicht pro Wiederholung"
+                                  : "Weight per workout repeat"
+                                : language === "DE"
+                                ? "Übung ohne Gewichte"
+                                : "Workout without weights"
+                            }
                           >
                             <option className="text-white bg-gray-700">
                               {language === "DE"
@@ -256,7 +378,7 @@ const EditWorkoutModal = ({
                             <option className="text-white bg-gray-700">
                               {language === "DE"
                                 ? "Übung ohne Gewichte"
-                                : "Workout without Weights"}
+                                : "Workout without weights"}
                             </option>
                           </select>
                         </div>
@@ -276,6 +398,10 @@ const EditWorkoutModal = ({
                           gender,
                           updatedWorkout.muscle_group
                         ),
+                        repetition_count: updatedWorkout.repetition_count,
+                        equipment_weight_in_kilo:
+                          updatedWorkout.equipment_weight_in_kilo,
+                        duration_in_seconds: updatedWorkout.duration_in_seconds,
                       });
                       setShowEditWorkoutModal(false);
                     }}

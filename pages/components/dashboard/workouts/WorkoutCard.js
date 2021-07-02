@@ -22,7 +22,7 @@ const WorkoutCard = ({
 
   return (
     <div
-      className="flex transition duration-300 ease-in transform bg-gray-700 rounded-lg hover:scale-105 iphone:flex-col iphone:items-center tabletpro:m-4"
+      className="flex transition duration-300 ease-in transform bg-gray-700 rounded-lg hover:scale-105 iphone:flex-col iphone:items-center tabletpro:m-4 tabletpro:mx-44 tablet:!mx-4"
       key={id}
     >
       <div className="relative flex-none w-48 ml-2 iphone:mt-4">
@@ -35,7 +35,7 @@ const WorkoutCard = ({
             "woman"
           )}
           alt="muscle view"
-          className="object-contain w-full h-full rounded-l select-none"
+          className="object-contain w-full h-full rounded-l select-none "
         />
       </div>
       <div className="p-6 lg:flex-auto iphone:!pb-4 truncate">
@@ -58,31 +58,38 @@ const WorkoutCard = ({
 
           <div className="flex-none w-full mt-2 text-lg font-medium text-gray-300">
             <div className="flex select-none iphone:justify-center">
-              {repetition_count && (
+              {repetition_count && parseInt(repetition_count) > 0 ? (
                 <img
                   src="./icons/repeat.png"
                   alt="repeat icon"
                   className="object-contain w-5 h-full mt-1 mr-3 rounded-l"
                 />
+              ) : (
+                ""
               )}
-              {duration_in_seconds && (
+              {duration_in_seconds && parseInt(duration_in_seconds) > 0 ? (
                 <img
                   src="./icons/clock.png"
                   alt="clock icon"
                   className="object-contain w-5 h-full mt-1 mr-3 rounded-l select-none"
                 />
+              ) : (
+                ""
               )}
               <div className="select-none">
-                {repetition_count
-                  ? repetition_count +
-                    ` ${language === "DE" ? "Wiederholungen" : "Repeats"}`
-                  : parseInt(duration_in_seconds) / 60 +
-                    ` ${language === "DE" ? "Minuten" : "Minutes"}`}
+                {repetition_count && parseInt(repetition_count) > 0
+                  ? `${language === "DE"}`
+                    ? `${parseInt(repetition_count)} Wiederholungen`
+                    : `${parseInt(repetition_count)} Repeats}`
+                  : `${language === "DE"}`
+                  ? `${parseInt(duration_in_seconds) / 60} Minuten`
+                  : `${parseInt(duration_in_seconds) / 60} Minutes`}
               </div>
             </div>
             <div className="text-lg font-medium text-gray-300">
               <div className="flex select-none iphone:justify-center iphone:mr-14">
-                {equipment_weight_in_kilo && (
+                {equipment_weight_in_kilo &&
+                parseInt(equipment_weight_in_kilo) > 0 ? (
                   <svg
                     className="w-6 h-6 mt-1 mr-2"
                     xmlns="http://www.w3.org/2000/svg"
@@ -145,6 +152,8 @@ const WorkoutCard = ({
                       />
                     </g>
                   </svg>
+                ) : (
+                  ""
                 )}
 
                 <div className="select-none">

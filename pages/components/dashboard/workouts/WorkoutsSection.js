@@ -143,33 +143,6 @@ const WorkoutsSection = ({ language }) => {
     console.log("Create Workout");
   };
 
-  const updateWorkout = (workout) => {
-    console.log("UPDATE Workout", workout);
-    /* fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/workouts/userid/${userId}`,
-      {
-        method: "get",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((response) =>
-        response
-          .json()
-          .then((data) => {
-            if (userId === session.user.id) {
-              setFetchedUserWorkouts(data.workouts);
-            } else {
-              setFetchedTemplateWorkouts(data.workouts);
-            }
-          })
-          .catch((e) => console.log(e))
-      )
-      .catch((e) => console.log(e)); */
-  };
-
   const reFetchWorkouts = () => {
     fetchWorkouts(session.user.id);
     fetchWorkouts(ADMIN_ID);
@@ -196,7 +169,7 @@ const WorkoutsSection = ({ language }) => {
               {language === "DE" ? "Deine Übungen" : "Your Workouts"}
             </h2>
 
-            <div className="grid grid-cols-2 gap-6 tablet:grid-cols-1 auto-rows-fr">
+            <div className="grid grid-cols-2 gap-6 tabletpro:grid-cols-1 auto-rows-fr">
               <div className="flex items-center justify-center transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer select-none hover:scale-105 iphone:m-4 tabletpro:m-4">
                 <img
                   src="./icons/add.png"
@@ -209,51 +182,55 @@ const WorkoutsSection = ({ language }) => {
                   editWorkoutData={editWorkoutData}
                   setShowEditWorkoutModal={setShowEditWorkoutModal}
                   showEditWorkoutModal={showEditWorkoutModal}
-                  updateWorkout={updateWorkout}
                   findMuscleGroup={findMuscleGroup}
+                  reFetchWorkouts={reFetchWorkouts}
                   gender={gender}
                   language={language}
                 />
               )}
 
-              {fetchedUserWorkouts.map((workout) => (
-                <WorkoutCard
-                  id={workout.id}
-                  name={workout.name}
-                  repetition_count={workout.repetition_count}
-                  duration_in_seconds={workout.duration_in_seconds}
-                  equipment_weight_in_kilo={workout.equipment_weight_in_kilo}
-                  muscle_group={workout.muscle_group}
-                  workout={workout}
-                  badge={language === "DE" ? "Individuell" : "Custom"}
-                  setShowEditWorkoutModal={setShowEditWorkoutModal}
-                  setEditWorkoutData={setEditWorkoutData}
-                  findMuscleGroup={findMuscleGroup}
-                  reFetchWorkouts={reFetchWorkouts}
-                  gender={gender}
-                  language={language}
-                  key={workout.id}
-                />
-              ))}
+              {fetchedUserWorkouts
+                .sort((a, b) => a.id - b.id)
+                .map((workout) => (
+                  <WorkoutCard
+                    id={workout.id}
+                    name={workout.name}
+                    repetition_count={workout.repetition_count}
+                    duration_in_seconds={workout.duration_in_seconds}
+                    equipment_weight_in_kilo={workout.equipment_weight_in_kilo}
+                    muscle_group={workout.muscle_group}
+                    workout={workout}
+                    badge={language === "DE" ? "Individuell" : "Custom"}
+                    setShowEditWorkoutModal={setShowEditWorkoutModal}
+                    setEditWorkoutData={setEditWorkoutData}
+                    findMuscleGroup={findMuscleGroup}
+                    reFetchWorkouts={reFetchWorkouts}
+                    gender={gender}
+                    language={language}
+                    key={workout.id}
+                  />
+                ))}
 
-              {fetchedTemplateWorkouts.map((workout) => (
-                <WorkoutCard
-                  id={workout.id}
-                  name={workout.name}
-                  repetition_count={workout.repetition_count}
-                  duration_in_seconds={workout.duration_in_seconds}
-                  equipment_weight_in_kilo={workout.equipment_weight_in_kilo}
-                  muscle_group={workout.muscle_group}
-                  workout={workout}
-                  badge={language === "DE" ? "Vorlage" : "Template"}
-                  setShowEditWorkoutModal={setShowEditWorkoutModal}
-                  setEditWorkoutData={setEditWorkoutData}
-                  findMuscleGroup={findMuscleGroup}
-                  gender={gender}
-                  language={language}
-                  key={workout.id}
-                />
-              ))}
+              {fetchedTemplateWorkouts
+                .sort((a, b) => a.id - b.id)
+                .map((workout) => (
+                  <WorkoutCard
+                    id={workout.id}
+                    name={workout.name}
+                    repetition_count={workout.repetition_count}
+                    duration_in_seconds={workout.duration_in_seconds}
+                    equipment_weight_in_kilo={workout.equipment_weight_in_kilo}
+                    muscle_group={workout.muscle_group}
+                    workout={workout}
+                    badge={language === "DE" ? "Vorlage" : "Template"}
+                    setShowEditWorkoutModal={setShowEditWorkoutModal}
+                    setEditWorkoutData={setEditWorkoutData}
+                    findMuscleGroup={findMuscleGroup}
+                    gender={gender}
+                    language={language}
+                    key={workout.id}
+                  />
+                ))}
             </div>
           </div>
         </div>
