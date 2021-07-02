@@ -8,6 +8,7 @@ const EditWorkoutModal = ({
   language,
   updateWorkout,
   findMuscleGroup,
+  gender,
 }) => {
   const cancelButtonRef = useRef(null);
   const [updatedWorkout, setUpdatedWorkout] = useState({
@@ -68,9 +69,14 @@ const EditWorkoutModal = ({
             >
               <div>
                 <img
-                  src="./muscle-groups/back-woman.png"
+                  src={findMuscleGroup(
+                    gender,
+                    updatedWorkout.muscle_group,
+                    language,
+                    "image"
+                  )}
                   alt="muscle view"
-                  className="object-contain w-full h-full rounded-l tablet:!h-60"
+                  className="object-contain w-full h-full rounded-l tablet:!h-60 select-none"
                   data-aos="fade-down"
                 />
                 <div data-aos="fade-right">
@@ -98,16 +104,17 @@ const EditWorkoutModal = ({
                     <div className="mx-auto my-4 w-80">
                       <label
                         htmlFor="muscle-group"
-                        className="block font-medium text-center text-gray-400 text-md"
+                        className="block font-medium text-center text-gray-400 select-none text-md"
                       >
-                        Muskelgruppe
+                        {language === "DE" ? "Muskelgruppe" : "Musclegroup"}
                       </label>
                       <div>
                         <select
                           id="muscle-group"
                           name="muscle-group"
-                          className="block w-full py-2 pl-3 pr-10 mt-1 text-base border-none rounded-md focus:outline-none sm:text-sm !bg-gray-700 text-green-500 font-bold cursor-pointer"
+                          className="block w-full py-2 pl-3 pr-10 mt-1 text-base border-none rounded-md focus:outline-none sm:text-sm !bg-gray-700 text-green-500 font-bold cursor-pointer select-none"
                           defaultValue={findMuscleGroup(
+                            gender,
                             editWorkoutData.muscle_group,
                             language
                           )}
@@ -119,7 +126,7 @@ const EditWorkoutModal = ({
                           }
                         >
                           <option className="text-white bg-gray-700">
-                            {language === "DE" ? "Brustmuskel" : "Chest"}
+                            {language === "DE" ? "Brustmuskel" : "Chestmuscles"}
                           </option>
                           <option className="text-white bg-gray-700">
                             {language === "DE"
@@ -127,28 +134,40 @@ const EditWorkoutModal = ({
                               : "Shoulders"}
                           </option>
                           <option className="text-white bg-gray-700">
-                            {language === "DE" ? "Bizepsmuskel" : "Biceps"}
+                            {language === "DE"
+                              ? "Bizepsmuskel"
+                              : "Bicepsmuscles"}
                           </option>
                           <option className="text-white bg-gray-700">
-                            {language === "DE" ? "Trizepsmuskel" : "Triceps"}
+                            {language === "DE"
+                              ? "Trizepsmuskel"
+                              : "Tricepsmuscles"}
                           </option>
                           <option className="text-white bg-gray-700">
-                            {language === "DE" ? "Bauchmuskel" : "Abs"}
+                            {language === "DE" ? "Bauchmuskel" : "Absmuscles"}
                           </option>
                           <option className="text-white bg-gray-700">
-                            {language === "DE" ? "Rückenmuskel" : "Back"}
+                            {language === "DE" ? "Rückenmuskel" : "Backmuscles"}
                           </option>
                           <option className="text-white bg-gray-700">
-                            {language === "DE" ? "Oberschenkelmuskel" : "Quads"}
+                            {language === "DE"
+                              ? "Oberschenkelmuskel"
+                              : "Quadsmuscles"}
                           </option>
                           <option className="text-white bg-gray-700">
-                            {language === "DE" ? "Beinbeugemuskel" : "Hams"}
+                            {language === "DE"
+                              ? "Beinbeugemuskel"
+                              : "Hamsmuscles"}
                           </option>
                           <option className="text-white bg-gray-700">
-                            {language === "DE" ? "Wadenmuskel" : "Calves"}
+                            {language === "DE"
+                              ? "Wadenmuskel"
+                              : "Calvesmuscles"}
                           </option>
                           <option className="text-white bg-gray-700">
-                            {language === "DE" ? "Gesäßmuskel" : "Glutes"}
+                            {language === "DE"
+                              ? "Gesäßmuskel"
+                              : "Glutesmuscles"}
                           </option>
                         </select>
                       </div>
@@ -156,11 +175,13 @@ const EditWorkoutModal = ({
                     <div className="mx-auto my-4 w-80">
                       <label
                         htmlFor="price"
-                        className="block font-medium text-center text-gray-400 text-md"
+                        className="block font-medium text-center text-gray-400 select-none text-md"
                       >
-                        Anzahl und Art der Übung
+                        {language === "DE"
+                          ? "Anzahl und Art der Übung"
+                          : "Amount and type of workout"}
                       </label>
-                      <div className="relative mt-1 rounded-md shadow-sm">
+                      <div className="relative mt-1 rounded-md shadow-sm select-none">
                         <input
                           type="text"
                           name="amount-input"
@@ -169,6 +190,9 @@ const EditWorkoutModal = ({
                           className="block w-full pr-12 !bg-gray-700 !text-white border-gray-300 rounded-md focus:outline-none pl-7 sm:text-sm placeholder-white border-none active:outline-none"
                           placeholder="20"
                           style={{ textIndent: "15px" }}
+                          onChange={(event) => {
+                            console.log("EVENT: ", event.target.value);
+                          }}
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center">
                           <label htmlFor="amount" className="sr-only">
@@ -178,12 +202,19 @@ const EditWorkoutModal = ({
                             id="amount"
                             name="amount"
                             className="block w-full py-2 pl-3 pr-10 border-none rounded-md focus:outline-none sm:text-sm !bg-gray-700 text-green-500 font-bold cursor-pointer text-sm"
+                            onChange={(event) => {
+                              console.log("EVENT: ", event.target.value);
+                            }}
                           >
-                            <option className="text-white bg-gray-700">
-                              Anzahl an Wiederholungen
+                            <option className="text-white bg-gray-700 ">
+                              {language === "DE"
+                                ? "Anzahl an Wiederholungen"
+                                : "Amount of workout repeats"}
                             </option>
                             <option className="text-white bg-gray-700">
-                              Dauer in Minuten
+                              {language === "DE"
+                                ? "Dauer in Minuten"
+                                : "Duration in minutes"}
                             </option>
                           </select>
                         </div>
@@ -192,9 +223,11 @@ const EditWorkoutModal = ({
                     <div className="mx-auto my-4 w-80">
                       <label
                         htmlFor="weight"
-                        className="block font-medium text-center text-gray-400 text-md"
+                        className="block font-medium text-center text-gray-400 select-none text-md"
                       >
-                        Optionale Gewichtangabe
+                        {language === "DE"
+                          ? "Optionale Gewichtangabe"
+                          : "Optional weight amount"}
                       </label>
                       <div className="relative mt-1 rounded-md shadow-sm">
                         <input
@@ -202,7 +235,7 @@ const EditWorkoutModal = ({
                           name="weight"
                           id="weight"
                           maxLength="4"
-                          className="block w-full pr-12 !bg-gray-700 !text-white border-gray-300 rounded-md focus:outline-none pl-7 sm:text-sm placeholder-white border-none active:outline-none"
+                          className="block w-full pr-12 !bg-gray-700 !text-white border-gray-300 rounded-md focus:outline-none pl-7 sm:text-sm placeholder-white border-none active:outline-none select-none"
                           placeholder="0"
                           style={{ textIndent: "15px" }}
                         />
@@ -213,13 +246,17 @@ const EditWorkoutModal = ({
                           <select
                             id="weight"
                             name="weight"
-                            className="block w-full py-2 pl-3 pr-10 border-none rounded-md focus:outline-none sm:text-sm !bg-gray-700 text-green-500 font-bold cursor-pointer text-sm"
+                            className="block w-full py-2 pl-3 pr-10 border-none rounded-md focus:outline-none sm:text-sm !bg-gray-700 text-green-500 font-bold cursor-pointer text-sm select-none"
                           >
                             <option className="text-white bg-gray-700">
-                              Gewicht pro Wiederholung
+                              {language === "DE"
+                                ? "Gewicht pro Wiederholung"
+                                : "Weight per workout repeat"}
                             </option>
                             <option className="text-white bg-gray-700">
-                              Übung ohne Gewichte
+                              {language === "DE"
+                                ? "Übung ohne Gewichte"
+                                : "Workout without Weights"}
                             </option>
                           </select>
                         </div>
@@ -236,6 +273,7 @@ const EditWorkoutModal = ({
                         id: editWorkoutData.id,
                         name: updatedWorkout.name,
                         muscle_group: findMuscleGroup(
+                          gender,
                           updatedWorkout.muscle_group
                         ),
                       });
@@ -250,7 +288,7 @@ const EditWorkoutModal = ({
                     onClick={() => setShowEditWorkoutModal(false)}
                     ref={cancelButtonRef}
                   >
-                    Abbrechen
+                    {language === "DE" ? "Abbrechen" : "Cancel"}
                   </button>
                 </div>
               </div>

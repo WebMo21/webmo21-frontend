@@ -6,11 +6,11 @@ import WorkoutCard from "./WorkoutCard";
 
 const ADMIN_ID = 12;
 
-const findMuscleGroup = (muscleInput, language, ImageInstead, gender) => {
-  console.log;
+const findMuscleGroup = (gender, muscleInput, language, ImageInstead) => {
   let parsedMuscleGroup = "";
   switch (muscleInput) {
     case "Chest":
+    case "Chestmuscles":
     case "Brustmuskel":
       ImageInstead
         ? (parsedMuscleGroup = `./muscle-groups/chest-${gender}.png`)
@@ -19,6 +19,7 @@ const findMuscleGroup = (muscleInput, language, ImageInstead, gender) => {
         : (parsedMuscleGroup = "Chest");
       break;
     case "Shoulders":
+    case "Shouldersmuscles":
     case "Schulternmuskel":
       ImageInstead
         ? (parsedMuscleGroup = `./muscle-groups/shoulders-${gender}.png`)
@@ -27,6 +28,7 @@ const findMuscleGroup = (muscleInput, language, ImageInstead, gender) => {
         : (parsedMuscleGroup = "Shoulders");
       break;
     case "Biceps":
+    case "Bicepsmuscles":
     case "Bizepsmuskel":
       ImageInstead
         ? (parsedMuscleGroup = `./muscle-groups/biceps-${gender}.png`)
@@ -35,6 +37,7 @@ const findMuscleGroup = (muscleInput, language, ImageInstead, gender) => {
         : (parsedMuscleGroup = "Biceps");
       break;
     case "Triceps":
+    case "Tricepsmuscles":
     case "Trizepsmuskel":
       ImageInstead
         ? (parsedMuscleGroup = `./muscle-groups/triceps-${gender}.png`)
@@ -43,6 +46,7 @@ const findMuscleGroup = (muscleInput, language, ImageInstead, gender) => {
         : (parsedMuscleGroup = "Triceps");
       break;
     case "Abs":
+    case "Absmuscles":
     case "Bauchmuskel":
       ImageInstead
         ? (parsedMuscleGroup = `./muscle-groups/abs-${gender}.png`)
@@ -51,6 +55,7 @@ const findMuscleGroup = (muscleInput, language, ImageInstead, gender) => {
         : (parsedMuscleGroup = "Abs");
       break;
     case "Back":
+    case "Backmuscles":
     case "Rückenmuskel":
       ImageInstead
         ? (parsedMuscleGroup = `./muscle-groups/back-${gender}.png`)
@@ -59,6 +64,7 @@ const findMuscleGroup = (muscleInput, language, ImageInstead, gender) => {
         : (parsedMuscleGroup = "Back");
       break;
     case "Quads":
+    case "Quadsmuscles":
     case "Oberschenkelmuskel":
       ImageInstead
         ? (parsedMuscleGroup = `./muscle-groups/quads-${gender}.png`)
@@ -67,6 +73,7 @@ const findMuscleGroup = (muscleInput, language, ImageInstead, gender) => {
         : (parsedMuscleGroup = "Quads");
       break;
     case "Hams":
+    case "Hamsmuscles":
     case "Beinbeugemuskel":
       ImageInstead
         ? (parsedMuscleGroup = `./muscle-groups/hams-${gender}.png`)
@@ -75,6 +82,7 @@ const findMuscleGroup = (muscleInput, language, ImageInstead, gender) => {
         : (parsedMuscleGroup = "Hams");
       break;
     case "Calves":
+    case "Calvesmuscles":
     case "Wadenmuskel":
       ImageInstead
         ? (parsedMuscleGroup = `./muscle-groups/calves-${gender}.png`)
@@ -83,6 +91,7 @@ const findMuscleGroup = (muscleInput, language, ImageInstead, gender) => {
         : (parsedMuscleGroup = "Calves");
       break;
     case "Glutes":
+    case "Glutesmuscles":
     case "Gesäßmuskel":
       ImageInstead
         ? (parsedMuscleGroup = `./muscle-groups/glutes-${gender}.png`)
@@ -103,6 +112,7 @@ const WorkoutsSection = ({ language }) => {
   const [showEditWorkoutModal, setShowEditWorkoutModal] = useState(false);
   const [editWorkoutData, setEditWorkoutData] = useState("");
   const [fetchedTemplateWorkouts, setFetchedTemplateWorkouts] = useState([]);
+  const [gender, setGender] = useState("");
 
   const fetchWorkouts = (userId) =>
     fetch(
@@ -160,10 +170,16 @@ const WorkoutsSection = ({ language }) => {
       .catch((e) => console.log(e)); */
   };
 
+  const reFetchWorkouts = () => {
+    fetchWorkouts(session.user.id);
+    fetchWorkouts(ADMIN_ID);
+  };
+
   useEffect(() => {
     if (session) {
       fetchWorkouts(session.user.id);
       fetchWorkouts(ADMIN_ID);
+      setGender(session.user.gender);
     }
   }, []);
 
@@ -181,7 +197,7 @@ const WorkoutsSection = ({ language }) => {
             </h2>
 
             <div className="grid grid-cols-2 gap-6 tablet:grid-cols-1 auto-rows-fr">
-              <div className="flex items-center justify-center transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer hover:scale-105 iphone:m-4 tabletpro:m-4">
+              <div className="flex items-center justify-center transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer select-none hover:scale-105 iphone:m-4 tabletpro:m-4">
                 <img
                   src="./icons/add.png"
                   alt="add icon"
@@ -195,6 +211,7 @@ const WorkoutsSection = ({ language }) => {
                   showEditWorkoutModal={showEditWorkoutModal}
                   updateWorkout={updateWorkout}
                   findMuscleGroup={findMuscleGroup}
+                  gender={gender}
                   language={language}
                 />
               )}
@@ -212,6 +229,8 @@ const WorkoutsSection = ({ language }) => {
                   setShowEditWorkoutModal={setShowEditWorkoutModal}
                   setEditWorkoutData={setEditWorkoutData}
                   findMuscleGroup={findMuscleGroup}
+                  reFetchWorkouts={reFetchWorkouts}
+                  gender={gender}
                   language={language}
                   key={workout.id}
                 />
@@ -230,6 +249,7 @@ const WorkoutsSection = ({ language }) => {
                   setShowEditWorkoutModal={setShowEditWorkoutModal}
                   setEditWorkoutData={setEditWorkoutData}
                   findMuscleGroup={findMuscleGroup}
+                  gender={gender}
                   language={language}
                   key={workout.id}
                 />

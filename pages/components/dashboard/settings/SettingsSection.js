@@ -75,7 +75,7 @@ const SettingsSection = ({ language }) => {
                   className={`p-2 font-semibold text-white ${
                     genderOfUser === "woman"
                       ? "bg-pink-500 hover:bg-pink-400"
-                      : "bg-pink-200 hover:bg-pink-100"
+                      : "bg-gray-600 hover:bg-gray-500"
                   } border border-transparent border-green-500 rounded cursor-pointer select-none`}
                 >
                   {language && language === "DE" ? "♀️ Weiblich" : "♀️ Female"}
@@ -88,7 +88,7 @@ const SettingsSection = ({ language }) => {
                   className={`p-2 ml-5 font-semibold text-white ${
                     genderOfUser === "man"
                       ? "bg-blue-500 hover:bg-blue-400"
-                      : "bg-blue-200 hover:bg-blue-100"
+                      : "bg-gray-600 hover:bg-gray-500"
                   }  border border-transparent border-green-500 rounded cursor-pointer select-none`}
                 >
                   {language && language === "DE" ? "♂️ Männlich" : "♂️ Male"}

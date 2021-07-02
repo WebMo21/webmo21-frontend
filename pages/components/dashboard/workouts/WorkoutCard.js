@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+
+import DeleteWorkoutModal from "./DeleteWorkoutModal";
 
 const WorkoutCard = ({
   id,
@@ -13,7 +15,11 @@ const WorkoutCard = ({
   workout,
   badge,
   findMuscleGroup,
+  gender,
+  reFetchWorkouts,
 }) => {
+  const [showDeleteWorkoutModal, setShowDeleteWorkoutModal] = useState(false);
+
   return (
     <div
       className="flex transition duration-300 ease-in transform bg-gray-700 rounded-lg hover:scale-105 iphone:flex-col iphone:items-center tabletpro:m-4"
@@ -21,14 +27,16 @@ const WorkoutCard = ({
     >
       <div className="relative flex-none w-48 ml-2 iphone:mt-4">
         <img
-          src={findMuscleGroup(muscle_group, language, "image", "woman")}
+          src={findMuscleGroup(
+            gender,
+            muscle_group,
+            language,
+            "image",
+            "woman"
+          )}
           alt="muscle view"
-          className="object-contain w-full h-full rounded-l"
+          className="object-contain w-full h-full rounded-l select-none"
         />
-        {console.log(
-          "IMAGES",
-          findMuscleGroup(muscle_group, language, "image", "woman")
-        )}
       </div>
       <div className="p-6 lg:flex-auto iphone:!pb-4 truncate">
         <div className="flex flex-wrap tablet:justify-flex-end iphone:justify-center">
@@ -38,18 +46,18 @@ const WorkoutCard = ({
                 badge === "Individuell" || badge === "Custom"
                   ? "bg-green-500"
                   : "bg-yellow-200 text-yellow-800"
-              } inline-flex items-center px-2 py-1 mt-2 text-xs font-medium bg-green-100 rounded opacity-60`}
+              } inline-flex items-center px-2 py-1 mt-2 text-xs font-medium bg-green-100 rounded opacity-60 select-none`}
               style={{ height: "1.5rem" }}
             >
               {badge}
             </span>
-            <h1 className="text-2xl font-bold text-green-500 truncate iphone:mx-auto">
+            <h1 className="text-2xl font-bold text-green-500 truncate select-none iphone:mx-auto">
               {name}
             </h1>
           </div>
 
           <div className="flex-none w-full mt-2 text-lg font-medium text-gray-300">
-            <div className="flex iphone:justify-center">
+            <div className="flex select-none iphone:justify-center">
               {repetition_count && (
                 <img
                   src="./icons/repeat.png"
@@ -61,17 +69,19 @@ const WorkoutCard = ({
                 <img
                   src="./icons/clock.png"
                   alt="clock icon"
-                  className="object-contain w-5 h-full mt-1 mr-3 rounded-l"
+                  className="object-contain w-5 h-full mt-1 mr-3 rounded-l select-none"
                 />
               )}
-              {repetition_count
-                ? repetition_count +
-                  ` ${language === "DE" ? "Wiederholungen" : "Repeats"}`
-                : parseInt(duration_in_seconds) / 60 +
-                  ` ${language === "DE" ? "Minuten" : "Minutes"}`}
+              <div className="select-none">
+                {repetition_count
+                  ? repetition_count +
+                    ` ${language === "DE" ? "Wiederholungen" : "Repeats"}`
+                  : parseInt(duration_in_seconds) / 60 +
+                    ` ${language === "DE" ? "Minuten" : "Minutes"}`}
+              </div>
             </div>
             <div className="text-lg font-medium text-gray-300">
-              <div className="flex iphone:justify-center iphone:mr-14">
+              <div className="flex select-none iphone:justify-center iphone:mr-14">
                 {equipment_weight_in_kilo && (
                   <svg
                     className="w-6 h-6 mt-1 mr-2"
@@ -137,23 +147,25 @@ const WorkoutCard = ({
                   </svg>
                 )}
 
-                {equipment_weight_in_kilo &&
-                parseInt(equipment_weight_in_kilo) > 0
-                  ? `${language === "DE" ? "Jeweils " : "Each "}` +
-                    equipment_weight_in_kilo +
-                    " kg"
-                  : ""}
+                <div className="select-none">
+                  {equipment_weight_in_kilo &&
+                  parseInt(equipment_weight_in_kilo) > 0
+                    ? `${language === "DE" ? "Jeweils " : "Each "}` +
+                      equipment_weight_in_kilo +
+                      " kg"
+                    : ""}
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div className="flex mt-4 mb-6 iphone:justify-center">
           <div className="flex-col iphone:items-center iphone:justify-center iphone-ml-left">
-            <div className="text-gray-400 iphone:text-center">
+            <div className="text-gray-400 select-none iphone:text-center">
               {language === "DE" ? "Muskelgruppe" : "Muscle Group"}
             </div>
-            <div className="text-gray-400 iphone:text-center">
-              {findMuscleGroup(muscle_group, language)}
+            <div className="text-gray-400 select-none iphone:text-center">
+              {findMuscleGroup(gender, muscle_group, language)}
             </div>
           </div>
           <div className="ml-auto text-sm text-gray-500 underline"></div>
@@ -170,10 +182,29 @@ const WorkoutCard = ({
                   className="inline-block p-2 text-lg font-semibold text-white bg-yellow-600 border border-transparent border-yellow-500 rounded cursor-pointer select-none hover:bg-yellow-500"
                 >
                   {language && language === "DE"
-                    ? "Übung bearbeiten"
+                    ? "Bearbeiten"
                     : "Edit Workout"}
                 </a>
               </div>
+              <div>
+                <a
+                  onClick={() => {
+                    setShowDeleteWorkoutModal(true);
+                  }}
+                  className="inline-block p-2 text-lg font-semibold text-white bg-red-500 border border-transparent border-red-500 rounded cursor-pointer select-none hover:bg-red-400"
+                >
+                  {language && language === "DE" ? "Löschen" : "Delete"}
+                </a>
+              </div>
+              {showDeleteWorkoutModal && (
+                <DeleteWorkoutModal
+                  language={language}
+                  setShowDeleteWorkoutModal={setShowDeleteWorkoutModal}
+                  workout={workout}
+                  showDeleteWorkoutModal={showDeleteWorkoutModal}
+                  reFetchWorkouts={reFetchWorkouts}
+                />
+              )}
             </div>
           </div>
         )}

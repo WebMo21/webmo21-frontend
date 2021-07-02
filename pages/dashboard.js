@@ -126,6 +126,7 @@ export default function Dashboard() {
       </div>
     );
   }
+
   return (
     <div>
       <Head>
@@ -141,7 +142,6 @@ export default function Dashboard() {
         localStorage.getItem("language") === null
           ? localStorage.setItem("language", language)
           : ""}
-        {console.log("SESSION", session)}
         <div className="flex flex-col h-screen overflow-hidden bg-gray-900">
           <header className="relative flex items-center flex-shrink-0 h-16 bg-gray-800">
             <NavbarLogo />
