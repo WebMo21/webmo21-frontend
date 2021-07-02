@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/client";
 
 import EditWorkoutModal from "./EditWorkoutModal";
+import CreateWorkoutModal from "./CreateWorkoutModal";
 import WorkoutCard from "./WorkoutCard";
 
 const ADMIN_ID = 12;
@@ -107,12 +108,13 @@ const findMuscleGroup = (gender, muscleInput, language, ImageInstead) => {
 };
 
 const WorkoutsSection = ({ language }) => {
-  const [session, loading] = useSession();
+  const [session] = useSession();
   const [fetchedUserWorkouts, setFetchedUserWorkouts] = useState([]);
   const [showEditWorkoutModal, setShowEditWorkoutModal] = useState(false);
   const [editWorkoutData, setEditWorkoutData] = useState("");
   const [fetchedTemplateWorkouts, setFetchedTemplateWorkouts] = useState([]);
   const [gender, setGender] = useState("");
+  const [showCreateWorkoutModal, setShowCreateWorkoutModal] = useState(false);
 
   const fetchWorkouts = (userId) =>
     fetch(
@@ -139,10 +141,6 @@ const WorkoutsSection = ({ language }) => {
       )
       .catch((e) => console.log(e));
 
-  const createNewWorkout = () => {
-    console.log("Create Workout");
-  };
-
   const reFetchWorkouts = () => {
     fetchWorkouts(session.user.id);
     fetchWorkouts(ADMIN_ID);
@@ -158,7 +156,6 @@ const WorkoutsSection = ({ language }) => {
 
   return (
     <>
-      {" "}
       <div
         className="relative z-0 flex-1 pb-8 overflow-y-auto"
         data-aos="fade-up"
@@ -170,7 +167,10 @@ const WorkoutsSection = ({ language }) => {
             </h2>
 
             <div className="grid grid-cols-2 gap-6 tabletpro:grid-cols-1 auto-rows-fr">
-              <div className="flex items-center justify-center transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer select-none hover:scale-105 iphone:m-4 tabletpro:m-4">
+              <div
+                onClick={() => setShowCreateWorkoutModal(true)}
+                className="flex items-center justify-center transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer select-none hover:scale-105 iphone:m-4 tabletpro:m-4"
+              >
                 <img
                   src="./icons/add.png"
                   alt="add icon"
@@ -182,6 +182,16 @@ const WorkoutsSection = ({ language }) => {
                   editWorkoutData={editWorkoutData}
                   setShowEditWorkoutModal={setShowEditWorkoutModal}
                   showEditWorkoutModal={showEditWorkoutModal}
+                  findMuscleGroup={findMuscleGroup}
+                  reFetchWorkouts={reFetchWorkouts}
+                  gender={gender}
+                  language={language}
+                />
+              )}
+              {showCreateWorkoutModal && (
+                <CreateWorkoutModal
+                  setShowCreateWorkoutModal={setShowCreateWorkoutModal}
+                  showCreateWorkoutModal={showCreateWorkoutModal}
                   findMuscleGroup={findMuscleGroup}
                   reFetchWorkouts={reFetchWorkouts}
                   gender={gender}

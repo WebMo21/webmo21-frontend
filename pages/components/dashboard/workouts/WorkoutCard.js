@@ -77,12 +77,12 @@ const WorkoutCard = ({
                 ""
               )}
               <div className="select-none">
-                {repetition_count && parseInt(repetition_count) > 0
-                  ? `${language === "DE"}`
+                {language === "DE"
+                  ? repetition_count && parseInt(repetition_count) > 0
                     ? `${parseInt(repetition_count)} Wiederholungen`
-                    : `${parseInt(repetition_count)} Repeats}`
-                  : `${language === "DE"}`
-                  ? `${parseInt(duration_in_seconds) / 60} Minuten`
+                    : `${parseInt(duration_in_seconds) / 60} Minuten`
+                  : repetition_count && parseInt(repetition_count) > 0
+                  ? `${parseInt(repetition_count)} Repeats`
                   : `${parseInt(duration_in_seconds) / 60} Minutes`}
               </div>
             </div>

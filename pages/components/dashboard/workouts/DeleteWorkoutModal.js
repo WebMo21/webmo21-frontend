@@ -86,8 +86,8 @@ const DeleteWorkoutModal = ({
                   className="block text-xl font-medium text-center text-gray-200 select-none"
                 >
                   {language === "DE"
-                    ? "Diese Übung wirklich löschen?"
-                    : "Do you really want to delete this workout?"}
+                    ? "Deine Übung wirklich löschen?"
+                    : "Do you really want to delete your workout?"}
                 </label>
                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
                   <button
