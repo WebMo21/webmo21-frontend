@@ -14,15 +14,15 @@ import {
   KeyIcon,
 } from "@heroicons/react/solid";
 
-import DashboardLogo from "./components/dashboard/navbar/DashboardLogo";
-import DashboardDesktopNavigation from "./components/dashboard/navbar/DashboardDesktopNavigation";
-import DashboardMobileMenu from "./components/dashboard/navbar/DashboardMobileMenu";
-import DashboardSideBar from "./components/dashboard/DashboardSideBar";
-import DashboardHome from "./components/dashboard/home/DashboardHome";
-import DashboardPlans from "./components/dashboard/plans/DashboardPlans";
-import DashboardWorkouts from "./components/dashboard/workouts/DashboardWorkouts";
-import DashboardSettings from "./components/dashboard/settings/DashboardSettings";
-import DashboardAdmin from "./components/dashboard/admin/DashboardAdmin";
+import NavbarLogo from "../components/dashboard/navbar/NavbarLogo";
+import Navigation from "../components/dashboard/navbar/Navigation";
+import MobileMenu from "../components/dashboard/navbar/MobileMenu";
+import DashboardSideBar from "../components/dashboard/DashboardSideBar";
+import HomeSection from "../components/dashboard/home/HomeSection";
+import PlansSection from "../components/dashboard/plans/PlansSection";
+import WorkoutsSection from "../components/dashboard/workouts/WorkoutsSection";
+import SettingsSection from "../components/dashboard/settings/SettingsSection";
+import AdminSection from "../components/dashboard/admin/AdminSection";
 
 const user = {
   name: "Whitney Francis",
@@ -126,6 +126,7 @@ export default function Dashboard() {
       </div>
     );
   }
+
   return (
     <div>
       <Head>
@@ -143,22 +144,32 @@ export default function Dashboard() {
           : ""}
         <div className="flex flex-col h-screen overflow-hidden bg-gray-900">
           <header className="relative flex items-center flex-shrink-0 h-16 bg-gray-800">
-            <DashboardLogo />
+            <NavbarLogo />
 
             {/* Desktop nav area */}
-            <DashboardDesktopNavigation
+            <Navigation
               navigation={navigation}
               user={user}
               title={`Fitness Time - ${
                 activeSideBarSection === "home"
-                  ? "Übersicht"
+                  ? language === "DE"
+                    ? "Übersicht"
+                    : "Overview"
                   : activeSideBarSection === "plans"
-                  ? "Trainingspläne"
+                  ? language === "DE"
+                    ? "Trainingspläne"
+                    : "Workout Plans"
                   : activeSideBarSection === "workouts"
-                  ? "Übungen"
+                  ? language === "DE"
+                    ? "Übungen"
+                    : "Workouts"
                   : activeSideBarSection === "settings"
-                  ? "Einstellungen"
-                  : "Admin Einstellungen"
+                  ? language === "DE"
+                    ? "Einstellungen"
+                    : "Settings"
+                  : language === "DE"
+                  ? "Admin Einstellungen"
+                  : "Admin Settings"
               }`}
             />
             <div className="relative z-30 inline-block pt-1 mb-3 ml-1 mr-20 select-none lg:mr-8 group tablet:mt-2">
@@ -204,8 +215,7 @@ export default function Dashboard() {
               </ul>
             </div>
 
-            {/* Mobile menu, show/hide this `div` based on menu open/closed state */}
-            <DashboardMobileMenu
+            <MobileMenu
               navigation={navigation}
               user={user}
               userNavigation={userNavigation}
@@ -230,22 +240,19 @@ export default function Dashboard() {
                 className="flex flex-col flex-1 h-full min-w-0 overflow-hidden xl:order-last"
               >
                 {activeSideBarSection === "home" && (
-                  <DashboardHome
-                    signUpDate={"26.06.2021"}
-                    language={language}
-                  />
+                  <HomeSection signUpDate={"26.06.2021"} language={language} />
                 )}
                 {activeSideBarSection === "plans" && (
-                  <DashboardPlans language={language} />
+                  <PlansSection language={language} />
                 )}
                 {activeSideBarSection === "workouts" && (
-                  <DashboardWorkouts language={language} />
+                  <WorkoutsSection language={language} />
                 )}
                 {activeSideBarSection === "settings" && (
-                  <DashboardSettings language={language} />
+                  <SettingsSection language={language} />
                 )}
                 {activeSideBarSection === "admin" && (
-                  <DashboardAdmin language={language} />
+                  <AdminSection language={language} />
                 )}
               </section>
             </div>

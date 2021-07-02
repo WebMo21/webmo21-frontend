@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const DashboardLogo = () => {
+const NavbarLogo = () => {
   return (
     <div className="absolute inset-y-0 left-0 lg:static lg:flex-shrink-0">
       <Link href="/">
@@ -17,4 +17,4 @@ const DashboardLogo = () => {
   );
 };
 
-export default DashboardLogo;
+export default NavbarLogo;

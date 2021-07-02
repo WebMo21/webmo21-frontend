@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { PlusIcon } from "@heroicons/react/solid";
 
-const DashboardPlans = ({ language }) => {
+const PlansSection = ({ language }) => {
   const createNewWorkoutPlan = () => {
     console.log("Create Workout Plan");
   };
@@ -32,4 +32,4 @@ const DashboardPlans = ({ language }) => {
   );
 };
 
-export default DashboardPlans;
+export default PlansSection;

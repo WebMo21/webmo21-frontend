@@ -5,7 +5,7 @@ import {
   SearchIcon,
 } from "@heroicons/react/solid";
 
-const DashboardDesktopNavigation = ({ title }) => {
+const Navigation = ({ title }) => {
   return (
     <div className="flex items-center justify-between flex-1 min-w-0">
       <div className="hidden lg:min-w-0 lg:flex-1 lg:flex lg:items-center lg:justify-between">
@@ -38,4 +38,4 @@ const DashboardDesktopNavigation = ({ title }) => {
   );
 };
 
-export default DashboardDesktopNavigation;
+export default Navigation;

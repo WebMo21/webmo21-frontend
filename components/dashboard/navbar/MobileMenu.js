@@ -12,7 +12,7 @@ import {
   SearchIcon,
 } from "@heroicons/react/solid";
 
-const DashboardMobileMenu = ({ navigation, user, userNavigation }) => {
+const MobileMenu = ({ navigation, user, userNavigation }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -173,4 +173,4 @@ const DashboardMobileMenu = ({ navigation, user, userNavigation }) => {
   );
 };
 
-export default DashboardMobileMenu;
+export default MobileMenu;

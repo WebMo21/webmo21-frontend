@@ -15,7 +15,7 @@ import {
   ChartBarIcon,
 } from "@heroicons/react/solid";
 
-const DashboardHome = ({ signUpDate, language }) => {
+const HomeSection = ({ signUpDate, language }) => {
   const [session, loading] = useSession();
 
   if (language && language === "DE") {
@@ -135,10 +135,10 @@ const DashboardHome = ({ signUpDate, language }) => {
                 </div>
               </div>
             </div>
-            <div className="flex mt-6 space-x-3 md:mt-0 md:ml-4">
+            <div className="flex mt-6 space-x-3 md:mt-0 md:ml-4 iphone:justify-center">
               <div>
                 <Link href="/logout">
-                  <a className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300">
+                  <a className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300 iphone:!w-40 iphone:text-center">
                     {language && language === "DE" ? "Ausloggen" : "SignOut"}
                   </a>
                 </Link>
@@ -257,4 +257,4 @@ const DashboardHome = ({ signUpDate, language }) => {
   );
 };
 
-export default DashboardHome;
+export default HomeSection;
