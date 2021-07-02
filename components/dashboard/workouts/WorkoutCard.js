@@ -17,6 +17,7 @@ const WorkoutCard = ({
   findMuscleGroup,
   gender,
   reFetchWorkouts,
+  admin,
 }) => {
   const [showDeleteWorkoutModal, setShowDeleteWorkoutModal] = useState(false);
 
@@ -179,7 +180,7 @@ const WorkoutCard = ({
           </div>
           <div className="ml-auto text-sm text-gray-500 underline"></div>
         </div>
-        {(badge === "Individuell" || badge === "Custom") && (
+        {badge === "Individuell" || badge === "Custom" || admin === "yes" ? (
           <div className="flex mb-4 space-x-3 text-sm font-medium">
             <div className="flex flex-auto space-x-3 iphone:justify-center">
               <div>
@@ -216,6 +217,8 @@ const WorkoutCard = ({
               )}
             </div>
           </div>
+        ) : (
+          ""
         )}
       </div>
     </div>

@@ -14,15 +14,15 @@ import {
   KeyIcon,
 } from "@heroicons/react/solid";
 
-import NavbarLogo from "./components/dashboard/navbar/NavbarLogo";
-import Navigation from "./components/dashboard/navbar/Navigation";
-import MobileMenu from "./components/dashboard/navbar/MobileMenu";
-import DashboardSideBar from "./components/dashboard/DashboardSideBar";
-import HomeSection from "./components/dashboard/home/HomeSection";
-import PlansSection from "./components/dashboard/plans/PlansSection";
-import WorkoutsSection from "./components/dashboard/workouts/WorkoutsSection";
-import SettingsSection from "./components/dashboard/settings/SettingsSection";
-import AdminSection from "./components/dashboard/admin/AdminSection";
+import NavbarLogo from "../components/dashboard/navbar/NavbarLogo";
+import Navigation from "../components/dashboard/navbar/Navigation";
+import MobileMenu from "../components/dashboard/navbar/MobileMenu";
+import DashboardSideBar from "../components/dashboard/DashboardSideBar";
+import HomeSection from "../components/dashboard/home/HomeSection";
+import PlansSection from "../components/dashboard/plans/PlansSection";
+import WorkoutsSection from "../components/dashboard/workouts/WorkoutsSection";
+import SettingsSection from "../components/dashboard/settings/SettingsSection";
+import AdminSection from "../components/dashboard/admin/AdminSection";
 
 const user = {
   name: "Whitney Francis",

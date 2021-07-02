@@ -7,7 +7,12 @@ import WorkoutCard from "./WorkoutCard";
 
 const ADMIN_ID = 12;
 
-const findMuscleGroup = (gender, muscleInput, language, ImageInstead) => {
+export const findMuscleGroup = (
+  gender,
+  muscleInput,
+  language,
+  ImageInstead
+) => {
   let parsedMuscleGroup = "";
   switch (muscleInput) {
     case "Chest":
@@ -116,7 +121,7 @@ const WorkoutsSection = ({ language }) => {
   const [gender, setGender] = useState("");
   const [showCreateWorkoutModal, setShowCreateWorkoutModal] = useState(false);
 
-  const fetchWorkouts = (userId) =>
+  const fetchUserWorkouts = (userId) =>
     fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/workouts/userid/${userId}`,
       {
@@ -142,14 +147,14 @@ const WorkoutsSection = ({ language }) => {
       .catch((e) => console.log(e));
 
   const reFetchWorkouts = () => {
-    fetchWorkouts(session.user.id);
-    fetchWorkouts(ADMIN_ID);
+    fetchUserWorkouts(session.user.id);
+    fetchUserWorkouts(ADMIN_ID);
   };
 
   useEffect(() => {
     if (session) {
-      fetchWorkouts(session.user.id);
-      fetchWorkouts(ADMIN_ID);
+      fetchUserWorkouts(session.user.id);
+      fetchUserWorkouts(ADMIN_ID);
       setGender(session.user.gender);
     }
   }, []);
@@ -184,7 +189,6 @@ const WorkoutsSection = ({ language }) => {
                   editWorkoutData={editWorkoutData}
                   setShowEditWorkoutModal={setShowEditWorkoutModal}
                   showEditWorkoutModal={showEditWorkoutModal}
-                  findMuscleGroup={findMuscleGroup}
                   reFetchWorkouts={reFetchWorkouts}
                   gender={gender}
                   language={language}
@@ -194,7 +198,6 @@ const WorkoutsSection = ({ language }) => {
                 <CreateWorkoutModal
                   setShowCreateWorkoutModal={setShowCreateWorkoutModal}
                   showCreateWorkoutModal={showCreateWorkoutModal}
-                  findMuscleGroup={findMuscleGroup}
                   reFetchWorkouts={reFetchWorkouts}
                   gender={gender}
                   language={language}

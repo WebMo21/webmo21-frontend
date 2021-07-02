@@ -3,8 +3,8 @@ import { signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 
-import NavBar from "./components/navbar/NavBar";
-import Footer from "./components/footer/Footer";
+import NavBar from "../components/navbar/NavBar";
+import Footer from "../components/footer/Footer";
 
 const login = () => {
   const [session, loading] = useSession();

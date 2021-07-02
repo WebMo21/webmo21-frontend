@@ -1,12 +1,13 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
+import { findMuscleGroup } from "./WorkoutsSection";
+
 const EditWorkoutModal = ({
   editWorkoutData,
   setShowEditWorkoutModal,
   showEditWorkoutModal,
   language,
-  findMuscleGroup,
   gender,
   reFetchWorkouts,
 }) => {

@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { NextSeo } from "next-seo";
 import CookieConsent from "react-cookie-consent";
 
-import NavBar from "./components/navbar/NavBar";
-import HeroSection from "./components/landing/HeroSection";
-import AboutSection from "./components/landing/AboutSection";
-import PreviewSection from "./components/landing/PreviewSection";
-import ContactHeader from "./components/landing/ContactHeader";
-import ContactForm from "./components/landing/ContactForm";
-import Footer from "./components/footer/Footer";
+import NavBar from "../components/navbar/NavBar";
+import HeroSection from "../components/landing/HeroSection";
+import AboutSection from "../components/landing/AboutSection";
+import PreviewSection from "../components/landing/PreviewSection";
+import ContactHeader from "../components/landing/ContactHeader";
+import ContactForm from "../components/landing/ContactForm";
+import Footer from "../components/footer/Footer";
 
 const landing = () => {
   const [language, setLanguage] = useState(
