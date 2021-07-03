@@ -28,7 +28,7 @@ const landing = () => {
         description="Nutze die Fitness Time Plattform um den Überblick über dein Training und deine Workouts zu erhalten. Erstelle individuelle Übungen und eigene Pläne, damit du stets einen Zeitplan für deinen Sport hast."
         openGraph={{
           type: "website",
-          url: "https://fitness-time.vercel.app",
+          url: "https://www.fitness-time.app",
           title: `Fitness Time - ${
             language === "DE"
               ? "Dein Workout Planer um deine Fitness zu verbessern und zu überwachen"
@@ -38,13 +38,13 @@ const landing = () => {
             "Nutze die Fitness Time Plattform um den Überblick über dein Training und deine Workouts zu erhalten. Erstelle individuelle Übungen und eigene Pläne, damit du stets einen Zeitplan für deinen Sport hast.",
           images: [
             {
-              url: "https://fitness-time.vercel.app/screenshot-landingpage.png",
+              url: "https://www.fitness-time.app/screenshot-landingpage.png",
               width: 800,
               height: 600,
               alt: "Gehe Jetzt Auf die Landingpage Von Fitness Time Und Beginne Dein Training Zu Optimieren",
             },
             {
-              url: "https://fitness-time.vercel.app/screenshot-dashboard.png",
+              url: "https://www.fitness-time.app/screenshot-dashboard.png",
               width: 800,
               height: 600,
               alt: "Das Dashboard Von Fitness Time Bietet Einfachen Überblick Über Workouts & Trainingspläne",
@@ -54,11 +54,11 @@ const landing = () => {
         additionalLinkTags={[
           {
             rel: "icon",
-            href: "https://fitness-time.vercel.app/favicons/favicon.ico",
+            href: "https://www.fitness-time.app/favicons/favicon.ico",
           },
           {
             rel: "apple-touch-icon",
-            href: "https://fitness-time.vercel.app/favicons/apple-icon-76x76.png",
+            href: "https://www.fitness-time.app/favicons/apple-icon-76x76.png",
             sizes: "76x76",
           },
         ]}
