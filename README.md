@@ -4,6 +4,8 @@
 
 A modern web application enabling users scheduling and organization of fitness activities.
 
+[VISIT LIVE DEMO](https://www.fitness-time.app)
+
 ![Alt Text](preview-fitness-time-landing-page.gif)
 
 ## ✨ Features
