@@ -179,7 +179,7 @@ const WorkoutsSection = ({ language }) => {
                 /* flex items-center justify-center transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer select-none hover:scale-105 iphone:m-4 tabletpro:m-4 tabletpro:mx-44 */
               >
                 <img
-                  src="./icons/add.png"
+                  src="/icons/add.png"
                   alt="add icon"
                   className="object-cover w-24 h-24 rounded-l"
                 />

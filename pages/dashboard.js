@@ -134,7 +134,7 @@ export default function Dashboard() {
           Fitness Time -{" "}
           {language === "DE" ? "Dein Workout Planer" : "Your Workout Planer"}
         </title>
-        <link rel="icon" href="./favicons/favicon.ico" />
+        <link rel="icon" href="/favicons/favicon.ico" />
       </Head>
       <div>
         {language &&

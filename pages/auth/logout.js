@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/client";
-import { useRouter } from "next/router";
 
 const logout = () => {
   const [session, loading] = useSession();
@@ -27,7 +26,7 @@ const logout = () => {
                 className="absolute w-full h-full bg-cover bg-50"
                 style={{
                   backgroundImage:
-                    "url(./backgrounds/bg-fitness-locker-room.jpeg)",
+                    "url(/backgrounds/bg-fitness-locker-room.jpeg)",
                 }}
               ></div>
               <div className="container h-full px-4 mx-auto" data-aos="fade-in">

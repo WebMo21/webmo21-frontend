@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { useSession } from "next-auth/client";
+import { signOut, useSession } from "next-auth/client";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "moment/locale/de";
@@ -137,10 +137,10 @@ const HomeSection = ({ signUpDate, language }) => {
             </div>
             <div className="flex mt-6 space-x-3 md:mt-0 md:ml-4 iphone:justify-center">
               <div>
-                <Link href="/logout">
-                  <a className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300 iphone:!w-40 iphone:text-center">
+                <Link href="/auth/logout">
+                  <div className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300 iphone:!w-40 iphone:text-center">
                     {language && language === "DE" ? "Ausloggen" : "SignOut"}
-                  </a>
+                  </div>
                 </Link>
               </div>
             </div>

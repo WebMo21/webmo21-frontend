@@ -12,7 +12,7 @@ const HeroSection = ({ language }) => {
       <div
         className="absolute top-0 w-full h-full bg-top bg-cover"
         style={{
-          backgroundImage: 'url("./backgrounds/bg-fitness-woman.jpeg")',
+          backgroundImage: 'url("/backgrounds/bg-fitness-woman.jpeg")',
         }}
       >
         <span
@@ -45,8 +45,8 @@ const HeroSection = ({ language }) => {
                   alt="Fitness Time On The iOS Store"
                   src={
                     language === "DE"
-                      ? "./ios-app-store-badge.png"
-                      : "./ios-app-store-badge-english.png"
+                      ? "/ios-app-store-badge.png"
+                      : "/ios-app-store-badge-english.png"
                   }
                 />
                 <img
@@ -54,14 +54,14 @@ const HeroSection = ({ language }) => {
                   alt="Fitness Time On The Android Play Store"
                   src={
                     language === "DE"
-                      ? "./google-play-badge.png"
-                      : "./google-play-badge-english.png"
+                      ? "/google-play-badge.png"
+                      : "/google-play-badge-english.png"
                   }
                 />
               </div>
               {!session && (
                 <>
-                  <Link href="/login">
+                  <Link href="/auth/login">
                     <a className="inline-block p-4 mt-5 font-semibold text-green-500 bg-transparent border border-green-500 rounded cursor-pointer select-none hover:bg-green-500 hover:text-white hover:border-transparent">
                       {language === "DE"
                         ? "Jetzt im Browser loslegen!"
@@ -91,11 +91,12 @@ const HeroSection = ({ language }) => {
                         : "go to dashboard!"}
                     </a>
                   </Link>
-                  <Link href="/logout">
-                    <a className="p-2 mx-2 mt-4 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none sm:hidden md:hidden lg:hidden xl:hidden iphone:block hover:bg-red-300">
-                      {language === "DE" ? "Ausloggen" : "Sign Out"}
-                    </a>
-                  </Link>
+                  <div
+                    onClick={() => signOut()}
+                    className="p-2 mx-2 mt-4 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none sm:hidden md:hidden lg:hidden xl:hidden iphone:block hover:bg-red-300"
+                  >
+                    {language === "DE" ? "Ausloggen" : "Sign Out"}
+                  </div>
                 </>
               )}
             </div>

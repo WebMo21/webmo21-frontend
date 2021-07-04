@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useSession } from "next-auth/client";
+import { signOut, useSession } from "next-auth/client";
 
 const NavBar = ({ language, setLanguageCallback }) => {
   const [session] = useSession();
@@ -17,7 +17,7 @@ const NavBar = ({ language, setLanguageCallback }) => {
                 <img
                   alt="Fitness Time Logo"
                   className="h-10 mt-1 mr-2 rounded-lg shadow-lg cursor-pointer select-none max-w-10"
-                  src="./logos/logo_small_icon_only_inverted-fitness-time.png"
+                  src="/logos/logo_small_icon_only_inverted-fitness-time.png"
                 />
               </a>
             </Link>
@@ -166,9 +166,9 @@ const NavBar = ({ language, setLanguageCallback }) => {
             </div>
             {/* signIn */}
             <li className="flex items-center tablet:mr-3 iphone:w-20 iphone:text-xs">
-              {!session && router.pathname !== "/login" && (
+              {!session && router.pathname !== "/auth/login" && (
                 <>
-                  <Link href="/login">
+                  <Link href="/auth/login">
                     <a className="inline-block p-2 ml-5 font-semibold text-white bg-green-500 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-green-400">
                       {language === "DE" ? "Login" : "Sign In"}
                     </a>
@@ -177,13 +177,12 @@ const NavBar = ({ language, setLanguageCallback }) => {
               )}
               {session && (
                 <>
-                  <Link href="/logout">
-                    <div>
-                      <a className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300">
-                        {language === "DE" ? "Logout" : "Logout"}
-                      </a>
-                    </div>
-                  </Link>
+                  <div
+                    onClick={() => signOut()}
+                    className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300"
+                  >
+                    Logout
+                  </div>
                 </>
               )}
             </li>

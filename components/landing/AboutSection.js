@@ -12,7 +12,7 @@ const AboutSection = ({ language }) => {
             <img
               alt="Tracking Time For Fitness Is Very Important"
               className="max-w-full rounded-lg shadow-lg"
-              src="./backgrounds/bg-fitness-woman-time.jpeg"
+              src="/backgrounds/bg-fitness-woman-time.jpeg"
             />
           </div>
           <div

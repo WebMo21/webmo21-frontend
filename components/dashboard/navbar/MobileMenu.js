@@ -70,7 +70,7 @@ const MobileMenu = ({ navigation, user, userNavigation }) => {
                     <a>
                       <img
                         className="block w-auto h-12 focus:outline-none"
-                        src="./logos/logo_small_icon_only_inverted-fitness-time.png"
+                        src="/logos/logo_small_icon_only_inverted-fitness-time.png"
                         alt="Fitness Time Logo"
                       />
                     </a>

@@ -61,7 +61,7 @@ const WorkoutCard = ({
             <div className="flex select-none iphone:justify-center">
               {repetition_count && parseInt(repetition_count) > 0 ? (
                 <img
-                  src="./icons/repeat.png"
+                  src="/icons/repeat.png"
                   alt="repeat icon"
                   className="object-contain w-5 h-full mt-1 mr-3 rounded-l"
                 />
@@ -70,7 +70,7 @@ const WorkoutCard = ({
               )}
               {duration_in_seconds && parseInt(duration_in_seconds) > 0 ? (
                 <img
-                  src="./icons/clock.png"
+                  src="/icons/clock.png"
                   alt="clock icon"
                   className="object-contain w-5 h-full mt-1 mr-3 rounded-l select-none"
                 />
