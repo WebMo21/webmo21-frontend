@@ -1,8 +1,9 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import customVerificationRequest from "./customVerificationRequest";
 import Adapters from "next-auth/adapters";
+import axios from "axios";
 
+import customVerificationRequest from "./customVerificationRequest";
 import Models from "../models";
 
 export default NextAuth({
@@ -45,19 +46,41 @@ export default NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
-        const user = { id: 1, name: "J Smith", email: "jsmith@example.com" };
+        console.log("CREDENTIALS", credentials);
 
-        if (user) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user;
-        } else {
-          // If you return null or false then the credentials will be rejected
-          return null;
-          // You can also Reject this callback with an Error or with a URL:
-          // throw new Error('error message') // Redirect to error page
-          // throw '/path/to/redirect'        // Redirect to a URL
-        }
+        let user = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/admin-login`,
+          {
+            method: "post",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              username: credentials.username,
+              password: credentials.password,
+            }),
+          }
+        )
+          .then((response) =>
+            response
+              .json()
+              .then((responseJson) => {
+                if (responseJson?.user) {
+                  return responseJson.user;
+                } else {
+                  return null;
+                }
+              })
+              .catch((e) => {
+                return null;
+              })
+          )
+          .catch((e) => {
+            return null;
+          });
+
+        return user;
       },
     }),
   ],
@@ -81,7 +104,7 @@ export default NextAuth({
   pages: {
     signOut: "/auth/logout",
     error: "/error",
-    verifyRequest: "/mailsent",
+    verifyRequest: "/auth/mailsent",
     // newUser: null, // If set, new users will be directed here on first sign in
   },
   callbacks: {

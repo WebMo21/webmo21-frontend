@@ -7,16 +7,16 @@ import NavBar from "../../components/navbar/NavBar";
 import Footer from "../../components/footer/Footer";
 
 const adminlogin = () => {
-  const [session, loading] = useSession();
   const router = useRouter();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPasswordInvalid, setShowPasswordInvalid] = useState(false);
+  const [session, loading] = useSession();
   const [language, setLanguage] = useState(
     typeof window !== "undefined" && localStorage.getItem("language") === null
       ? "DE"
       : typeof window !== "undefined" && localStorage.getItem("language")
   );
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [showInvalidCredentials, setShowInvalidCredentials] = useState(false);
 
   useEffect(() => {
     if (session) {
@@ -30,8 +30,20 @@ const adminlogin = () => {
     }
   }, []);
 
-  const validatePassword = (password) =>
-    /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(String(password).toLowerCase());
+  const adminSignIn = (username, password) =>
+    signIn("credentials", {
+      redirect: false,
+      username: username,
+      password: password,
+    })
+      .then((error, status, ok, url) => {
+        if (error) {
+          setShowInvalidCredentials(true);
+        }
+      })
+      .catch((error) => {
+        console.log("ERROR FROM CALLBACK", error);
+      });
 
   return (
     <>
@@ -60,6 +72,7 @@ const adminlogin = () => {
         ? localStorage.setItem("language", language)
         : ""}
       <div>
+        {console.log("SESSION", session)}
         <section className="relative w-full h-full min-h-screen py-40">
           <div
             className="absolute top-0 w-full h-full bg-top bg-cover"
@@ -90,8 +103,8 @@ const adminlogin = () => {
                     <div className="mb-3 text-lg font-bold text-center select-none text-blueGray-500">
                       <small>
                         {language === "DE"
-                          ? "Mit E-Mail und Passwort fortfahren"
-                          : "Continue with Email and Password"}
+                          ? "Mit Username und Passwort fortfahren"
+                          : "Continue with username and Password"}
                       </small>
                     </div>
                     <div className="relative w-full">
@@ -108,21 +121,8 @@ const adminlogin = () => {
                           className="relative w-full px-3 py-2 text-sm transition duration-200 bg-white border border-solid rounded-md outline-none border-blueGray-300 placeholder-blueGray-200 text-blueGray-700 focus:ring-green-500 focus:ring-1 focus:border-green-500"
                           autoComplete="off"
                           onKeyPress={(event) => {
-                            if (
-                              event.key === "Enter" &&
-                              validatePassword(password)
-                            ) {
-                              setShowPasswordInvalid(false);
-                              signIn("credentials", {
-                                username: username,
-                                password: password,
-                              });
-                            } else if (
-                              event.key === "Enter" &&
-                              !validatePassword(email)
-                            ) {
-                              setShowPasswordInvalid(true);
-                            }
+                            if (event.key === "Enter")
+                              adminSignIn(username, password);
                           }}
                         />
                       </div>
@@ -141,28 +141,15 @@ const adminlogin = () => {
                           className="relative w-full px-3 py-2 text-sm transition duration-200 bg-white border border-solid rounded-md outline-none border-blueGray-300 placeholder-blueGray-200 text-blueGray-700 focus:ring-green-500 focus:ring-1 focus:border-green-500"
                           autoComplete="off"
                           onKeyPress={(event) => {
-                            if (
-                              event.key === "Enter" &&
-                              validatePassword(password)
-                            ) {
-                              setShowPasswordInvalid(false);
-                              signIn("credentials", {
-                                username: username,
-                                password: password,
-                              });
-                            } else if (
-                              event.key === "Enter" &&
-                              !validatePassword(email)
-                            ) {
-                              setShowPasswordInvalid(true);
-                            }
+                            if (event.key === "Enter")
+                              adminSignIn(username, password);
                           }}
                         />
-                        {showPasswordInvalid ? (
-                          <span className="text-xs font-semibold tracking-wide text-justify text-red-500 rounded bg-red-50">
+                        {showInvalidCredentials ? (
+                          <span className="rounded bg-red-50 px-2.5 py-1 text-xs font-semibold text-red-500 tracking-wide">
                             {language === "DE"
-                              ? "Die Kombination aus E-Mail-Adresse und Passwort ist nicht zulässig. Das Passwort muss aus mindestens einer Zahl, einem Kleinbuchstaben und einem Großbuchstaben bestehen bei mindestens 6 Zeichen."
-                              : "The password must consist of at least one number, one lowercase letter and one uppercase letter with at least 6 characters."}
+                              ? "Die Kombination aus Username und Passwort ist ungültig!"
+                              : "The username and password combination is invalid!"}
                           </span>
                         ) : (
                           ""
@@ -172,15 +159,7 @@ const adminlogin = () => {
                     <div className="mt-5 text-center">
                       <button
                         onClick={() => {
-                          if (validatePassword(password)) {
-                            setShowPasswordInvalid(false);
-                            signIn("credentials", {
-                              username: username,
-                              password: password,
-                            });
-                          } else {
-                            setShowPasswordInvalid(true);
-                          }
+                          adminSignIn(username, password);
                         }}
                         className="inline-block w-full px-6 py-2 mr-2 text-sm font-bold text-center text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none select-none focus:outline-none last:mr-0 bg-blueGray-800 border-blueGray-800 active:bg-blueGray-900 active:border-blueGray-900 hover:shadow-lg"
                       >
