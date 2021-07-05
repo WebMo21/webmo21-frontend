@@ -200,6 +200,7 @@ const WorkoutsSection = ({ language }) => {
                   showCreateWorkoutModal={showCreateWorkoutModal}
                   reFetchWorkouts={reFetchWorkouts}
                   gender={gender}
+                  findMuscleGroup={findMuscleGroup}
                   language={language}
                 />
               )}
