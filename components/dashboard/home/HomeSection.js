@@ -152,8 +152,8 @@ const HomeSection = ({ signUpDate, language }) => {
         <div className="max-w-6xl px-4 mx-auto sm:px-6 lg:px-8">
           <h2 className="pb-2 text-2xl font-medium leading-6 text-white select-none">
             {language && language === "DE"
-              ? "Deine Trainingsfakten"
-              : "Your Fitness Facts"}
+              ? "Deine Erfolge"
+              : "Your achievements"}
           </h2>
           <div className="grid grid-cols-1 gap-5 mt-2 sm:grid-cols-2 lg:grid-cols-3">
             {/* Card */}
