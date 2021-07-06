@@ -2,20 +2,32 @@ import React, { useState, useEffect } from "react";
 import { signOut, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 
+import ChangeUserPictureModal from "./ChangeUserPictureModal";
+
 const SettingsSection = ({ language }) => {
   const router = useRouter();
-  const [session, loading] = useSession();
+  const [session] = useSession();
   const [nameOfUser, setNameOfUser] = useState("");
   const [genderOfUser, setGenderOfUser] = useState("");
+  const [pictureOfUser, setPictureOfUser] = useState("");
+  const [showChangePictureModal, setShowChangePictureModal] = useState(false);
 
   useEffect(() => {
     if (session) {
       setNameOfUser(session.user?.name);
       setGenderOfUser(session.user?.gender);
+      setPictureOfUser(
+        session.user?.image ? session.user.image : "https://i.pravatar.cc/300"
+      );
     }
   }, []);
 
-  const saveUserUpdated = (id, name, gender) => {
+  const handleChangeUserPicture = (pictureURL) => {
+    setPictureOfUser(pictureURL);
+    setShowChangePictureModal(false);
+  };
+
+  const saveUserUpdated = (id, name, gender, image) =>
     fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/users/`, {
       method: "put",
       headers: {
@@ -26,6 +38,7 @@ const SettingsSection = ({ language }) => {
         id: id,
         name: name,
         gender: gender,
+        image: image,
       }),
     })
       .then((response) =>
@@ -40,20 +53,61 @@ const SettingsSection = ({ language }) => {
           .catch((e) => console.log(e))
       )
       .catch((e) => console.log(e));
-  };
 
   return (
     <div className="pb-8 bg-gray-900" data-aos="fade-up">
+      {showChangePictureModal ? (
+        <ChangeUserPictureModal
+          showChangePictureModal={showChangePictureModal}
+          setShowChangePictureModal={setShowChangePictureModal}
+          pictureOfUser={pictureOfUser}
+          handleChangeUserPicture={handleChangeUserPicture}
+          language={language}
+        />
+      ) : (
+        ""
+      )}
       <div className="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
         <h2 className="max-w-6xl pl-1 mx-auto mt-8 text-2xl font-medium leading-6 text-white select-none">
           {language === "DE" ? "Deine Einstellungen" : "Your Settings"}
         </h2>
         <div className="justify-center p-8 py-6 mt-5 bg-gray-700 rounded-lg md:flex">
           <div className="flex-col cursor-pointer">
-            <div className="mb-4">
+            <div className="mb-5">
               <div className="flex-col">
-                <div className="mb-2 text-xl text-center text-white">
-                  {language === "DE" ? "Mein Name lautet:" : "My name is:"}
+                <div
+                  onClick={() => setShowChangePictureModal(true)}
+                  title={
+                    language === "DE"
+                      ? "Profilbild ändern"
+                      : "Change Profile Picture"
+                  }
+                  className="ml-3 iphone:!ml-1 figure"
+                >
+                  {pictureOfUser ? (
+                    <img
+                      className="w-20 h-20 mx-auto mb-6 rounded-full select-none image-main"
+                      src={pictureOfUser}
+                      srcset={pictureOfUser}
+                      alt="Fitness Time User Avatar"
+                    />
+                  ) : (
+                    ""
+                  )}
+                  {pictureOfUser ? (
+                    <img
+                      className="w-20 h-20 mx-auto mb-6 rounded-full select-none image-hover"
+                      src="/icons/change-image.png"
+                      srcset="/icons/change-image.png"
+                      alt="Change Fitness Time User Avatar"
+                    />
+                  ) : (
+                    ""
+                  )}
+                </div>
+
+                <div className="mb-2 text-xl font-bold text-center text-white">
+                  Name
                 </div>
                 <input
                   value={nameOfUser}
@@ -65,8 +119,8 @@ const SettingsSection = ({ language }) => {
                 />
               </div>
             </div>
-            <div className="mb-2 text-xl text-center text-white">
-              {language === "DE" ? "Mein Geschlecht ist:" : "My gender is:"}
+            <div className="mb-2 text-xl font-bold text-center text-white">
+              {language === "DE" ? "Geschlecht" : "Gender"}
             </div>
             <div className="flex justify-center pt-2 ml-4">
               <div>
@@ -100,7 +154,12 @@ const SettingsSection = ({ language }) => {
               type="button"
               className="inline-flex justify-center w-full px-4 py-2 mt-12 text-base font-medium text-white bg-green-500 border border-transparent rounded-md shadow-sm select-none hover:bg-green-400 sm:col-start-2 sm:text-sm focus:outline-none"
               onClick={() => {
-                saveUserUpdated(session.user.id, nameOfUser, genderOfUser);
+                saveUserUpdated(
+                  session.user.id,
+                  nameOfUser,
+                  genderOfUser,
+                  pictureOfUser
+                );
               }}
             >
               {language === "DE" ? "Speichern" : "Save"}
