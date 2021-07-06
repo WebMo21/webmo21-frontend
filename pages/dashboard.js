@@ -253,7 +253,7 @@ export default function Dashboard() {
                 className="flex flex-col flex-1 h-full min-w-0 overflow-hidden xl:order-last"
               >
                 {activeSideBarSection === "home" && (
-                  <HomeSection signUpDate={"26.06.2021"} language={language} />
+                  <HomeSection language={language} />
                 )}
                 {console.log("activeSideBarSection", activeSideBarSection)}
                 {activeSideBarSection === "plans" && (

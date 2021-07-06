@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/client";
+import { useSession } from "next-auth/client";
 import { Calendar, momentLocalizer } from "react-big-calendar";
+import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import moment from "moment";
 import "moment/locale/de";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
-
 import {
   ClockIcon,
   CheckCircleIcon,
@@ -15,8 +14,10 @@ import {
   ChartBarIcon,
 } from "@heroicons/react/solid";
 
-const HomeSection = ({ signUpDate, language }) => {
-  const [session, loading] = useSession();
+import OnboardingModal from "./OnboardingModal";
+
+const HomeSection = ({ language }) => {
+  const [session] = useSession();
 
   if (language && language === "DE") {
     moment.locale("de");
@@ -67,11 +68,34 @@ const HomeSection = ({ signUpDate, language }) => {
     },
   ];
 
+  const [showOnboardingModal, setShowOnboardingModal] = useState(false);
+
+  useEffect(() => {
+    if (
+      session &&
+      (!session.user?.image || !session.user?.name || !session.user?.gender)
+    ) {
+      setShowOnboardingModal(true);
+    }
+  }, []);
+
   return (
     <div
       className="relative z-0 flex-1 pb-8 overflow-y-auto"
       data-aos="fade-up"
     >
+      {showOnboardingModal ? (
+        <OnboardingModal
+          id={session.user?.id}
+          image={session.user?.image}
+          name={session.user?.name}
+          gender={session.user?.gender}
+          showOnboardingModal={showOnboardingModal}
+          language={language}
+        />
+      ) : (
+        ""
+      )}
       <div className="bg-gray-900">
         <div className="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
           <div className="p-8 py-6 mt-8 bg-gray-700 rounded-lg md:flex md:items-center md:justify-between">

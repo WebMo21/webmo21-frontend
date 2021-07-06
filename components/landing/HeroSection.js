@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/client";
+import { useSession } from "next-auth/client";
 
 const HeroSection = ({ language }) => {
   const [session] = useSession();
@@ -91,12 +91,11 @@ const HeroSection = ({ language }) => {
                         : "go to dashboard!"}
                     </a>
                   </Link>
-                  <div
-                    onClick={() => signOut()}
-                    className="p-2 mx-2 mt-4 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none sm:hidden md:hidden lg:hidden xl:hidden iphone:block hover:bg-red-300"
-                  >
-                    {language === "DE" ? "Ausloggen" : "Sign Out"}
-                  </div>
+                  <Link href="/auth/logout">
+                    <a className="p-2 mx-2 mt-4 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none sm:hidden md:hidden lg:hidden xl:hidden iphone:block hover:bg-red-300 iphone:!mx-16">
+                      {language === "DE" ? "Ausloggen" : "Sign Out"}
+                    </a>
+                  </Link>
                 </>
               )}
             </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { signOut, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/client";
 
 import ChangeUserPictureModal from "./ChangeUserPictureModal";
 
@@ -45,10 +45,7 @@ const SettingsSection = ({ language }) => {
         response
           .json()
           .then(() => {
-            router.push("/");
-            setTimeout(function () {
-              signOut();
-            }, 600);
+            router.push("/auth/logout");
           })
           .catch((e) => console.log(e))
       )

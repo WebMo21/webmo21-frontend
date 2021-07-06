@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { signOut, useSession } from "next-auth/client";
+import { useSession } from "next-auth/client";
 
 const NavBar = ({ language, setLanguageCallback }) => {
   const [session] = useSession();
@@ -177,12 +177,11 @@ const NavBar = ({ language, setLanguageCallback }) => {
               )}
               {session && (
                 <>
-                  <div
-                    onClick={() => signOut()}
-                    className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300"
-                  >
-                    Logout
-                  </div>
+                  <Link href="/auth/logout">
+                    <a className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300">
+                      Logout
+                    </a>
+                  </Link>
                 </>
               )}
             </li>
