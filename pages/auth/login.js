@@ -107,8 +107,9 @@ const login = () => {
                       <h1
                         className={`mx-auto text-lg text-green-500 mb-6 font-bold w-full bg-green-100 rounded-md p-4 select-none`}
                       >
-                        Jetzt einloggen und mit der Fitness Time App deine
-                        Workouts planen
+                        {language === "DE"
+                          ? "Jetzt mit Fitness Time deine Workouts planen"
+                          : "Plan your workouts with Fitness Time now"}
                       </h1>
                       <h6 className="font-bold select-none text-md text-blueGray-500">
                         {language === "DE"
@@ -119,19 +120,19 @@ const login = () => {
                     <div className="flex-col text-center cursor-pointer iphone:flex iphone:">
                       <a
                         onClick={() => signIn("github")}
-                        className="inline-block px-3 py-2 mr-2 text-sm font-bold text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none select-none focus:outline-none last:mr-0 bg-github-regular border-github-regular active:bg-github-active active:border-github-active hover:shadow-md iphone:mt-2"
+                        className="inline-block px-3 py-2 mr-2 text-sm font-bold text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none select-none focus:outline-none last:mr-0 bg-github-regular border-github-regular active:bg-github-active active:border-github-active hover:shadow-md iphone:mt-2 hover:bg-[#4b5668]"
                       >
                         {/* */}github
                       </a>
                       <a
                         onClick={() => signIn("facebook")}
-                        className="inline-block px-3 py-2 mr-2 text-sm font-bold text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none select-none focus:outline-none last:mr-0 bg-facebook-regular border-facebook-regular active:bg-facebook-active active:border-facebook-active hover:shadow-md iphone:mt-2"
+                        className="inline-block px-3 py-2 mr-2 text-sm font-bold text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none select-none focus:outline-none last:mr-0 bg-facebook-regular border-facebook-regular active:bg-facebook-active active:border-facebook-active hover:shadow-md iphone:mt-2 hover:bg-[#657baa]"
                       >
                         {/* */}facebook
                       </a>
                       <a
                         onClick={() => signIn("twitter")}
-                        className="inline-block px-3 py-2 text-sm font-bold text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none focus:outline-none last:mr-0 bg-twitter-regular border-twitter-regular active:bg-twitter-active active:border-twitter-active hover:shadow-md iphone:!mr-2 iphone:mt-2 select-none"
+                        className="inline-block px-3 py-2 text-sm font-bold text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none focus:outline-none last:mr-0 bg-twitter-regular border-twitter-regular active:bg-twitter-active active:border-twitter-active hover:shadow-md iphone:!mr-2 iphone:mt-2 select-none hover:bg-[#63b2e4]"
                       >
                         {/* */}twitter
                       </a>
@@ -192,7 +193,7 @@ const login = () => {
                             setShowEmailInvalid(true);
                           }
                         }}
-                        className="inline-block w-full px-6 py-2 mr-2 text-sm font-bold text-center text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none select-none focus:outline-none last:mr-0 bg-blueGray-800 border-blueGray-800 active:bg-blueGray-900 active:border-blueGray-900 hover:shadow-lg"
+                        className="inline-block w-full px-6 py-2 mr-2 text-sm font-bold text-center text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none select-none focus:outline-none last:mr-0 bg-blueGray-800 border-blueGray-800 active:bg-blueGray-900 active:border-blueGray-900 hover:shadow-lg hover:bg-[#374458]"
                       >
                         {language === "DE"
                           ? "Mit E-Mail Einloggen"
