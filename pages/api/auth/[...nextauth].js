@@ -84,7 +84,6 @@ export default NextAuth({
       },
     }),
   ],
-  /* database: process.env.DATABASE_URL, */
   adapter: Adapters.TypeORM.Adapter(process.env.DATABASE_URL, {
     models: {
       User: Models.User,

@@ -88,7 +88,7 @@ const SettingsSection = ({ language }) => {
                     <img
                       className="w-20 h-20 mx-auto mb-6 rounded-full select-none image-main"
                       src={pictureOfUser}
-                      srcset={pictureOfUser}
+                      srcSet={pictureOfUser}
                       alt="Fitness Time User Avatar"
                     />
                   ) : (
@@ -98,7 +98,7 @@ const SettingsSection = ({ language }) => {
                     <img
                       className="w-20 h-20 mx-auto mb-6 rounded-full select-none image-hover"
                       src="/icons/change-image.png"
-                      srcset="/icons/change-image.png"
+                      srcSet="/icons/change-image.png"
                       alt="Change Fitness Time User Avatar"
                     />
                   ) : (
