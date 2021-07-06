@@ -27,7 +27,7 @@ body {
 }
 
 .rbc-off-range-bg {
-  background: #0000004f !important;
+  background: #111827 !important;
 }
 
 .rbc-today {
@@ -60,4 +60,23 @@ input:focus {
   .iphone-ml-left {
     margin-left: 30%;
   }
+}
+
+.figure {
+  position: relative;
+  width: 360px; /* can be omitted for a regular non-lazy image */
+  max-width: 100%;
+}
+.figure img.image-hover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.figure:hover img.image-hover {
+  opacity: 1;
 }

@@ -32,7 +32,7 @@ const Custom404 = () => {
                   className="absolute w-full h-full bg-cover bg-50"
                   style={{
                     backgroundImage:
-                      "url(./backgrounds/bg-fitness-man-dark.jpeg)",
+                      "url(/backgrounds/bg-fitness-man-dark.jpeg)",
                   }}
                 ></div>
                 <div

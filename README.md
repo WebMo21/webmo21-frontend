@@ -4,6 +4,8 @@
 
 A modern web application enabling users scheduling and organization of fitness activities.
 
+[VISIT LIVE DEMO](https://www.fitness-time.app)
+
 ![Alt Text](preview-fitness-time-landing-page.gif)
 
 ## ✨ Features
@@ -14,7 +16,7 @@ A modern web application enabling users scheduling and organization of fitness a
 - Responsiveness optimized for desktop, tablet and mobile devices
 - JWT token based authentication via oAuth providers like GitHub, Facebook and Twitter for quick SignIn
 - Alternative fallback magic URL email login
-- Custom [Error](https://www.fitness-time.app/error), [404](https://www.fitness-time.app/404) and [Email sent](https://www.fitness-time.app/mailsent) page
+- Custom [Error](https://www.fitness-time.app/error), [404](https://www.fitness-time.app/404) and [Email sent](https://www.fitness-time.app/auth/mailsent) page
 - Continuous Integration/Continuous Deployment Pipeline through [Vercel](https://vercel.com/)
 
 ## 🤖 Technologies

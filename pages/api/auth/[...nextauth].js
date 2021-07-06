@@ -1,8 +1,9 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import customVerificationRequest from "./customVerificationRequest";
 import Adapters from "next-auth/adapters";
+import axios from "axios";
 
+import customVerificationRequest from "./customVerificationRequest";
 import Models from "../models";
 
 export default NextAuth({
@@ -31,8 +32,58 @@ export default NextAuth({
       from: process.env.EMAIL_FROM,
       sendVerificationRequest: customVerificationRequest,
     }),
+    Providers.Credentials({
+      name: "Einloggen als Administrator",
+      // The credentials is used to generate a suitable form on the sign in page.
+      // You can specify whatever fields you are expecting to be submitted.
+      // e.g. domain, username, password, 2FA token, etc.
+      credentials: {
+        username: {
+          label: "Username",
+          type: "text",
+          placeholder: "maxmustermann",
+        },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials, req) {
+        console.log("CREDENTIALS", credentials);
+
+        let user = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/admin-login`,
+          {
+            method: "post",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              username: credentials.username,
+              password: credentials.password,
+            }),
+          }
+        )
+          .then((response) =>
+            response
+              .json()
+              .then((responseJson) => {
+                if (responseJson?.user) {
+                  return responseJson.user;
+                } else {
+                  return null;
+                }
+              })
+              .catch((e) => {
+                return null;
+              })
+          )
+          .catch((e) => {
+            return null;
+          });
+
+        return user;
+      },
+    }),
   ],
-  /* database: process.env.DATABASE_URL, */
   adapter: Adapters.TypeORM.Adapter(process.env.DATABASE_URL, {
     models: {
       User: Models.User,
@@ -50,8 +101,9 @@ export default NextAuth({
   },
   debug: true,
   pages: {
-    verifyRequest: "/mailsent",
+    signOut: "/auth/logout",
     error: "/error",
+    verifyRequest: "/auth/mailsent",
     // newUser: null, // If set, new users will be directed here on first sign in
   },
   callbacks: {

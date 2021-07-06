@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/client";
 import { Calendar, momentLocalizer } from "react-big-calendar";
+import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import moment from "moment";
 import "moment/locale/de";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
-
 import {
   ClockIcon,
   CheckCircleIcon,
@@ -15,8 +14,10 @@ import {
   ChartBarIcon,
 } from "@heroicons/react/solid";
 
-const HomeSection = ({ signUpDate, language }) => {
-  const [session, loading] = useSession();
+import OnboardingModal from "./OnboardingModal";
+
+const HomeSection = ({ language }) => {
+  const [session] = useSession();
 
   if (language && language === "DE") {
     moment.locale("de");
@@ -67,11 +68,34 @@ const HomeSection = ({ signUpDate, language }) => {
     },
   ];
 
+  const [showOnboardingModal, setShowOnboardingModal] = useState(false);
+
+  useEffect(() => {
+    if (
+      session &&
+      (!session.user?.image || !session.user?.name || !session.user?.gender)
+    ) {
+      setShowOnboardingModal(true);
+    }
+  }, []);
+
   return (
     <div
       className="relative z-0 flex-1 pb-8 overflow-y-auto"
       data-aos="fade-up"
     >
+      {showOnboardingModal ? (
+        <OnboardingModal
+          id={session.user?.id}
+          image={session.user?.image}
+          name={session.user?.name}
+          gender={session.user?.gender}
+          showOnboardingModal={showOnboardingModal}
+          language={language}
+        />
+      ) : (
+        ""
+      )}
       <div className="bg-gray-900">
         <div className="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
           <div className="p-8 py-6 mt-8 bg-gray-700 rounded-lg md:flex md:items-center md:justify-between">
@@ -137,10 +161,10 @@ const HomeSection = ({ signUpDate, language }) => {
             </div>
             <div className="flex mt-6 space-x-3 md:mt-0 md:ml-4 iphone:justify-center">
               <div>
-                <Link href="/logout">
-                  <a className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300 iphone:!w-40 iphone:text-center">
+                <Link href="/auth/logout">
+                  <div className="inline-block p-2 ml-5 font-semibold text-white bg-red-400 border border-transparent border-green-500 rounded cursor-pointer select-none hover:bg-red-300 iphone:!w-40 iphone:text-center">
                     {language && language === "DE" ? "Ausloggen" : "SignOut"}
-                  </a>
+                  </div>
                 </Link>
               </div>
             </div>
@@ -152,8 +176,8 @@ const HomeSection = ({ signUpDate, language }) => {
         <div className="max-w-6xl px-4 mx-auto sm:px-6 lg:px-8">
           <h2 className="pb-2 text-2xl font-medium leading-6 text-white select-none">
             {language && language === "DE"
-              ? "Deine Trainingsfakten"
-              : "Your Fitness Facts"}
+              ? "Deine Erfolge"
+              : "Your achievements"}
           </h2>
           <div className="grid grid-cols-1 gap-5 mt-2 sm:grid-cols-2 lg:grid-cols-3">
             {/* Card */}

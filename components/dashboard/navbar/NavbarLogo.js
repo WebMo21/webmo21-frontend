@@ -8,7 +8,7 @@ const NavbarLogo = () => {
         <a className="flex items-center justify-center w-20 h-16 bg-[#10b981] bg-cyan-400 lg:w-20">
           <img
             className="w-auto h-12"
-            src="./logos/logo_white_large-fitness-time.png"
+            src="/logos/logo_white_large-fitness-time.png"
             alt="Fitness Time Logo"
           />
         </a>

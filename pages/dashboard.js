@@ -24,29 +24,38 @@ import WorkoutsSection from "../components/dashboard/workouts/WorkoutsSection";
 import SettingsSection from "../components/dashboard/settings/SettingsSection";
 import AdminSection from "../components/dashboard/admin/AdminSection";
 
-const user = {
-  name: "Whitney Francis",
-  email: "whitneyfrancis@example.com",
-  imageUrl:
-    "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
 const navigation = [
   {
-    name: "Inboxes",
+    name: "Navigation",
+    englishName: "Navigations",
     href: "#",
     children: [
-      { name: "Technical Support", href: "#" },
-      { name: "Sales", href: "#" },
-      { name: "General", href: "#" },
+      {
+        name: "home",
+        title: "Übersicht",
+        englishTitle: "Overview",
+        icon: HomeIcon,
+      },
+      {
+        name: "plans",
+        title: "Trainingspläne",
+        englishTitle: "Workout Plans",
+        icon: ClipboardIcon,
+      },
+      {
+        name: "workouts",
+        title: "Übungen",
+        englishTitle: "Workouts",
+        icon: LightningBoltIcon,
+      },
+      {
+        name: "settings",
+        title: "Einstellungen",
+        englishTitle: "Settings",
+        icon: CogIcon,
+      },
     ],
   },
-  { name: "Reporting", href: "#", children: [] },
-  { name: "Settings", href: "#", children: [] },
-];
-
-const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Sign out", href: "#" },
 ];
 
 const setSideBarNavigationActive = (name) =>
@@ -94,14 +103,13 @@ export default function Dashboard() {
       ? "DE"
       : typeof window !== "undefined" && localStorage.getItem("language")
   );
-
   const [activeSideBarSection, setActiveSideBarSection] = useState("home");
 
   if (
     session &&
     session.user.role === "admin" &&
     !sidebarNavigation.find((x) => x.name === "admin")
-  )
+  ) {
     sidebarNavigation.push({
       name: "admin",
       title: "Admin Übersicht",
@@ -109,6 +117,13 @@ export default function Dashboard() {
       icon: KeyIcon,
       current: false,
     });
+    navigation[0].children.push({
+      name: "admin",
+      title: "Admin Übersicht",
+      englishTitle: "Admin Overview",
+      icon: KeyIcon,
+    });
+  }
 
   if (typeof window !== "undefined" && loading) return null;
 
@@ -134,7 +149,7 @@ export default function Dashboard() {
           Fitness Time -{" "}
           {language === "DE" ? "Dein Workout Planer" : "Your Workout Planer"}
         </title>
-        <link rel="icon" href="./favicons/favicon.ico" />
+        <link rel="icon" href="/favicons/favicon.ico" />
       </Head>
       <div>
         {language &&
@@ -148,8 +163,6 @@ export default function Dashboard() {
 
             {/* Desktop nav area */}
             <Navigation
-              navigation={navigation}
-              user={user}
               title={`Fitness Time - ${
                 activeSideBarSection === "home"
                   ? language === "DE"
@@ -217,8 +230,8 @@ export default function Dashboard() {
 
             <MobileMenu
               navigation={navigation}
-              user={user}
-              userNavigation={userNavigation}
+              setActiveSideBarSection={setActiveSideBarSection}
+              language={language}
             />
           </header>
 
@@ -240,8 +253,9 @@ export default function Dashboard() {
                 className="flex flex-col flex-1 h-full min-w-0 overflow-hidden xl:order-last"
               >
                 {activeSideBarSection === "home" && (
-                  <HomeSection signUpDate={"26.06.2021"} language={language} />
+                  <HomeSection language={language} />
                 )}
+                {console.log("activeSideBarSection", activeSideBarSection)}
                 {activeSideBarSection === "plans" && (
                   <PlansSection language={language} />
                 )}
