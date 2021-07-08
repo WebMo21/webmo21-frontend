@@ -205,7 +205,7 @@ const WorkoutsSection = ({ language }) => {
                 />
               )}
 
-              {fetchedUserWorkouts
+              {fetchedUserWorkouts && fetchedUserWorkouts
                 .sort((a, b) => a.id - b.id)
                 .map((workout) => (
                   <WorkoutCard
