@@ -46,6 +46,37 @@ const HomeSection = ({ language }) => {
 
   const onEventDrop = (data) => console.log(data);
 
+  const [fetchedUserPlans, setFetchedUserPlans] = useState([]);
+
+  const fetchUserPlans = (userId) =>
+    fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}` +
+        `/weekly-workout-plans/userid/${userId}`,
+      {
+        method: "get",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) =>
+        response
+          .json()
+          .then((data) => {
+            console.log("DATA PLANS", data);
+            console.log("response PLANS", response.status);
+            if (response.status === 200)
+              setFetchedUserPlans(data.weeklyWorkoutPlans);
+          })
+          .catch((e) => console.log(e))
+      )
+      .catch((e) => console.log(e));
+
+  const calculateCompletedTrainingWeeks = () => {
+    return "3";
+  };
+
   const cards = [
     {
       name: `${
@@ -54,17 +85,31 @@ const HomeSection = ({ language }) => {
           : "Training Weeks Completed"
       }`, // Fetch users weekly workout plans and count each where there is a workout and is minimum last week+
       icon: CalendarIcon,
-      amount: "2" + ` ${language === "DE" ? "Wochen" : "Weeks"}`,
+      amount:
+        fetchedUserPlans.length > 0
+          ? calculateCompletedTrainingWeeks() +
+            ` ${language === "DE" ? "Wochen" : "Weeks"}`
+          : ` ${
+              language === "DE"
+                ? "Starte deine 1. Trainingwoche"
+                : "Start your first week"
+            }`,
     },
     {
       name: `${language === "DE" ? "Trainingszeit" : "Training Time"}`,
       icon: ClockIcon,
-      amount: "3" + ` ${language === "DE" ? "Stunden" : "Hours"}`,
+      amount:
+        fetchedUserPlans.length > 0
+          ? "3" + ` ${language === "DE" ? "Stunden" : "Hours"}`
+          : "0" + ` ${language === "DE" ? "Stunden" : "Hours"}`,
     },
     {
       name: `${language === "DE" ? "Bewegtes Gewicht" : "Moved Weight"}`,
       icon: ChartBarIcon,
-      amount: "2,5" + ` ${language === "DE" ? "Tonnen" : "Tons"}`,
+      amount:
+        fetchedUserPlans.length > 0
+          ? "2,5" + ` ${language === "DE" ? "Tonnen" : "Tons"}`
+          : "0" + ` ${language === "DE" ? "Tonnen" : "Tons"}`,
     },
   ];
 
@@ -77,6 +122,8 @@ const HomeSection = ({ language }) => {
     ) {
       setShowOnboardingModal(true);
     }
+
+    if (session && session.user?.id) fetchUserPlans(session.user.id);
   }, []);
 
   return (
