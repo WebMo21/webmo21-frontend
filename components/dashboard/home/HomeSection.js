@@ -65,6 +65,7 @@ const HomeSection = ({ language }) => {
           .json()
           .then((data) => {
             console.log("DATA PLANS", data);
+            console.log("data.weeklyWorkoutPlans", data.weeklyWorkoutPlans);
             console.log("response PLANS", response.status);
             if (response.status === 200)
               setFetchedUserPlans(data.weeklyWorkoutPlans);
@@ -73,8 +74,335 @@ const HomeSection = ({ language }) => {
       )
       .catch((e) => console.log(e));
 
-  const calculateCompletedTrainingWeeks = () => {
-    return "3";
+  const isMoreThanNinetyPercentOfWorkoutsCompleted = (
+    workoutCompletedArray
+  ) => {
+    return (
+      workoutCompletedArray.filter((element) => element === "completed")
+        .length /
+        workoutCompletedArray.length >=
+      0.9
+    );
+  };
+
+  // A day of a plan is counted as complete when 90 % or more of the workouts of that day are completed. When all days are complete the plan is counted as complete.
+  const calculateCompletedTrainingWeeks = (fetchedUserPlans) => {
+    let weeklyPlanCompletedCount = 0;
+    let workoutCompletedArray = [];
+    let dayCompleted = [];
+
+    fetchedUserPlans.forEach((plan) => {
+      if (plan.day_1.length > 0) {
+        plan.day_1.forEach((workout) => {
+          if (workout.workout_completed === "yes")
+            workoutCompletedArray.push("completed");
+        });
+
+        if (
+          workoutCompletedArray.length > 0 &&
+          isMoreThanNinetyPercentOfWorkoutsCompleted(workoutCompletedArray)
+        ) {
+          dayCompleted.push("completed");
+          workoutCompletedArray = [];
+        }
+      }
+
+      if (plan.day_2.length > 0) {
+        plan.day_2.forEach((workout) => {
+          if (workout.workout_completed === "yes")
+            workoutCompletedArray.push("completed");
+        });
+
+        if (
+          workoutCompletedArray.length > 0 &&
+          isMoreThanNinetyPercentOfWorkoutsCompleted(workoutCompletedArray)
+        ) {
+          dayCompleted.push("completed");
+          workoutCompletedArray = [];
+        }
+      }
+
+      if (plan.day_3.length > 0) {
+        plan.day_3.forEach((workout) => {
+          if (workout.workout_completed === "yes")
+            workoutCompletedArray.push("completed");
+        });
+
+        if (
+          workoutCompletedArray.length > 0 &&
+          isMoreThanNinetyPercentOfWorkoutsCompleted(workoutCompletedArray)
+        ) {
+          dayCompleted.push("completed");
+          workoutCompletedArray = [];
+        }
+      }
+
+      if (plan.day_4.length > 0) {
+        plan.day_4.forEach((workout) => {
+          if (workout.workout_completed === "yes")
+            workoutCompletedArray.push("completed");
+        });
+
+        if (
+          workoutCompletedArray.length > 0 &&
+          isMoreThanNinetyPercentOfWorkoutsCompleted(workoutCompletedArray)
+        ) {
+          dayCompleted.push("completed");
+          workoutCompletedArray = [];
+        }
+      }
+
+      if (plan.day_5.length > 0) {
+        plan.day_5.forEach((workout) => {
+          if (workout.workout_completed === "yes")
+            workoutCompletedArray.push("completed");
+        });
+
+        if (
+          workoutCompletedArray.length > 0 &&
+          isMoreThanNinetyPercentOfWorkoutsCompleted(workoutCompletedArray)
+        ) {
+          dayCompleted.push("completed");
+          workoutCompletedArray = [];
+        }
+      }
+
+      if (plan.day_6.length > 0) {
+        plan.day_6.forEach((workout) => {
+          if (workout.workout_completed === "yes")
+            workoutCompletedArray.push("completed");
+        });
+
+        if (
+          workoutCompletedArray.length > 0 &&
+          isMoreThanNinetyPercentOfWorkoutsCompleted(workoutCompletedArray)
+        ) {
+          dayCompleted.push("completed");
+          workoutCompletedArray = [];
+        }
+      }
+
+      if (plan.day_7.length > 0) {
+        plan.day_7.forEach((workout) => {
+          if (workout.workout_completed === "yes")
+            workoutCompletedArray.push("completed");
+        });
+
+        if (
+          workoutCompletedArray.length > 0 &&
+          isMoreThanNinetyPercentOfWorkoutsCompleted(workoutCompletedArray)
+        ) {
+          dayCompleted.push("completed");
+          workoutCompletedArray = [];
+        }
+      }
+
+      let daysWithWorkoutsCount = 0;
+      if (plan.day_1.length > 0) {
+        daysWithWorkoutsCount++;
+      }
+      if (plan.day_2.length > 0) {
+        daysWithWorkoutsCount++;
+      }
+      if (plan.day_3.length > 0) {
+        daysWithWorkoutsCount++;
+      }
+      if (plan.day_4.length > 0) {
+        daysWithWorkoutsCount++;
+      }
+      if (plan.day_5.length > 0) {
+        daysWithWorkoutsCount++;
+      }
+      if (plan.day_6.length > 0) {
+        daysWithWorkoutsCount++;
+      }
+      if (plan.day_7.length > 0) {
+        daysWithWorkoutsCount++;
+      }
+
+      if (
+        dayCompleted.length > 0 &&
+        dayCompleted.length === daysWithWorkoutsCount
+      ) {
+        weeklyPlanCompletedCount++;
+        dayCompleted = [];
+      }
+    });
+
+    console.log("weeklyPlanCompletedCount", weeklyPlanCompletedCount);
+    return weeklyPlanCompletedCount;
+  };
+
+  const calculateCompletedWorkoutTimeInHours = (fetchedUserPlans) => {
+    let totalWorkoutTime = 0;
+
+    fetchedUserPlans.forEach((plan) => {
+      if (plan.day_1.length > 0) {
+        plan.day_1.forEach((workout) => {
+          if (
+            workout.workout_completed === "yes" &&
+            workout.workout_tracked_time
+          ) {
+            totalWorkoutTime += parseInt(workout.workout_tracked_time);
+          }
+        });
+      }
+
+      if (plan.day_2.length > 0) {
+        plan.day_2.forEach((workout) => {
+          if (
+            workout.workout_completed === "yes" &&
+            workout.workout_tracked_time
+          ) {
+            totalWorkoutTime += parseInt(workout.workout_tracked_time);
+          }
+        });
+      }
+
+      if (plan.day_3.length > 0) {
+        plan.day_3.forEach((workout) => {
+          if (
+            workout.workout_completed === "yes" &&
+            workout.workout_tracked_time
+          ) {
+            totalWorkoutTime += parseInt(workout.workout_tracked_time);
+          }
+        });
+      }
+
+      if (plan.day_4.length > 0) {
+        plan.day_4.forEach((workout) => {
+          if (
+            workout.workout_completed === "yes" &&
+            workout.workout_tracked_time
+          ) {
+            totalWorkoutTime += parseInt(workout.workout_tracked_time);
+          }
+        });
+      }
+
+      if (plan.day_5.length > 0) {
+        plan.day_5.forEach((workout) => {
+          if (
+            workout.workout_completed === "yes" &&
+            workout.workout_tracked_time
+          ) {
+            totalWorkoutTime += parseInt(workout.workout_tracked_time);
+          }
+        });
+      }
+
+      if (plan.day_6.length > 0) {
+        plan.day_6.forEach((workout) => {
+          if (
+            workout.workout_completed === "yes" &&
+            workout.workout_tracked_time
+          ) {
+            totalWorkoutTime += parseInt(workout.workout_tracked_time);
+          }
+        });
+      }
+
+      if (plan.day_7.length > 0) {
+        plan.day_7.forEach((workout) => {
+          if (
+            workout.workout_completed === "yes" &&
+            workout.workout_tracked_time
+          ) {
+            totalWorkoutTime += parseInt(workout.workout_tracked_time);
+          }
+        });
+      }
+    });
+
+    console.log("totalWorkoutTime", totalWorkoutTime);
+    return totalWorkoutTime / 3600;
+  };
+
+  const calculateCompletedWorkoutWeightInTons = (fetchedUserPlans) => {
+    let totalWorkoutWeight = 0;
+
+    fetchedUserPlans.forEach((plan) => {
+      if (plan.day_1.length > 0) {
+        plan.day_1.forEach((workout) => {
+          if (
+            workout.workout_completed === "yes" &&
+            workout.workout_equipment_weight_in_kilo
+          ) {
+            totalWorkoutWeight += parseInt(workout.equipment_weight_in_kilo);
+          }
+        });
+      }
+
+      if (plan.day_2.length > 0) {
+        plan.day_2.forEach((workout) => {
+          if (
+            workout.workout_completed === "yes" &&
+            workout.workout_equipment_weight_in_kilo
+          ) {
+            totalWorkoutWeight += parseInt(workout.equipment_weight_in_kilo);
+          }
+        });
+      }
+
+      if (plan.day_3.length > 0) {
+        plan.day_3.forEach((workout) => {
+          if (
+            workout.workout_completed === "yes" &&
+            workout.workout_equipment_weight_in_kilo
+          ) {
+            totalWorkoutWeight += parseInt(workout.equipment_weight_in_kilo);
+          }
+        });
+      }
+
+      if (plan.day_4.length > 0) {
+        plan.day_4.forEach((workout) => {
+          if (
+            workout.workout_completed === "yes" &&
+            workout.workout_equipment_weight_in_kilo
+          ) {
+            totalWorkoutWeight += parseInt(workout.equipment_weight_in_kilo);
+          }
+        });
+      }
+
+      if (plan.day_5.length > 0) {
+        plan.day_5.forEach((workout) => {
+          if (
+            workout.workout_completed === "yes" &&
+            workout.workout_equipment_weight_in_kilo
+          ) {
+            totalWorkoutWeight += parseInt(workout.equipment_weight_in_kilo);
+          }
+        });
+      }
+
+      if (plan.day_6.length > 0) {
+        plan.day_6.forEach((workout) => {
+          if (
+            workout.workout_completed === "yes" &&
+            workout.workout_equipment_weight_in_kilo
+          ) {
+            totalWorkoutWeight += parseInt(workout.equipment_weight_in_kilo);
+          }
+        });
+      }
+
+      if (plan.day_7.length > 0) {
+        plan.day_7.forEach((workout) => {
+          if (
+            workout.workout_completed === "yes" &&
+            workout.workout_equipment_weight_in_kilo
+          ) {
+            totalWorkoutWeight += parseInt(workout.equipment_weight_in_kilo);
+          }
+        });
+      }
+    });
+
+    console.log("totalWorkoutWeight", totalWorkoutWeight);
+    return totalWorkoutWeight / 1000;
   };
 
   const cards = [
@@ -86,8 +414,9 @@ const HomeSection = ({ language }) => {
       }`, // Fetch users weekly workout plans and count each where there is a workout and is minimum last week+
       icon: CalendarIcon,
       amount:
-        fetchedUserPlans.length > 0
-          ? calculateCompletedTrainingWeeks() +
+        fetchedUserPlans.length > 0 &&
+        calculateCompletedTrainingWeeks(fetchedUserPlans)
+          ? calculateCompletedTrainingWeeks(fetchedUserPlans) +
             ` ${language === "DE" ? "Wochen" : "Weeks"}`
           : ` ${
               language === "DE"
@@ -99,16 +428,21 @@ const HomeSection = ({ language }) => {
       name: `${language === "DE" ? "Trainingszeit" : "Training Time"}`,
       icon: ClockIcon,
       amount:
-        fetchedUserPlans.length > 0
-          ? "3" + ` ${language === "DE" ? "Stunden" : "Hours"}`
+        fetchedUserPlans.length > 0 &&
+        calculateCompletedWorkoutTimeInHours(fetchedUserPlans)
+          ? Math.floor(calculateCompletedWorkoutTimeInHours(fetchedUserPlans)) +
+            ` ${language === "DE" ? "Stunden" : "Hours"}`
           : "0" + ` ${language === "DE" ? "Stunden" : "Hours"}`,
     },
     {
       name: `${language === "DE" ? "Bewegtes Gewicht" : "Moved Weight"}`,
       icon: ChartBarIcon,
       amount:
-        fetchedUserPlans.length > 0
-          ? "2,5" + ` ${language === "DE" ? "Tonnen" : "Tons"}`
+        fetchedUserPlans.length > 0 &&
+        calculateCompletedWorkoutWeightInTons(fetchedUserPlans)
+          ? Math.floor(
+              calculateCompletedWorkoutWeightInTons(fetchedUserPlans)
+            ) + ` ${language === "DE" ? "Tonnen" : "Tons"}`
           : "0" + ` ${language === "DE" ? "Tonnen" : "Tons"}`,
     },
   ];
