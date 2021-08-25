@@ -123,7 +123,7 @@ const CreateWorkoutModal = ({
                       value={createdWorkout.name}
                       type="text"
                       id="workout-name"
-                      maxLength="10"
+                      maxLength="20"
                       onChange={(event) =>
                         setCreatedWorkout({
                           ...createdWorkout,
