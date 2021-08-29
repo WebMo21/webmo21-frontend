@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 /* import DeleteWorkoutModal from "./DeleteWorkoutModal"; */
+import PlanWorkoutCard from "./PlanWorkoutCard";
 
 const PlanCard = ({
   id,
@@ -16,24 +17,32 @@ const PlanCard = ({
   day_7,
   language,
   refetchPlans,
+  currentExpandedPlanCard,
+  setCurrentExpandedPlanCard,
 }) => {
   const [showDeletePlanModal, setShowDeletePlanModal] = useState(false);
 
   return (
-    <div className="p-8 py-6 mt-5 transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer md:flex md:items-center md:justify-between hover:scale-105">
+    <div className="p-8 py-6 mt-5 transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer md:flex md:items-center md:justify-between">
       <div className="flex-1 min-w-0">
-        <div
-          onClick={() => createNewWorkoutPlan()}
-          className="flex items-center justify-center h-12"
-        >
+        <div className="flex items-center justify-center h-full">
           <div className="relative flex flex-col w-full">
-            <div className="flex content-between w-full mb-4 text-2xl font-bold text-green-500 select-none">
+            <div
+              onClick={() =>
+                id !== currentExpandedPlanCard
+                  ? setCurrentExpandedPlanCard(id)
+                  : setCurrentExpandedPlanCard(0)
+              }
+              className="relative flex content-between w-full mb-2 text-2xl font-bold text-green-500 select-none"
+            >
               <div className="w-full text-center">{name}</div>
               <div className="absolute inset-y-0 right-0 text-white">
                 <img
                   src="/icons/down-arrow.png"
                   alt="down arrow icon"
-                  className="object-contain w-5 h-full mt-1 mr-3 rounded-l select-none"
+                  className={`${
+                    id === currentExpandedPlanCard ? "rotate-180" : ""
+                  } object-contain w-5 h-full mt-1 mr-3 transform rounded-l select-none transition duration-300`}
                 />
               </div>
             </div>
@@ -41,6 +50,176 @@ const PlanCard = ({
               {year} {language === "DE" ? "Kalenderwoche" : "Calendar Week"}{" "}
               {calendar_week}
             </div>
+            {id === currentExpandedPlanCard ? (
+              <div className="w-full max-w-full mt-4">
+                <div className="flex justify-center max-w-full">
+                  <div className="w-full h-full max-w-full ml-3 mr-3">
+                    <div className="mb-1 font-bold text-center text-green-500 text-md">
+                      MONTAG
+                    </div>
+                    <div
+                      className={`${
+                        day_1.length > 0 ? "py-1" : ""
+                      } w-32 h-full rounded-lg bg-striped-green`}
+                    >
+                      {day_1 && day_1.length > 0
+                        ? day_1.map((workout) => (
+                            <PlanWorkoutCard
+                              workoutId={workout.workout_id}
+                              workoutCompleted={workout.workout_completed}
+                              workoutTimeStart={workout.workout_time_start}
+                              workoutTimeEnd={workout.workout_time_end}
+                              workoutTrackedTime={workout.workout_tracked_time}
+                              language={language}
+                            />
+                          ))
+                        : ""}
+                    </div>
+                  </div>
+                  <div className="h-full ml-3 mr-3">
+                    <div className="mb-1 font-bold text-center text-green-500 text-md">
+                      DIENSTAG
+                    </div>
+                    <div
+                      className={`${
+                        day_2.length > 0 ? "py-1" : ""
+                      } w-32 h-full rounded bg-striped-green`}
+                    >
+                      {day_2 && day_2.length > 0
+                        ? day_2.map((workout) => (
+                            <PlanWorkoutCard
+                              workoutId={workout.workout_id}
+                              workoutCompleted={workout.workout_completed}
+                              workoutTimeStart={workout.workout_time_start}
+                              workoutTimeEnd={workout.workout_time_end}
+                              workoutTrackedTime={workout.workout_tracked_time}
+                              language={language}
+                            />
+                          ))
+                        : ""}
+                    </div>
+                  </div>
+                  <div className="h-full ml-3 mr-3">
+                    <div className="mb-1 font-bold text-center text-green-500 text-md">
+                      MITTWOCH
+                    </div>
+                    <div
+                      className={`${
+                        day_3.length > 0 ? "py-1" : ""
+                      } w-32 h-full rounded bg-striped-green`}
+                    >
+                      {day_3 && day_3.length > 0
+                        ? day_3.map((workout) => (
+                            <PlanWorkoutCard
+                              workoutId={workout.workout_id}
+                              workoutCompleted={workout.workout_completed}
+                              workoutTimeStart={workout.workout_time_start}
+                              workoutTimeEnd={workout.workout_time_end}
+                              workoutTrackedTime={workout.workout_tracked_time}
+                              language={language}
+                            />
+                          ))
+                        : ""}
+                    </div>
+                  </div>
+                  <div className="h-full ml-3 mr-3">
+                    <div className="mb-1 font-bold text-center text-green-500 text-md">
+                      DONNERSTAG
+                    </div>
+                    <div
+                      className={`${
+                        day_4.length > 0 ? "py-1" : ""
+                      } w-32 h-full rounded bg-striped-green`}
+                    >
+                      {day_4 && day_4.length > 0
+                        ? day_4.map((workout) => (
+                            <PlanWorkoutCard
+                              workoutId={workout.workout_id}
+                              workoutCompleted={workout.workout_completed}
+                              workoutTimeStart={workout.workout_time_start}
+                              workoutTimeEnd={workout.workout_time_end}
+                              workoutTrackedTime={workout.workout_tracked_time}
+                              language={language}
+                            />
+                          ))
+                        : ""}
+                    </div>
+                  </div>
+                  <div className="h-full ml-3 mr-3">
+                    <div className="mb-1 font-bold text-center text-green-500 text-md">
+                      FREITAG
+                    </div>
+                    <div
+                      className={`${
+                        day_5.length > 0 ? "py-1" : ""
+                      } w-32 h-full rounded bg-striped-green`}
+                    >
+                      {day_5 && day_5.length > 0
+                        ? day_5.map((workout) => (
+                            <PlanWorkoutCard
+                              workoutId={workout.workout_id}
+                              workoutCompleted={workout.workout_completed}
+                              workoutTimeStart={workout.workout_time_start}
+                              workoutTimeEnd={workout.workout_time_end}
+                              workoutTrackedTime={workout.workout_tracked_time}
+                              language={language}
+                            />
+                          ))
+                        : ""}
+                    </div>
+                  </div>
+                  <div className="h-full ml-3 mr-3">
+                    <div className="mb-1 font-bold text-center text-green-500 text-md">
+                      SAMSTAG
+                    </div>
+                    <div
+                      className={`${
+                        day_6.length > 0 ? "py-1" : ""
+                      } w-32 h-full rounded bg-striped-green`}
+                    >
+                      {day_6 && day_6.length > 0
+                        ? day_6.map((workout) => (
+                            <PlanWorkoutCard
+                              workoutId={workout.workout_id}
+                              workoutCompleted={workout.workout_completed}
+                              workoutTimeStart={workout.workout_time_start}
+                              workoutTimeEnd={workout.workout_time_end}
+                              workoutTrackedTime={workout.workout_tracked_time}
+                              language={language}
+                            />
+                          ))
+                        : ""}
+                    </div>
+                  </div>
+                  <div className="h-full ml-3 mr-3">
+                    <div className="mb-1 font-bold text-center text-green-500 text-md">
+                      SONNTAG
+                    </div>
+                    <div
+                      className={`${
+                        day_7.length > 0 ? "py-1" : ""
+                      } w-32 h-full rounded bg-striped-green`}
+                    >
+                      {day_7 && day_7.length > 0
+                        ? day_7.map((workout) => (
+                            <PlanWorkoutCard
+                              workoutId={workout.workout_id}
+                              workoutCompleted={workout.workout_completed}
+                              workoutTimeStart={workout.workout_time_start}
+                              workoutTimeEnd={workout.workout_time_end}
+                              workoutTrackedTime={workout.workout_tracked_time}
+                              language={language}
+                            />
+                          ))
+                        : ""}
+                    </div>
+                  </div>
+                </div>
+                {/* <div className="text-center">TEST2</div> */}
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

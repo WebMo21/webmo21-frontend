@@ -9,6 +9,7 @@ const PlansSection = ({ language }) => {
   const [session] = useSession();
   const [fetchedUserWeeklyPlans, setFetchedUserWeeklyPlans] = useState([]);
   const [showCreatePlanModal, setShowCreatePlanModal] = useState(false);
+  const [currentExpandedPlanCard, setCurrentExpandedPlanCard] = useState(0);
 
   const createNewWorkoutPlan = () => {
     console.log("Create Workout Plan");
@@ -119,6 +120,8 @@ const PlansSection = ({ language }) => {
                   day_7={plan.day_7}
                   language={language}
                   refetchPlans={refetchPlans}
+                  currentExpandedPlanCard={currentExpandedPlanCard}
+                  setCurrentExpandedPlanCard={setCurrentExpandedPlanCard}
                 />
               ))}
           <h2 className="max-w-6xl pl-1 mx-auto mt-8 text-xl font-medium leading-6 text-white select-none">
@@ -143,6 +146,8 @@ const PlansSection = ({ language }) => {
                   day_7={plan.day_7}
                   language={language}
                   refetchPlans={refetchPlans}
+                  currentExpandedPlanCard={currentExpandedPlanCard}
+                  setCurrentExpandedPlanCard={setCurrentExpandedPlanCard}
                 />
               ))}
         </div>
