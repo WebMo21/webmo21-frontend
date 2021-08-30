@@ -52,12 +52,25 @@ const PlansSection = ({ language }) => {
       .then((response) =>
         response
           .json()
-          .then((data) => setFetchedUserWeeklyPlans(data.weeklyWorkoutPlans))
+          .then((data) =>
+            setFetchedUserWeeklyPlans(
+              data.weeklyWorkoutPlans.sort(
+                (a, b) =>
+                  parseInt(b.year) +
+                  parseInt(b.calendar_week) +
+                  parseInt(b.id) -
+                  (parseInt(a.year) +
+                    parseInt(a.calendar_week) +
+                    parseInt(a.id))
+              )
+            )
+          )
           .catch((e) => console.log(e))
       )
       .catch((e) => console.log(e));
 
   const refetchPlans = () => {
+    setFetchedUserWeeklyPlans([]);
     fetchUserWeeklyPlans(session.user.id);
   };
 

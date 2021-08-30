@@ -15,6 +15,7 @@ const PlanWorkoutCard = ({
   day,
   language,
   callbackFindAndRemoveWorkoutFromPlan,
+  callbackUpdateWorkoutWithinPlan,
 }) => {
   const [session] = useSession();
   const [gender, setGender] = useState("");
@@ -51,12 +52,28 @@ const PlanWorkoutCard = ({
     if (
       !updateTimeStart ||
       !updateTimeEnd ||
-      !updateTrackedTime ||
+      (!updateTrackedTime && parseInt(updateTrackedTime) !== 0) ||
       !/^\d{2}:\d{2}$/.test(updateTimeStart) ||
       !/^\d{2}:\d{2}$/.test(updateTimeEnd) ||
       !/^[0-9]*$/.test(updateTrackedTime)
     ) {
-      console.log("ERROR");
+      console.log("ERROR WRONG INPUT");
+      console.log("updateTimeStart", updateTimeStart);
+      console.log("updateTimeEnd", updateTimeEnd);
+      console.log("updateTrackedTime", updateTrackedTime);
+      console.log(
+        "/^d{2}:d{2}$/.test(updateTimeStart)",
+        /^\d{2}:\d{2}$/.test(updateTimeStart)
+      );
+      console.log(
+        "/^d{2}:d{2}$/.test(updateTimeEnd)",
+        /^\d{2}:\d{2}$/.test(updateTimeEnd)
+      );
+      console.log(
+        "/^[0-9]*$/.test(updateTrackedTime)",
+        /^[0-9]*$/.test(updateTrackedTime)
+      );
+
       setShowInputErrorTime(true);
       return null;
     }
@@ -68,12 +85,20 @@ const PlanWorkoutCard = ({
       Math.floor(parseInt(updateTrackedTime)) ===
         Math.floor(parseInt(workoutTrackedTime) / 60)
     ) {
+      console.log("ERROR NO UPDATE");
       return null;
     }
 
-    //BACKEND REQUEST TO UPDATE WORKOUT
-    console.log("NO ERROR");
-    /* setShowInputErrorTime(false); */
+    callbackUpdateWorkoutWithinPlan(
+      workoutId,
+      day,
+      updateTimeStart,
+      updateTimeEnd,
+      updateCompleted,
+      Math.floor(parseInt(updateTrackedTime)),
+      workoutTimeStart,
+      workoutTimeEnd
+    );
   };
 
   useEffect(() => {
