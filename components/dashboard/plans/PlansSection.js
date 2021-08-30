@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { PlusIcon } from "@heroicons/react/solid";
 import { useSession } from "next-auth/client";
 
@@ -97,7 +96,6 @@ const PlansSection = ({ language }) => {
                 className="flex items-center justify-center h-12"
               >
                 <PlusIcon className="w-10 h-10 text-gray-400" />
-                {console.log("fetchedUserWeeklyPlans", fetchedUserWeeklyPlans)}
               </div>
             </div>
           </div>
@@ -122,6 +120,7 @@ const PlansSection = ({ language }) => {
                   refetchPlans={refetchPlans}
                   currentExpandedPlanCard={currentExpandedPlanCard}
                   setCurrentExpandedPlanCard={setCurrentExpandedPlanCard}
+                  wholePlan={plan}
                 />
               ))}
           <h2 className="max-w-6xl pl-1 mx-auto mt-8 text-xl font-medium leading-6 text-white select-none">
@@ -148,6 +147,7 @@ const PlansSection = ({ language }) => {
                   refetchPlans={refetchPlans}
                   currentExpandedPlanCard={currentExpandedPlanCard}
                   setCurrentExpandedPlanCard={setCurrentExpandedPlanCard}
+                  wholePlan={plan}
                 />
               ))}
         </div>

@@ -3,6 +3,7 @@ import { useSession } from "next-auth/client";
 
 import { findMuscleGroup } from "../workouts/WorkoutsSection";
 import ViewWorkoutModal from "./ViewWorkoutModal";
+import DeleteWorkoutFromPlanModal from "./DeleteWorkoutFromPlanModal";
 import InputErrorTimeModal from "./InputErrorTimeModal";
 
 const PlanWorkoutCard = ({
@@ -11,7 +12,9 @@ const PlanWorkoutCard = ({
   workoutTimeStart,
   workoutTimeEnd,
   workoutTrackedTime,
+  day,
   language,
+  callbackFindAndRemoveWorkoutFromPlan,
 }) => {
   const [session] = useSession();
   const [gender, setGender] = useState("");
@@ -23,6 +26,8 @@ const PlanWorkoutCard = ({
     Math.floor(parseInt(workoutTrackedTime) / 60)
   );
   const [showViewWorkoutModal, setShowViewWorkoutModal] = useState(false);
+  const [showDeleteWorkoutFromPlanModal, setShowDeleteWorkoutFromPlanModal] =
+    useState(false);
   const [showInputErrorTime, setShowInputErrorTime] = useState(false);
 
   // TODO Take care about a user asking for workouts from admin template in backend auth check
@@ -77,11 +82,7 @@ const PlanWorkoutCard = ({
       setGender(session.user.gender);
     }
   }, []);
-  {
-    /* <div>{workoutId}</div>
-      {console.log("ID", workoutId)}
-      {console.log("WORKOUT DETAILS", fetchedWorkoutDetails)} */
-  }
+
   return (
     <div
       className="flex-col items-center h-full pb-1 mx-3 my-3 transition duration-300 ease-in transform bg-gray-500 rounded-lg"
@@ -94,6 +95,22 @@ const PlanWorkoutCard = ({
           setShowViewWorkoutModal={setShowViewWorkoutModal}
           language={language}
           gender={gender}
+        />
+      ) : (
+        ""
+      )}
+      {showDeleteWorkoutFromPlanModal ? (
+        <DeleteWorkoutFromPlanModal
+          showDeleteWorkoutFromPlanModal={showDeleteWorkoutFromPlanModal}
+          setShowDeleteWorkoutFromPlanModal={setShowDeleteWorkoutFromPlanModal}
+          callbackFindAndRemoveWorkoutFromPlan={
+            callbackFindAndRemoveWorkoutFromPlan
+          }
+          workoutId={workoutId}
+          workoutTimeStart={workoutTimeStart}
+          workoutTimeEnd={workoutTimeEnd}
+          day={day}
+          language={language}
         />
       ) : (
         ""
@@ -223,7 +240,7 @@ const PlanWorkoutCard = ({
             {language && language === "DE" ? "Ansehen" : "Show"}
           </div>
           <div
-            /* onClick={() => deleteWorkout() */
+            onClick={() => setShowDeleteWorkoutFromPlanModal(true)}
             className="p-1 my-1 text-sm font-semibold text-center text-white bg-red-500 border border-transparent border-red-500 rounded cursor-pointer select-none hover:bg-red-400"
           >
             {language && language === "DE" ? "Entfernen" : "Remove"}

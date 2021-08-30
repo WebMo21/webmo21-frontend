@@ -11,7 +11,7 @@ const EditWorkoutModal = ({
   gender,
 }) => {
   const cancelButtonRef = useRef(null);
-  const [updatedWorkout, setUpdatedWorkout] = useState({
+  const [updatedWorkout] = useState({
     name: viewWorkoutData?.name,
     muscle_group: viewWorkoutData?.muscle_group,
     repetition_count: viewWorkoutData?.repetition_count,
