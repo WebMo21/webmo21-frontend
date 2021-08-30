@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { PlusIcon } from "@heroicons/react/solid";
+import { format, addDays } from "date-fns";
 
 import PlanWorkoutCard from "./PlanWorkoutCard";
 
@@ -351,6 +352,15 @@ const PlanCard = ({
       .catch((e) => console.log(e));
   };
 
+  function getDateOfISOWeek(w, y) {
+    var simple = new Date(y, 0, 1 + (w - 1) * 7);
+    var dow = simple.getDay();
+    var ISOweekStart = simple;
+    if (dow <= 4) ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+    else ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+    return ISOweekStart;
+  }
+
   return (
     <div className="p-8 py-6 mt-5 transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer md:flex md:items-center md:justify-between">
       <div className="flex-1 min-w-0">
@@ -385,6 +395,12 @@ const PlanCard = ({
               <div className="w-full max-w-full mt-4">
                 <div className="flex justify-center max-w-full">
                   <div className="w-full h-full max-w-full ml-3 mr-3">
+                    <div className="mb-1 font-bold text-center text-white text-md">
+                      {format(
+                        getDateOfISOWeek(calendar_week, year),
+                        "dd.MM.yyyy"
+                      )}
+                    </div>
                     <div className="mb-1 font-bold text-center text-green-500 text-md">
                       MONTAG
                     </div>
@@ -442,6 +458,12 @@ const PlanCard = ({
                     </div>
                   </div>
                   <div className="h-full ml-3 mr-3">
+                    <div className="mb-1 font-bold text-center text-white text-md">
+                      {format(
+                        addDays(getDateOfISOWeek(calendar_week, year), 1),
+                        "dd.MM.yyyy"
+                      )}
+                    </div>
                     <div className="mb-1 font-bold text-center text-green-500 text-md">
                       DIENSTAG
                     </div>
@@ -499,6 +521,12 @@ const PlanCard = ({
                     </div>
                   </div>
                   <div className="h-full ml-3 mr-3">
+                    <div className="mb-1 font-bold text-center text-white text-md">
+                      {format(
+                        addDays(getDateOfISOWeek(calendar_week, year), 2),
+                        "dd.MM.yyyy"
+                      )}
+                    </div>
                     <div className="mb-1 font-bold text-center text-green-500 text-md">
                       MITTWOCH
                     </div>
@@ -556,6 +584,12 @@ const PlanCard = ({
                     </div>
                   </div>
                   <div className="h-full ml-3 mr-3">
+                    <div className="mb-1 font-bold text-center text-white text-md">
+                      {format(
+                        addDays(getDateOfISOWeek(calendar_week, year), 3),
+                        "dd.MM.yyyy"
+                      )}
+                    </div>
                     <div className="mb-1 font-bold text-center text-green-500 text-md">
                       DONNERSTAG
                     </div>
@@ -613,6 +647,12 @@ const PlanCard = ({
                     </div>
                   </div>
                   <div className="h-full ml-3 mr-3">
+                    <div className="mb-1 font-bold text-center text-white text-md">
+                      {format(
+                        addDays(getDateOfISOWeek(calendar_week, year), 4),
+                        "dd.MM.yyyy"
+                      )}
+                    </div>
                     <div className="mb-1 font-bold text-center text-green-500 text-md">
                       FREITAG
                     </div>
@@ -670,6 +710,12 @@ const PlanCard = ({
                     </div>
                   </div>
                   <div className="h-full ml-3 mr-3">
+                    <div className="mb-1 font-bold text-center text-white text-md">
+                      {format(
+                        addDays(getDateOfISOWeek(calendar_week, year), 5),
+                        "dd.MM.yyyy"
+                      )}
+                    </div>
                     <div className="mb-1 font-bold text-center text-green-500 text-md">
                       SAMSTAG
                     </div>
@@ -727,6 +773,12 @@ const PlanCard = ({
                     </div>
                   </div>
                   <div className="h-full ml-3 mr-3">
+                    <div className="mb-1 font-bold text-center text-white text-md">
+                      {format(
+                        addDays(getDateOfISOWeek(calendar_week, year), 6),
+                        "dd.MM.yyyy"
+                      )}
+                    </div>
                     <div className="mb-1 font-bold text-center text-green-500 text-md">
                       SONNTAG
                     </div>
