@@ -3,6 +3,7 @@ import { useSession } from "next-auth/client";
 
 import { findMuscleGroup } from "../workouts/WorkoutsSection";
 import ViewWorkoutModal from "./ViewWorkoutModal";
+import InputErrorTimeModal from "./InputErrorTimeModal";
 
 const PlanWorkoutCard = ({
   workoutId,
@@ -18,9 +19,11 @@ const PlanWorkoutCard = ({
   const [updateTimeStart, setUpdateTimeStart] = useState(workoutTimeStart);
   const [updateTimeEnd, setUpdateTimeEnd] = useState(workoutTimeEnd);
   const [updateCompleted, setUpdateCompleted] = useState(workoutCompleted);
-  const [updateTrackedTime, setUpdateTrackedTime] =
-    useState(workoutTrackedTime);
+  const [updateTrackedTime, setUpdateTrackedTime] = useState(
+    Math.floor(parseInt(workoutTrackedTime) / 60)
+  );
   const [showViewWorkoutModal, setShowViewWorkoutModal] = useState(false);
+  const [showInputErrorTime, setShowInputErrorTime] = useState(false);
 
   // TODO Take care about a user asking for workouts from admin template in backend auth check
   const fetchWorkoutDetails = () =>
@@ -38,6 +41,35 @@ const PlanWorkoutCard = ({
           .catch((e) => console.log(e))
       )
       .catch((e) => console.log(e));
+
+  const updateWorkout = () => {
+    if (
+      !updateTimeStart ||
+      !updateTimeEnd ||
+      !updateTrackedTime ||
+      !/^\d{2}:\d{2}$/.test(updateTimeStart) ||
+      !/^\d{2}:\d{2}$/.test(updateTimeEnd) ||
+      !/^[0-9]*$/.test(updateTrackedTime)
+    ) {
+      console.log("ERROR");
+      setShowInputErrorTime(true);
+      return null;
+    }
+
+    if (
+      updateTimeStart === workoutTimeStart &&
+      updateTimeEnd === workoutTimeEnd &&
+      updateCompleted === workoutCompleted &&
+      Math.floor(parseInt(updateTrackedTime)) ===
+        Math.floor(parseInt(workoutTrackedTime) / 60)
+    ) {
+      return null;
+    }
+
+    //BACKEND REQUEST TO UPDATE WORKOUT
+    console.log("NO ERROR");
+    /* setShowInputErrorTime(false); */
+  };
 
   useEffect(() => {
     if (session) {
@@ -62,6 +94,15 @@ const PlanWorkoutCard = ({
           setShowViewWorkoutModal={setShowViewWorkoutModal}
           language={language}
           gender={gender}
+        />
+      ) : (
+        ""
+      )}
+      {showInputErrorTime ? (
+        <InputErrorTimeModal
+          showInputErrorTime={showInputErrorTime}
+          setShowInputErrorTime={setShowInputErrorTime}
+          language={language}
         />
       ) : (
         ""
@@ -94,8 +135,10 @@ const PlanWorkoutCard = ({
               type="text"
               name="start"
               id="start-time"
-              className="block w-full text-xs border border-transparent border-gray-300 rounded-md shadow-sm outline-none"
-              placeholder={workoutTimeStart}
+              maxLength="5"
+              className="block w-full text-xs text-center border border-transparent border-gray-300 rounded-md shadow-sm outline-none"
+              value={updateTimeStart}
+              onChange={(event) => setUpdateTimeStart(event.target.value)}
             />
           </div>
           <div className="flex-col">
@@ -104,10 +147,12 @@ const PlanWorkoutCard = ({
             </div>
             <input
               type="text"
-              name="start"
-              id="start-time"
-              className="block w-full text-xs border-gray-300 rounded-md shadow-sm"
-              placeholder={workoutTimeEnd}
+              name="end"
+              id="end-time"
+              maxLength="5"
+              className="block w-full text-xs text-center border-gray-300 rounded-md shadow-sm"
+              value={updateTimeEnd}
+              onChange={(event) => setUpdateTimeEnd(event.target.value)}
             />
           </div>
           <div className="w-full text-sm text-center text-gray-300 select-none">
@@ -148,16 +193,27 @@ const PlanWorkoutCard = ({
                 alt="workout unchecked icon"
               />
             )}
+            <div className="w-full text-xs text-center text-gray-300 select-none">
+              {language === "DE" ? "Erf. Zeit (min)" : "Used Time(min) "}
+            </div>
             <input
               type="text"
-              name="start"
-              id="start-time"
-              className="block w-full text-xs bg-gray-600 border-gray-300 rounded-md shadow-sm"
-              placeholder={workoutTimeEnd}
+              name="tracked"
+              id="tracked-time"
+              maxLength="3"
+              className="block w-full text-xs text-center bg-gray-600 border-gray-300 rounded-md shadow-sm"
+              value={Math.floor(parseInt(updateTrackedTime))}
+              onChange={(event) =>
+                setUpdateTrackedTime(Math.floor(parseInt(event.target.value)))
+              }
+              placeholder={workoutTrackedTime}
             />
           </div>
 
-          <div className="p-1 my-1 text-sm font-semibold text-center text-white bg-green-500 border border-transparent border-yellow-500 rounded cursor-pointer select-none hover:bg-green-400">
+          <div
+            onClick={() => updateWorkout()}
+            className="p-1 my-1 text-sm font-semibold text-center text-white bg-green-500 border border-transparent border-yellow-500 rounded cursor-pointer select-none hover:bg-green-400"
+          >
             {language && language === "DE" ? "Speichern" : "Save"}
           </div>
           <div
@@ -165,6 +221,12 @@ const PlanWorkoutCard = ({
             className="p-1 my-1 text-sm font-semibold text-center text-white bg-yellow-500 border border-transparent border-yellow-500 rounded cursor-pointer select-none hover:bg-yellow-400"
           >
             {language && language === "DE" ? "Ansehen" : "Show"}
+          </div>
+          <div
+            /* onClick={() => deleteWorkout() */
+            className="p-1 my-1 text-sm font-semibold text-center text-white bg-red-500 border border-transparent border-red-500 rounded cursor-pointer select-none hover:bg-red-400"
+          >
+            {language && language === "DE" ? "Entfernen" : "Remove"}
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { PlusIcon } from "@heroicons/react/solid";
 /* import DeleteWorkoutModal from "./DeleteWorkoutModal"; */
 import PlanWorkoutCard from "./PlanWorkoutCard";
 
@@ -75,6 +75,16 @@ const PlanCard = ({
                           ))
                         : ""}
                     </div>
+                    <div className="p-8 py-2 mt-2 transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer md:flex md:items-center md:justify-between hover:scale-105">
+                      <div className="flex-1 min-w-0">
+                        <div
+                          onClick={() => createNewWorkoutPlan()}
+                          className="flex items-center justify-center h-12"
+                        >
+                          <PlusIcon className="w-10 h-10 text-gray-400 transition duration-300 transform hover:scale-105" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div className="h-full ml-3 mr-3">
                     <div className="mb-1 font-bold text-center text-green-500 text-md">
@@ -97,6 +107,16 @@ const PlanCard = ({
                             />
                           ))
                         : ""}
+                    </div>
+                    <div className="p-8 py-2 mt-2 transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer md:flex md:items-center md:justify-between hover:scale-105">
+                      <div className="flex-1 min-w-0">
+                        <div
+                          onClick={() => createNewWorkoutPlan()}
+                          className="flex items-center justify-center h-12"
+                        >
+                          <PlusIcon className="w-10 h-10 text-gray-400 transition duration-300 transform hover:scale-105" />
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="h-full ml-3 mr-3">
@@ -121,6 +141,16 @@ const PlanCard = ({
                           ))
                         : ""}
                     </div>
+                    <div className="p-8 py-2 mt-2 transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer md:flex md:items-center md:justify-between hover:scale-105">
+                      <div className="flex-1 min-w-0">
+                        <div
+                          onClick={() => createNewWorkoutPlan()}
+                          className="flex items-center justify-center h-12"
+                        >
+                          <PlusIcon className="w-10 h-10 text-gray-400 transition duration-300 transform hover:scale-105" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div className="h-full ml-3 mr-3">
                     <div className="mb-1 font-bold text-center text-green-500 text-md">
@@ -143,6 +173,16 @@ const PlanCard = ({
                             />
                           ))
                         : ""}
+                    </div>
+                    <div className="p-8 py-2 mt-2 transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer md:flex md:items-center md:justify-between hover:scale-105">
+                      <div className="flex-1 min-w-0">
+                        <div
+                          onClick={() => createNewWorkoutPlan()}
+                          className="flex items-center justify-center h-12"
+                        >
+                          <PlusIcon className="w-10 h-10 text-gray-400 transition duration-300 transform hover:scale-105" />
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="h-full ml-3 mr-3">
@@ -167,6 +207,16 @@ const PlanCard = ({
                           ))
                         : ""}
                     </div>
+                    <div className="p-8 py-2 mt-2 transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer md:flex md:items-center md:justify-between hover:scale-105">
+                      <div className="flex-1 min-w-0">
+                        <div
+                          onClick={() => createNewWorkoutPlan()}
+                          className="flex items-center justify-center h-12"
+                        >
+                          <PlusIcon className="w-10 h-10 text-gray-400 transition duration-300 transform hover:scale-105" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div className="h-full ml-3 mr-3">
                     <div className="mb-1 font-bold text-center text-green-500 text-md">
@@ -189,6 +239,16 @@ const PlanCard = ({
                             />
                           ))
                         : ""}
+                    </div>
+                    <div className="p-8 py-2 mt-2 transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer md:flex md:items-center md:justify-between hover:scale-105">
+                      <div className="flex-1 min-w-0">
+                        <div
+                          onClick={() => createNewWorkoutPlan()}
+                          className="flex items-center justify-center h-12"
+                        >
+                          <PlusIcon className="w-10 h-10 text-gray-400 transition duration-300 transform hover:scale-105" />
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="h-full ml-3 mr-3">
@@ -213,8 +273,19 @@ const PlanCard = ({
                           ))
                         : ""}
                     </div>
+                    <div className="p-8 py-2 mt-2 transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer md:flex md:items-center md:justify-between hover:scale-105">
+                      <div className="flex-1 min-w-0">
+                        <div
+                          onClick={() => createNewWorkoutPlan()}
+                          className="flex items-center justify-center h-12"
+                        >
+                          <PlusIcon className="w-10 h-10 text-gray-400 transition duration-300 transform hover:scale-105" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
+
                 {/* <div className="text-center">TEST2</div> */}
               </div>
             ) : (

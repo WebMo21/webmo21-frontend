@@ -15,12 +15,14 @@ import {
 } from "@heroicons/react/solid";
 
 import NavbarLogo from "../components/dashboard/navbar/NavbarLogo";
+import PlayLogo from "../components/dashboard/navbar/PlayLogo";
 import Navigation from "../components/dashboard/navbar/Navigation";
 import MobileMenu from "../components/dashboard/navbar/MobileMenu";
 import DashboardSideBar from "../components/dashboard/DashboardSideBar";
 import HomeSection from "../components/dashboard/home/HomeSection";
 import PlansSection from "../components/dashboard/plans/PlansSection";
 import WorkoutsSection from "../components/dashboard/workouts/WorkoutsSection";
+import TrainingStartSection from "../components/dashboard/training-start/TrainingStartSection";
 import SettingsSection from "../components/dashboard/settings/SettingsSection";
 import AdminSection from "../components/dashboard/admin/AdminSection";
 
@@ -47,6 +49,12 @@ const navigation = [
         title: "Übungen",
         englishTitle: "Workouts",
         icon: LightningBoltIcon,
+      },
+      {
+        name: "start",
+        title: "Start",
+        englishTitle: "Start",
+        icon: PlayLogo,
       },
       {
         name: "settings",
@@ -86,6 +94,12 @@ const sidebarNavigation = [
     englishTitle: "Workouts",
     icon: LightningBoltIcon,
     current: false,
+  },
+  {
+    name: "start",
+    title: "Start",
+    englishTitle: "Start",
+    icon: PlayLogo,
   },
   {
     name: "settings",
@@ -176,6 +190,10 @@ export default function Dashboard() {
                   ? language === "DE"
                     ? "Übungen"
                     : "Workouts"
+                  : activeSideBarSection === "start"
+                  ? language === "DE"
+                    ? "Trainingsbeginn"
+                    : "Training Start"
                   : activeSideBarSection === "settings"
                   ? language === "DE"
                     ? "Einstellungen"
@@ -261,6 +279,9 @@ export default function Dashboard() {
                 )}
                 {activeSideBarSection === "workouts" && (
                   <WorkoutsSection language={language} />
+                )}
+                {activeSideBarSection === "start" && (
+                  <TrainingStartSection language={language} />
                 )}
                 {activeSideBarSection === "settings" && (
                   <SettingsSection language={language} />
