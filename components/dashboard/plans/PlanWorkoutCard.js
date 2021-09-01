@@ -4,7 +4,7 @@ import { useSession } from "next-auth/client";
 import { findMuscleGroup } from "../workouts/WorkoutsSection";
 import ViewWorkoutModal from "./ViewWorkoutModal";
 import DeleteWorkoutFromPlanModal from "./DeleteWorkoutFromPlanModal";
-import InputErrorTimeModal from "./InputErrorTimeModal";
+import InputErrorTimeModal from "./ErrorModal";
 
 const PlanWorkoutCard = ({
   workoutId,
@@ -144,6 +144,14 @@ const PlanWorkoutCard = ({
         <InputErrorTimeModal
           showInputErrorTime={showInputErrorTime}
           setShowInputErrorTime={setShowInputErrorTime}
+          germanTitleText={"Error in der Zeitangabe"}
+          englishTitleText={"Error In Time Input"}
+          germanText={
+            "Die Zeit muss im Format hh:mm für Start- und Endzeitpunkt und optional benötigte Zeit in Minuten als Zahl angegeben werden."
+          }
+          englishText={
+            "The time has to be inserted in the format hh:mm for start and end time and optionally the tracked time in minutes als digit."
+          }
           language={language}
         />
       ) : (

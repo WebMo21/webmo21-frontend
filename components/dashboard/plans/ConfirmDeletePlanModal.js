@@ -1,16 +1,18 @@
 import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-const InputErrorTimeModal = ({
-  showInputErrorTime,
-  setShowInputErrorTime,
+const DeleteWorkoutFromPlanModal = ({
+  showConfirmDeletePlanModal,
+  setShowConfirmDeletePlanModal,
+  callbackDeleteWeeklyWorkoutPlan,
+  id,
   language,
 }) => {
   const cancelButtonRef = useRef(null);
 
   return (
     <Transition.Root
-      show={showInputErrorTime ? showInputErrorTime : false}
+      show={showConfirmDeletePlanModal ? showConfirmDeletePlanModal : false}
       as={Fragment}
     >
       <Dialog
@@ -18,8 +20,8 @@ const InputErrorTimeModal = ({
         static
         className="fixed inset-0 z-50 overflow-y-auto"
         initialFocus={cancelButtonRef}
-        open={showInputErrorTime}
-        onClose={setShowInputErrorTime}
+        open={showConfirmDeletePlanModal}
+        onClose={setShowConfirmDeletePlanModal}
       >
         <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -34,7 +36,6 @@ const InputErrorTimeModal = ({
             <Dialog.Overlay className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" />
           </Transition.Child>
 
-          {/* This element is to trick the browser into centering the modal contents. */}
           <span
             className="hidden sm:inline-block sm:align-middle sm:h-screen"
             aria-hidden="true"
@@ -55,24 +56,32 @@ const InputErrorTimeModal = ({
               data-aos="fade-in"
             >
               <div>
-                <h2 className="text-2xl font-bold text-center text-green-500 truncate select-none">
+                <h2 className="mb-4 text-2xl font-bold text-center text-green-500 select-none">
                   {language === "DE"
-                    ? "Error in der Zeitangabe"
-                    : "Error In Time Input "}
+                    ? "Bist du dir sicher den Trainingsplan zu löschen?"
+                    : "Are You Sure About Deleting That Weekly Workout Plan?"}
                 </h2>
-                <h2 className="my-2 font-bold text-center text-white select-none text-md">
-                  {language === "DE"
-                    ? "Die Zeit muss im Format hh:mm für Start- und Endzeitpunkt und optional benötigte Zeit in Minuten als Zahl angegeben werden."
-                    : "The time has to be inserted in the format hh:mm for start and end time and optionally the tracked time in minutes als digit."}
-                </h2>
-                <button
-                  type="button"
-                  className="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-gray-300 border border-gray-300 rounded-md shadow-sm select-none hover:bg-gray-200 sm:mt-0 sm:col-start-1 sm:text-sm focus:outline-none"
-                  onClick={() => setShowInputErrorTime(false)}
-                  ref={cancelButtonRef}
-                >
-                  {language === "DE" ? "Schließen" : "Close"}
-                </button>
+                <div className="flex pt-4 mb-2">
+                  <button
+                    type="button"
+                    className="inline-flex justify-center w-full px-4 py-2 mt-3 ml-2 mr-4 text-base font-medium text-gray-700 bg-gray-300 border border-gray-300 rounded-md shadow-sm select-none hover:bg-gray-200 sm:mt-0 sm:col-start-1 sm:text-sm focus:outline-none"
+                    onClick={() => setShowConfirmDeletePlanModal(false)}
+                    ref={cancelButtonRef}
+                  >
+                    {language === "DE" ? "Abbrechen" : "Abort"}
+                  </button>
+                  <button
+                    type="button"
+                    className="inline-flex justify-center w-full px-4 py-2 mt-3 ml-4 mr-2 text-base font-medium text-white bg-red-500 border border-red-500 rounded-md shadow-sm select-none hover:bg-red-400 sm:mt-0 sm:col-start-1 sm:text-sm focus:outline-none"
+                    onClick={() => {
+                      callbackDeleteWeeklyWorkoutPlan(id);
+                      setShowConfirmDeletePlanModal(false);
+                    }}
+                    ref={cancelButtonRef}
+                  >
+                    {language === "DE" ? "Löschen" : "Delete"}
+                  </button>
+                </div>
               </div>
             </div>
           </Transition.Child>
@@ -82,4 +91,4 @@ const InputErrorTimeModal = ({
   );
 };
 
-export default InputErrorTimeModal;
+export default DeleteWorkoutFromPlanModal;

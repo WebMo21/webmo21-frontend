@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { PlusIcon } from "@heroicons/react/solid";
 import { format, addDays } from "date-fns";
 
+import EditPlanModal from "./EditPlanModal";
 import PlanWorkoutCard from "./PlanWorkoutCard";
 
 const PlanCard = ({
@@ -22,6 +23,8 @@ const PlanCard = ({
   setCurrentExpandedPlanCard,
   wholePlan,
 }) => {
+  const [showEditPlanModal, setShowEditPlanModal] = useState(false);
+
   const findAndRemoveWorkoutFromPlan = (
     originalPlan,
     workoutId,
@@ -374,6 +377,36 @@ const PlanCard = ({
               }
               className="relative flex content-between w-full mb-2 text-2xl font-bold text-green-500 select-none"
             >
+              {showEditPlanModal ? (
+                <EditPlanModal
+                  showEditPlanModal={showEditPlanModal}
+                  setShowEditPlanModal={setShowEditPlanModal}
+                  name={name}
+                  year={year}
+                  calendarWeek={calendar_week}
+                  id={id}
+                  language={language}
+                  refetchPlans={refetchPlans}
+                />
+              ) : (
+                ""
+              )}
+              <div className="absolute inset-y-0 left-0 mt-3 ml-3 text-white ">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  onClick={() => setShowEditPlanModal(true)}
+                >
+                  <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                  <path
+                    fillRule="evenodd"
+                    d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
               <div className="w-full text-center">
                 {name} {id}
               </div>

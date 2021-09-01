@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { PlusIcon } from "@heroicons/react/solid";
 import { useSession } from "next-auth/client";
 
+import CreatePlanModal from "./CreatePlanModal";
 import PlanCard from "./PlanCard";
 
 const PlansSection = ({ language }) => {
@@ -10,9 +11,9 @@ const PlansSection = ({ language }) => {
   const [showCreatePlanModal, setShowCreatePlanModal] = useState(false);
   const [currentExpandedPlanCard, setCurrentExpandedPlanCard] = useState(0);
 
-  const createNewWorkoutPlan = () => {
+  /*  const createNewWorkoutPlan = () => {
     console.log("Create Workout Plan");
-  };
+  }; */
 
   const isPlanCurrentOrFuture = (plan) => {
     const date = new Date();
@@ -105,7 +106,7 @@ const PlansSection = ({ language }) => {
           <div className="p-8 py-6 mt-5 transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer md:flex md:items-center md:justify-between hover:scale-105">
             <div className="flex-1 min-w-0">
               <div
-                onClick={() => createNewWorkoutPlan()}
+                onClick={() => setShowCreatePlanModal(true)}
                 className="flex items-center justify-center h-12"
               >
                 <PlusIcon className="w-10 h-10 text-gray-400" />

@@ -66,10 +66,10 @@ const DeleteWorkoutFromPlanModal = ({
                     ? "Bitte bestätige das Löschen des Workouts aus deinem dem Wochenplan"
                     : "Please Confirm The Deletion Of The Workout From Your Weekly Workout Plan"}
                 </h2>
-                <div className="flex">
+                <div className="flex pt-4 mb-2">
                   <button
                     type="button"
-                    className="inline-flex justify-center w-full px-4 py-2 mt-3 mr-4 text-base font-medium text-gray-700 bg-gray-300 border border-gray-300 rounded-md shadow-sm select-none hover:bg-gray-200 sm:mt-0 sm:col-start-1 sm:text-sm focus:outline-none"
+                    className="inline-flex justify-center w-full px-4 py-2 mt-3 ml-2 mr-4 text-base font-medium text-gray-700 bg-gray-300 border border-gray-300 rounded-md shadow-sm select-none hover:bg-gray-200 sm:mt-0 sm:col-start-1 sm:text-sm focus:outline-none"
                     onClick={() => setShowDeleteWorkoutFromPlanModal(false)}
                     ref={cancelButtonRef}
                   >
@@ -77,7 +77,7 @@ const DeleteWorkoutFromPlanModal = ({
                   </button>
                   <button
                     type="button"
-                    className="inline-flex justify-center w-full px-4 py-2 mt-3 ml-4 text-base font-medium text-white bg-red-500 border border-red-500 rounded-md shadow-sm select-none hover:bg-red-400 sm:mt-0 sm:col-start-1 sm:text-sm focus:outline-none"
+                    className="inline-flex justify-center w-full px-4 py-2 mt-3 ml-4 mr-2 text-base font-medium text-white bg-red-500 border border-red-500 rounded-md shadow-sm select-none hover:bg-red-400 sm:mt-0 sm:col-start-1 sm:text-sm focus:outline-none"
                     onClick={() => {
                       callbackFindAndRemoveWorkoutFromPlan(
                         workoutId,
