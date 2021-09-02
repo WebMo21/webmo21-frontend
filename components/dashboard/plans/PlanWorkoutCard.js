@@ -55,7 +55,13 @@ const PlanWorkoutCard = ({
       (!updateTrackedTime && parseInt(updateTrackedTime) !== 0) ||
       !/^\d{2}:\d{2}$/.test(updateTimeStart) ||
       !/^\d{2}:\d{2}$/.test(updateTimeEnd) ||
-      !/^[0-9]*$/.test(updateTrackedTime)
+      !/^[0-9]*$/.test(updateTrackedTime) ||
+      parseInt(updateTimeEnd.replace(":", "")) -
+        parseInt(updateTimeStart.replace(":", "")) <
+        1 ||
+      parseInt(updateTimeEnd.replace(":", "")) -
+        parseInt(updateTimeStart.replace(":", "")) >
+        2359
     ) {
       console.log("ERROR WRONG INPUT");
       console.log("updateTimeStart", updateTimeStart);
@@ -111,6 +117,7 @@ const PlanWorkoutCard = ({
   return (
     <div
       className="flex-col items-center h-full pb-1 mx-3 my-3 transition duration-300 ease-in transform bg-gray-500 rounded-lg"
+      title={fetchedWorkoutDetails && fetchedWorkoutDetails.name}
       key={workoutId}
     >
       {showViewWorkoutModal && fetchedWorkoutDetails ? (
@@ -144,13 +151,13 @@ const PlanWorkoutCard = ({
         <InputErrorTimeModal
           showInputErrorTime={showInputErrorTime}
           setShowInputErrorTime={setShowInputErrorTime}
-          germanTitleText={"Error in der Zeitangabe"}
+          germanTitleText={"Fehler in der Zeitangabe"}
           englishTitleText={"Error In Time Input"}
           germanText={
             "Die Zeit muss im Format hh:mm für Start- und Endzeitpunkt und optional benötigte Zeit in Minuten als Zahl angegeben werden."
           }
           englishText={
-            "The time has to be inserted in the format hh:mm for start and end time and optionally the tracked time in minutes als digit."
+            "The time has to be inserted in the format hh:mm for start and end time and optionally the tracked time in minutes as digit."
           }
           language={language}
         />

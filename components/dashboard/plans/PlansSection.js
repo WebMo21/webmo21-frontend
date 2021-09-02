@@ -145,6 +145,8 @@ const PlansSection = ({ language }) => {
                   currentExpandedPlanCard={currentExpandedPlanCard}
                   setCurrentExpandedPlanCard={setCurrentExpandedPlanCard}
                   wholePlan={plan}
+                  userId={session.user.id}
+                  gender={session.user.gender}
                 />
               ))}
           <h2 className="max-w-6xl pl-1 mx-auto mt-8 text-xl font-medium leading-6 text-white select-none">
@@ -175,6 +177,8 @@ const PlansSection = ({ language }) => {
                   currentExpandedPlanCard={currentExpandedPlanCard}
                   setCurrentExpandedPlanCard={setCurrentExpandedPlanCard}
                   wholePlan={plan}
+                  userId={session.user.id}
+                  gender={session.user.gender}
                 />
               ))}
         </div>

@@ -182,7 +182,7 @@ const CreatePlanModal = ({
                     }}
                     ref={cancelButtonRef}
                   >
-                    {language === "DE" ? "Speichern" : "Save"}
+                    {language === "DE" ? "Erstellen" : "Create"}
                   </button>
                 </div>
               </div>
