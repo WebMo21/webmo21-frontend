@@ -17,6 +17,39 @@ const landing = () => {
       : typeof window !== "undefined" && localStorage.getItem("language")
   );
 
+  const wakeup = () =>
+    fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}`.substring(
+        0,
+        process.env.NEXT_PUBLIC_BACKEND_URL.length - 3
+      ),
+      {
+        method: "get",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) =>
+        response
+          .json()
+          .then((data) => console.log("Wake up, Neo..."))
+          .catch((e) => console.log(e))
+      )
+      .catch((e) => console.log(e));
+
+  useEffect(() => {
+    wakeup();
+    console.log(
+      "TEST",
+      process.env.NEXT_PUBLIC_BACKEND_URL.substring(
+        0,
+        process.env.NEXT_PUBLIC_BACKEND_URL.length - 3
+      )
+    );
+  }, []);
+
   return (
     <>
       <NextSeo
