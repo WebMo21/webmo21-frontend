@@ -4,6 +4,7 @@ import { format, addDays } from "date-fns";
 
 import EditPlanModal from "./EditPlanModal";
 import PlanWorkoutCard from "./PlanWorkoutCard";
+import AddWorkoutToPlanModal from "./AddWorkoutToPlanModal";
 
 const PlanCard = ({
   id,
@@ -22,6 +23,8 @@ const PlanCard = ({
   currentExpandedPlanCard,
   setCurrentExpandedPlanCard,
   wholePlan,
+  userId,
+  gender,
 }) => {
   const [showEditPlanModal, setShowEditPlanModal] = useState(false);
   const [showAddWorkoutToPlanModal, setShowAddWorkoutToPlanModal] =
@@ -399,13 +402,33 @@ const PlanCard = ({
               ) : (
                 ""
               )}
+              {showAddWorkoutToPlanModal ? (
+                <AddWorkoutToPlanModal
+                  showAddWorkoutToPlanModal={showAddWorkoutToPlanModal}
+                  setShowAddWorkoutToPlanModal={setShowAddWorkoutToPlanModal}
+                  dayId={activeDay}
+                  userId={userId}
+                  gender={gender}
+                  language={language}
+                  refetchPlans={refetchPlans}
+                  year={year}
+                  calendarWeek={calendar_week}
+                  getDateOfISOWeek={getDateOfISOWeek}
+                  wholePlan={wholePlan}
+                />
+              ) : (
+                ""
+              )}
               <div className="absolute inset-y-0 left-0 mt-6 ml-3 text-white ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-5 h-5"
                   viewBox="0 0 20 20"
                   fill="currentColor"
-                  onClick={() => setShowEditPlanModal(true)}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setShowEditPlanModal(true);
+                  }}
                 >
                   <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                   <path
