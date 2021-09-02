@@ -167,9 +167,9 @@ const CreatePlanModal = ({
                     className="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-green-700 bg-green-300 border border-green-300 rounded-md shadow-sm select-none hover:bg-green-200 sm:mt-0 sm:col-start-1 sm:text-sm focus:outline-none"
                     onClick={() => {
                       if (
-                        inputYear > 2020 &&
+                        inputYear >= 2020 &&
                         inputCalendarWeek > 0 &&
-                        inputCalendarWeek < 53
+                        inputCalendarWeek <= 53
                       ) {
                         createWeeklyWorkoutPlan(
                           userId,
