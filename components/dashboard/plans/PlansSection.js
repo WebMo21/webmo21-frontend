@@ -123,6 +123,9 @@ const PlansSection = ({ language }) => {
           {fetchedUserWeeklyPlans.length > 0 &&
             fetchedUserWeeklyPlans
               .filter((plan) => isPlanCurrentOrFuture(plan))
+              .sort((a, b) => a.calendar_week - b.calendar_week)
+              .sort((a, b) => a.year - b.year)
+              .reverse()
               .map((plan) => (
                 <PlanCard
                   key={plan.id}
@@ -150,6 +153,9 @@ const PlansSection = ({ language }) => {
           {fetchedUserWeeklyPlans.length > 0 &&
             fetchedUserWeeklyPlans
               .filter((plan) => !isPlanCurrentOrFuture(plan))
+              .sort((a, b) => a.calendar_week - b.calendar_week)
+              .sort((a, b) => a.year - b.year)
+              .reverse()
               .map((plan) => (
                 <PlanCard
                   key={plan.id}

@@ -200,7 +200,7 @@ const EditPlanModal = ({
                       if (
                         inputYear > 2020 &&
                         inputCalendarWeek > 0 &&
-                        inputCalendarWeek < 53
+                        inputCalendarWeek <= 53
                       ) {
                         updateWeeklyWorkoutPlan(
                           id,
