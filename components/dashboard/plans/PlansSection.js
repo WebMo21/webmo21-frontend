@@ -15,10 +15,7 @@ const PlansSection = ({ language }) => {
     console.log("Create Workout Plan");
   }; */
 
-  const isPlanCurrentOrFuture = (plan) => {
-    if (!plan) {
-      return false;
-    }
+  const getCurrentWeekNumber = () => {
     const date = new Date();
     const currentThursday = new Date(
       date.getTime() + (3 - ((date.getDay() + 6) % 7)) * 86400000
@@ -28,17 +25,21 @@ const PlansSection = ({ language }) => {
       new Date(yearOfThursday, 0, 4).getTime() +
         (3 - ((new Date(yearOfThursday, 0, 4).getDay() + 6) % 7)) * 86400000
     );
-    const weekNumber = Math.floor(
+    return Math.floor(
       1 +
         0.5 +
         (currentThursday.getTime() - firstThursday.getTime()) / 86400000 / 7
     );
+  };
+
+  const isPlanCurrentOrFuture = (plan) => {
+    if (!plan) return false;
 
     return (
       (plan &&
-        plan.year === date.getFullYear() &&
-        plan.calendar_week >= weekNumber) ||
-      plan.year > date.getFullYear()
+        plan.year === new Date().getFullYear() &&
+        plan.calendar_week >= getCurrentWeekNumber()) ||
+      plan.year > new Date().getFullYear()
     );
   };
 
@@ -104,6 +105,8 @@ const PlansSection = ({ language }) => {
               setShowCreatePlanModal={setShowCreatePlanModal}
               showCreatePlanModal={showCreatePlanModal}
               refetchPlans={refetchPlans}
+              getCurrentWeekNumber={getCurrentWeekNumber}
+              userId={session.user.id}
               language={language}
             />
           )}

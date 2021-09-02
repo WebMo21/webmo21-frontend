@@ -2,17 +2,58 @@ import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 const CreatePlanModal = ({
-  setShowCreatePlanModal,
   showCreatePlanModal,
+  setShowCreatePlanModal,
   refetchPlans,
+  getCurrentWeekNumber,
+  userId,
   language,
 }) => {
   const cancelButtonRef = useRef(null);
   const [inputName, setInputName] = useState(
-    `${language === "DE" ? "Dein Trainingsplan" : "Your Workoutplan"}`
+    language === "DE" ? "Dein Trainingsplan" : "Your Workout Plan"
   );
   const [inputYear, setInputYear] = useState(new Date().getFullYear());
-  const [inputCalendarWeek, setInputCalendarWeek] = useState(25);
+  const [inputCalendarWeek, setInputCalendarWeek] = useState(
+    getCurrentWeekNumber()
+  );
+
+  const createWeeklyWorkoutPlan = (
+    userId,
+    planName,
+    planYear,
+    planCalendarWeek
+  ) =>
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/weekly-workout-plans`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: userId,
+        name: planName,
+        year: planYear,
+        calendar_week: planCalendarWeek,
+        day_1: [],
+        day_2: [],
+        day_3: [],
+        day_4: [],
+        day_5: [],
+        day_6: [],
+        day_7: [],
+      }),
+    })
+      .then((response) =>
+        response
+          .json()
+          .then((data) => {
+            console.log("DONE CREATING");
+            refetchPlans();
+          })
+          .catch((e) => console.log(e))
+      )
+      .catch((e) => console.log(e));
 
   return (
     <Transition.Root
@@ -60,67 +101,90 @@ const CreatePlanModal = ({
               data-aos="fade-in"
             >
               <div>
-                <h2 className="text-2xl font-bold text-center text-green-500 truncate select-none">
+                <h2 className="mb-4 text-2xl font-bold text-center text-green-500 select-none">
                   {language === "DE"
-                    ? "Erstelle deinen Trainingsplan"
-                    : "Create Your Weekly Workout Plan"}
+                    ? "Bearbeite deinen Trainingsplan"
+                    : "Edit your Weekly Workout Plan"}
                 </h2>
-                <div className="mt-3 text-center sm:mt-5">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-3xl font-bold leading-6 text-green-500 select-none"
-                  ></Dialog.Title>
+                <div className="mb-4 text-center">
+                  <div className="text-center text-white text-md">Name</div>
                   <input
                     value={inputName}
                     type="text"
-                    id="training-name"
+                    id="plan-name"
                     maxLength="40"
                     onChange={(event) => setInputName(event.target.value)}
-                    className="border !bg-gray-700 border-transparent text-2xl font-bold !text-green-500 select-none text-center w-full rounded-md placeholder-green-700"
+                    className="border !bg-gray-700 border-transparent text-2xl font-bold !text-green-500 select-none text-center rounded-md placeholder-green-700 w-full"
                   ></input>
                 </div>
                 <div className="flex mb-8">
                   <div className="mr-2">
-                    <div className="text-center text-white text-md">Jahr</div>
+                    <div className="text-center text-white text-md">
+                      {language === "DE" ? "Jahr" : "Year"}
+                    </div>
                     <input
                       value={inputYear}
                       type="text"
                       id="year-input"
                       maxLength="4"
-                      onChange={(event) => setInputYear(event.target.value)}
+                      onChange={(event) => {
+                        if (/^[0-9]*$/.test(event.target.value))
+                          setInputYear(event.target.value);
+                      }}
                       className="border !bg-gray-700 border-transparent text-2xl font-bold !text-green-500 select-none text-center rounded-md placeholder-green-700 w-full "
                     ></input>
                   </div>
 
                   <div className="ml-2">
                     <div className="text-center text-white text-md">
-                      Kalenderwoche
+                      {language === "DE" ? "Kalenderwoche" : "Calendar Week"}
                     </div>
                     <input
                       value={inputCalendarWeek}
                       type="text"
                       id="calender-week-input"
                       maxLength="2"
-                      onChange={(event) =>
-                        setInputCalendarWeek(event.target.value)
-                      }
+                      onChange={(event) => {
+                        if (/^[0-9]*$/.test(event.target.value))
+                          setInputCalendarWeek(event.target.value);
+                      }}
                       className="border !bg-gray-700 border-transparent text-2xl font-bold !text-green-500 select-none text-center rounded-md placeholder-green-700 w-full "
                     ></input>
                   </div>
                 </div>
-                <h2 className="my-2 font-bold text-center text-white select-none text-md">
-                  {language === "DE"
-                    ? "Die Zeit muss im Format hh:mm für Start- und Endzeitpunkt und optional benötigte Zeit in Minuten als Zahl angegeben werden."
-                    : "The time has to be inserted in the format hh:mm for start and end time and optionally the tracked time in minutes als digit."}
-                </h2>
-                <button
-                  type="button"
-                  className="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-gray-300 border border-gray-300 rounded-md shadow-sm select-none hover:bg-gray-200 sm:mt-0 sm:col-start-1 sm:text-sm focus:outline-none"
-                  onClick={() => setShowCreatePlanModal(false)}
-                  ref={cancelButtonRef}
-                >
-                  {language === "DE" ? "Schließen" : "Close"}
-                </button>
+
+                <div className="flex">
+                  <button
+                    type="button"
+                    className="inline-flex justify-center w-full px-4 py-2 mt-3 mr-4 text-base font-medium text-gray-700 bg-gray-300 border border-gray-300 rounded-md shadow-sm select-none hover:bg-gray-200 sm:mt-0 sm:col-start-1 sm:text-sm focus:outline-none"
+                    onClick={() => setShowCreatePlanModal(false)}
+                    ref={cancelButtonRef}
+                  >
+                    {language === "DE" ? "Abbrechen" : "Abort"}
+                  </button>
+                  <button
+                    type="button"
+                    className="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-green-700 bg-green-300 border border-green-300 rounded-md shadow-sm select-none hover:bg-green-200 sm:mt-0 sm:col-start-1 sm:text-sm focus:outline-none"
+                    onClick={() => {
+                      if (
+                        inputYear > 2020 &&
+                        inputCalendarWeek > 0 &&
+                        inputCalendarWeek < 53
+                      ) {
+                        createWeeklyWorkoutPlan(
+                          userId,
+                          inputName,
+                          inputYear,
+                          inputCalendarWeek
+                        );
+                        setShowCreatePlanModal(false);
+                      }
+                    }}
+                    ref={cancelButtonRef}
+                  >
+                    {language === "DE" ? "Speichern" : "Save"}
+                  </button>
+                </div>
               </div>
             </div>
           </Transition.Child>
