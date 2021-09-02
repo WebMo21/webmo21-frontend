@@ -1,4 +1,4 @@
-import { Fragment, useRef } from "react";
+import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 const CreatePlanModal = ({
@@ -8,6 +8,11 @@ const CreatePlanModal = ({
   language,
 }) => {
   const cancelButtonRef = useRef(null);
+  const [inputName, setInputName] = useState(
+    `${language === "DE" ? "Dein Trainingsplan" : "Your Workoutplan"}`
+  );
+  const [inputYear, setInputYear] = useState(new Date().getFullYear());
+  const [inputCalendarWeek, setInputCalendarWeek] = useState(25);
 
   return (
     <Transition.Root
@@ -66,18 +71,42 @@ const CreatePlanModal = ({
                     className="text-3xl font-bold leading-6 text-green-500 select-none"
                   ></Dialog.Title>
                   <input
-                    value="TEST"
+                    value={inputName}
                     type="text"
-                    id="workout-name"
-                    maxLength="20"
-                    /*  onChange={(event) =>
-                      setCreatedWorkout({
-                        ...createdWorkout,
-                        name: event.target.value,
-                      })
-                    } */
-                    className="border !bg-gray-700 border-transparent text-3xl font-bold !text-green-500 select-none text-center w-80 rounded-md placeholder-green-700"
+                    id="training-name"
+                    maxLength="40"
+                    onChange={(event) => setInputName(event.target.value)}
+                    className="border !bg-gray-700 border-transparent text-2xl font-bold !text-green-500 select-none text-center w-full rounded-md placeholder-green-700"
                   ></input>
+                </div>
+                <div className="flex mb-8">
+                  <div className="mr-2">
+                    <div className="text-center text-white text-md">Jahr</div>
+                    <input
+                      value={inputYear}
+                      type="text"
+                      id="year-input"
+                      maxLength="4"
+                      onChange={(event) => setInputYear(event.target.value)}
+                      className="border !bg-gray-700 border-transparent text-2xl font-bold !text-green-500 select-none text-center rounded-md placeholder-green-700 w-full "
+                    ></input>
+                  </div>
+
+                  <div className="ml-2">
+                    <div className="text-center text-white text-md">
+                      Kalenderwoche
+                    </div>
+                    <input
+                      value={inputCalendarWeek}
+                      type="text"
+                      id="calender-week-input"
+                      maxLength="2"
+                      onChange={(event) =>
+                        setInputCalendarWeek(event.target.value)
+                      }
+                      className="border !bg-gray-700 border-transparent text-2xl font-bold !text-green-500 select-none text-center rounded-md placeholder-green-700 w-full "
+                    ></input>
+                  </div>
                 </div>
                 <h2 className="my-2 font-bold text-center text-white select-none text-md">
                   {language === "DE"

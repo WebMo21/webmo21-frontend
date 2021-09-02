@@ -391,7 +391,7 @@ const PlanCard = ({
               ) : (
                 ""
               )}
-              <div className="absolute inset-y-0 left-0 mt-3 ml-3 text-white ">
+              <div className="absolute inset-y-0 left-0 mt-6 ml-3 text-white ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-5 h-5"
@@ -407,16 +407,14 @@ const PlanCard = ({
                   />
                 </svg>
               </div>
-              <div className="w-full text-center">
-                {name} {id}
-              </div>
+              <div className="w-full text-center">{name}</div>
               <div className="absolute inset-y-0 right-0 text-white">
                 <img
                   src="/icons/down-arrow.png"
                   alt="down arrow icon"
                   className={`${
                     id === currentExpandedPlanCard ? "rotate-180" : ""
-                  } object-contain w-5 h-full mt-1 mr-3 transform rounded-l select-none transition duration-300`}
+                  } object-contain w-5 h-full mt-5 mr-3 transform rounded-l select-none transition duration-300`}
                 />
               </div>
             </div>

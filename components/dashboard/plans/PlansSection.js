@@ -16,6 +16,9 @@ const PlansSection = ({ language }) => {
   }; */
 
   const isPlanCurrentOrFuture = (plan) => {
+    if (!plan) {
+      return false;
+    }
     const date = new Date();
     const currentThursday = new Date(
       date.getTime() + (3 - ((date.getDay() + 6) % 7)) * 86400000
@@ -32,9 +35,10 @@ const PlansSection = ({ language }) => {
     );
 
     return (
-      plan &&
-      plan.year >= date.getFullYear() &&
-      plan.calendar_week >= weekNumber
+      (plan &&
+        plan.year === date.getFullYear() &&
+        plan.calendar_week >= weekNumber) ||
+      plan.year > date.getFullYear()
     );
   };
 

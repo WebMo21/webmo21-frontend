@@ -43,6 +43,36 @@ const EditPlanModal = ({
       )
       .catch((e) => console.log(e));
 
+  const updateWeeklyWorkoutPlan = (
+    planId,
+    planName,
+    planYear,
+    planCalendarWeek
+  ) =>
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/weekly-workout-plans`, {
+      method: "put",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: planId,
+        name: planName,
+        year: planYear,
+        calendar_week: planCalendarWeek,
+      }),
+    })
+      .then((response) =>
+        response
+          .json()
+          .then((data) => {
+            console.log("DONE UPDATING");
+            refetchPlans();
+          })
+          .catch((e) => console.log(e))
+      )
+      .catch((e) => console.log(e));
+
   return (
     <Transition.Root
       show={showEditPlanModal ? showEditPlanModal : false}
@@ -113,36 +143,42 @@ const EditPlanModal = ({
                     value={inputName}
                     type="text"
                     id="plan-name"
-                    maxLength="20"
+                    maxLength="40"
                     onChange={(event) => setInputName(event.target.value)}
                     className="border !bg-gray-700 border-transparent text-2xl font-bold !text-green-500 select-none text-center rounded-md placeholder-green-700 w-full"
                   ></input>
                 </div>
                 <div className="flex mb-8">
                   <div className="mr-2">
-                    <div className="text-center text-white text-md">Jahr</div>
+                    <div className="text-center text-white text-md">
+                      {language === "DE" ? "Jahr" : "Year"}
+                    </div>
                     <input
                       value={inputYear}
                       type="text"
                       id="year-input"
                       maxLength="4"
-                      onChange={(event) => setInputYear(event.target.value)}
+                      onChange={(event) => {
+                        if (/^[0-9]*$/.test(event.target.value))
+                          setInputYear(event.target.value);
+                      }}
                       className="border !bg-gray-700 border-transparent text-2xl font-bold !text-green-500 select-none text-center rounded-md placeholder-green-700 w-full "
                     ></input>
                   </div>
 
                   <div className="ml-2">
                     <div className="text-center text-white text-md">
-                      Kalenderwoche
+                      {language === "DE" ? "Kalenderwoche" : "Calendar Week"}
                     </div>
                     <input
                       value={inputCalendarWeek}
                       type="text"
                       id="calender-week-input"
                       maxLength="2"
-                      onChange={(event) =>
-                        setInputCalendarWeek(event.target.value)
-                      }
+                      onChange={(event) => {
+                        if (/^[0-9]*$/.test(event.target.value))
+                          setInputCalendarWeek(event.target.value);
+                      }}
                       className="border !bg-gray-700 border-transparent text-2xl font-bold !text-green-500 select-none text-center rounded-md placeholder-green-700 w-full "
                     ></input>
                   </div>
@@ -160,7 +196,21 @@ const EditPlanModal = ({
                   <button
                     type="button"
                     className="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-green-700 bg-green-300 border border-green-300 rounded-md shadow-sm select-none hover:bg-green-200 sm:mt-0 sm:col-start-1 sm:text-sm focus:outline-none"
-                    onClick={() => setShowEditPlanModal(false)}
+                    onClick={() => {
+                      if (
+                        inputYear > 2020 &&
+                        inputCalendarWeek > 0 &&
+                        inputCalendarWeek < 53
+                      ) {
+                        updateWeeklyWorkoutPlan(
+                          id,
+                          inputName,
+                          inputYear,
+                          inputCalendarWeek
+                        );
+                        setShowEditPlanModal(false);
+                      }
+                    }}
                     ref={cancelButtonRef}
                   >
                     {language === "DE" ? "Speichern" : "Save"}
