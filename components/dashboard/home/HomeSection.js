@@ -13,6 +13,7 @@ import {
   CalendarIcon,
   ChartBarIcon,
 } from "@heroicons/react/solid";
+import { format, addDays } from "date-fns";
 
 import OnboardingModal from "./OnboardingModal";
 
@@ -27,13 +28,208 @@ const HomeSection = ({ language }) => {
 
   const localizer = momentLocalizer(moment);
 
-  const myEventsList = [
+  function getDateOfISOWeek(w, y) {
+    var simple = new Date(y, 0, 1 + (w - 1) * 7);
+    var dow = simple.getDay();
+    var ISOweekStart = simple;
+    if (dow <= 4) ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+    else ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+    return ISOweekStart;
+  }
+
+  const findStartOfPlanDay = (planDay, date) => {
+    let earliestStartTime = "23:59";
+    console.log("PARAMS S", planDay, date);
+
+    planDay.forEach((workout) => {
+      if (
+        parseInt(workout.workout_time_start.replace(":", "")) <=
+        parseInt(earliestStartTime.replace(":", ""))
+      )
+        earliestStartTime = workout.workout_time_start;
+    });
+
+    console.log("earliestStartTime RESULT", earliestStartTime);
+    return moment({
+      year: parseInt(date.split(".")[2]),
+      month: parseInt(date.split(".")[1] - 1),
+      day: parseInt(date.split(".")[0]),
+      hour: parseInt(earliestStartTime.split(":")[0]),
+      minute: parseInt(earliestStartTime.split(":")[1]),
+    })._d;
+  };
+
+  const findEndOfPlanDay = (planDay, date) => {
+    let latestEndTime = "00:01";
+    console.log("PARAMS E", planDay, date);
+
+    planDay.forEach((workout) => {
+      if (
+        parseInt(workout.workout_time_end.replace(":", "")) >=
+        parseInt(latestEndTime.replace(":", ""))
+      )
+        latestEndTime = workout.workout_time_end;
+    });
+
+    console.log("latestEndTime RESULT", latestEndTime);
+    return moment({
+      year: parseInt(date.split(".")[2]),
+      month: parseInt(date.split(".")[1]) - 1,
+      day: parseInt(date.split(".")[0]),
+      hour: parseInt(latestEndTime.split(":")[0]),
+      minute: parseInt(latestEndTime.split(":")[1]),
+    })._d;
+  };
+
+  const convertWeeklyPlansToForEventList = (plansArray) => {
+    let planPerDayArray = [];
+    const testArray = plansArray.forEach((plan) => {
+      // MOMENT EACH START AND END!
+      if (plan.day_1.length > 0)
+        planPerDayArray.push({
+          title: plan.name,
+          start: findStartOfPlanDay(
+            plan.day_1,
+            format(
+              getDateOfISOWeek(plan.calendar_week, plan.year),
+              "dd.MM.yyyy"
+            )
+          ),
+          end: findEndOfPlanDay(
+            plan.day_1,
+            format(
+              getDateOfISOWeek(plan.calendar_week, plan.year),
+              "dd.MM.yyyy"
+            )
+          ),
+        });
+
+      if (plan.day_2.length > 0)
+        planPerDayArray.push({
+          title: plan.name,
+          start: findStartOfPlanDay(
+            plan.day_2,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 1),
+              "dd.MM.yyyy"
+            )
+          ),
+          end: findEndOfPlanDay(
+            plan.day_2,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 1),
+              "dd.MM.yyyy"
+            )
+          ),
+        });
+
+      if (plan.day_3.length > 0)
+        planPerDayArray.push({
+          title: plan.name,
+          start: findStartOfPlanDay(
+            plan.day_3,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 2),
+              "dd.MM.yyyy"
+            )
+          ),
+          end: findEndOfPlanDay(
+            plan.day_3,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 2),
+              "dd.MM.yyyy"
+            )
+          ),
+        });
+
+      if (plan.day_4.length > 0)
+        planPerDayArray.push({
+          title: plan.name,
+          start: findStartOfPlanDay(
+            plan.day_4,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 3),
+              "dd.MM.yyyy"
+            )
+          ),
+          end: findEndOfPlanDay(
+            plan.day_4,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 3),
+              "dd.MM.yyyy"
+            )
+          ),
+        });
+
+      if (plan.day_5.length > 0)
+        planPerDayArray.push({
+          title: plan.name,
+          start: findStartOfPlanDay(
+            plan.day_5,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 4),
+              "dd.MM.yyyy"
+            )
+          ),
+          end: findEndOfPlanDay(
+            plan.day_5,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 4),
+              "dd.MM.yyyy"
+            )
+          ),
+        });
+
+      if (plan.day_6.length > 0)
+        planPerDayArray.push({
+          title: plan.name,
+          start: findStartOfPlanDay(
+            plan.day_6,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 5),
+              "dd.MM.yyyy"
+            )
+          ),
+          end: findEndOfPlanDay(
+            plan.day_6,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 5),
+              "dd.MM.yyyy"
+            )
+          ),
+        });
+
+      if (plan.day_7.length > 0)
+        planPerDayArray.push({
+          title: plan.name,
+          start: findStartOfPlanDay(
+            plan.day_7,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 6),
+              "dd.MM.yyyy"
+            )
+          ),
+          end: findEndOfPlanDay(
+            plan.day_7,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 6),
+              "dd.MM.yyyy"
+            )
+          ),
+        });
+    });
+
+    console.log("planPerDayArray", planPerDayArray);
+    return planPerDayArray;
+  };
+
+  const [myEventsList, setMyEventsList] = useState([
     {
       start: moment().toDate(),
       end: moment().add(1, "hours").toDate(),
-      title: "Testing",
+      title: "Testings Test",
     },
-  ];
+  ]);
 
   const DnDCalendar = withDragAndDrop(Calendar);
 
@@ -69,6 +265,10 @@ const HomeSection = ({ language }) => {
             console.log("response PLANS", response.status);
             if (response.status === 200)
               setFetchedUserPlans(data.weeklyWorkoutPlans);
+            /* convertWeeklyPlansToForEventList(data.weeklyWorkoutPlans); */
+            setMyEventsList(
+              convertWeeklyPlansToForEventList(data.weeklyWorkoutPlans)
+            );
           })
           .catch((e) => console.log(e))
       )
@@ -540,6 +740,7 @@ const HomeSection = ({ language }) => {
                 </div>
               </div>
             </div>
+            {console.log("myEventsList", myEventsList)}
             <div className="flex mt-6 space-x-3 md:mt-0 md:ml-4 iphone:justify-center">
               <div>
                 <Link href="/auth/logout">
