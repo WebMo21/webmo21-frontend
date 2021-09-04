@@ -364,7 +364,7 @@ const AddWorkoutToPlanModal = ({
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <div
-              className="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-gray-800 rounded-lg shadow-xl sm:my-8 sm:align-middle sm:p-6 iphone:mt-12"
+              className="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-gray-800 rounded-lg shadow-xl sm:my-8 sm:align-middle sm:p-6 iphone:mt-12 iphonebgsize"
               data-aos="fade-in"
               style={{ width: "60%" }}
             >
@@ -454,7 +454,7 @@ const AddWorkoutToPlanModal = ({
                       ></input>
                     </div>
                   </div>
-                  <div className="flex mb-4">
+                  <div className="flex mb-4 iphonebg">
                     <div className="flex-col figure">
                       <div className="mb-1 font-bold text-center text-white">
                         {language === "DE" ? "Status" : "Status"}
@@ -508,7 +508,7 @@ const AddWorkoutToPlanModal = ({
                           if (/^[0-9]*$/.test(event.target.value))
                             setInputTrackedTimeInMinutes(event.target.value);
                         }}
-                        className="border !bg-gray-700 border-transparent text-2xl font-bold !text-green-500 select-none text-center rounded-md placeholder-green-700 w-full "
+                        className="border !bg-gray-700 border-transparent text-2xl font-bold !text-green-500 select-none text-center rounded-md placeholder-green-700 w-full"
                       ></input>
                     </div>
                   </div>
@@ -530,7 +530,7 @@ const AddWorkoutToPlanModal = ({
                     onChange={(event) =>
                       setWorkoutSearchTerm(event.target.value)
                     }
-                    className="border !bg-gray-700 border-transparent text-2xl font-bold !text-green-500 select-none text-center rounded-md placeholder-green-700 w-5/12"
+                    className="iphonebg border !bg-gray-700 border-transparent text-2xl font-bold !text-green-500 select-none text-center rounded-md placeholder-green-700 w-5/12"
                   ></input>
                 </div>
 

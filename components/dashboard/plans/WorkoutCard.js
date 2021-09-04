@@ -24,7 +24,7 @@ const WorkoutCard = ({
         selectedWorkout === id
           ? "border-4 border-green-500 scale-105"
           : "scale-100"
-      } flex transition duration-300 ease-in transform bg-gray-700 rounded-lg hover:scale-105 iphone:flex-col iphone:items-center tabletpro:m-4 tabletpro:mx-44 tablet:!mx-4 mb-4 cursor-pointer`}
+      } flex transition duration-300 ease-in transform bg-gray-700 rounded-lg hover:scale-105 iphone:flex-col iphone:items-center tabletpro:m-4 tabletpro:mx-44 tablet:!mx-4 mb-4 cursor-pointer iphonebg ipadbgsize`}
       style={{ width: "48%", maxWidth: "29rem" }}
       key={id}
     >
