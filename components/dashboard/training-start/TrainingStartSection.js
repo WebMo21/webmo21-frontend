@@ -10,10 +10,10 @@ const TrainingStartSection = ({ language }) => {
             : "Start Your Training Now!"}
         </h2>
         <div className="justify-center p-8 py-6 mt-5 bg-gray-700 rounded-lg md:flex">
-          <div className="flex-col cursor-pointer">
+          <div className="flex-col">
             <div className="mb-5">
               <div className="flex-col">
-                <div className="mb-2 text-xl font-bold text-center text-green-500">
+                <div className="mb-2 text-xl font-bold text-center text-green-500 select-none">
                   {language === "DE"
                     ? "Bald kannst du dein Training in der App starten und überwachen"
                     : "Soon you can start and keep track of your training within the app"}

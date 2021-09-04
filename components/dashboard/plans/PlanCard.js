@@ -376,7 +376,7 @@ const PlanCard = ({
   };
 
   return (
-    <div className="p-8 py-6 mt-5 transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer md:flex md:items-center md:justify-between">
+    <div className="p-8 py-6 mt-5 transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer md:flex md:items-center md:justify-between paddingipad paddingiphone">
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-center h-full">
           <div className="relative flex flex-col w-full">
@@ -438,7 +438,9 @@ const PlanCard = ({
                   />
                 </svg>
               </div>
-              <div className="w-full text-center">{name}</div>
+              <div className="w-full text-center ipadtextsize iphonetextsize">
+                {name}
+              </div>
               <div className="absolute inset-y-0 right-0 text-white">
                 <img
                   src="/icons/down-arrow.png"
@@ -456,7 +458,7 @@ const PlanCard = ({
             {id === currentExpandedPlanCard ? (
               <div className="w-full max-w-full mt-4">
                 <div className="flex justify-center max-w-full ipadwrap iphonewrap">
-                  <div className="w-full h-full max-w-full ml-3 mr-3 ipadwith iphonewidth">
+                  <div className="h-full ml-3 mr-3">
                     <div className="mb-1 font-bold text-center text-white text-md">
                       {format(
                         getDateOfISOWeek(calendar_week, year),
