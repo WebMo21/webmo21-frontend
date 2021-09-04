@@ -91,7 +91,7 @@ input:focus {
   );
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1400px) {
   .ipadwrap {
     flex-wrap: wrap;
     flex: 50%;
@@ -111,6 +111,10 @@ input:focus {
   .ipadtextsize {
     font-size: 1rem !important;
   }
+
+  .ipadbgsize {
+    width: 100% !important;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -127,4 +131,9 @@ input:focus {
   .iphonebg {
     width: 100% !important;
   }
+}
+
+.desktopwidth {
+  width: "48%" !important;
+  max-width: "29rem" !important;
 }
