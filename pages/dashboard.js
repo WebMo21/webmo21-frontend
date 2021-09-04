@@ -12,6 +12,7 @@ import {
   LightningBoltIcon,
   CogIcon,
   KeyIcon,
+  PlayIcon,
 } from "@heroicons/react/solid";
 
 import NavbarLogo from "../components/dashboard/navbar/NavbarLogo";
@@ -54,7 +55,7 @@ const navigation = [
         name: "start",
         title: "Start",
         englishTitle: "Start",
-        icon: PlayLogo,
+        icon: PlayIcon,
       },
       {
         name: "settings",
@@ -99,7 +100,7 @@ const sidebarNavigation = [
     name: "start",
     title: "Start",
     englishTitle: "Start",
-    icon: PlayLogo,
+    icon: PlayIcon,
   },
   {
     name: "settings",

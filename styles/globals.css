@@ -90,3 +90,14 @@ input:focus {
     #4d576867 20px
   );
 }
+
+@media screen and (max-width: 1300px) {
+  .ipadwrap {
+    flex-wrap: wrap;
+    flex: 50%;
+  }
+
+  .ipadwith {
+    width: 30% !important;
+  }
+}

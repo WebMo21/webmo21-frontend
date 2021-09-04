@@ -315,8 +315,8 @@ const EditWorkoutModal = ({
                         className="block font-medium text-center text-gray-400 select-none text-md"
                       >
                         {language === "DE"
-                          ? "Optionale Gewichtangabe"
-                          : "Optional weight amount"}
+                          ? "Optionale Gewichtangabe (kg)"
+                          : "Optional weight amount (kg)"}
                       </label>
                       <div className="relative mt-1 rounded-md shadow-sm">
                         <input

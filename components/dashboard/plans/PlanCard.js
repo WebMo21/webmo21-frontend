@@ -455,8 +455,8 @@ const PlanCard = ({
             </div>
             {id === currentExpandedPlanCard ? (
               <div className="w-full max-w-full mt-4">
-                <div className="flex justify-center max-w-full">
-                  <div className="w-full h-full max-w-full ml-3 mr-3">
+                <div className="flex justify-center max-w-full ipadwrap iphonewrap">
+                  <div className="w-full h-full max-w-full ml-3 mr-3 ipadwith iphonewidth">
                     <div className="mb-1 font-bold text-center text-white text-md">
                       {format(
                         getDateOfISOWeek(calendar_week, year),
