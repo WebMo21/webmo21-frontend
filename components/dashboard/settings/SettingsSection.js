@@ -9,7 +9,9 @@ const SettingsSection = ({ language }) => {
   const [session] = useSession();
   const [nameOfUser, setNameOfUser] = useState("");
   const [genderOfUser, setGenderOfUser] = useState("");
-  const [pictureOfUser, setPictureOfUser] = useState("");
+  const [pictureOfUser, setPictureOfUser] = useState(
+    "https://i.pravatar.cc/300"
+  );
   const [showChangePictureModal, setShowChangePictureModal] = useState(false);
 
   useEffect(() => {

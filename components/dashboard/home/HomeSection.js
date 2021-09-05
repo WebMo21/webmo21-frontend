@@ -83,8 +83,7 @@ const HomeSection = ({ language }) => {
 
   const convertWeeklyPlansToForEventList = (plansArray) => {
     let planPerDayArray = [];
-    const testArray = plansArray.forEach((plan) => {
-      // MOMENT EACH START AND END!
+    plansArray.forEach((plan) => {
       if (plan.day_1.length > 0)
         planPerDayArray.push({
           title: plan.name,
@@ -219,7 +218,6 @@ const HomeSection = ({ language }) => {
         });
     });
 
-    console.log("planPerDayArray", planPerDayArray);
     return planPerDayArray;
   };
 
@@ -263,12 +261,12 @@ const HomeSection = ({ language }) => {
             console.log("DATA PLANS", data);
             console.log("data.weeklyWorkoutPlans", data.weeklyWorkoutPlans);
             console.log("response PLANS", response.status);
-            if (response.status === 200)
+            if (response.status === 200 && data.weeklyWorkoutPlans) {
               setFetchedUserPlans(data.weeklyWorkoutPlans);
-            /* convertWeeklyPlansToForEventList(data.weeklyWorkoutPlans); */
-            setMyEventsList(
-              convertWeeklyPlansToForEventList(data.weeklyWorkoutPlans)
-            );
+              setMyEventsList(
+                convertWeeklyPlansToForEventList(data.weeklyWorkoutPlans)
+              );
+            }
           })
           .catch((e) => console.log(e))
       )
