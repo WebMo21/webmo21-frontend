@@ -12,6 +12,7 @@ import {
   CheckCircleIcon,
   CalendarIcon,
   ChartBarIcon,
+  KeyIcon,
 } from "@heroicons/react/solid";
 import { format, addDays } from "date-fns";
 
@@ -734,6 +735,17 @@ const HomeSection = ({ language }) => {
                         ? "Verifizierter Nutzer"
                         : "Verified User"}
                     </dd>
+                    {session.user.role === "admin" ? (
+                      <dd className="flex items-center mt-3 font-medium text-gray-400 capitalize select-none ttext-md sm:mr-6 sm:mt-0">
+                        <KeyIcon
+                          className="flex-shrink-0 mr-1.5 h-5 w-5 text-yellow-400"
+                          aria-hidden="true"
+                        />
+                        Admin
+                      </dd>
+                    ) : (
+                      ""
+                    )}
                   </dl>
                 </div>
               </div>

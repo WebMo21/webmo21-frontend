@@ -31,6 +31,31 @@ const AdminSection = ({ language }) => {
       )
       .catch((e) => console.log(e));
 
+  const activateOrDeactiveUser = (userId, activeStatus) =>
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/users`, {
+      method: "put",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: userId,
+        active: activeStatus ? false : true,
+      }),
+    })
+      .then((response) =>
+        response
+          .json()
+          .then((data) => refetchUsers())
+          .catch((e) => console.log(e))
+      )
+      .catch((e) => console.log(e));
+
+  const refetchUsers = () => {
+    setFetchedUsers([]);
+    fetchAllUsers();
+  };
+
   useEffect(() => {
     if (session) {
       fetchAllUsers();
@@ -74,8 +99,9 @@ const AdminSection = ({ language }) => {
                                 name={user.name}
                                 role={user.role}
                                 username={user.username}
-                                refetchUsers={"Test"}
+                                refetchUsers={refetchUsers}
                                 language={language}
+                                callbackSetActiveStatus={activateOrDeactiveUser}
                               />
                             ))
                         : ""}
