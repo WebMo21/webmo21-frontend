@@ -37,8 +37,10 @@ const adminlogin = () => {
       password: password,
     })
       .then((error, status, ok, url) => {
-        if (error) {
+        if (parseInt(error.status) === 401 || parseInt(error.status) === 403) {
           setShowInvalidCredentials(true);
+        } else {
+          setShowInvalidCredentials(false);
         }
       })
       .catch((error) => {
@@ -72,7 +74,6 @@ const adminlogin = () => {
         ? localStorage.setItem("language", language)
         : ""}
       <div>
-        {console.log("SESSION", session)}
         <section className="relative w-full h-full min-h-screen py-40">
           <div
             className="absolute top-0 w-full h-full bg-top bg-cover"
