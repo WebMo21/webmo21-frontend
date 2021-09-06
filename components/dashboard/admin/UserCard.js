@@ -15,7 +15,9 @@ const UserCard = ({
   username,
   refetchUsers,
   language,
+  callbackSetShowEditUserModal,
   callbackSetActiveStatus,
+  callbackSetEditUserData,
 }) => {
   return (
     <div
@@ -116,10 +118,21 @@ const UserCard = ({
           >
             <div>
               <a
-                /*  onClick={() => {
-                setShowEditWorkoutModal(true);
-                setEditWorkoutData(workout);
-              }} */
+                onClick={() => {
+                  callbackSetShowEditUserModal(true);
+                  callbackSetEditUserData({
+                    active,
+                    create_at: createdAt,
+                    email,
+                    email_verified: emailVerified,
+                    gender,
+                    id,
+                    image,
+                    name,
+                    role,
+                    username,
+                  });
+                }}
                 className="inline-block p-2 font-semibold text-white bg-yellow-600 border border-transparent border-yellow-500 rounded cursor-pointer select-none text-md hover:bg-yellow-500"
               >
                 {language && language === "DE" ? "Editieren" : "Edit User"}

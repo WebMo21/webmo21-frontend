@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/client";
-import { Disclosure } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/outline";
 
 import UserCard from "./UserCard";
-import EditWorkoutModal from "../workouts/EditWorkoutModal";
-import { findMuscleGroup } from "../workouts/WorkoutsSection";
+import EditUserModal from "./EditUserModal";
 
 const ADMIN_ID = 12;
 
 const AdminSection = ({ language }) => {
   const [session] = useSession();
   const [fetchedUsers, setFetchedUsers] = useState([]);
-  const [showEditWorkoutModal, setShowEditWorkoutModal] = useState(false);
+  const [showEditUserModal, setShowEditUserModal] = useState(false);
+  const [editUserData, setEditUserData] = useState("");
   const [gender, setGender] = useState("");
 
   const fetchAllUsers = () =>
@@ -65,6 +63,15 @@ const AdminSection = ({ language }) => {
 
   return (
     <>
+      {showEditUserModal && (
+        <EditUserModal
+          editUserData={editUserData}
+          showEditUserModal={showEditUserModal}
+          setShowEditUserModal={setShowEditUserModal}
+          refetchUsers={refetchUsers}
+          language={language}
+        />
+      )}
       <div
         className="relative z-0 flex-1 pb-8 overflow-y-auto"
         data-aos="fade-up"
@@ -101,7 +108,11 @@ const AdminSection = ({ language }) => {
                                 username={user.username}
                                 refetchUsers={refetchUsers}
                                 language={language}
+                                callbackSetShowEditUserModal={
+                                  setShowEditUserModal
+                                }
                                 callbackSetActiveStatus={activateOrDeactiveUser}
+                                callbackSetEditUserData={setEditUserData}
                               />
                             ))
                         : ""}
@@ -112,7 +123,7 @@ const AdminSection = ({ language }) => {
               </div>
             </div>
           </div>
-        </div>{" "}
+        </div>
       </div>
     </>
   );
