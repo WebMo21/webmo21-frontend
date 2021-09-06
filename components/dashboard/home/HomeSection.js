@@ -40,7 +40,6 @@ const HomeSection = ({ language }) => {
 
   const findStartOfPlanDay = (planDay, date) => {
     let earliestStartTime = "23:59";
-    console.log("PARAMS S", planDay, date);
 
     planDay.forEach((workout) => {
       if (
@@ -50,7 +49,6 @@ const HomeSection = ({ language }) => {
         earliestStartTime = workout.workout_time_start;
     });
 
-    console.log("earliestStartTime RESULT", earliestStartTime);
     return moment({
       year: parseInt(date.split(".")[2]),
       month: parseInt(date.split(".")[1] - 1),
@@ -62,7 +60,6 @@ const HomeSection = ({ language }) => {
 
   const findEndOfPlanDay = (planDay, date) => {
     let latestEndTime = "00:01";
-    console.log("PARAMS E", planDay, date);
 
     planDay.forEach((workout) => {
       if (
@@ -72,7 +69,6 @@ const HomeSection = ({ language }) => {
         latestEndTime = workout.workout_time_end;
     });
 
-    console.log("latestEndTime RESULT", latestEndTime);
     return moment({
       year: parseInt(date.split(".")[2]),
       month: parseInt(date.split(".")[1]) - 1,
@@ -259,9 +255,6 @@ const HomeSection = ({ language }) => {
         response
           .json()
           .then((data) => {
-            console.log("DATA PLANS", data);
-            console.log("data.weeklyWorkoutPlans", data.weeklyWorkoutPlans);
-            console.log("response PLANS", response.status);
             if (response.status === 200 && data.weeklyWorkoutPlans) {
               setFetchedUserPlans(data.weeklyWorkoutPlans);
               setMyEventsList(
@@ -273,16 +266,10 @@ const HomeSection = ({ language }) => {
       )
       .catch((e) => console.log(e));
 
-  const isMoreThanNinetyPercentOfWorkoutsCompleted = (
-    workoutCompletedArray
-  ) => {
-    return (
-      workoutCompletedArray.filter((element) => element === "completed")
-        .length /
-        workoutCompletedArray.length >=
-      0.9
-    );
-  };
+  const isMoreThanNinetyPercentOfWorkoutsCompleted = (workoutCompletedArray) =>
+    workoutCompletedArray.filter((element) => element === "completed").length /
+      workoutCompletedArray.length >=
+    0.9;
 
   // A day of a plan is counted as complete when 90 % or more of the workouts of that day are completed. When all days are complete the plan is counted as complete.
   const calculateCompletedTrainingWeeks = (fetchedUserPlans) => {
@@ -427,8 +414,6 @@ const HomeSection = ({ language }) => {
         dayCompleted = [];
       }
     });
-
-    console.log("weeklyPlanCompletedCount", weeklyPlanCompletedCount);
     return weeklyPlanCompletedCount;
   };
 
@@ -599,8 +584,6 @@ const HomeSection = ({ language }) => {
         });
       }
     });
-
-    console.log("totalWorkoutWeight", totalWorkoutWeight);
     return totalWorkoutWeight / 1000;
   };
 
@@ -750,7 +733,6 @@ const HomeSection = ({ language }) => {
                 </div>
               </div>
             </div>
-            {console.log("myEventsList", myEventsList)}
             <div className="flex mt-6 space-x-3 md:mt-0 md:ml-4 iphone:justify-center">
               <div>
                 <Link href="/auth/logout">
@@ -849,25 +831,19 @@ const HomeSection = ({ language }) => {
         </div>
 
         {/* History Section */}
-        <div>
+        {/* <div>
           <h2 className="max-w-6xl px-4 pb-2 mx-auto mt-8 text-2xl font-medium leading-6 text-white select-none sm:px-6 lg:px-8">
             {language && language === "DE"
               ? "Deine Trainingshistorie"
               : "Your Training History"}
           </h2>
 
-          {/* Activity list (smallest breakpoint only) */}
+         
           <div className="flex-col p-8 py-6 mt-3 mb-12 text-gray-300 bg-gray-700 rounded-md select-none sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-10 md:flex md:items-center md:justify-between">
-            {/* <div className="flex-row justify-between mx-auto md:flex items-between">
-              <div className="p-8">Test1.1</div>
-              <div className="p-8">Test1.2</div>
-              <div className="p-8">Test1.3</div>
-            </div>
-            <div>Test2</div>
-            <div>Test3</div> */}
+           
             Test
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

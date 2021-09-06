@@ -198,9 +198,7 @@ const WorkoutCard = ({
               </div>
               <div>
                 <a
-                  onClick={() => {
-                    setShowDeleteWorkoutModal(true);
-                  }}
+                  onClick={() => setShowDeleteWorkoutModal(true)}
                   className="inline-block p-2 text-lg font-semibold text-white bg-red-500 border border-transparent border-red-500 rounded cursor-pointer select-none hover:bg-red-400"
                 >
                   {language && language === "DE" ? "Löschen" : "Delete"}

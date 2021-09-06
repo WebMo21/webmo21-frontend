@@ -208,10 +208,7 @@ const AddWorkoutToPlanModal = ({
       hasChanged = true;
     }
 
-    if (hasChanged) {
-      console.log("updatedPlan", updatedPlan);
-      updateAddWorkoutFromPlan(updatedPlan);
-    }
+    if (hasChanged) updateAddWorkoutFromPlan(updatedPlan);
   };
 
   const updateAddWorkoutFromPlan = (wholeUpdatedPlan) =>
@@ -686,10 +683,7 @@ const AddWorkoutToPlanModal = ({
                   <button
                     type="button"
                     className="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-green-700 bg-green-300 border border-green-300 rounded-md shadow-sm select-none hover:bg-green-200 sm:mt-0 sm:col-start-1 sm:text-sm focus:outline-none"
-                    onClick={() => {
-                      handleUpdateWorkout(wholePlan);
-                      /* setShowAddWorkoutToPlanModal(false); */
-                    }}
+                    onClick={() => handleUpdateWorkout(wholePlan)}
                     ref={cancelButtonRef}
                   >
                     {language === "DE" ? "Hinzufügen" : "Add"}

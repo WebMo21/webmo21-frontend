@@ -12,10 +12,6 @@ const PlansSection = ({ language }) => {
   const [currentExpandedPlanCard, setCurrentExpandedPlanCard] = useState(0);
   const [searchTermCalendarWeek, setSearchTermCalendarWeek] = useState("");
 
-  /*  const createNewWorkoutPlan = () => {
-    console.log("Create Workout Plan");
-  }; */
-
   const getCurrentWeekNumber = () => {
     const date = new Date();
     const currentThursday = new Date(

@@ -1,7 +1,6 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import Adapters from "next-auth/adapters";
-import axios from "axios";
 
 import customVerificationRequest from "./customVerificationRequest";
 import Models from "../models";
@@ -108,11 +107,6 @@ export default NextAuth({
   },
   callbacks: {
     async jwt(token, user, account, profile, isNewUser) {
-      console.log("INSPECT account", account);
-      console.log("INSPECT user", user);
-      console.log("INSPECT token", token);
-      console.log("INSPECT profile", profile);
-      console.log("INSPECT isNewUser", isNewUser);
       if (account?.accessToken) {
         token.accessToken = account.accessToken;
       }
@@ -134,8 +128,6 @@ export default NextAuth({
       return token;
     },
     async session(session, token) {
-      console.log("INSPECT session", session);
-      console.log("INSPECT token", token);
       if (token?.accessToken) {
         session.accessToken = token.accessToken;
       }

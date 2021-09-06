@@ -63,23 +63,6 @@ const PlanWorkoutCard = ({
         parseInt(updateTimeStart.replace(":", "")) >
         2359
     ) {
-      console.log("ERROR WRONG INPUT");
-      console.log("updateTimeStart", updateTimeStart);
-      console.log("updateTimeEnd", updateTimeEnd);
-      console.log("updateTrackedTime", updateTrackedTime);
-      console.log(
-        "/^d{2}:d{2}$/.test(updateTimeStart)",
-        /^\d{2}:\d{2}$/.test(updateTimeStart)
-      );
-      console.log(
-        "/^d{2}:d{2}$/.test(updateTimeEnd)",
-        /^\d{2}:\d{2}$/.test(updateTimeEnd)
-      );
-      console.log(
-        "/^[0-9]*$/.test(updateTrackedTime)",
-        /^[0-9]*$/.test(updateTrackedTime)
-      );
-
       setShowInputErrorTime(true);
       return null;
     }

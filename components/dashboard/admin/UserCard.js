@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { format } from "date-fns";
 import { BadgeCheckIcon, BanIcon } from "@heroicons/react/solid";
 
@@ -13,13 +13,14 @@ const UserCard = ({
   name,
   role,
   username,
-  refetchUsers,
   language,
+  callbackSetShowEditUserModal,
   callbackSetActiveStatus,
+  callbackSetEditUserData,
 }) => {
   return (
     <div
-      className="flex transition duration-300 ease-in transform bg-gray-600 rounded-lg hover:scale-105 iphone:flex-col m-2 iphone:items-center tabletpro:m-4 tabletpro:mx-44 tablet:!mx-4 w-5/12"
+      className="flex w-5/12 m-2 transition duration-300 ease-in transform bg-gray-600 rounded-lg tabletfullsize hover:scale-105 iphone:flex-col iphone:items-center"
       key={id}
       title={name}
     >
@@ -116,10 +117,21 @@ const UserCard = ({
           >
             <div>
               <a
-                /*  onClick={() => {
-                setShowEditWorkoutModal(true);
-                setEditWorkoutData(workout);
-              }} */
+                onClick={() => {
+                  callbackSetShowEditUserModal(true);
+                  callbackSetEditUserData({
+                    active,
+                    create_at: createdAt,
+                    email,
+                    email_verified: emailVerified,
+                    gender,
+                    id,
+                    image,
+                    name,
+                    role,
+                    username,
+                  });
+                }}
                 className="inline-block p-2 font-semibold text-white bg-yellow-600 border border-transparent border-yellow-500 rounded cursor-pointer select-none text-md hover:bg-yellow-500"
               >
                 {language && language === "DE" ? "Editieren" : "Edit User"}

@@ -46,7 +46,6 @@ const EditWorkoutModal = ({
             <Dialog.Overlay className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" />
           </Transition.Child>
 
-          {/* This element is to trick the browser into centering the modal contents. */}
           <span
             className="hidden sm:inline-block sm:align-middle sm:h-screen"
             aria-hidden="true"
@@ -93,7 +92,6 @@ const EditWorkoutModal = ({
                       className="border !bg-gray-700 border-transparent text-3xl font-bold !text-green-500 select-none text-center w-80 rounded-md placeholder-green-700"
                     ></input>
                   </div>
-                  {/* {console.log("editworkout", viewWorkoutData)} */}
                   <div className="mt-2">
                     <div className="mx-auto my-4 w-80">
                       <label

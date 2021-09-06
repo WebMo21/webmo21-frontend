@@ -38,11 +38,6 @@ const PlanCard = ({
     workoutTimeStart,
     workoutTimeEnd
   ) => {
-    /* console.log("INSPECT PLAN", originalPlan);
-    console.log("workoutId", workoutId);
-    console.log("day", day);
-    console.log("workoutTimeStart", workoutTimeStart);
-    console.log("workoutTimeEnd", workoutTimeEnd); */
     const updatedPlan = originalPlan;
 
     if (day === "1") {
@@ -151,24 +146,9 @@ const PlanCard = ({
     workoutTimeStart,
     workoutTimeEnd
   ) => {
-    /* console.log("INSPECT PLAN", originalPlan);
-    console.log("workoutId", workoutId);
-    console.log("day", day);
-    console.log("updateTimeStart", updateTimeStart);
-    console.log("updateTimeEnd", updateTimeEnd);
-    console.log("updateCompleted", updateCompleted);
-    console.log("updateTrackedTime", updateTrackedTime);
-    console.log("workoutTimeStart", workoutTimeStart);
-    console.log("workoutTimeEnd", workoutTimeEnd); */
     const updatedPlan = originalPlan;
 
     if (day === "1") {
-      /*  const selectedWorkout = updatedPlan.day_1.filter(
-        (workout) =>
-          workout.workout_id === workoutId &&
-          workout.workout_time_start === workoutTimeStart &&
-          workout.workout_time_end === workoutTimeEnd
-      ); */
       updatedPlan.day_1 = updatedPlan.day_1.filter(
         (workout) =>
           workout.workout_id !== workoutId &&
@@ -307,7 +287,6 @@ const PlanCard = ({
         },
       ];
     }
-    /* console.log("UPDATED PLAN", updatedPlan); */
     return updatedPlan;
   };
 
@@ -320,18 +299,7 @@ const PlanCard = ({
     updateTrackedTime,
     workoutTimeStart,
     workoutTimeEnd
-  ) => {
-    console.log(
-      "RECEIVED",
-      workoutId,
-      day,
-      updateTimeStart,
-      updateTimeEnd,
-      updateCompleted,
-      updateTrackedTime,
-      workoutTimeStart,
-      workoutTimeEnd
-    );
+  ) =>
     fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/weekly-workout-plans/`, {
       method: "put",
       headers: {
@@ -359,7 +327,6 @@ const PlanCard = ({
           .catch((e) => console.log(e))
       )
       .catch((e) => console.log(e));
-  };
 
   function getDateOfISOWeek(w, y) {
     var simple = new Date(y, 0, 1 + (w - 1) * 7);

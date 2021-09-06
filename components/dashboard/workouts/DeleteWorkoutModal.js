@@ -10,8 +10,7 @@ const DeleteWorkoutModal = ({
 }) => {
   const cancelButtonRef = useRef(null);
 
-  const deleteWorkout = (workout) => {
-    console.log("DELETE Workout", workout);
+  const deleteWorkout = (workout) =>
     fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/workouts/${workout.id}`,
       {
@@ -32,7 +31,6 @@ const DeleteWorkoutModal = ({
           .catch((e) => console.log(e))
       )
       .catch((e) => console.log(e));
-  };
 
   return (
     <Transition.Root
@@ -60,7 +58,6 @@ const DeleteWorkoutModal = ({
             <Dialog.Overlay className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" />
           </Transition.Child>
 
-          {/* This element is to trick the browser into centering the modal contents. */}
           <span
             className="hidden sm:inline-block sm:align-middle sm:h-screen"
             aria-hidden="true"
