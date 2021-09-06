@@ -8,12 +8,9 @@ const WorkoutCard = ({
   equipment_weight_in_kilo,
   language,
   muscle_group,
-  workout,
   badge,
   findMuscleGroup,
   gender,
-  reFetchWorkouts,
-  admin,
   callbackSetSelectedWorkout,
   selectedWorkout,
 }) => {

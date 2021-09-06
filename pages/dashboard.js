@@ -1,8 +1,7 @@
-import { Fragment, useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 
-import { useRouter } from "next/router";
 import { useSession } from "next-auth/client";
 
 import {
@@ -16,7 +15,6 @@ import {
 } from "@heroicons/react/solid";
 
 import NavbarLogo from "../components/dashboard/navbar/NavbarLogo";
-import PlayLogo from "../components/dashboard/navbar/PlayLogo";
 import Navigation from "../components/dashboard/navbar/Navigation";
 import MobileMenu from "../components/dashboard/navbar/MobileMenu";
 import DashboardSideBar from "../components/dashboard/DashboardSideBar";
@@ -68,11 +66,11 @@ const navigation = [
 ];
 
 const setSideBarNavigationActive = (name) =>
-  sidebarNavigation.map((navigation) => {
+  sidebarNavigation.map((navigation) =>
     navigation.name === name
       ? (navigation.current = true)
-      : (navigation.current = false);
-  });
+      : (navigation.current = false)
+  );
 
 const sidebarNavigation = [
   {
@@ -123,7 +121,7 @@ export default function Dashboard() {
   if (
     session &&
     session.user.role === "admin" &&
-    !sidebarNavigation.find((x) => x.name === "admin")
+    !sidebarNavigation.find((navElement) => navElement.name === "admin")
   ) {
     sidebarNavigation.push({
       name: "admin",
@@ -274,7 +272,6 @@ export default function Dashboard() {
                 {activeSideBarSection === "home" && (
                   <HomeSection language={language} />
                 )}
-                {console.log("activeSideBarSection", activeSideBarSection)}
                 {activeSideBarSection === "plans" && (
                   <PlansSection language={language} />
                 )}

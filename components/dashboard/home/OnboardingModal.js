@@ -33,9 +33,7 @@ const ChangeUserPictureModal = ({
       .then((response) =>
         response
           .json()
-          .then(() => {
-            router.push("/auth/logout");
-          })
+          .then(() => router.push("/auth/logout"))
           .catch((e) => console.log(e))
       )
       .catch((e) => console.log(e));
@@ -50,7 +48,6 @@ const ChangeUserPictureModal = ({
         static
         className="fixed inset-0 z-50 overflow-y-auto"
         open={showOnboardingModal}
-        onClose={() => {}}
       >
         <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -65,7 +62,6 @@ const ChangeUserPictureModal = ({
             <Dialog.Overlay className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-95" />
           </Transition.Child>
 
-          {/* This element is to trick the browser into centering the modal contents. */}
           <span
             className="hidden sm:inline-block sm:align-middle sm:h-screen"
             aria-hidden="true"

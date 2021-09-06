@@ -47,10 +47,7 @@ const CreatePlanModal = ({
       .then((response) =>
         response
           .json()
-          .then((data) => {
-            console.log("DONE CREATING");
-            refetchPlans();
-          })
+          .then((data) => refetchPlans())
           .catch((e) => console.log(e))
       )
       .catch((e) => console.log(e));

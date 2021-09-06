@@ -35,10 +35,7 @@ const EditPlanModal = ({
       .then((response) =>
         response
           .json()
-          .then((data) => {
-            console.log("DONE DELETING");
-            refetchPlans();
-          })
+          .then((data) => refetchPlans())
           .catch((e) => console.log(e))
       )
       .catch((e) => console.log(e));
@@ -65,10 +62,7 @@ const EditPlanModal = ({
       .then((response) =>
         response
           .json()
-          .then((data) => {
-            console.log("DONE UPDATING");
-            refetchPlans();
-          })
+          .then((data) => refetchPlans())
           .catch((e) => console.log(e))
       )
       .catch((e) => console.log(e));

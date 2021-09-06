@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { format } from "date-fns";
 import { BadgeCheckIcon, BanIcon } from "@heroicons/react/solid";
 
@@ -13,7 +13,6 @@ const UserCard = ({
   name,
   role,
   username,
-  refetchUsers,
   language,
   callbackSetShowEditUserModal,
   callbackSetActiveStatus,
@@ -21,7 +20,7 @@ const UserCard = ({
 }) => {
   return (
     <div
-      className="flex transition duration-300 ease-in transform bg-gray-600 rounded-lg hover:scale-105 iphone:flex-col m-2 iphone:items-center tabletpro:m-4 tabletpro:mx-44 tablet:!mx-4 w-5/12"
+      className="flex w-5/12 m-2 transition duration-300 ease-in transform bg-gray-600 rounded-lg tabletfullsize hover:scale-105 iphone:flex-col iphone:items-center"
       key={id}
       title={name}
     >

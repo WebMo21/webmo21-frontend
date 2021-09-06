@@ -115,6 +115,10 @@ input:focus {
   .ipadbgsize {
     width: 100% !important;
   }
+
+  .tabletfullsize {
+    width: 100% !important;
+  }
 }
 
 @media screen and (max-width: 600px) {

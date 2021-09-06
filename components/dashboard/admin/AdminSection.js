@@ -11,7 +11,6 @@ const AdminSection = ({ language }) => {
   const [fetchedUsers, setFetchedUsers] = useState([]);
   const [showEditUserModal, setShowEditUserModal] = useState(false);
   const [editUserData, setEditUserData] = useState("");
-  const [gender, setGender] = useState("");
 
   const fetchAllUsers = () =>
     fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/users/`, {
@@ -57,7 +56,6 @@ const AdminSection = ({ language }) => {
   useEffect(() => {
     if (session) {
       fetchAllUsers();
-      setGender(session.user.gender);
     }
   }, []);
 

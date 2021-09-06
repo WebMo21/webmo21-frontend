@@ -39,16 +39,7 @@ const landing = () => {
       )
       .catch((e) => console.log(e));
 
-  useEffect(() => {
-    wakeup();
-    console.log(
-      "TEST",
-      process.env.NEXT_PUBLIC_BACKEND_URL.substring(
-        0,
-        process.env.NEXT_PUBLIC_BACKEND_URL.length - 3
-      )
-    );
-  }, []);
+  useEffect(() => wakeup(), []);
 
   return (
     <>

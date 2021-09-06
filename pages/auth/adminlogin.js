@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
@@ -8,7 +8,7 @@ import Footer from "../../components/footer/Footer";
 
 const adminlogin = () => {
   const router = useRouter();
-  const [session, loading] = useSession();
+  const [session] = useSession();
   const [language, setLanguage] = useState(
     typeof window !== "undefined" && localStorage.getItem("language") === null
       ? "DE"
@@ -36,7 +36,7 @@ const adminlogin = () => {
       username: username,
       password: password,
     })
-      .then((error, status, ok, url) => {
+      .then((error) => {
         if (parseInt(error.status) === 401 || parseInt(error.status) === 403) {
           setShowInvalidCredentials(true);
         } else {
@@ -159,9 +159,7 @@ const adminlogin = () => {
                     </div>
                     <div className="mt-5 text-center">
                       <button
-                        onClick={() => {
-                          adminSignIn(username, password);
-                        }}
+                        onClick={() => adminSignIn(username, password)}
                         className="inline-block w-full px-6 py-2 mr-2 text-sm font-bold text-center text-white uppercase align-middle transition-all duration-150 ease-in-out border border-solid rounded-md shadow outline-none select-none focus:outline-none last:mr-0 bg-blueGray-800 border-blueGray-800 active:bg-blueGray-900 active:border-blueGray-900 hover:shadow-lg"
                       >
                         {language === "DE" ? "Jetzt einloggen" : "Login now"}

@@ -192,8 +192,6 @@ const WorkoutsSection = ({ language }) => {
               <div
                 onClick={() => setShowCreateWorkoutModal(true)}
                 className="flex items-center justify-center transition duration-300 ease-in transform bg-gray-700 rounded-lg hover:scale-105 iphone:flex-col iphone:items-center tabletpro:m-4 tabletpro:mx-44 tablet:!mx-4 cursor-pointer"
-
-                /* flex items-center justify-center transition duration-300 ease-in transform bg-gray-700 rounded-lg cursor-pointer select-none hover:scale-105 iphone:m-4 tabletpro:m-4 tabletpro:mx-44 */
               >
                 <img
                   src="/icons/add.png"
