@@ -10,6 +10,7 @@ const PlansSection = ({ language }) => {
   const [fetchedUserWeeklyPlans, setFetchedUserWeeklyPlans] = useState([]);
   const [showCreatePlanModal, setShowCreatePlanModal] = useState(false);
   const [currentExpandedPlanCard, setCurrentExpandedPlanCard] = useState(0);
+  const [searchTermCalendarWeek, setSearchTermCalendarWeek] = useState("");
 
   /*  const createNewWorkoutPlan = () => {
     console.log("Create Workout Plan");
@@ -98,8 +99,26 @@ const PlansSection = ({ language }) => {
             {language === "DE" ? "Deine Trainingspläne" : "Your Workoutplans"}
           </h2>
           <h2 className="max-w-6xl pl-1 mx-auto mt-8 text-xl font-medium leading-6 text-white select-none">
+            {language === "DE"
+              ? "Suche nach Kalenderwochenzahl"
+              : "Search By Calendar Week Number"}
+          </h2>
+          <div className="w-full mt-5">
+            <input
+              value={searchTermCalendarWeek}
+              type="text"
+              id="searchterm-input"
+              maxLength="40"
+              onChange={(event) =>
+                setSearchTermCalendarWeek(event.target.value)
+              }
+              className="iphonebg border !bg-gray-600 border-transparent text-2xl font-bold !text-green-500 select-none text-center rounded-md placeholder-green-700 w-full"
+            ></input>
+          </div>
+          <h2 className="max-w-6xl pl-1 mx-auto mt-8 text-xl font-medium leading-6 text-white select-none">
             {language === "DE" ? "Aktuelle Pläne" : "Current Plans"}
           </h2>
+
           {showCreatePlanModal && (
             <CreatePlanModal
               setShowCreatePlanModal={setShowCreatePlanModal}
@@ -120,67 +139,133 @@ const PlansSection = ({ language }) => {
               </div>
             </div>
           </div>
-          {fetchedUserWeeklyPlans.length > 0 &&
-            fetchedUserWeeklyPlans
-              .filter((plan) => isPlanCurrentOrFuture(plan))
-              .sort((a, b) => a.calendar_week - b.calendar_week)
-              .sort((a, b) => a.year - b.year)
-              .reverse()
-              .map((plan) => (
-                <PlanCard
-                  key={plan.id}
-                  id={plan.id}
-                  name={plan.name}
-                  year={plan.year}
-                  calendar_week={plan.calendar_week}
-                  day_1={plan.day_1}
-                  day_2={plan.day_2}
-                  day_3={plan.day_3}
-                  day_4={plan.day_4}
-                  day_5={plan.day_5}
-                  day_6={plan.day_6}
-                  day_7={plan.day_7}
-                  language={language}
-                  refetchPlans={refetchPlans}
-                  currentExpandedPlanCard={currentExpandedPlanCard}
-                  setCurrentExpandedPlanCard={setCurrentExpandedPlanCard}
-                  wholePlan={plan}
-                  userId={session.user.id}
-                  gender={session.user.gender}
-                />
-              ))}
+          {fetchedUserWeeklyPlans.length > 0 && searchTermCalendarWeek
+            ? fetchedUserWeeklyPlans
+                .filter((plan) => isPlanCurrentOrFuture(plan))
+                .filter(
+                  (plan) =>
+                    parseInt(plan.calendar_week) ===
+                    parseInt(searchTermCalendarWeek)
+                )
+                .sort((a, b) => a.calendar_week - b.calendar_week)
+                .sort((a, b) => a.year - b.year)
+                .reverse()
+                .map((plan) => (
+                  <PlanCard
+                    key={plan.id}
+                    id={plan.id}
+                    name={plan.name}
+                    year={plan.year}
+                    calendar_week={plan.calendar_week}
+                    day_1={plan.day_1}
+                    day_2={plan.day_2}
+                    day_3={plan.day_3}
+                    day_4={plan.day_4}
+                    day_5={plan.day_5}
+                    day_6={plan.day_6}
+                    day_7={plan.day_7}
+                    language={language}
+                    refetchPlans={refetchPlans}
+                    currentExpandedPlanCard={currentExpandedPlanCard}
+                    setCurrentExpandedPlanCard={setCurrentExpandedPlanCard}
+                    wholePlan={plan}
+                    userId={session.user.id}
+                    gender={session.user.gender}
+                  />
+                ))
+            : fetchedUserWeeklyPlans
+                .filter((plan) => isPlanCurrentOrFuture(plan))
+                .sort((a, b) => a.calendar_week - b.calendar_week)
+                .sort((a, b) => a.year - b.year)
+                .reverse()
+                .map((plan) => (
+                  <PlanCard
+                    key={plan.id}
+                    id={plan.id}
+                    name={plan.name}
+                    year={plan.year}
+                    calendar_week={plan.calendar_week}
+                    day_1={plan.day_1}
+                    day_2={plan.day_2}
+                    day_3={plan.day_3}
+                    day_4={plan.day_4}
+                    day_5={plan.day_5}
+                    day_6={plan.day_6}
+                    day_7={plan.day_7}
+                    language={language}
+                    refetchPlans={refetchPlans}
+                    currentExpandedPlanCard={currentExpandedPlanCard}
+                    setCurrentExpandedPlanCard={setCurrentExpandedPlanCard}
+                    wholePlan={plan}
+                    userId={session.user.id}
+                    gender={session.user.gender}
+                  />
+                ))}
           <h2 className="max-w-6xl pl-1 mx-auto mt-8 text-xl font-medium leading-6 text-white select-none">
             {language === "DE" ? "Vergangene Pläne" : "Past Plans"}
           </h2>
-          {fetchedUserWeeklyPlans.length > 0 &&
-            fetchedUserWeeklyPlans
-              .filter((plan) => !isPlanCurrentOrFuture(plan))
-              .sort((a, b) => a.calendar_week - b.calendar_week)
-              .sort((a, b) => a.year - b.year)
-              .reverse()
-              .map((plan) => (
-                <PlanCard
-                  key={plan.id}
-                  id={plan.id}
-                  name={plan.name}
-                  year={plan.year}
-                  calendar_week={plan.calendar_week}
-                  day_1={plan.day_1}
-                  day_2={plan.day_2}
-                  day_3={plan.day_3}
-                  day_4={plan.day_4}
-                  day_5={plan.day_5}
-                  day_6={plan.day_6}
-                  day_7={plan.day_7}
-                  language={language}
-                  refetchPlans={refetchPlans}
-                  currentExpandedPlanCard={currentExpandedPlanCard}
-                  setCurrentExpandedPlanCard={setCurrentExpandedPlanCard}
-                  wholePlan={plan}
-                  userId={session.user.id}
-                  gender={session.user.gender}
-                />
-              ))}
+          {fetchedUserWeeklyPlans.length > 0 && searchTermCalendarWeek
+            ? fetchedUserWeeklyPlans
+                .filter((plan) => !isPlanCurrentOrFuture(plan))
+                .filter(
+                  (plan) =>
+                    parseInt(plan.calendar_week) ===
+                    parseInt(searchTermCalendarWeek)
+                )
+                .sort((a, b) => a.calendar_week - b.calendar_week)
+                .sort((a, b) => a.year - b.year)
+                .reverse()
+                .map((plan) => (
+                  <PlanCard
+                    key={plan.id}
+                    id={plan.id}
+                    name={plan.name}
+                    year={plan.year}
+                    calendar_week={plan.calendar_week}
+                    day_1={plan.day_1}
+                    day_2={plan.day_2}
+                    day_3={plan.day_3}
+                    day_4={plan.day_4}
+                    day_5={plan.day_5}
+                    day_6={plan.day_6}
+                    day_7={plan.day_7}
+                    language={language}
+                    refetchPlans={refetchPlans}
+                    currentExpandedPlanCard={currentExpandedPlanCard}
+                    setCurrentExpandedPlanCard={setCurrentExpandedPlanCard}
+                    wholePlan={plan}
+                    userId={session.user.id}
+                    gender={session.user.gender}
+                  />
+                ))
+            : fetchedUserWeeklyPlans
+                .filter((plan) => !isPlanCurrentOrFuture(plan))
+                .sort((a, b) => a.calendar_week - b.calendar_week)
+                .sort((a, b) => a.year - b.year)
+                .reverse()
+                .map((plan) => (
+                  <PlanCard
+                    key={plan.id}
+                    id={plan.id}
+                    name={plan.name}
+                    year={plan.year}
+                    calendar_week={plan.calendar_week}
+                    day_1={plan.day_1}
+                    day_2={plan.day_2}
+                    day_3={plan.day_3}
+                    day_4={plan.day_4}
+                    day_5={plan.day_5}
+                    day_6={plan.day_6}
+                    day_7={plan.day_7}
+                    language={language}
+                    refetchPlans={refetchPlans}
+                    currentExpandedPlanCard={currentExpandedPlanCard}
+                    setCurrentExpandedPlanCard={setCurrentExpandedPlanCard}
+                    wholePlan={plan}
+                    userId={session.user.id}
+                    gender={session.user.gender}
+                  />
+                ))}
         </div>
       </div>
     </div>
