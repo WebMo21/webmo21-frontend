@@ -7,6 +7,7 @@ const EditUserModal = ({
   setShowEditUserModal,
   language,
   refetchUsers,
+  session,
 }) => {
   const cancelButtonRef = useRef(null);
   const [inputName, setInputName] = useState(editUserData.name);
@@ -14,11 +15,12 @@ const EditUserModal = ({
   const [inputUsername, setInputUsername] = useState(editUserData.username);
 
   const updateUser = (userId, name, email, username) =>
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/users`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/users/admin`, {
       method: "put",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: session.user.id,
       },
       body: JSON.stringify({
         id: userId,

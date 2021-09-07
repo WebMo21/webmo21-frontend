@@ -10,6 +10,7 @@ const EditWorkoutModal = ({
   language,
   gender,
   reFetchWorkouts,
+  session,
 }) => {
   const cancelButtonRef = useRef(null);
   const [updatedWorkout, setUpdatedWorkout] = useState({
@@ -27,6 +28,7 @@ const EditWorkoutModal = ({
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: session.user.id,
       },
       body: JSON.stringify({
         id: workout.id,

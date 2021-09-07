@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/client";
+import Cookies from "js-cookie";
 
 import UserCard from "./UserCard";
 import EditUserModal from "./EditUserModal";
@@ -18,6 +19,7 @@ const AdminSection = ({ language }) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: session.user.id,
       },
     })
       .then((response) =>
@@ -29,11 +31,12 @@ const AdminSection = ({ language }) => {
       .catch((e) => console.log(e));
 
   const activateOrDeactiveUser = (userId, activeStatus) =>
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/users`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/users/admin`, {
       method: "put",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: session.user.id,
       },
       body: JSON.stringify({
         id: userId,
@@ -68,6 +71,7 @@ const AdminSection = ({ language }) => {
           setShowEditUserModal={setShowEditUserModal}
           refetchUsers={refetchUsers}
           language={language}
+          session={session}
         />
       )}
       <div
@@ -94,6 +98,7 @@ const AdminSection = ({ language }) => {
                             .sort((a, b) => a.id - b.id)
                             .map((user) => (
                               <UserCard
+                                key={user.id}
                                 active={user.active}
                                 createdAt={user.created_at}
                                 email={user.email}
@@ -115,9 +120,9 @@ const AdminSection = ({ language }) => {
                             ))
                         : ""}
                     </div>
-                    {console.log("fetchedUsers", fetchedUsers)}
                   </div>
                 </div>
+                {console.log("COOKIE VALUE", Cookies.get())}
               </div>
             </div>
           </div>

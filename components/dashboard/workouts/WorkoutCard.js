@@ -18,6 +18,7 @@ const WorkoutCard = ({
   gender,
   reFetchWorkouts,
   admin,
+  session,
 }) => {
   const [showDeleteWorkoutModal, setShowDeleteWorkoutModal] = useState(false);
 
@@ -211,6 +212,7 @@ const WorkoutCard = ({
                   workout={workout}
                   showDeleteWorkoutModal={showDeleteWorkoutModal}
                   reFetchWorkouts={reFetchWorkouts}
+                  session={session}
                 />
               )}
             </div>

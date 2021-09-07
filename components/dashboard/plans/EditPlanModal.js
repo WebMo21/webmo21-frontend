@@ -12,6 +12,7 @@ const EditPlanModal = ({
   id,
   language,
   refetchPlans,
+  userId,
 }) => {
   const cancelButtonRef = useRef(null);
   const [showConfirmDeletePlanModal, setShowConfirmDeletePlanModal] =
@@ -29,6 +30,7 @@ const EditPlanModal = ({
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
+          Authorization: userId,
         },
       }
     )
@@ -51,6 +53,7 @@ const EditPlanModal = ({
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: userId,
       },
       body: JSON.stringify({
         id: planId,
