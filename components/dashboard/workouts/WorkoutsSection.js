@@ -282,7 +282,6 @@ const WorkoutsSection = ({ language }) => {
                         />
                       ))
                 : ""}
-              {console.log("WHAT IS THIS?", fetchedUserWorkouts)}
               {typeof fetchedTemplateWorkouts !== undefined &&
               fetchedTemplateWorkouts.length > 0
                 ? fetchedTemplateWorkouts && searchTermWorkoutName
