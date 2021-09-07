@@ -1,5 +1,4 @@
 import { Fragment, useRef, useState } from "react";
-import { useSession } from "next-auth/client";
 import { Dialog, Transition } from "@headlessui/react";
 
 const CreateWorkoutModal = ({
@@ -9,8 +8,8 @@ const CreateWorkoutModal = ({
   findMuscleGroup,
   gender,
   reFetchWorkouts,
+  session,
 }) => {
-  const [session] = useSession();
   const cancelButtonRef = useRef(null);
   const [createdWorkout, setCreatedWorkout] = useState({
     name: language === "DE" ? "Beispiel" : "Example",
@@ -27,6 +26,7 @@ const CreateWorkoutModal = ({
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: session.user.id,
       },
       body: JSON.stringify({
         id: workout.id,

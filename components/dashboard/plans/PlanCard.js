@@ -116,6 +116,7 @@ const PlanCard = ({
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: userId,
       },
       body: JSON.stringify(
         findAndRemoveWorkoutFromPlan(
@@ -305,6 +306,7 @@ const PlanCard = ({
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: userId,
       },
       body: JSON.stringify(
         findAndUpdateWorkoutWithinPlan(
@@ -365,6 +367,7 @@ const PlanCard = ({
                   id={id}
                   language={language}
                   refetchPlans={refetchPlans}
+                  userId={userId}
                 />
               ) : (
                 ""
@@ -473,6 +476,7 @@ const PlanCard = ({
                                 callbackUpdateWorkoutWithinPlan={
                                   updateWorkoutWithinPlan
                                 }
+                                userId={userId}
                               />
                             ))
                         : ""}
@@ -536,6 +540,7 @@ const PlanCard = ({
                                 callbackUpdateWorkoutWithinPlan={
                                   updateWorkoutWithinPlan
                                 }
+                                userId={userId}
                               />
                             ))
                         : ""}
@@ -599,6 +604,7 @@ const PlanCard = ({
                                 callbackUpdateWorkoutWithinPlan={
                                   updateWorkoutWithinPlan
                                 }
+                                userId={userId}
                               />
                             ))
                         : ""}
@@ -662,6 +668,7 @@ const PlanCard = ({
                                 callbackUpdateWorkoutWithinPlan={
                                   updateWorkoutWithinPlan
                                 }
+                                userId={userId}
                               />
                             ))
                         : ""}
@@ -725,6 +732,7 @@ const PlanCard = ({
                                 callbackUpdateWorkoutWithinPlan={
                                   updateWorkoutWithinPlan
                                 }
+                                userId={userId}
                               />
                             ))
                         : ""}
@@ -788,6 +796,7 @@ const PlanCard = ({
                                 callbackUpdateWorkoutWithinPlan={
                                   updateWorkoutWithinPlan
                                 }
+                                userId={userId}
                               />
                             ))
                         : ""}
@@ -851,6 +860,7 @@ const PlanCard = ({
                                 callbackUpdateWorkoutWithinPlan={
                                   updateWorkoutWithinPlan
                                 }
+                                userId={userId}
                               />
                             ))
                         : ""}

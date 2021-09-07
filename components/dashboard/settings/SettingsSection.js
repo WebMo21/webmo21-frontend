@@ -35,6 +35,7 @@ const SettingsSection = ({ language }) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: session.user.id,
       },
       body: JSON.stringify({
         id: id,

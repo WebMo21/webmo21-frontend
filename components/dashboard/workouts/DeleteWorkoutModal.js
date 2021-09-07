@@ -7,6 +7,7 @@ const DeleteWorkoutModal = ({
   workout,
   showDeleteWorkoutModal,
   reFetchWorkouts,
+  session,
 }) => {
   const cancelButtonRef = useRef(null);
 
@@ -18,6 +19,7 @@ const DeleteWorkoutModal = ({
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
+          Authorization: session.user.id,
         },
       }
     )

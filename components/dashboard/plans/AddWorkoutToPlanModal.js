@@ -217,6 +217,7 @@ const AddWorkoutToPlanModal = ({
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: userId,
       },
       body: JSON.stringify(wholeUpdatedPlan),
     })
@@ -265,6 +266,7 @@ const AddWorkoutToPlanModal = ({
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: userId,
       },
     })
       .then((response) =>
@@ -400,10 +402,6 @@ const AddWorkoutToPlanModal = ({
                 ) : (
                   ""
                 )}
-                {console.log(
-                  "showTimeConflictErrorModal",
-                  showTimeConflictErrorModal
-                )}
                 <h2 className="mb-2 text-2xl font-bold text-center text-green-500 select-none">
                   {language === "DE"
                     ? "Informationen über deine Übung"
@@ -535,11 +533,18 @@ const AddWorkoutToPlanModal = ({
                   {fetchedAllWorkouts
                     ? fetchedAllWorkouts && workoutSearchTerm
                       ? fetchedAllWorkouts
-                          .filter((workout) => workout.user_id !== ADMIN_ID)
+                          .filter(
+                            (workout) =>
+                              workout.user_id !== ADMIN_ID &&
+                              parseInt(workout.user_id) === parseInt(userId)
+                          )
                           .filter((workout) =>
                             workout.name
+                              .toString()
                               .toLowerCase()
-                              .includes(workoutSearchTerm.toLowerCase())
+                              .includes(
+                                workoutSearchTerm.toString().toLowerCase()
+                              )
                           )
                           .map((workout) => (
                             <WorkoutCard
@@ -571,7 +576,11 @@ const AddWorkoutToPlanModal = ({
                             />
                           ))
                       : fetchedAllWorkouts
-                          .filter((workout) => workout.user_id !== ADMIN_ID)
+                          .filter(
+                            (workout) =>
+                              workout.user_id !== ADMIN_ID &&
+                              parseInt(workout.user_id) === parseInt(userId)
+                          )
                           .map((workout) => (
                             <WorkoutCard
                               id={workout.id}
@@ -607,7 +616,12 @@ const AddWorkoutToPlanModal = ({
                       ? fetchedAllWorkouts
                           .filter((workout) => workout.user_id === ADMIN_ID)
                           .filter((workout) =>
-                            workout.name.includes(workoutSearchTerm)
+                            workout.name
+                              .toString()
+                              .toLowerCase()
+                              .includes(
+                                workoutSearchTerm.toString().toLowerCase()
+                              )
                           )
                           .map((workout) => (
                             <WorkoutCard

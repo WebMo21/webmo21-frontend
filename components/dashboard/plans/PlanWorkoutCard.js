@@ -38,6 +38,7 @@ const PlanWorkoutCard = ({
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: session.user.id,
       },
     })
       .then((response) =>

@@ -29,6 +29,7 @@ const CreatePlanModal = ({
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: userId,
       },
       body: JSON.stringify({
         user_id: userId,

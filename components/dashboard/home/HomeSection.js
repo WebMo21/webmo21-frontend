@@ -218,13 +218,7 @@ const HomeSection = ({ language }) => {
     return planPerDayArray;
   };
 
-  const [myEventsList, setMyEventsList] = useState([
-    {
-      start: moment().toDate(),
-      end: moment().add(1, "hours").toDate(),
-      title: "Testings Test",
-    },
-  ]);
+  const [myEventsList, setMyEventsList] = useState([]);
 
   const DnDCalendar = withDragAndDrop(Calendar);
 
@@ -248,6 +242,7 @@ const HomeSection = ({ language }) => {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
+          Authorization: session.user.id,
         },
       }
     )
@@ -499,7 +494,6 @@ const HomeSection = ({ language }) => {
       }
     });
 
-    console.log("totalWorkoutTime", totalWorkoutTime);
     return totalWorkoutTime / 3600;
   };
 
@@ -655,6 +649,7 @@ const HomeSection = ({ language }) => {
           gender={session.user?.gender}
           showOnboardingModal={showOnboardingModal}
           language={language}
+          session={session}
         />
       ) : (
         ""

@@ -9,6 +9,7 @@ const ChangeUserPictureModal = ({
   gender,
   showOnboardingModal,
   language,
+  session,
 }) => {
   const router = useRouter();
   const [nameInput, setNameInput] = useState(name);
@@ -17,17 +18,19 @@ const ChangeUserPictureModal = ({
   const [showUpdateError, setShowUpdateError] = useState(false);
 
   const saveUserUpdated = (id, name, image, gender) =>
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/users/`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/users/signUp`, {
       method: "put",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: session.user.id,
       },
       body: JSON.stringify({
         id: id,
         name: name,
         image: image,
         gender: gender,
+        role: "user",
       }),
     })
       .then((response) =>
@@ -48,6 +51,7 @@ const ChangeUserPictureModal = ({
         static
         className="fixed inset-0 z-50 overflow-y-auto"
         open={showOnboardingModal}
+        onClose={() => {}}
       >
         <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -66,6 +70,7 @@ const ChangeUserPictureModal = ({
             className="hidden sm:inline-block sm:align-middle sm:h-screen"
             aria-hidden="true"
           >
+            {console.log("SESSION LOG", session)}
             &#8203;
           </span>
           <Transition.Child
