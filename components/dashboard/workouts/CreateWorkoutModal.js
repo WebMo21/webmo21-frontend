@@ -1,5 +1,4 @@
 import { Fragment, useRef, useState } from "react";
-import { useSession } from "next-auth/client";
 import { Dialog, Transition } from "@headlessui/react";
 
 const CreateWorkoutModal = ({
@@ -9,8 +8,8 @@ const CreateWorkoutModal = ({
   findMuscleGroup,
   gender,
   reFetchWorkouts,
+  session,
 }) => {
-  const [session] = useSession();
   const cancelButtonRef = useRef(null);
   const [createdWorkout, setCreatedWorkout] = useState({
     name: language === "DE" ? "Beispiel" : "Example",
@@ -27,6 +26,7 @@ const CreateWorkoutModal = ({
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: session.user.id,
       },
       body: JSON.stringify({
         id: workout.id,
@@ -47,9 +47,7 @@ const CreateWorkoutModal = ({
       .then((response) =>
         response
           .json()
-          .then(() => {
-            reFetchWorkouts();
-          })
+          .then(() => reFetchWorkouts())
           .catch((e) => console.log(e))
       )
       .catch((e) => console.log(e));
@@ -81,7 +79,6 @@ const CreateWorkoutModal = ({
             <Dialog.Overlay className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" />
           </Transition.Child>
 
-          {/* This element is to trick the browser into centering the modal contents. */}
           <span
             className="hidden sm:inline-block sm:align-middle sm:h-screen"
             aria-hidden="true"
@@ -326,12 +323,12 @@ const CreateWorkoutModal = ({
                           maxLength="4"
                           className="block w-full pr-12 !bg-gray-700 !text-white border-gray-300 rounded-md focus:outline-none pl-7 sm:text-sm placeholder-white border-none active:outline-none select-none"
                           placeholder="0"
-                          onChange={(event) => {
+                          onChange={(event) =>
                             setCreatedWorkout({
                               ...createdWorkout,
                               equipment_weight_in_kilo: event.target.value,
-                            });
-                          }}
+                            })
+                          }
                           value={
                             createdWorkout.equipment_weight_in_kilo
                               ? createdWorkout.equipment_weight_in_kilo

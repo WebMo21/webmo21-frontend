@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
@@ -7,7 +7,7 @@ import NavBar from "../../components/navbar/NavBar";
 import Footer from "../../components/footer/Footer";
 
 const login = () => {
-  const [session, loading] = useSession();
+  const [session] = useSession();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [showEmailInvalid, setShowEmailInvalid] = useState(false);

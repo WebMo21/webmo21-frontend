@@ -3,7 +3,7 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/client";
 
 const logout = () => {
-  const [session, loading] = useSession();
+  const [session] = useSession();
   const [language] = useState(
     typeof window !== "undefined" && localStorage.getItem("language") === null
       ? "DE"

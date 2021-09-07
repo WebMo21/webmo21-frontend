@@ -21,7 +21,6 @@ const Navigation = ({ title }) => {
             <label htmlFor="search" className="sr-only">
               Search all inboxes
             </label>
-            // TODO: THIS SHOULD BE A USEABLE SEARCHBAR ON THE WORKOUT PAGE
             <input
               id="search"
               type="search"

@@ -9,6 +9,7 @@ const ChangeUserPictureModal = ({
   gender,
   showOnboardingModal,
   language,
+  session,
 }) => {
   const router = useRouter();
   const [nameInput, setNameInput] = useState(name);
@@ -17,25 +18,25 @@ const ChangeUserPictureModal = ({
   const [showUpdateError, setShowUpdateError] = useState(false);
 
   const saveUserUpdated = (id, name, image, gender) =>
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/users/`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/users/signUp`, {
       method: "put",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: session.user.id,
       },
       body: JSON.stringify({
         id: id,
         name: name,
         image: image,
         gender: gender,
+        role: "user",
       }),
     })
       .then((response) =>
         response
           .json()
-          .then(() => {
-            router.push("/auth/logout");
-          })
+          .then(() => router.push("/auth/logout"))
           .catch((e) => console.log(e))
       )
       .catch((e) => console.log(e));
@@ -65,11 +66,11 @@ const ChangeUserPictureModal = ({
             <Dialog.Overlay className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-95" />
           </Transition.Child>
 
-          {/* This element is to trick the browser into centering the modal contents. */}
           <span
             className="hidden sm:inline-block sm:align-middle sm:h-screen"
             aria-hidden="true"
           >
+            {console.log("SESSION LOG", session)}
             &#8203;
           </span>
           <Transition.Child

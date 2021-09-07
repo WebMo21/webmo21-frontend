@@ -80,3 +80,72 @@ input:focus {
 .figure:hover img.image-hover {
   opacity: 1;
 }
+
+.bg-striped-green {
+  background: repeating-linear-gradient(
+    45deg,
+    #12d6952d,
+    #12d6952d 10px,
+    #4d576867 10px,
+    #4d576867 20px
+  );
+}
+
+@media screen and (max-width: 1400px) {
+  .ipadwrap {
+    flex-wrap: wrap;
+    flex: 50%;
+  }
+
+  .ipadwith {
+    width: 30% !important;
+  }
+
+  .paddingipad {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    padding-bottom: 1rem !important;
+    padding-top: 1rem !important;
+  }
+
+  .ipadtextsize {
+    font-size: 1rem !important;
+  }
+
+  .ipadbgsize {
+    width: 100% !important;
+  }
+
+  .tabletfullsize {
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .paddingipad {
+    padding: 0px !important;
+    padding-bottom: 1rem !important;
+    padding-top: 1rem !important;
+  }
+
+  .iphonebgsize {
+    width: 95% !important;
+  }
+
+  .iphonebg {
+    width: 100% !important;
+  }
+}
+
+.desktopwidth {
+  width: "48%" !important;
+  max-width: "29rem" !important;
+}
+
+.rbc-ellipsis,
+.rbc-event-label,
+.rbc-row-segment .rbc-event-content,
+.rbc-show-more {
+  overflow: visible !important;
+  white-space: pre-wrap !important;
+}

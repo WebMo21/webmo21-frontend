@@ -9,7 +9,9 @@ const SettingsSection = ({ language }) => {
   const [session] = useSession();
   const [nameOfUser, setNameOfUser] = useState("");
   const [genderOfUser, setGenderOfUser] = useState("");
-  const [pictureOfUser, setPictureOfUser] = useState("");
+  const [pictureOfUser, setPictureOfUser] = useState(
+    "https://i.pravatar.cc/300"
+  );
   const [showChangePictureModal, setShowChangePictureModal] = useState(false);
 
   useEffect(() => {
@@ -33,6 +35,7 @@ const SettingsSection = ({ language }) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        Authorization: session.user.id,
       },
       body: JSON.stringify({
         id: id,
@@ -44,9 +47,7 @@ const SettingsSection = ({ language }) => {
       .then((response) =>
         response
           .json()
-          .then(() => {
-            router.push("/auth/logout");
-          })
+          .then(() => router.push("/auth/logout"))
           .catch((e) => console.log(e))
       )
       .catch((e) => console.log(e));
@@ -150,14 +151,14 @@ const SettingsSection = ({ language }) => {
             <button
               type="button"
               className="inline-flex justify-center w-full px-4 py-2 mt-12 text-base font-medium text-white bg-green-500 border border-transparent rounded-md shadow-sm select-none hover:bg-green-400 sm:col-start-2 sm:text-sm focus:outline-none"
-              onClick={() => {
+              onClick={() =>
                 saveUserUpdated(
                   session.user.id,
                   nameOfUser,
                   genderOfUser,
                   pictureOfUser
-                );
-              }}
+                )
+              }
             >
               {language === "DE" ? "Speichern" : "Save"}
             </button>

@@ -12,7 +12,9 @@ import {
   CheckCircleIcon,
   CalendarIcon,
   ChartBarIcon,
+  KeyIcon,
 } from "@heroicons/react/solid";
+import { format, addDays } from "date-fns";
 
 import OnboardingModal from "./OnboardingModal";
 
@@ -27,13 +29,196 @@ const HomeSection = ({ language }) => {
 
   const localizer = momentLocalizer(moment);
 
-  const myEventsList = [
-    {
-      start: moment().toDate(),
-      end: moment().add(1, "hours").toDate(),
-      title: "Testing",
-    },
-  ];
+  function getDateOfISOWeek(w, y) {
+    var simple = new Date(y, 0, 1 + (w - 1) * 7);
+    var dow = simple.getDay();
+    var ISOweekStart = simple;
+    if (dow <= 4) ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+    else ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+    return ISOweekStart;
+  }
+
+  const findStartOfPlanDay = (planDay, date) => {
+    let earliestStartTime = "23:59";
+
+    planDay.forEach((workout) => {
+      if (
+        parseInt(workout.workout_time_start.replace(":", "")) <=
+        parseInt(earliestStartTime.replace(":", ""))
+      )
+        earliestStartTime = workout.workout_time_start;
+    });
+
+    return moment({
+      year: parseInt(date.split(".")[2]),
+      month: parseInt(date.split(".")[1] - 1),
+      day: parseInt(date.split(".")[0]),
+      hour: parseInt(earliestStartTime.split(":")[0]),
+      minute: parseInt(earliestStartTime.split(":")[1]),
+    })._d;
+  };
+
+  const findEndOfPlanDay = (planDay, date) => {
+    let latestEndTime = "00:01";
+
+    planDay.forEach((workout) => {
+      if (
+        parseInt(workout.workout_time_end.replace(":", "")) >=
+        parseInt(latestEndTime.replace(":", ""))
+      )
+        latestEndTime = workout.workout_time_end;
+    });
+
+    return moment({
+      year: parseInt(date.split(".")[2]),
+      month: parseInt(date.split(".")[1]) - 1,
+      day: parseInt(date.split(".")[0]),
+      hour: parseInt(latestEndTime.split(":")[0]),
+      minute: parseInt(latestEndTime.split(":")[1]),
+    })._d;
+  };
+
+  const convertWeeklyPlansToForEventList = (plansArray) => {
+    let planPerDayArray = [];
+    plansArray.forEach((plan) => {
+      if (plan.day_1.length > 0)
+        planPerDayArray.push({
+          title: plan.name,
+          start: findStartOfPlanDay(
+            plan.day_1,
+            format(
+              getDateOfISOWeek(plan.calendar_week, plan.year),
+              "dd.MM.yyyy"
+            )
+          ),
+          end: findEndOfPlanDay(
+            plan.day_1,
+            format(
+              getDateOfISOWeek(plan.calendar_week, plan.year),
+              "dd.MM.yyyy"
+            )
+          ),
+        });
+
+      if (plan.day_2.length > 0)
+        planPerDayArray.push({
+          title: plan.name,
+          start: findStartOfPlanDay(
+            plan.day_2,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 1),
+              "dd.MM.yyyy"
+            )
+          ),
+          end: findEndOfPlanDay(
+            plan.day_2,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 1),
+              "dd.MM.yyyy"
+            )
+          ),
+        });
+
+      if (plan.day_3.length > 0)
+        planPerDayArray.push({
+          title: plan.name,
+          start: findStartOfPlanDay(
+            plan.day_3,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 2),
+              "dd.MM.yyyy"
+            )
+          ),
+          end: findEndOfPlanDay(
+            plan.day_3,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 2),
+              "dd.MM.yyyy"
+            )
+          ),
+        });
+
+      if (plan.day_4.length > 0)
+        planPerDayArray.push({
+          title: plan.name,
+          start: findStartOfPlanDay(
+            plan.day_4,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 3),
+              "dd.MM.yyyy"
+            )
+          ),
+          end: findEndOfPlanDay(
+            plan.day_4,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 3),
+              "dd.MM.yyyy"
+            )
+          ),
+        });
+
+      if (plan.day_5.length > 0)
+        planPerDayArray.push({
+          title: plan.name,
+          start: findStartOfPlanDay(
+            plan.day_5,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 4),
+              "dd.MM.yyyy"
+            )
+          ),
+          end: findEndOfPlanDay(
+            plan.day_5,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 4),
+              "dd.MM.yyyy"
+            )
+          ),
+        });
+
+      if (plan.day_6.length > 0)
+        planPerDayArray.push({
+          title: plan.name,
+          start: findStartOfPlanDay(
+            plan.day_6,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 5),
+              "dd.MM.yyyy"
+            )
+          ),
+          end: findEndOfPlanDay(
+            plan.day_6,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 5),
+              "dd.MM.yyyy"
+            )
+          ),
+        });
+
+      if (plan.day_7.length > 0)
+        planPerDayArray.push({
+          title: plan.name,
+          start: findStartOfPlanDay(
+            plan.day_7,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 6),
+              "dd.MM.yyyy"
+            )
+          ),
+          end: findEndOfPlanDay(
+            plan.day_7,
+            format(
+              addDays(getDateOfISOWeek(plan.calendar_week, plan.year), 6),
+              "dd.MM.yyyy"
+            )
+          ),
+        });
+    });
+
+    return planPerDayArray;
+  };
+
+  const [myEventsList, setMyEventsList] = useState([]);
 
   const DnDCalendar = withDragAndDrop(Calendar);
 
@@ -57,6 +242,7 @@ const HomeSection = ({ language }) => {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
+          Authorization: session.user.id,
         },
       }
     )
@@ -64,26 +250,21 @@ const HomeSection = ({ language }) => {
         response
           .json()
           .then((data) => {
-            console.log("DATA PLANS", data);
-            console.log("data.weeklyWorkoutPlans", data.weeklyWorkoutPlans);
-            console.log("response PLANS", response.status);
-            if (response.status === 200)
+            if (response.status === 200 && data.weeklyWorkoutPlans) {
               setFetchedUserPlans(data.weeklyWorkoutPlans);
+              setMyEventsList(
+                convertWeeklyPlansToForEventList(data.weeklyWorkoutPlans)
+              );
+            }
           })
           .catch((e) => console.log(e))
       )
       .catch((e) => console.log(e));
 
-  const isMoreThanNinetyPercentOfWorkoutsCompleted = (
-    workoutCompletedArray
-  ) => {
-    return (
-      workoutCompletedArray.filter((element) => element === "completed")
-        .length /
-        workoutCompletedArray.length >=
-      0.9
-    );
-  };
+  const isMoreThanNinetyPercentOfWorkoutsCompleted = (workoutCompletedArray) =>
+    workoutCompletedArray.filter((element) => element === "completed").length /
+      workoutCompletedArray.length >=
+    0.9;
 
   // A day of a plan is counted as complete when 90 % or more of the workouts of that day are completed. When all days are complete the plan is counted as complete.
   const calculateCompletedTrainingWeeks = (fetchedUserPlans) => {
@@ -228,8 +409,6 @@ const HomeSection = ({ language }) => {
         dayCompleted = [];
       }
     });
-
-    console.log("weeklyPlanCompletedCount", weeklyPlanCompletedCount);
     return weeklyPlanCompletedCount;
   };
 
@@ -315,7 +494,6 @@ const HomeSection = ({ language }) => {
       }
     });
 
-    console.log("totalWorkoutTime", totalWorkoutTime);
     return totalWorkoutTime / 3600;
   };
 
@@ -400,8 +578,6 @@ const HomeSection = ({ language }) => {
         });
       }
     });
-
-    console.log("totalWorkoutWeight", totalWorkoutWeight);
     return totalWorkoutWeight / 1000;
   };
 
@@ -473,6 +649,7 @@ const HomeSection = ({ language }) => {
           gender={session.user?.gender}
           showOnboardingModal={showOnboardingModal}
           language={language}
+          session={session}
         />
       ) : (
         ""
@@ -536,6 +713,17 @@ const HomeSection = ({ language }) => {
                         ? "Verifizierter Nutzer"
                         : "Verified User"}
                     </dd>
+                    {session.user.role === "admin" ? (
+                      <dd className="flex items-center mt-3 font-medium text-gray-400 capitalize select-none ttext-md sm:mr-6 sm:mt-0">
+                        <KeyIcon
+                          className="flex-shrink-0 mr-1.5 h-5 w-5 text-yellow-400"
+                          aria-hidden="true"
+                        />
+                        Admin
+                      </dd>
+                    ) : (
+                      ""
+                    )}
                   </dl>
                 </div>
               </div>
@@ -638,25 +826,19 @@ const HomeSection = ({ language }) => {
         </div>
 
         {/* History Section */}
-        <div>
+        {/* <div>
           <h2 className="max-w-6xl px-4 pb-2 mx-auto mt-8 text-2xl font-medium leading-6 text-white select-none sm:px-6 lg:px-8">
             {language && language === "DE"
               ? "Deine Trainingshistorie"
               : "Your Training History"}
           </h2>
 
-          {/* Activity list (smallest breakpoint only) */}
+         
           <div className="flex-col p-8 py-6 mt-3 mb-12 text-gray-300 bg-gray-700 rounded-md select-none sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-10 md:flex md:items-center md:justify-between">
-            {/* <div className="flex-row justify-between mx-auto md:flex items-between">
-              <div className="p-8">Test1.1</div>
-              <div className="p-8">Test1.2</div>
-              <div className="p-8">Test1.3</div>
-            </div>
-            <div>Test2</div>
-            <div>Test3</div> */}
+           
             Test
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

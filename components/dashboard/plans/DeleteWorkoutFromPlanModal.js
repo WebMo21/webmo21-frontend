@@ -1,19 +1,23 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-const ChangeUserPictureModal = ({
-  showChangePictureModal,
-  setShowChangePictureModal,
-  pictureOfUser,
-  handleChangeUserPicture,
+const DeleteWorkoutFromPlanModal = ({
+  showDeleteWorkoutFromPlanModal,
+  setShowDeleteWorkoutFromPlanModal,
+  callbackFindAndRemoveWorkoutFromPlan,
+  workoutId,
+  workoutTimeStart,
+  workoutTimeEnd,
+  day,
   language,
 }) => {
   const cancelButtonRef = useRef(null);
-  const [pictureURLInput, setPictureURLInput] = useState(pictureOfUser);
 
   return (
     <Transition.Root
-      show={showChangePictureModal ? showChangePictureModal : false}
+      show={
+        showDeleteWorkoutFromPlanModal ? showDeleteWorkoutFromPlanModal : false
+      }
       as={Fragment}
     >
       <Dialog
@@ -21,8 +25,8 @@ const ChangeUserPictureModal = ({
         static
         className="fixed inset-0 z-50 overflow-y-auto"
         initialFocus={cancelButtonRef}
-        open={showChangePictureModal}
-        onClose={setShowChangePictureModal}
+        open={showDeleteWorkoutFromPlanModal}
+        onClose={setShowDeleteWorkoutFromPlanModal}
       >
         <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -57,36 +61,35 @@ const ChangeUserPictureModal = ({
               data-aos="fade-in"
             >
               <div>
-                <label
-                  htmlFor="price"
-                  className="block mb-4 text-xl font-medium text-center text-gray-200 select-none"
-                >
+                <h2 className="mb-4 text-2xl font-bold text-center text-green-500 select-none">
                   {language === "DE"
-                    ? "Dein Profilbild aktualisieren?"
-                    : "Do you want to update your profile picture?"}
-                </label>
-                <input
-                  value={pictureURLInput}
-                  type="text"
-                  id="picture-of-user"
-                  onChange={(event) => setPictureURLInput(event.target.value)}
-                  className="border !bg-gray-600 border-transparent text-3xl font-bold !text-green-500 select-none w-full rounded-md placeholder-green-700 text-center iphone:!text-base  mx-auto"
-                />
-                <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
+                    ? "Bitte bestätige das Löschen des Workouts aus deinem dem Wochenplan"
+                    : "Please Confirm The Deletion Of The Workout From Your Weekly Workout Plan"}
+                </h2>
+                <div className="flex pt-4 mb-2">
                   <button
                     type="button"
-                    className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-green-500 border border-transparent rounded-md shadow-sm select-none hover:bg-green-400 sm:col-start-2 sm:text-sm focus:outline-none"
-                    onClick={() => handleChangeUserPicture(pictureURLInput)}
+                    className="inline-flex justify-center w-full px-4 py-2 mt-3 ml-2 mr-4 text-base font-medium text-gray-700 bg-gray-300 border border-gray-300 rounded-md shadow-sm select-none hover:bg-gray-200 sm:mt-0 sm:col-start-1 sm:text-sm focus:outline-none"
+                    onClick={() => setShowDeleteWorkoutFromPlanModal(false)}
+                    ref={cancelButtonRef}
                   >
-                    {language === "DE" ? "Aktualisieren" : "Update"}
+                    {language === "DE" ? "Abbrechen" : "Abort"}
                   </button>
                   <button
                     type="button"
-                    className="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm select-none hover:bg-gray-100 sm:mt-0 sm:col-start-1 sm:text-sm focus:outline-none"
-                    onClick={() => setShowChangePictureModal(false)}
+                    className="inline-flex justify-center w-full px-4 py-2 mt-3 ml-4 mr-2 text-base font-medium text-white bg-red-500 border border-red-500 rounded-md shadow-sm select-none hover:bg-red-400 sm:mt-0 sm:col-start-1 sm:text-sm focus:outline-none"
+                    onClick={() => {
+                      callbackFindAndRemoveWorkoutFromPlan(
+                        workoutId,
+                        day,
+                        workoutTimeStart,
+                        workoutTimeEnd
+                      );
+                      setShowDeleteWorkoutFromPlanModal(false);
+                    }}
                     ref={cancelButtonRef}
                   >
-                    {language === "DE" ? "Abbrechen" : "Cancel"}
+                    {language === "DE" ? "Löschen" : "Delete"}
                   </button>
                 </div>
               </div>
@@ -98,4 +101,4 @@ const ChangeUserPictureModal = ({
   );
 };
 
-export default ChangeUserPictureModal;
+export default DeleteWorkoutFromPlanModal;

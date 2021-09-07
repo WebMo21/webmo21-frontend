@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-
-import DeleteWorkoutModal from "./DeleteWorkoutModal";
+import React from "react";
 
 const WorkoutCard = ({
   id,
@@ -10,21 +8,21 @@ const WorkoutCard = ({
   equipment_weight_in_kilo,
   language,
   muscle_group,
-  setShowEditWorkoutModal,
-  setEditWorkoutData,
-  workout,
   badge,
   findMuscleGroup,
   gender,
-  reFetchWorkouts,
-  admin,
-  session,
+  callbackSetSelectedWorkout,
+  selectedWorkout,
 }) => {
-  const [showDeleteWorkoutModal, setShowDeleteWorkoutModal] = useState(false);
-
   return (
     <div
-      className="flex transition duration-300 ease-in transform bg-gray-700 rounded-lg hover:scale-105 iphone:flex-col iphone:items-center tabletpro:m-4 tabletpro:mx-44 tablet:!mx-4"
+      onClick={() => callbackSetSelectedWorkout(id)}
+      className={`${
+        selectedWorkout === id
+          ? "border-4 border-green-500 scale-105"
+          : "scale-100"
+      } flex transition duration-300 ease-in transform bg-gray-700 rounded-lg hover:scale-105 iphone:flex-col iphone:items-center tabletpro:m-4 tabletpro:mx-44 tablet:!mx-4 mb-4 cursor-pointer iphonebg ipadbgsize`}
+      style={{ width: "48%", maxWidth: "29rem" }}
       key={id}
     >
       <div className="relative flex-none w-48 ml-2 iphone:mt-4">
@@ -181,45 +179,6 @@ const WorkoutCard = ({
           </div>
           <div className="ml-auto text-sm text-gray-500 underline"></div>
         </div>
-        {badge === "Individuell" || badge === "Custom" || admin === "yes" ? (
-          <div className="flex mb-4 space-x-3 text-sm font-medium">
-            <div className="flex flex-auto space-x-3 iphone:justify-center">
-              <div>
-                <a
-                  onClick={() => {
-                    setShowEditWorkoutModal(true);
-                    setEditWorkoutData(workout);
-                  }}
-                  className="inline-block p-2 text-lg font-semibold text-white bg-yellow-600 border border-transparent border-yellow-500 rounded cursor-pointer select-none hover:bg-yellow-500"
-                >
-                  {language && language === "DE"
-                    ? "Bearbeiten"
-                    : "Edit Workout"}
-                </a>
-              </div>
-              <div>
-                <a
-                  onClick={() => setShowDeleteWorkoutModal(true)}
-                  className="inline-block p-2 text-lg font-semibold text-white bg-red-500 border border-transparent border-red-500 rounded cursor-pointer select-none hover:bg-red-400"
-                >
-                  {language && language === "DE" ? "Löschen" : "Delete"}
-                </a>
-              </div>
-              {showDeleteWorkoutModal && (
-                <DeleteWorkoutModal
-                  language={language}
-                  setShowDeleteWorkoutModal={setShowDeleteWorkoutModal}
-                  workout={workout}
-                  showDeleteWorkoutModal={showDeleteWorkoutModal}
-                  reFetchWorkouts={reFetchWorkouts}
-                  session={session}
-                />
-              )}
-            </div>
-          </div>
-        ) : (
-          ""
-        )}
       </div>
     </div>
   );
