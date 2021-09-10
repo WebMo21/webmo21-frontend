@@ -5,7 +5,6 @@ import AOS from "aos";
 import "../styles/globals.css";
 import "aos/dist/aos.css";
 import "@notus-pro/react/tailwind.min.css";
-// TODO: Remove @notus-pro and fix missing bg-color classed by hand with bg-[#1da1f1] to get rid of this minified css file
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
