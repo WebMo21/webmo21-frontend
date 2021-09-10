@@ -31,7 +31,6 @@ const PlanWorkoutCard = ({
     useState(false);
   const [showInputErrorTime, setShowInputErrorTime] = useState(false);
 
-  // TODO Take care about a user asking for workouts from admin template in backend auth check
   const fetchWorkoutDetails = () =>
     fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/workouts/${workoutId}`, {
       method: "get",
