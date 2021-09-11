@@ -229,3 +229,7 @@ We used Git Flow to merge code into the codebase with a structured order and kee
 | <img src="team-jakob-holz.png" width="200"> | <img src="team-onur-menekse.png" width="200"> | <img src="team-artur-kamrad.png" width="200"> | <img src="team-sascha-majewsky.png" width="200">   |
 | ------------------------------------------- | --------------------------------------------- | --------------------------------------------- | -------------------------------------------------- |
 | Jakob Holz                                  | Onur Menekse                                  | Artur Kamrad                                  | [Sascha Majewsky](https://github.com/SaschaWebDev) |
+
+## 🔑 License
+
+License under MIT License. See [LICENSE](https://github.com/WebMo21/webmo21-frontend/blob/main/LICENSE) for further information.
