@@ -538,10 +538,12 @@ const HomeSection = ({ language }) => {
       )
     );
 
+    console.log("promiseArrayDay1", promiseDay1Array);
     let workoutInformationDay1Array = [];
     Promise.allSettled(promiseDay1Array)
       .then((result) => {
         result.forEach((row) => workoutInformationDay1Array.push(row.value));
+        console.log("workoutInformationDay1Array", workoutInformationDay1Array);
 
         let planDay2Filtered = fetchedUserPlans.filter(
           (plan) => plan.day_2.length > 0
@@ -559,6 +561,10 @@ const HomeSection = ({ language }) => {
           .then((result) => {
             result.forEach((row) =>
               workoutInformationDay2Array.push(row.value)
+            );
+            console.log(
+              "workoutInformationDay2Array",
+              workoutInformationDay2Array
             );
 
             let planDay3Filtered = fetchedUserPlans.filter(
@@ -578,6 +584,10 @@ const HomeSection = ({ language }) => {
                 result.forEach((row) =>
                   workoutInformationDay3Array.push(row.value)
                 );
+                console.log(
+                  "workoutInformationDay3Array",
+                  workoutInformationDay3Array
+                );
 
                 let planDay4Filtered = fetchedUserPlans.filter(
                   (plan) => plan.day_4.length > 0
@@ -595,6 +605,10 @@ const HomeSection = ({ language }) => {
                   .then((result) => {
                     result.forEach((row) =>
                       workoutInformationDay4Array.push(row.value)
+                    );
+                    console.log(
+                      "workoutInformationDay4Array",
+                      workoutInformationDay4Array
                     );
 
                     let planDay5Filtered = fetchedUserPlans.filter(
@@ -614,6 +628,10 @@ const HomeSection = ({ language }) => {
                         result.forEach((row) =>
                           workoutInformationDay5Array.push(row.value)
                         );
+                        console.log(
+                          "workoutInformationDay5Array",
+                          workoutInformationDay5Array
+                        );
 
                         let planDay6Filtered = fetchedUserPlans.filter(
                           (plan) => plan.day_6.length > 0
@@ -631,6 +649,10 @@ const HomeSection = ({ language }) => {
                           .then((result) => {
                             result.forEach((row) =>
                               workoutInformationDay6Array.push(row.value)
+                            );
+                            console.log(
+                              "workoutInformationDay6Array",
+                              workoutInformationDay6Array
                             );
 
                             let planDay7Filtered = fetchedUserPlans.filter(
@@ -652,6 +674,10 @@ const HomeSection = ({ language }) => {
                                 result.forEach((row) =>
                                   workoutInformationDay7Array.push(row.value)
                                 );
+                                console.log(
+                                  "workoutInformationDay7Array",
+                                  workoutInformationDay7Array
+                                );
 
                                 const allWorkoutsInformationUniqueArray = [
                                   ...new Set([
@@ -664,6 +690,11 @@ const HomeSection = ({ language }) => {
                                     ...workoutInformationDay7Array,
                                   ]),
                                 ];
+
+                                console.log(
+                                  "TOTAL RESULT",
+                                  allWorkoutsInformationUniqueArray
+                                );
 
                                 fetchedUserPlans.forEach((plan) => {
                                   if (plan.day_1.length > 0) {
@@ -692,6 +723,10 @@ const HomeSection = ({ language }) => {
                                               ));
                                         }
                                       }
+                                      console.log(
+                                        "totalWorkoutWeight 1",
+                                        totalWorkoutWeight
+                                      );
                                     });
                                   }
 
@@ -721,6 +756,10 @@ const HomeSection = ({ language }) => {
                                               ));
                                         }
                                       }
+                                      console.log(
+                                        "totalWorkoutWeight 2",
+                                        totalWorkoutWeight
+                                      );
                                     });
                                   }
 
@@ -750,6 +789,10 @@ const HomeSection = ({ language }) => {
                                               ));
                                         }
                                       }
+                                      console.log(
+                                        "totalWorkoutWeight 3",
+                                        totalWorkoutWeight
+                                      );
                                     });
                                   }
 
@@ -779,6 +822,10 @@ const HomeSection = ({ language }) => {
                                               ));
                                         }
                                       }
+                                      console.log(
+                                        "totalWorkoutWeight 4",
+                                        totalWorkoutWeight
+                                      );
                                     });
                                   }
 
@@ -808,6 +855,10 @@ const HomeSection = ({ language }) => {
                                               ));
                                         }
                                       }
+                                      console.log(
+                                        "totalWorkoutWeight 5",
+                                        totalWorkoutWeight
+                                      );
                                     });
                                   }
 
@@ -837,6 +888,10 @@ const HomeSection = ({ language }) => {
                                               ));
                                         }
                                       }
+                                      console.log(
+                                        "totalWorkoutWeight 6",
+                                        totalWorkoutWeight
+                                      );
                                     });
                                   }
 
@@ -866,10 +921,18 @@ const HomeSection = ({ language }) => {
                                               ));
                                         }
                                       }
+                                      console.log(
+                                        "totalWorkoutWeight 7",
+                                        totalWorkoutWeight
+                                      );
                                     });
                                   }
                                 });
 
+                                console.log(
+                                  "TOTAL totalWorkoutWeight",
+                                  totalWorkoutWeight
+                                );
                                 setTotalCompletedWeightInKilo(
                                   totalWorkoutWeight / 1000
                                 );
@@ -905,6 +968,48 @@ const HomeSection = ({ language }) => {
         console.log("RESULT ERROR", error);
       });
   };
+
+  const cards = [
+    {
+      name: `${
+        language === "DE"
+          ? "Absolvierte Trainingswochen"
+          : "Training Weeks Completed"
+      }`, // Fetch users weekly workout plans and count each where there is a workout and is minimum last week+
+      icon: CalendarIcon,
+      amount:
+        fetchedUserPlans.length > 0 &&
+        calculateCompletedTrainingWeeks(fetchedUserPlans)
+          ? calculateCompletedTrainingWeeks(fetchedUserPlans) +
+            ` ${language === "DE" ? "Wochen" : "Weeks"}`
+          : ` ${
+              language === "DE"
+                ? "Starte deine 1. Trainingwoche"
+                : "Start your first week"
+            }`,
+    },
+    {
+      name: `${language === "DE" ? "Trainingszeit" : "Training Time"}`,
+      icon: ClockIcon,
+      amount:
+        fetchedUserPlans.length > 0 &&
+        calculateCompletedWorkoutTimeInHours(fetchedUserPlans)
+          ? Math.floor(calculateCompletedWorkoutTimeInHours(fetchedUserPlans)) +
+            ` ${language === "DE" ? "Stunden" : "Hours"}`
+          : "0" + ` ${language === "DE" ? "Stunden" : "Hours"}`,
+    },
+    {
+      name: `${language === "DE" ? "Bewegtes Gewicht" : "Moved Weight"}`,
+      icon: ChartBarIcon,
+      amount:
+        fetchedUserPlans.length > 0 &&
+        calculateCompletedWorkoutWeightInTons(fetchedUserPlans)
+          ? Math.floor(
+              calculateCompletedWorkoutWeightInTons(fetchedUserPlans)
+            ) + ` ${language === "DE" ? "Tonnen" : "Tons"}`
+          : "0" + ` ${language === "DE" ? "Tonnen" : "Tons"}`,
+    },
+  ];
 
   const [showOnboardingModal, setShowOnboardingModal] = useState(false);
 
@@ -942,6 +1047,10 @@ const HomeSection = ({ language }) => {
           <div className="p-8 py-6 mt-8 bg-gray-700 rounded-lg md:flex md:items-center md:justify-between">
             <div className="flex-1 min-w-0">
               <div className="flex items-center ">
+                {console.log(
+                  "calculateCompletedWorkoutWeightInTons(fetchedUserPlans)",
+                  calculateCompletedWorkoutWeightInTons(fetchedUserPlans)
+                )}
                 <img
                   className="w-20 h-20 rounded-full select-none iphone:hidden"
                   src={
@@ -1095,8 +1204,7 @@ const HomeSection = ({ language }) => {
                       </dt>
                       <dd>
                         <div className="text-xl font-medium text-green-500 select-none">
-                          {fetchedUserPlans.length > 0 &&
-                          calculateCompletedWorkoutTimeInHours(fetchedUserPlans)
+                          {fetchedUserPlans.length > 0
                             ? Math.floor(
                                 calculateCompletedWorkoutTimeInHours(
                                   fetchedUserPlans
