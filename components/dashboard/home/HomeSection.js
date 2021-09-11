@@ -497,131 +497,414 @@ const HomeSection = ({ language }) => {
     return totalWorkoutTime / 3600;
   };
 
-  const calculateCompletedWorkoutWeightInTons = (fetchedUserPlans) => {
+  const fetchWorkoutDetails = (workoutId) =>
+    new Promise((resolve, reject) => {
+      fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/workouts/${workoutId}`,
+        {
+          method: "get",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: session.user.id,
+          },
+        }
+      )
+        .then((response) =>
+          response
+            .json()
+            .then((data) => resolve(data.workout))
+            .catch((e) => {
+              console.log(e);
+              reject(e);
+            })
+        )
+        .catch((e) => console.log(e));
+    });
+
+  const [totalCompletedWeightInKilo, setTotalCompletedWeightInKilo] =
+    useState("");
+
+  const calculateCompletedWorkoutWeightInTons = async (fetchedUserPlans) => {
     let totalWorkoutWeight = 0;
 
-    fetchedUserPlans.forEach((plan) => {
-      if (plan.day_1.length > 0) {
-        plan.day_1.forEach((workout) => {
-          if (
-            workout.workout_completed === "yes" &&
-            workout.workout_equipment_weight_in_kilo
-          ) {
-            totalWorkoutWeight += parseInt(workout.equipment_weight_in_kilo);
-          }
-        });
-      }
+    let planDay1Filtered = fetchedUserPlans.filter(
+      (plan) => plan.day_1.length > 0
+    );
+    let promiseDay1Array = [];
+    planDay1Filtered.forEach((plan) =>
+      plan.day_1.map((workout) =>
+        promiseDay1Array.push(fetchWorkoutDetails(parseInt(workout.workout_id)))
+      )
+    );
 
-      if (plan.day_2.length > 0) {
-        plan.day_2.forEach((workout) => {
-          if (
-            workout.workout_completed === "yes" &&
-            workout.workout_equipment_weight_in_kilo
-          ) {
-            totalWorkoutWeight += parseInt(workout.equipment_weight_in_kilo);
-          }
-        });
-      }
+    let workoutInformationDay1Array = [];
+    Promise.allSettled(promiseDay1Array)
+      .then((result) => {
+        result.forEach((row) => workoutInformationDay1Array.push(row.value));
 
-      if (plan.day_3.length > 0) {
-        plan.day_3.forEach((workout) => {
-          if (
-            workout.workout_completed === "yes" &&
-            workout.workout_equipment_weight_in_kilo
-          ) {
-            totalWorkoutWeight += parseInt(workout.equipment_weight_in_kilo);
-          }
-        });
-      }
+        let planDay2Filtered = fetchedUserPlans.filter(
+          (plan) => plan.day_2.length > 0
+        );
+        let promiseDay2Array = [];
+        planDay2Filtered.forEach((plan) =>
+          plan.day_2.map((workout) =>
+            promiseDay2Array.push(
+              fetchWorkoutDetails(parseInt(workout.workout_id))
+            )
+          )
+        );
+        let workoutInformationDay2Array = [];
+        Promise.allSettled(promiseDay2Array)
+          .then((result) => {
+            result.forEach((row) =>
+              workoutInformationDay2Array.push(row.value)
+            );
 
-      if (plan.day_4.length > 0) {
-        plan.day_4.forEach((workout) => {
-          if (
-            workout.workout_completed === "yes" &&
-            workout.workout_equipment_weight_in_kilo
-          ) {
-            totalWorkoutWeight += parseInt(workout.equipment_weight_in_kilo);
-          }
-        });
-      }
+            let planDay3Filtered = fetchedUserPlans.filter(
+              (plan) => plan.day_3.length > 0
+            );
+            let promiseDay3Array = [];
+            planDay3Filtered.forEach((plan) =>
+              plan.day_3.map((workout) =>
+                promiseDay3Array.push(
+                  fetchWorkoutDetails(parseInt(workout.workout_id))
+                )
+              )
+            );
+            let workoutInformationDay3Array = [];
+            Promise.allSettled(promiseDay3Array)
+              .then((result) => {
+                result.forEach((row) =>
+                  workoutInformationDay3Array.push(row.value)
+                );
 
-      if (plan.day_5.length > 0) {
-        plan.day_5.forEach((workout) => {
-          if (
-            workout.workout_completed === "yes" &&
-            workout.workout_equipment_weight_in_kilo
-          ) {
-            totalWorkoutWeight += parseInt(workout.equipment_weight_in_kilo);
-          }
-        });
-      }
+                let planDay4Filtered = fetchedUserPlans.filter(
+                  (plan) => plan.day_4.length > 0
+                );
+                let promiseDay4Array = [];
+                planDay4Filtered.forEach((plan) =>
+                  plan.day_4.map((workout) =>
+                    promiseDay4Array.push(
+                      fetchWorkoutDetails(parseInt(workout.workout_id))
+                    )
+                  )
+                );
+                let workoutInformationDay4Array = [];
+                Promise.allSettled(promiseDay4Array)
+                  .then((result) => {
+                    result.forEach((row) =>
+                      workoutInformationDay4Array.push(row.value)
+                    );
 
-      if (plan.day_6.length > 0) {
-        plan.day_6.forEach((workout) => {
-          if (
-            workout.workout_completed === "yes" &&
-            workout.workout_equipment_weight_in_kilo
-          ) {
-            totalWorkoutWeight += parseInt(workout.equipment_weight_in_kilo);
-          }
-        });
-      }
+                    let planDay5Filtered = fetchedUserPlans.filter(
+                      (plan) => plan.day_5.length > 0
+                    );
+                    let promiseDay5Array = [];
+                    planDay5Filtered.forEach((plan) =>
+                      plan.day_5.map((workout) =>
+                        promiseDay5Array.push(
+                          fetchWorkoutDetails(parseInt(workout.workout_id))
+                        )
+                      )
+                    );
+                    let workoutInformationDay5Array = [];
+                    Promise.allSettled(promiseDay5Array)
+                      .then((result) => {
+                        result.forEach((row) =>
+                          workoutInformationDay5Array.push(row.value)
+                        );
 
-      if (plan.day_7.length > 0) {
-        plan.day_7.forEach((workout) => {
-          if (
-            workout.workout_completed === "yes" &&
-            workout.workout_equipment_weight_in_kilo
-          ) {
-            totalWorkoutWeight += parseInt(workout.equipment_weight_in_kilo);
-          }
-        });
-      }
-    });
-    return totalWorkoutWeight / 1000;
+                        let planDay6Filtered = fetchedUserPlans.filter(
+                          (plan) => plan.day_6.length > 0
+                        );
+                        let promiseDay6Array = [];
+                        planDay6Filtered.forEach((plan) =>
+                          plan.day_6.map((workout) =>
+                            promiseDay6Array.push(
+                              fetchWorkoutDetails(parseInt(workout.workout_id))
+                            )
+                          )
+                        );
+                        let workoutInformationDay6Array = [];
+                        Promise.allSettled(promiseDay6Array)
+                          .then((result) => {
+                            result.forEach((row) =>
+                              workoutInformationDay6Array.push(row.value)
+                            );
+
+                            let planDay7Filtered = fetchedUserPlans.filter(
+                              (plan) => plan.day_7.length > 0
+                            );
+                            let promiseDay7Array = [];
+                            planDay7Filtered.forEach((plan) =>
+                              plan.day_7.map((workout) =>
+                                promiseDay7Array.push(
+                                  fetchWorkoutDetails(
+                                    parseInt(workout.workout_id)
+                                  )
+                                )
+                              )
+                            );
+                            let workoutInformationDay7Array = [];
+                            Promise.allSettled(promiseDay7Array)
+                              .then((result) => {
+                                result.forEach((row) =>
+                                  workoutInformationDay7Array.push(row.value)
+                                );
+
+                                const allWorkoutsInformationUniqueArray = [
+                                  ...new Set([
+                                    ...workoutInformationDay1Array,
+                                    ...workoutInformationDay2Array,
+                                    ...workoutInformationDay3Array,
+                                    ...workoutInformationDay4Array,
+                                    ...workoutInformationDay5Array,
+                                    ...workoutInformationDay6Array,
+                                    ...workoutInformationDay7Array,
+                                  ]),
+                                ];
+
+                                fetchedUserPlans.forEach((plan) => {
+                                  if (plan.day_1.length > 0) {
+                                    plan.day_1.forEach((workout) => {
+                                      if (workout.workout_completed === "yes") {
+                                        const fetchedWorkoutDetails =
+                                          allWorkoutsInformationUniqueArray.find(
+                                            (info) =>
+                                              parseInt(info.id) ===
+                                              parseInt(workout.workout_id)
+                                          );
+                                        if (
+                                          fetchedWorkoutDetails.equipment_weight_in_kilo
+                                        ) {
+                                          fetchedWorkoutDetails.equipment_weight_in_kilo &&
+                                          fetchedWorkoutDetails.repetition_count
+                                            ? (totalWorkoutWeight +=
+                                                parseFloat(
+                                                  fetchedWorkoutDetails.equipment_weight_in_kilo
+                                                ) *
+                                                parseFloat(
+                                                  fetchedWorkoutDetails.repetition_count
+                                                ))
+                                            : (totalWorkoutWeight += parseFloat(
+                                                fetchedWorkoutDetails.equipment_weight_in_kilo
+                                              ));
+                                        }
+                                      }
+                                    });
+                                  }
+
+                                  if (plan.day_2.length > 0) {
+                                    plan.day_2.forEach(async (workout) => {
+                                      if (workout.workout_completed === "yes") {
+                                        const fetchedWorkoutDetails =
+                                          allWorkoutsInformationUniqueArray.find(
+                                            (info) =>
+                                              parseInt(info.id) ===
+                                              parseInt(workout.workout_id)
+                                          );
+                                        if (
+                                          fetchedWorkoutDetails.equipment_weight_in_kilo
+                                        ) {
+                                          fetchedWorkoutDetails.equipment_weight_in_kilo &&
+                                          fetchedWorkoutDetails.repetition_count
+                                            ? (totalWorkoutWeight +=
+                                                parseFloat(
+                                                  fetchedWorkoutDetails.equipment_weight_in_kilo
+                                                ) *
+                                                parseFloat(
+                                                  fetchedWorkoutDetails.repetition_count
+                                                ))
+                                            : (totalWorkoutWeight += parseFloat(
+                                                fetchedWorkoutDetails.equipment_weight_in_kilo
+                                              ));
+                                        }
+                                      }
+                                    });
+                                  }
+
+                                  if (plan.day_3.length > 0) {
+                                    plan.day_3.forEach(async (workout) => {
+                                      if (workout.workout_completed === "yes") {
+                                        const fetchedWorkoutDetails =
+                                          allWorkoutsInformationUniqueArray.find(
+                                            (info) =>
+                                              parseInt(info.id) ===
+                                              parseInt(workout.workout_id)
+                                          );
+                                        if (
+                                          fetchedWorkoutDetails.equipment_weight_in_kilo
+                                        ) {
+                                          fetchedWorkoutDetails.equipment_weight_in_kilo &&
+                                          fetchedWorkoutDetails.repetition_count
+                                            ? (totalWorkoutWeight +=
+                                                parseFloat(
+                                                  fetchedWorkoutDetails.equipment_weight_in_kilo
+                                                ) *
+                                                parseFloat(
+                                                  fetchedWorkoutDetails.repetition_count
+                                                ))
+                                            : (totalWorkoutWeight += parseFloat(
+                                                fetchedWorkoutDetails.equipment_weight_in_kilo
+                                              ));
+                                        }
+                                      }
+                                    });
+                                  }
+
+                                  if (plan.day_4.length > 0) {
+                                    plan.day_4.forEach(async (workout) => {
+                                      if (workout.workout_completed === "yes") {
+                                        const fetchedWorkoutDetails =
+                                          allWorkoutsInformationUniqueArray.find(
+                                            (info) =>
+                                              parseInt(info.id) ===
+                                              parseInt(workout.workout_id)
+                                          );
+                                        if (
+                                          fetchedWorkoutDetails.equipment_weight_in_kilo
+                                        ) {
+                                          fetchedWorkoutDetails.equipment_weight_in_kilo &&
+                                          fetchedWorkoutDetails.repetition_count
+                                            ? (totalWorkoutWeight +=
+                                                parseFloat(
+                                                  fetchedWorkoutDetails.equipment_weight_in_kilo
+                                                ) *
+                                                parseFloat(
+                                                  fetchedWorkoutDetails.repetition_count
+                                                ))
+                                            : (totalWorkoutWeight += parseFloat(
+                                                fetchedWorkoutDetails.equipment_weight_in_kilo
+                                              ));
+                                        }
+                                      }
+                                    });
+                                  }
+
+                                  if (plan.day_5.length > 0) {
+                                    plan.day_5.forEach(async (workout) => {
+                                      if (workout.workout_completed === "yes") {
+                                        const fetchedWorkoutDetails =
+                                          allWorkoutsInformationUniqueArray.find(
+                                            (info) =>
+                                              parseInt(info.id) ===
+                                              parseInt(workout.workout_id)
+                                          );
+                                        if (
+                                          fetchedWorkoutDetails.equipment_weight_in_kilo
+                                        ) {
+                                          fetchedWorkoutDetails.equipment_weight_in_kilo &&
+                                          fetchedWorkoutDetails.repetition_count
+                                            ? (totalWorkoutWeight +=
+                                                parseFloat(
+                                                  fetchedWorkoutDetails.equipment_weight_in_kilo
+                                                ) *
+                                                parseFloat(
+                                                  fetchedWorkoutDetails.repetition_count
+                                                ))
+                                            : (totalWorkoutWeight += parseFloat(
+                                                fetchedWorkoutDetails.equipment_weight_in_kilo
+                                              ));
+                                        }
+                                      }
+                                    });
+                                  }
+
+                                  if (plan.day_6.length > 0) {
+                                    plan.day_6.forEach(async (workout) => {
+                                      if (workout.workout_completed === "yes") {
+                                        const fetchedWorkoutDetails =
+                                          allWorkoutsInformationUniqueArray.find(
+                                            (info) =>
+                                              parseInt(info.id) ===
+                                              parseInt(workout.workout_id)
+                                          );
+                                        if (
+                                          fetchedWorkoutDetails.equipment_weight_in_kilo
+                                        ) {
+                                          fetchedWorkoutDetails.equipment_weight_in_kilo &&
+                                          fetchedWorkoutDetails.repetition_count
+                                            ? (totalWorkoutWeight +=
+                                                parseFloat(
+                                                  fetchedWorkoutDetails.equipment_weight_in_kilo
+                                                ) *
+                                                parseFloat(
+                                                  fetchedWorkoutDetails.repetition_count
+                                                ))
+                                            : (totalWorkoutWeight += parseFloat(
+                                                fetchedWorkoutDetails.equipment_weight_in_kilo
+                                              ));
+                                        }
+                                      }
+                                    });
+                                  }
+
+                                  if (plan.day_7.length > 0) {
+                                    plan.day_7.forEach(async (workout) => {
+                                      if (workout.workout_completed === "yes") {
+                                        const fetchedWorkoutDetails =
+                                          allWorkoutsInformationUniqueArray.find(
+                                            (info) =>
+                                              parseInt(info.id) ===
+                                              parseInt(workout.workout_id)
+                                          );
+                                        if (
+                                          fetchedWorkoutDetails.equipment_weight_in_kilo
+                                        ) {
+                                          fetchedWorkoutDetails.equipment_weight_in_kilo &&
+                                          fetchedWorkoutDetails.repetition_count
+                                            ? (totalWorkoutWeight +=
+                                                parseFloat(
+                                                  fetchedWorkoutDetails.equipment_weight_in_kilo
+                                                ) *
+                                                parseFloat(
+                                                  fetchedWorkoutDetails.repetition_count
+                                                ))
+                                            : (totalWorkoutWeight += parseFloat(
+                                                fetchedWorkoutDetails.equipment_weight_in_kilo
+                                              ));
+                                        }
+                                      }
+                                    });
+                                  }
+                                });
+
+                                setTotalCompletedWeightInKilo(
+                                  totalWorkoutWeight / 1000
+                                );
+                                setTimeout(function () {
+                                  return totalCompletedWeightInKilo;
+                                }, 2000);
+                              })
+                              .catch((error) => {
+                                console.log("ERROR", error);
+                              });
+                          })
+                          .catch((error) => {
+                            console.log("ERROR", error);
+                          });
+                      })
+                      .catch((error) => {
+                        console.log("ERROR", error);
+                      });
+                  })
+                  .catch((error) => {
+                    console.log("ERROR", error);
+                  });
+              })
+              .catch((error) => {
+                console.log("ERROR", error);
+              });
+          })
+          .catch((error) => {
+            console.log("ERROR", error);
+          });
+      })
+      .catch((error) => {
+        console.log("RESULT ERROR", error);
+      });
   };
-
-  const cards = [
-    {
-      name: `${
-        language === "DE"
-          ? "Absolvierte Trainingswochen"
-          : "Training Weeks Completed"
-      }`, // Fetch users weekly workout plans and count each where there is a workout and is minimum last week+
-      icon: CalendarIcon,
-      amount:
-        fetchedUserPlans.length > 0 &&
-        calculateCompletedTrainingWeeks(fetchedUserPlans)
-          ? calculateCompletedTrainingWeeks(fetchedUserPlans) +
-            ` ${language === "DE" ? "Wochen" : "Weeks"}`
-          : ` ${
-              language === "DE"
-                ? "Starte deine 1. Trainingwoche"
-                : "Start your first week"
-            }`,
-    },
-    {
-      name: `${language === "DE" ? "Trainingszeit" : "Training Time"}`,
-      icon: ClockIcon,
-      amount:
-        fetchedUserPlans.length > 0 &&
-        calculateCompletedWorkoutTimeInHours(fetchedUserPlans)
-          ? Math.floor(calculateCompletedWorkoutTimeInHours(fetchedUserPlans)) +
-            ` ${language === "DE" ? "Stunden" : "Hours"}`
-          : "0" + ` ${language === "DE" ? "Stunden" : "Hours"}`,
-    },
-    {
-      name: `${language === "DE" ? "Bewegtes Gewicht" : "Moved Weight"}`,
-      icon: ChartBarIcon,
-      amount:
-        fetchedUserPlans.length > 0 &&
-        calculateCompletedWorkoutWeightInTons(fetchedUserPlans)
-          ? Math.floor(
-              calculateCompletedWorkoutWeightInTons(fetchedUserPlans)
-            ) + ` ${language === "DE" ? "Tonnen" : "Tons"}`
-          : "0" + ` ${language === "DE" ? "Tonnen" : "Tons"}`,
-    },
-  ];
 
   const [showOnboardingModal, setShowOnboardingModal] = useState(false);
 
@@ -749,8 +1032,120 @@ const HomeSection = ({ language }) => {
               : "Your achievements"}
           </h2>
           <div className="grid grid-cols-1 gap-5 mt-2 sm:grid-cols-2 lg:grid-cols-3">
-            {/* Card */}
-            {cards.map((card) => (
+            {/* Cards */}
+            <div
+              key={`${
+                language === "DE"
+                  ? "Absolvierte Trainingswochen"
+                  : "Training Weeks Completed"
+              }`}
+              className="overflow-hidden transition duration-300 ease-in transform bg-gray-700 border-green-500 rounded-lg shadow hover:scale-105"
+            >
+              <div className="p-5">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <CalendarIcon
+                      className="w-6 h-6 text-gray-400"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="flex-1 w-0 ml-5">
+                    <dl>
+                      <dt className="text-lg font-medium text-gray-400 truncate select-none">
+                        {language === "DE"
+                          ? "Absolvierte Trainingswochen"
+                          : "Training Weeks Completed"}
+                      </dt>
+                      <dd>
+                        <div className="text-xl font-medium text-green-500 select-none">
+                          {fetchedUserPlans.length > 0 &&
+                          calculateCompletedTrainingWeeks(fetchedUserPlans)
+                            ? calculateCompletedTrainingWeeks(
+                                fetchedUserPlans
+                              ) + ` ${language === "DE" ? "Wochen" : "Weeks"}`
+                            : ` ${
+                                language === "DE"
+                                  ? "Starte deine 1. Trainingwoche"
+                                  : "Start your first week"
+                              }`}
+                        </div>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              key={`${language === "DE" ? "Bewegtes Gewicht" : "Moved Weight"}`}
+              className="overflow-hidden transition duration-300 ease-in transform bg-gray-700 border-green-500 rounded-lg shadow hover:scale-105"
+            >
+              <div className="p-5">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <ClockIcon
+                      className="w-6 h-6 text-gray-400"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="flex-1 w-0 ml-5">
+                    <dl>
+                      <dt className="text-lg font-medium text-gray-400 truncate select-none">
+                        {language === "DE"
+                          ? "Bewegtes Gewicht"
+                          : "Moved Weight"}
+                      </dt>
+                      <dd>
+                        <div className="text-xl font-medium text-green-500 select-none">
+                          {fetchedUserPlans.length > 0 &&
+                          calculateCompletedWorkoutTimeInHours(fetchedUserPlans)
+                            ? Math.floor(
+                                calculateCompletedWorkoutTimeInHours(
+                                  fetchedUserPlans
+                                )
+                              ) + ` ${language === "DE" ? "Stunden" : "Hours"}`
+                            : "0" +
+                              ` ${language === "DE" ? "Stunden" : "Hours"}`}
+                        </div>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              key={`${language === "DE" ? "Trainingszeit" : "Training Time"}`}
+              className="overflow-hidden transition duration-300 ease-in transform bg-gray-700 border-green-500 rounded-lg shadow hover:scale-105"
+            >
+              <div className="p-5">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <ChartBarIcon
+                      className="w-6 h-6 text-gray-400"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="flex-1 w-0 ml-5">
+                    <dl>
+                      <dt className="text-lg font-medium text-gray-400 truncate select-none">
+                        {language === "DE" ? "Trainingszeit" : "Training Time"}
+                      </dt>
+                      <dd>
+                        <div className="text-xl font-medium text-green-500 select-none">
+                          {fetchedUserPlans.length > 0
+                            ? totalCompletedWeightInKilo +
+                              ` ${language === "DE" ? "Tonnen" : "Tons"}`
+                            : "0" + ` ${language === "DE" ? "Tonnen" : "Tons"}`}
+                        </div>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* {cards.map((card) => (
               <div
                 key={card.name}
                 className="overflow-hidden transition duration-300 ease-in transform bg-gray-700 border-green-500 rounded-lg shadow hover:scale-105"
@@ -778,7 +1173,7 @@ const HomeSection = ({ language }) => {
                   </div>
                 </div>
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
 
