@@ -1200,9 +1200,7 @@ const HomeSection = ({ language }) => {
                   <div className="flex-1 w-0 ml-5">
                     <dl>
                       <dt className="text-lg font-medium text-gray-400 truncate select-none">
-                        {language === "DE"
-                          ? "Bewegtes Gewicht"
-                          : "Moved Weight"}
+                        {language === "DE" ? "Trainingszeit" : "Training Time"}
                       </dt>
                       <dd>
                         <div className="text-xl font-medium text-green-500 select-none">
@@ -1238,7 +1236,9 @@ const HomeSection = ({ language }) => {
                   <div className="flex-1 w-0 ml-5">
                     <dl>
                       <dt className="text-lg font-medium text-gray-400 truncate select-none">
-                        {language === "DE" ? "Trainingszeit" : "Training Time"}
+                        {language === "DE"
+                          ? "Bewegtes Gewicht"
+                          : "Moved Weight"}
                       </dt>
                       <dd>
                         <div className="text-xl font-medium text-green-500 select-none">
