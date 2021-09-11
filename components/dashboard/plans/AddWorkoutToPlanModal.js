@@ -66,7 +66,7 @@ const AddWorkoutToPlanModal = ({
         setShowTimeConflictErrorModal(true);
       }
     });
-
+    console.log("RETURNSTRING", returnString);
     return returnString;
   };
 
