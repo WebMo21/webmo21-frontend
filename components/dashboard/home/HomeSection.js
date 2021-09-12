@@ -869,7 +869,6 @@ const HomeSection = ({ language }) => {
                                     });
                                   }
                                 });
-
                                 setTotalCompletedWeightInKilo(
                                   totalWorkoutWeight / 1000
                                 );
@@ -905,6 +904,48 @@ const HomeSection = ({ language }) => {
         console.log("RESULT ERROR", error);
       });
   };
+
+  const cards = [
+    {
+      name: `${
+        language === "DE"
+          ? "Absolvierte Trainingswochen"
+          : "Training Weeks Completed"
+      }`, // Fetch users weekly workout plans and count each where there is a workout and is minimum last week+
+      icon: CalendarIcon,
+      amount:
+        fetchedUserPlans.length > 0 &&
+        calculateCompletedTrainingWeeks(fetchedUserPlans)
+          ? calculateCompletedTrainingWeeks(fetchedUserPlans) +
+            ` ${language === "DE" ? "Wochen" : "Weeks"}`
+          : ` ${
+              language === "DE"
+                ? "Starte deine 1. Trainingwoche"
+                : "Start your first week"
+            }`,
+    },
+    {
+      name: `${language === "DE" ? "Trainingszeit" : "Training Time"}`,
+      icon: ClockIcon,
+      amount:
+        fetchedUserPlans.length > 0 &&
+        calculateCompletedWorkoutTimeInHours(fetchedUserPlans)
+          ? Math.floor(calculateCompletedWorkoutTimeInHours(fetchedUserPlans)) +
+            ` ${language === "DE" ? "Stunden" : "Hours"}`
+          : "0" + ` ${language === "DE" ? "Stunden" : "Hours"}`,
+    },
+    {
+      name: `${language === "DE" ? "Bewegtes Gewicht" : "Moved Weight"}`,
+      icon: ChartBarIcon,
+      amount:
+        fetchedUserPlans.length > 0 &&
+        calculateCompletedWorkoutWeightInTons(fetchedUserPlans)
+          ? Math.floor(
+              calculateCompletedWorkoutWeightInTons(fetchedUserPlans)
+            ) + ` ${language === "DE" ? "Tonnen" : "Tons"}`
+          : "0" + ` ${language === "DE" ? "Tonnen" : "Tons"}`,
+    },
+  ];
 
   const [showOnboardingModal, setShowOnboardingModal] = useState(false);
 
@@ -1091,14 +1132,11 @@ const HomeSection = ({ language }) => {
                   <div className="flex-1 w-0 ml-5">
                     <dl>
                       <dt className="text-lg font-medium text-gray-400 truncate select-none">
-                        {language === "DE"
-                          ? "Bewegtes Gewicht"
-                          : "Moved Weight"}
+                        {language === "DE" ? "Trainingszeit" : "Training Time"}
                       </dt>
                       <dd>
                         <div className="text-xl font-medium text-green-500 select-none">
-                          {fetchedUserPlans.length > 0 &&
-                          calculateCompletedWorkoutTimeInHours(fetchedUserPlans)
+                          {fetchedUserPlans.length > 0
                             ? Math.floor(
                                 calculateCompletedWorkoutTimeInHours(
                                   fetchedUserPlans
@@ -1129,7 +1167,9 @@ const HomeSection = ({ language }) => {
                   <div className="flex-1 w-0 ml-5">
                     <dl>
                       <dt className="text-lg font-medium text-gray-400 truncate select-none">
-                        {language === "DE" ? "Trainingszeit" : "Training Time"}
+                        {language === "DE"
+                          ? "Bewegtes Gewicht"
+                          : "Moved Weight"}
                       </dt>
                       <dd>
                         <div className="text-xl font-medium text-green-500 select-none">
