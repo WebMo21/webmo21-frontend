@@ -4,7 +4,11 @@
 
 A modern web application enabling users scheduling and organization of fitness activities.
 
-[VISIT LIVE DEMO](https://www.fitness-time.app)
+🌐 [VISIT LIVE WEBSITE](https://www.fitness-time.app)
+
+🎨 [VISIT FRONTEND REPOSITORY](https://github.com/WebMo21/webmo21-frontend)
+
+🖥️ [VISIT BACKEND REPOSITORY](https://github.com/WebMo21/webmo21-backend)
 
 ![Preview Landing Page](preview-fitness-time-landing-page.gif)
 ![Preview Dashboard](preview-fitness-time-dashboard.gif)
@@ -31,6 +35,7 @@ A modern web application enabling users scheduling and organization of fitness a
   - Admin login via custom backend authentication using username and salted + hashed password
 - GDPR compliant cookie consent banner achieved with [js-cookie](https://www.npmjs.com/package/js-cookie)
 - SEO & compatibility for OpenGraph through [Next SEO](https://www.npmjs.com/package/next-seo)
+- Sending emails from the frontend for magic url login was achieved with the help of [Mailjet](https://www.mailjet.com)
 
 ## 🎨 UI
 
@@ -43,6 +48,8 @@ A modern web application enabling users scheduling and organization of fitness a
   - primary background color darkslategray (#374151)
   - secondary background color black (#111827)
   - input background color darkslategray (#4b5563)
+- **Used Images**
+  - All used images are either CC0 free to use or their license has been purchased at [Adobe Stock](https://stock.adobe.com) or [flaticon](https://www.flaticon.com)
 - Custom [Error](https://www.fitness-time.app/error), [404](https://www.fitness-time.app/404) and [Email sent](https://www.fitness-time.app/auth/mailsent) page
 
 ## 🏗️ Architecture & Design decisions
