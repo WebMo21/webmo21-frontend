@@ -11,6 +11,217 @@ const DeleteWorkoutModal = ({
 }) => {
   const cancelButtonRef = useRef(null);
 
+  const updateRemoveWorkoutFromPlan = (
+    wholePlan,
+    workoutId,
+    day,
+    workoutTimeStart,
+    workoutTimeEnd
+  ) =>
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/weekly-workout-plans/`, {
+      method: "put",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: session.user.id,
+      },
+      body: JSON.stringify(
+        findAndRemoveWorkoutFromPlan(
+          wholePlan,
+          workoutId,
+          day,
+          workoutTimeStart,
+          workoutTimeEnd
+        )
+      ),
+    })
+      .then((response) =>
+        response
+          .json()
+          .then((data) => console.log("UPDATE DATA", data))
+          .catch((e) => console.log(e))
+      )
+      .catch((e) => console.log(e));
+
+  const findAndRemoveWorkoutFromPlan = (
+    originalPlan,
+    workoutId,
+    day,
+    workoutTimeStart,
+    workoutTimeEnd
+  ) => {
+    const updatedPlan = originalPlan;
+
+    if (day === 1) {
+      updatedPlan.day_1 = updatedPlan.day_1.filter(
+        (workout) =>
+          workout.workout_id !== workoutId &&
+          workout.workout_time_start !== workoutTimeStart &&
+          workout.workout_time_end !== workoutTimeEnd
+      );
+    }
+
+    if (day === 2) {
+      updatedPlan.day_2 = updatedPlan.day_2.filter(
+        (workout) =>
+          workout.workout_id !== workoutId &&
+          workout.workout_time_start !== workoutTimeStart &&
+          workout.workout_time_end !== workoutTimeEnd
+      );
+    }
+
+    if (day === 3) {
+      updatedPlan.day_3 = updatedPlan.day_3.filter(
+        (workout) =>
+          workout.workout_id !== workoutId &&
+          workout.workout_time_start !== workoutTimeStart &&
+          workout.workout_time_end !== workoutTimeEnd
+      );
+    }
+
+    if (day === 4) {
+      updatedPlan.day_4 = updatedPlan.day_4.filter(
+        (workout) =>
+          workout.workout_id !== workoutId &&
+          workout.workout_time_start !== workoutTimeStart &&
+          workout.workout_time_end !== workoutTimeEnd
+      );
+    }
+
+    if (day === 5) {
+      updatedPlan.day_5 = updatedPlan.day_5.filter(
+        (workout) =>
+          workout.workout_id !== workoutId &&
+          workout.workout_time_start !== workoutTimeStart &&
+          workout.workout_time_end !== workoutTimeEnd
+      );
+    }
+
+    if (day === 6) {
+      updatedPlan.day_6 = updatedPlan.day_6.filter(
+        (workout) =>
+          workout.workout_id !== workoutId &&
+          workout.workout_time_start !== workoutTimeStart &&
+          workout.workout_time_end !== workoutTimeEnd
+      );
+    }
+
+    if (day === 7) {
+      updatedPlan.day_7 = updatedPlan.day_7.filter(
+        (workout) =>
+          workout.workout_id !== workoutId &&
+          workout.workout_time_start !== workoutTimeStart &&
+          workout.workout_time_end !== workoutTimeEnd
+      );
+    }
+
+    return updatedPlan;
+  };
+
+  const fetchUserPlansFilteredByWorkoutId = (userId, workoutId) =>
+    fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}` +
+        `/weekly-workout-plans/userid/${userId}`,
+      {
+        method: "get",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: session.user.id,
+        },
+      }
+    )
+      .then((response) =>
+        response
+          .json()
+          .then((data) => {
+            if (response.status === 200 && data.weeklyWorkoutPlans) {
+              data.weeklyWorkoutPlans.forEach((plan) => {
+                plan.day_1.forEach((workout) => {
+                  if (parseInt(workout.workout_id) === parseInt(workoutId))
+                    updateRemoveWorkoutFromPlan(
+                      plan,
+                      workout.workout_id,
+                      1,
+                      workout.workout_time_start,
+                      workout.workout_time_end
+                    );
+                });
+
+                plan.day_2.forEach((workout) => {
+                  if (parseInt(workout.workout_id) === parseInt(workoutId))
+                    updateRemoveWorkoutFromPlan(
+                      plan,
+                      workout.workout_id,
+                      2,
+                      workout.workout_time_start,
+                      workout.workout_time_end
+                    );
+                });
+
+                plan.day_3.forEach((workout) => {
+                  if (parseInt(workout.workout_id) === parseInt(workoutId))
+                    updateRemoveWorkoutFromPlan(
+                      plan,
+                      workout.workout_id,
+                      3,
+                      workout.workout_time_start,
+                      workout.workout_time_end
+                    );
+                });
+
+                plan.day_4.forEach((workout) => {
+                  if (parseInt(workout.workout_id) === parseInt(workoutId))
+                    updateRemoveWorkoutFromPlan(
+                      plan,
+                      workout.workout_id,
+                      4,
+                      workout.workout_time_start,
+                      workout.workout_time_end
+                    );
+                });
+
+                plan.day_5.forEach((workout) => {
+                  if (parseInt(workout.workout_id) === parseInt(workoutId))
+                    updateRemoveWorkoutFromPlan(
+                      plan,
+                      workout.workout_id,
+                      5,
+                      workout.workout_time_start,
+                      workout.workout_time_end
+                    );
+                });
+
+                plan.day_6.forEach((workout) => {
+                  if (parseInt(workout.workout_id) === parseInt(workoutId))
+                    updateRemoveWorkoutFromPlan(
+                      plan,
+                      workout.workout_id,
+                      6,
+                      workout.workout_time_start,
+                      workout.workout_time_end
+                    );
+                });
+
+                plan.day_7.forEach((workout) => {
+                  if (parseInt(workout.workout_id) === parseInt(workoutId))
+                    updateRemoveWorkoutFromPlan(
+                      plan,
+                      workout.workout_id,
+                      7,
+                      workout.workout_time_start,
+                      workout.workout_time_end
+                    );
+                });
+              });
+            }
+            reFetchWorkouts();
+            setShowDeleteWorkoutModal(false);
+          })
+          .catch((e) => console.log(e))
+      )
+      .catch((e) => console.log(e));
+
   const deleteWorkout = (workout) =>
     fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}` + `/workouts/${workout.id}`,
@@ -27,8 +238,7 @@ const DeleteWorkoutModal = ({
         response
           .json()
           .then(() => {
-            reFetchWorkouts();
-            setShowDeleteWorkoutModal(false);
+            fetchUserPlansFilteredByWorkoutId(session.user.id, workout.id);
           })
           .catch((e) => console.log(e))
       )

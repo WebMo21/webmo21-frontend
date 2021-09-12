@@ -26,7 +26,7 @@ const PreviewSection = ({ language }) => {
             <div className="px-6 transition duration-500 ease-in transform hover:scale-110">
               <img
                 alt="Preview Of Fitness Time Custom Workout Feature"
-                src="/inspiration-exercise2.png"
+                src="/inspiration-exercise.png"
                 className="mx-auto rounded-md shadow-lg h-30 w-30"
                 style={{ maxWidth: 250 }}
               />
@@ -50,7 +50,7 @@ const PreviewSection = ({ language }) => {
             <div className="px-6 transition duration-500 ease-in transform hover:scale-110">
               <img
                 alt="Preview Of Fitness Time Modern Drag & Drop Calendar Feature"
-                src="/inspiration-plan2.png"
+                src="/inspiration-plan.png"
                 className="max-w-full mx-auto rounded-md shadow-lg"
                 style={{ maxWidth: 250 }}
               />
@@ -60,8 +60,8 @@ const PreviewSection = ({ language }) => {
                 </h5>
                 <p className="mt-1 text-sm font-semibold text-gray-500 uppercase select-none">
                   {language === "DE"
-                    ? "Modern mit Drag & Drop"
-                    : "Modern with Drag and Drop"}
+                    ? "Modern mit Kalenderübersicht"
+                    : "Modern with Calendar View"}
                 </p>
               </div>
             </div>
@@ -74,7 +74,7 @@ const PreviewSection = ({ language }) => {
             <div className="px-6 transition duration-500 ease-in transform hover:scale-110">
               <img
                 alt="Preview Of Fitness Time Training Overview Feature"
-                src="/inspiration-overview2.png"
+                src="/inspiration-overview.png"
                 className="max-w-full mx-auto rounded-md shadow-lg"
                 style={{ maxWidth: 250 }}
               />
