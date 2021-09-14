@@ -38,18 +38,22 @@ A modern web application enabling users scheduling and organization of fitness a
 - GDPR compliant cookie consent banner achieved with [js-cookie](https://www.npmjs.com/package/js-cookie)
 - SEO & compatibility for OpenGraph through [Next SEO](https://www.npmjs.com/package/next-seo)
 - Sending emails from the frontend for magic url login was achieved with the help of [Mailjet](https://www.mailjet.com)
+- The domain [https://www.fitness-time.app/](https://www.fitness-time.app) was purchased and registered with the help of [https://www.namecheap.com/](https://www.namecheap.com) with a free SSL-certificate of [Let's Encrypt](https://letsencrypt.org/de)
 
 ## 🎨 UI
 
 - Modern landing page with [Animate on Scroll](https://www.npmjs.com/package/aos) animations
 - Responsiveness optimized for desktop, tablet and mobile devices
 - **Color Palette**
+
   ![Color Palette](color-palette.png)
+
   - accent color lightseagreen (#10b981)
   - font color white (#ffffff)
   - primary background color darkslategray (#374151)
   - secondary background color black (#111827)
   - input background color darkslategray (#4b5563)
+
 - **Used Images**
   - All used images are either CC0 free to use or their license has been purchased at [Adobe Stock](https://stock.adobe.com) or [flaticon](https://www.flaticon.com)
 - Custom [Error](https://www.fitness-time.app/error), [404](https://www.fitness-time.app/404) and [Email sent](https://www.fitness-time.app/auth/mailsent) page
