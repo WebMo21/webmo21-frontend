@@ -56,6 +56,14 @@ const PlanWorkoutCard = ({
       !/^\d{2}:\d{2}$/.test(updateTimeStart) ||
       !/^\d{2}:\d{2}$/.test(updateTimeEnd) ||
       !/^[0-9]*$/.test(updateTrackedTime) ||
+      parseInt(updateTimeStart.split(":")[0]) > 23 ||
+      parseInt(updateTimeStart.split(":")[0]) < 0 ||
+      parseInt(updateTimeStart.split(":")[1]) > 59 ||
+      parseInt(updateTimeStart.split(":")[1]) < 0 ||
+      parseInt(updateTimeEnd.split(":")[0]) > 23 ||
+      parseInt(updateTimeEnd.split(":")[0]) < 0 ||
+      parseInt(updateTimeEnd.split(":")[1]) > 59 ||
+      parseInt(updateTimeEnd.split(":")[1]) < 0 ||
       parseInt(updateTimeEnd.replace(":", "")) -
         parseInt(updateTimeStart.replace(":", "")) <
         1 ||
